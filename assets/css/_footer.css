@@ -1,0 +1,446 @@
+.site-footer {
+  background: linear-gradient(to right, var(--color-black), var(--color-primary));
+  color: var(--color-white);
+  padding-top: 4rem;
+  padding-bottom: 5rem; /* Added padding to prevent sticky button from covering content */
+  position: relative;
+  font-family: var(--font-body);
+}
+
+.wide-container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer-heading {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.text-gold {
+  color: var(--color-gold);
+  margin-bottom: 1rem; /* Add space between headings and content below */
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-menu a {
+  color: var(--color-white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  font-size: 0.95rem;
+}
+
+.footer-menu a:hover {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.social-icon i {
+  font-size: 1.2rem;
+}
+
+/* Footer Dividers */
+.footer-divider-container {
+  width: 100%;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.footer-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(200, 178, 115, 0.4);
+  width: 100%;
+  margin: 0;
+}
+
+/* Locations Accordion */
+.locations-section {
+  padding-top: 0; /* Remove top padding */
+  margin-top: 0;
+}
+
+.locations-section h5 {
+  padding-left: 0; /* Ensure heading aligns with columns above */
+}
+
+.locations-section .accordion {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  align-items: flex-start; /* This prevents items from stretching */
+  margin-top: 1rem;
+  padding: 0; /* Remove any default padding */
+}
+
+.locations-section .accordion-item {
+  background-color: var(--color-black);
+  border: 1px solid rgba(200, 178, 115, 0.2);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  width: 100%; /* Ensure full width within grid cell */
+}
+
+/* Fix for accordion items to maintain their size */
+.locations-section .accordion-item {
+  height: auto !important;
+  min-height: 56px; /* Height of the button */
+  display: flex;
+  flex-direction: column;
+}
+
+.locations-section .accordion-button {
+  height: 56px; /* Fixed height for the button */
+  flex-shrink: 0;
+}
+
+/* Improved accordion transition */
+.locations-section .accordion-collapse {
+  transition: all 0.35s ease;
+}
+
+.locations-section .accordion-collapse.collapsing {
+  height: 0;
+  overflow: hidden;
+}
+
+.locations-section .accordion-collapse.show {
+  overflow: hidden;
+}
+
+.locations-section .accordion-button {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-medium);
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  box-shadow: none;
+  transition: color 0.3s ease;
+}
+
+.locations-section .accordion-button:hover {
+  color: var(--color-gold);
+}
+
+.locations-section .accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(200, 178, 115, 0.5);
+}
+
+.locations-section .accordion-button:not(.collapsed) {
+  color: var(--color-white);
+  background-color: var(--color-black);
+  box-shadow: none;
+}
+
+/* Custom plus/minus icons for accordion */
+.locations-section .accordion-button::after {
+  content: "\f067"; /* Font Awesome plus icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  background-image: none;
+  font-size: 0.8rem;
+  width: auto;
+  height: auto;
+  color: var(--color-white);
+}
+
+.locations-section .accordion-button:not(.collapsed)::after {
+  content: "\f068"; /* Font Awesome minus icon */
+  transform: none;
+  color: var(--color-white);
+}
+
+.locations-section .accordion-body {
+  padding: 1rem 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: var(--color-black);
+  border-top: 1px solid rgba(200, 178, 115, 0.1);
+}
+
+.surgeons-list h6 {
+  color: var(--color-gold-light);
+  font-size: 0.9rem;
+}
+
+.surgeons-list ul {
+  margin-bottom: 0;
+}
+
+/* Location link styling */
+.location-link a {
+  text-decoration: none;
+}
+
+/* Gold location link styling */
+.surgeon-link.text-gold:hover {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+.surgeon-link.text-gold:hover span {
+  text-decoration: underline;
+}
+
+.surgeon-link.text-gold:hover .surgeon-arrow {
+  opacity: 1;
+  color: var(--color-gold);
+}
+
+/* Surgeon links with arrows */
+.surgeon-link {
+  color: var(--color-white);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.surgeon-link:hover {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+.surgeon-link:hover span {
+  text-decoration: underline;
+}
+
+.surgeon-arrow {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.surgeon-link:hover .surgeon-arrow {
+  opacity: 1;
+  color: var(--color-gold);
+}
+
+/* Footer Bottom Section - Simplified for better responsive behavior */
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: 0.85rem;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: var(--weight-medium);
+}
+
+.disclaimer {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+}
+
+.footer-links a:hover {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
+
+@media (max-width: 1800px) {
+  .wide-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .footer-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  /* Adjust locations grid to 3 columns on medium screens */
+  .locations-section .accordion {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding-bottom: 6rem; /* Increased padding for mobile to account for sticky button */
+  }
+
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-column:first-child {
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  /* Adjust locations grid to 1 column on all mobile devices for consistency */
+  .locations-section .accordion {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .locations-section {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .locations-section .accordion-button {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .locations-section .accordion-body {
+    padding: 0.75rem 1rem;
+  }
+
+  .surgeons-list h6 {
+    font-size: 0.85rem;
+  }
+
+  .surgeon-link {
+    font-size: 0.9rem;
+  }
+
+  /* Footer links on mobile */
+  .footer-links {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    padding-bottom: 7rem; /* Extra padding for smallest screens */
+  }
+
+  .wide-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .social-icons {
+    gap: 2px;
+  }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .social-icon i {
+    font-size: 1rem;
+  }
+
+  .locations-section .accordion-button {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .locations-section .accordion-body {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Adjust surgeon arrow size for smallest screens */
+  .surgeon-arrow {
+    font-size: 0.7rem;
+  }
+
+  /* Footer links on smallest screens */
+  .footer-links {
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .footer-links li {
+    margin: 0 0.25rem 0.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+  }
+}

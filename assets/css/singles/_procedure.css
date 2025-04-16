@@ -1,0 +1,606 @@
+/* procedures-template.css */
+
+/* Resource Links Grid Styling */
+.bbl-resources {
+  padding: 4rem 0;
+  /* Removed background gradient */
+}
+
+.bbl-resource-card {
+  background-color: #1b1b1b;
+  border: 1px solid #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bbl-resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: var(--color-gold);
+}
+
+.bbl-resource-icon {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  background-color: rgba(200, 178, 115, 0.1);
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.bbl-resource-card .card-title {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.bbl-resource-card:hover .card-title {
+  color: var(--color-gold);
+}
+
+.bbl-resource-card .card-text {
+  color: #aaa;
+}
+
+.bbl-resource-card .card-body {
+  padding: 2rem;
+}
+
+/* Resource Links Grid Styling - Version B (Light Cards) */
+.bbl-resources-b {
+  padding: 4rem 0;
+  /* No background color, will use the page's background */
+}
+
+.bbl-resource-card-b {
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.bbl-resource-card-b:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bbl-resource-icon-b {
+  color: var(--color-gold);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.bbl-resource-card-b .card-title {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.bbl-resource-card-b .card-text {
+  color: #333;
+}
+
+.bbl-resource-card-b .card-body {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* Header Styles */
+.procedure-header {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)),
+    url("/wp-content/uploads/2025/02/bbl-large.jpg"); /* Default fallback image */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.procedure-header h1,
+.procedure-header .pricing-info {
+  color: var(--color-white);
+  font-family: var(--font-heading);
+}
+
+.procedure-header h1 {
+  font-weight: var(--weight-bold);
+  color: #fff;
+  font-size: 56px;
+  text-shadow: 2px 2px 4px black;
+}
+
+.procedure-header .pricing-info {
+  font-weight: var(--weight-medium);
+}
+
+.pricing-info p {
+  font-size: 32px;
+}
+
+.pricing-info small {
+  font-size: 20px;
+}
+
+/* Main Content Area */
+.main-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Prevents horizontal scroll if children exceed viewport */
+}
+
+/* Allow full-width sections inside content */
+.main-content > .container-fluid,
+.main-content > .container,
+.main-content > section,
+.main-content > div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Control spacing between content sections */
+.main-content > * + * {
+  margin-top: 2rem;
+}
+
+/* Default content spacing */
+.main-content {
+  margin-bottom: 3rem;
+}
+
+/* Fix for Bootstrap nested containers */
+.main-content .container .row [class^="col-"] .container {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Results & Resources Section */
+.results-resources-section {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+/* Before & After Gallery */
+.before-after-card {
+  background: var(--color-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.before-after-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.before-after-images {
+  display: flex;
+  position: relative;
+}
+
+.before-after-images img {
+  width: 50%;
+  object-fit: cover;
+  height: 240px;
+}
+
+.before-after-images:before {
+  content: "Before";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.before-after-images:after {
+  content: "After";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--color-gold);
+  color: var(--color-black);
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.before-after-card .caption {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+/* Resource Cards */
+.resource-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.resource-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(200, 178, 115, 0.1);
+  border-radius: 50%;
+  color: var(--color-gold);
+}
+
+.resource-card h4 {
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+.resource-card:hover h4 {
+  color: var(--color-gold);
+}
+
+.resource-card p {
+  color: #555;
+  margin-bottom: 0;
+}
+
+/* View More Results Button */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-primary);
+  padding: 10px 20px;
+  font-weight: var(--weight-medium);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Consultation Form Styles */
+/* Hide labels visually but keep them for screen readers */
+.gform_wrapper .gfield_label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hide the required fields legend */
+.gform_wrapper .gform_required_legend {
+  display: none;
+}
+
+/* Form container styling - removing background */
+.gform_wrapper {
+  padding: 25px;
+  max-width: 600px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+/* Card styling */
+.consultation-card {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 8px;
+}
+
+/* Form title styling */
+.consultation-card h3 {
+  color: var(--color-white);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Uniform styling for all input fields */
+.gform_wrapper input[type="text"],
+.gform_wrapper input[type="email"],
+.gform_wrapper input[type="tel"],
+.gform_wrapper select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #333;
+  color: var(--color-white);
+}
+
+/* Uniform focus state for all inputs */
+.gform_wrapper input[type="text"]:focus,
+.gform_wrapper input[type="email"]:focus,
+.gform_wrapper input[type="tel"]:focus,
+.gform_wrapper select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
+  outline: none;
+}
+
+/* Make all placeholders consistent and more visible */
+.gform_wrapper input::placeholder,
+.gform_wrapper select::placeholder {
+  color: #c0c0c0;
+  opacity: 1;
+}
+
+/* Read Consent link styling */
+.gform_wrapper a[href="#consent-popup"] {
+  color: var(--color-white);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.gform_wrapper a[href="#consent-popup"]:hover {
+  color: var(--color-gold);
+}
+
+/* Submit button */
+.gform_wrapper .gform_button {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+  border: 2px solid var(--color-gold);
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.gform_wrapper .gform_button:hover {
+  background-color: transparent;
+  color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.gform_wrapper .gfield_checkbox label {
+  display: inline-block;
+  padding-left: 8px;
+  vertical-align: middle;
+  color: var(--color-white);
+}
+
+/* Required field indicator */
+.gform_wrapper .gfield_required_asterisk {
+  color: #e63946;
+}
+
+/* Make checkbox text slightly smaller and with proper line height */
+.gform_wrapper .gfield--type-checkbox label {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+/* Reduce space between checkbox fields */
+.gform_wrapper .gfield--type-checkbox {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Adjust field width on mobile */
+@media (max-width: 767px) {
+  .gform_wrapper input[type="text"],
+  .gform_wrapper input[type="email"],
+  .gform_wrapper input[type="tel"],
+  .gform_wrapper select {
+    font-size: 16px;
+  }
+
+  .gform_wrapper .gfield--width-half {
+    width: 100%;
+  }
+}
+
+/* FAQ Section Styling - Updated for Font Awesome 6 */
+.faq-container {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faqs-section h2 {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  font-family: var(--font-heading);
+}
+
+.faqs-section h2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+.faq-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Accordion Styling with Font Awesome 6 */
+.accordion-item {
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  padding: 1.25rem;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: var(--font-heading);
+  position: relative;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+/* Font Awesome 6 icon styling for accordion */
+.accordion-button::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f078"; /* fa-chevron-down */
+  background-image: none;
+  transition: transform 0.3s ease;
+  color: var(--color-gold);
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  content: "\f078"; /* Same icon, just rotated */
+  color: var(--color-gold);
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .procedure-header h1 {
+    font-size: 42px;
+  }
+
+  .pricing-info p {
+    font-size: 28px;
+  }
+
+  .pricing-info small {
+    font-size: 18px;
+  }
+
+  .resource-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .before-after-images img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  .procedure-header h1 {
+    font-size: 36px;
+  }
+
+  .pricing-info p {
+    font-size: 24px;
+  }
+
+  .pricing-info small {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .faq-container {
+    padding: 1.5rem;
+  }
+
+  .accordion-button {
+    padding: 1rem;
+  }
+
+  .accordion-body {
+    padding: 1.25rem;
+  }
+
+  .before-after-images img {
+    height: 160px;
+  }
+
+  .before-after-images:before,
+  .before-after-images:after {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}

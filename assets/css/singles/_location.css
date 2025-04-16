@@ -1,0 +1,375 @@
+/* Location Page Styles */
+
+/* Location Header */
+.location-header {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.location-header h1 {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  font-size: 42px;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-heading);
+}
+
+/* Location Info */
+.location-info {
+  margin-top: 1rem;
+}
+
+.location-detail {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.location-icon {
+  color: var(--color-gold);
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+.location-phone {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.location-phone:hover {
+  color: var(--color-gold);
+}
+
+.location-directions {
+  margin-top: 1.5rem;
+}
+
+/* Video Container */
+.video-container {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Main Content Area */
+.location-content {
+  color: #333;
+  line-height: 1.6;
+}
+
+.location-content h2,
+.location-content h3,
+.location-content h4 {
+  color: var(--color-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.location-content p {
+  margin-bottom: 1rem;
+}
+
+.location-content ul,
+.location-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.location-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+/* Team Section */
+.team-section {
+  background-color: #f8f9fa;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+.surgeon-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.surgeon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.surgeon-title {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Consultation Form Card */
+.consultation-card {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 8px;
+}
+
+.consultation-card h3 {
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+.consultation-card .card-body {
+  padding: 15px;
+}
+
+/* Form Styling - Same as procedure page but with smaller inputs */
+.gform_wrapper .gfield_label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gform_wrapper .gform_required_legend {
+  display: none;
+}
+
+.gform_wrapper {
+  padding: 15px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.gform_wrapper input[type="text"],
+.gform_wrapper input[type="email"],
+.gform_wrapper input[type="tel"],
+.gform_wrapper select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #333;
+  color: var(--color-white);
+}
+
+.gform_wrapper input[type="text"]:focus,
+.gform_wrapper input[type="email"]:focus,
+.gform_wrapper input[type="tel"]:focus,
+.gform_wrapper select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
+  outline: none;
+}
+
+.gform_wrapper input::placeholder,
+.gform_wrapper select::placeholder {
+  color: #c0c0c0;
+  opacity: 1;
+}
+
+.gform_wrapper a[href="#consent-popup"] {
+  color: var(--color-white);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.gform_wrapper a[href="#consent-popup"]:hover {
+  color: var(--color-gold);
+}
+
+.gform_wrapper .gform_button {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+  border: 2px solid var(--color-gold);
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.gform_wrapper .gform_button:hover {
+  background-color: transparent;
+  color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.gform_wrapper .gfield_checkbox label {
+  display: inline-block;
+  padding-left: 8px;
+  vertical-align: middle;
+  color: var(--color-white);
+  font-size: 13px;
+}
+
+.gform_wrapper .gfield_required_asterisk {
+  color: #e63946;
+}
+
+.gform_wrapper .gfield--type-checkbox {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+/* FAQ Section Styling - Matching procedure page */
+.faq-container {
+}
+
+.faqs-section h2 {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  font-family: var(--font-heading);
+}
+
+.faqs-section h2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+.faq-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Accordion Styling with Font Awesome 6 */
+.accordion-item {
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  padding: 1.25rem;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: var(--font-heading);
+  position: relative;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.accordion-button::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f078"; /* fa-chevron-down */
+  background-image: none;
+  transition: transform 0.3s ease;
+  color: var(--color-gold);
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  content: "\f078"; /* Same icon, just rotated */
+  color: var(--color-gold);
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .location-header h1 {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .location-header h1 {
+    font-size: 30px;
+  }
+
+  .location-detail {
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .faq-container {
+    padding: 1.5rem;
+  }
+
+  .accordion-button {
+    padding: 1rem;
+  }
+
+  .accordion-body {
+    padding: 1.25rem;
+  }
+}
