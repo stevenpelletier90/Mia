@@ -16,12 +16,34 @@ get_header(); ?>
           <button type="button" data-bs-target="#specialsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/wp-content/uploads/2025/04/Banner-GENERIC.jpg" class="d-block w-100" alt="Promotional Banner 1" />
-          </div>
-          <div class="carousel-item">
-            <img src="/wp-content/uploads/2025/04/non-surgical-home-banner.jpg" class="d-block w-100" alt="Promotional Banner 2" />
-          </div>
+<div class="carousel-item active">
+  <img src="/wp-content/uploads/2025/04/Banner-GENERIC.jpg" 
+       srcset="/wp-content/uploads/2025/04/Banner-GENERIC-576w.jpg 576w,
+               /wp-content/uploads/2025/04/Banner-GENERIC-768w.jpg 768w,
+               /wp-content/uploads/2025/04/Banner-GENERIC-992w.jpg 992w,
+               /wp-content/uploads/2025/04/Banner-GENERIC-1200w.jpg 1200w,
+               /wp-content/uploads/2025/04/Banner-GENERIC.jpg 1600w"
+       sizes="(max-width: 576px) 576px,
+              (max-width: 768px) 768px,
+              (max-width: 992px) 992px,
+              (max-width: 1200px) 1200px,
+              1600px"
+       class="d-block w-100" alt="Promotional Banner 1" loading="eager" fetchpriority="high"/>
+</div>
+<div class="carousel-item">
+  <img src="/wp-content/uploads/2025/04/non-surgical-home-banner.jpg" 
+       srcset="/wp-content/uploads/2025/04/non-surgical-home-banner-576w.jpg 576w,
+               /wp-content/uploads/2025/04/non-surgical-home-banner-768w.jpg 768w,
+               /wp-content/uploads/2025/04/non-surgical-home-banner-992w.jpg 992w,
+               /wp-content/uploads/2025/04/non-surgical-home-banner-1200w.jpg 1200w,
+               /wp-content/uploads/2025/04/non-surgical-home-banner.jpg 1600w"
+       sizes="(max-width: 576px) 576px,
+              (max-width: 768px) 768px,
+              (max-width: 992px) 992px,
+              (max-width: 1200px) 1200px,
+              1600px"
+       class="d-block w-100" alt="Promotional Banner 2" loading="eager" fetchpriority="high"/>
+</div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#specialsCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -75,6 +97,7 @@ get_header(); ?>
         <h2 class="section-heading mb-3">About Us</h2>
         <h4 class="section-subheading mb-4">Professional Care You Can Trust</h4>
         <p class="about-text">
+          At Mia Aesthetics, we are dedicated to providing exceptional plastic surgery services that prioritize your safety and satisfaction. Our team of board-certified surgeons and experienced staff are committed to delivering personalized care tailored to your unique needs. We understand that every patient is different, and we take the time to listen to your concerns and goals.
         Our mission at Mia Aesthetics is to deliver the highest quality of plastic surgery at affordable prices, demonstrating that beauty and cost-effectiveness can coexist harmoniously.
         </p>
         <div class="mt-4">
