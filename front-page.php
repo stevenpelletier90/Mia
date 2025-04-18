@@ -28,7 +28,7 @@ get_header(); ?>
               (max-width: 992px) 992px,
               (max-width: 1200px) 1200px,
               1600px"
-       class="d-block w-100" alt="Promotional Banner 1" loading="eager" fetchpriority="high"/>
+       class="d-block w-100" alt="Promotional Banner 1" rel="preload" loading="eager" fetchpriority="high"/>
 </div>
 <div class="carousel-item">
   <img src="/wp-content/uploads/2025/04/non-surgical-home-banner.jpg" 
@@ -95,10 +95,9 @@ get_header(); ?>
     <div class="row align-items-center">
       <div class="col-lg-6 about-content mb-4 mb-lg-0">
         <h2 class="section-heading mb-3">About Us</h2>
-        <h4 class="section-subheading mb-4">Professional Care You Can Trust</h4>
+        <h3 class="section-subheading mb-4">Professional Care You Can Trust</h3>
         <p class="about-text">
-          At Mia Aesthetics, we are dedicated to providing exceptional plastic surgery services that prioritize your safety and satisfaction. Our team of board-certified surgeons and experienced staff are committed to delivering personalized care tailored to your unique needs. We understand that every patient is different, and we take the time to listen to your concerns and goals.
-        Our mission at Mia Aesthetics is to deliver the highest quality of plastic surgery at affordable prices, demonstrating that beauty and cost-effectiveness can coexist harmoniously.
+          Test Text
         </p>
         <div class="mt-4">
           <a href="#learn-more" class="btn btn-primary">Learn More</a>
@@ -179,7 +178,7 @@ get_header(); ?>
           <div class="stats-number" data-count="2018">
             <span class="display-4 fw-bold text-primary">2018</span>
           </div>
-          <h4 class="stats-title mt-2 mt-md-3">Year Founded</h4>
+          <h3 class="stats-title mt-2 mt-md-3">Year Founded</h3>
           <p class="mb-2 mb-md-3">Serving our community with excellence since day one</p>
         </div>
       </div>
@@ -190,7 +189,7 @@ get_header(); ?>
           <div class="stats-number" data-count="26">
             <span class="display-4 fw-bold text-primary">26</span>
           </div>
-          <h4 class="stats-title mt-2 mt-md-3">Board Certified Specialists</h4>
+          <h3 class="stats-title mt-2 mt-md-3">Board Certified Specialists</h3>
           <p class="mb-2 mb-md-3">Expert professionals dedicated to your care</p>
         </div>
       </div>
@@ -201,7 +200,7 @@ get_header(); ?>
           <div class="stats-number" data-count="12">
             <span class="display-4 fw-bold text-primary">12</span>
           </div>
-          <h4 class="stats-title mt-2 mt-md-3">Locations</h4>
+          <h3 class="stats-title mt-2 mt-md-3">Locations</h3>
           <p class="mb-2 mb-md-3">Conveniently serving patients across the region</p>
         </div>
       </div>
@@ -625,7 +624,7 @@ get_header(); ?>
       <div class="col-12">
         <div class="foundation-content text-center">
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
-          <h4 class="section-subheading text-gold mb-4">Gives Back</h4>
+          <h3 class="section-subheading text-gold mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
           <a href="/mia-foundation/" class="btn btn-primary">Learn More</a>
         </div>

@@ -1,26 +1,21 @@
-/* === STRUCTURE === */
 .hero-section {
   background-color: var(--color-white);
   box-sizing: border-box;
 }
-
 .hero-wrapper {
   background-color: var(--color-white);
   overflow: hidden;
 }
-
 .hero-wrapper .row {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   align-items: flex-start;
 }
-
 .col-md-8,
 .col-md-4 {
   padding: 0;
 }
-
 .content-box {
   position: relative;
   overflow: hidden;
@@ -30,60 +25,48 @@
   background-color: var(--color-black);
   box-sizing: border-box;
 }
-
-/* === DESKTOP BORDER LOGIC === */
 .box-carousel {
   border: 1px solid var(--color-white);
   border-right: none;
 }
-
 .box-top {
   border-top: 1px solid var(--color-white);
   border-left: 1px solid var(--color-white);
   border-right: 1px solid var(--color-white);
   border-bottom: none;
 }
-
 .box-bottom {
-  border-top: 1px solid var(--color-white); /* middle divider */
+  border-top: 1px solid var(--color-white);
   border-left: 1px solid var(--color-white);
   border-right: 1px solid var(--color-white);
   border-bottom: 1px solid var(--color-white);
 }
 
-/* === MOBILE VIEW === */
 @media (max-width: 767px) {
   .hero-wrapper .row {
     flex-direction: column;
   }
-
   .col-md-8,
   .col-md-4 {
     width: 100%;
   }
-
   .box-carousel {
     border: 1px solid var(--color-white);
   }
-
-  /* Side by side boxes on mobile */
   .col-md-4 {
     flex-direction: row !important;
   }
-
   .box-top,
   .box-bottom {
     width: 50%;
     border: 1px solid var(--color-white);
-    border-top: none; /* Remove top border to prevent double border */
+    border-top: none;
   }
-
   .box-top {
     border-right: none;
   }
 }
 
-/* === INNER SHARED CONTENT === */
 .img-container {
   width: 100%;
   height: 100%;
@@ -92,7 +75,6 @@
   left: 0;
   overflow: hidden;
 }
-
 .content-image {
   width: 100%;
   height: 100%;
@@ -101,7 +83,6 @@
   display: block;
   background-color: var(--color-black);
 }
-
 .content-overlay {
   position: absolute;
   top: 0;
@@ -123,7 +104,6 @@
   padding-bottom: 3.5rem;
   z-index: 2;
 }
-
 .responsive-heading {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 700;
@@ -134,19 +114,15 @@
   letter-spacing: 0.5px;
   line-height: 1.2;
 }
-
-/* === Carousel === */
 .carousel {
   width: 100%;
   height: 100%;
   border-radius: 0;
 }
-
 .carousel-item {
   width: 100%;
   height: 100%;
 }
-
 .carousel-item img {
   width: 100%;
   height: auto;
@@ -154,12 +130,10 @@
   object-fit: cover;
   object-position: center;
 }
-
 .carousel-indicators {
   margin-bottom: 0.5rem;
   z-index: 10;
 }
-
 .carousel-indicators [data-bs-target] {
   background-color: var(--color-gold);
   width: 10px;
@@ -169,16 +143,22 @@
   opacity: 0.7;
 }
 
+@media (max-width: 767px) {
+  .carousel-indicators [data-bs-target] {
+    width: 16px;
+    height: 16px;
+    margin: 0 10px;
+  }
+}
+
 .carousel-indicators .active {
   opacity: 1;
 }
-
 .carousel-control-prev,
 .carousel-control-next {
   width: 10%;
   opacity: 0.8;
 }
-
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   width: 2.5rem;
@@ -186,17 +166,10 @@
   background-color: transparent;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
 }
-
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
   opacity: 1;
 }
-
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-  /* Removed scale animation */
-}
-
 .content-overlay .btn-outline-light {
   background-color: var(--color-gold);
   color: var(--color-primary);
@@ -209,30 +182,24 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
 .content-overlay .btn-outline-light:hover {
   background-color: var(--color-white);
   color: var(--color-primary);
   border-color: var(--color-white);
-  /* Removed translateY animation */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 .button-wrapper {
   margin-top: 0.5rem;
 }
 
-/* === Responsive Typography Tweaks === */
 @media (max-width: 991px) {
   .responsive-heading {
     font-size: clamp(1.25rem, 3.5vw, 1.75rem);
     margin-bottom: 0.4rem;
   }
-
   .content-overlay {
     padding-bottom: 2.5rem;
   }
-
   .content-overlay .btn-outline-light {
     font-size: 0.95rem;
     padding: 0.4rem 1.25rem;
@@ -247,16 +214,13 @@
     padding: 1rem;
     padding-bottom: 1.75rem;
   }
-
   .button-wrapper {
     margin-top: 0.3rem;
   }
-
   .responsive-heading {
     font-size: 1.35rem;
     margin-bottom: 0.3rem;
   }
-
   .content-overlay .btn-outline-light {
     padding: 0.4rem 1.25rem;
     font-size: 0.95rem;
@@ -268,22 +232,17 @@
     padding: 0.75rem;
     padding-bottom: 1rem;
   }
-
   .button-wrapper {
     margin-top: 0.2rem;
   }
-
   .responsive-heading {
     font-size: 1rem;
     margin-bottom: 0.2rem;
   }
-
   .content-overlay .btn-outline-light {
     padding: 0.3rem 0.9rem;
     font-size: 0.8rem;
   }
-
-  /* Make stats numbers even bigger on smaller screens */
   .stats-number .display-4 {
     font-size: 3.5rem;
   }
@@ -294,26 +253,21 @@
     font-size: 3.25rem;
     margin-bottom: 0.6rem;
   }
-
   .content-overlay {
     padding-bottom: 4rem;
   }
-
   .button-wrapper {
     margin-top: 0.6rem;
   }
-
   .content-overlay .btn-outline-light {
     padding: 0.6rem 1.75rem;
     font-size: 1.2rem;
   }
 }
 
-/* About Section Styling */
 .about-section {
   padding: 4rem 0;
 }
-
 .section-heading {
   font-size: 2.5rem;
   font-weight: 700;
@@ -321,37 +275,36 @@
   margin-bottom: 1rem;
   position: relative;
 }
-
 .section-subheading {
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--color-gold);
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
 }
-
+h3.section-subheading {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+}
 .about-text {
   font-size: 1rem;
   line-height: 1.8;
   color: var(--color-secondary);
   margin-bottom: 1.5rem;
 }
-
-/* Video Gallery Styling */
 .video-gallery {
   position: relative;
 }
-
 .featured-video {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
 .video-thumbnails {
   position: relative;
 }
-
 .video-thumb {
   position: relative;
   cursor: pointer;
@@ -359,14 +312,12 @@
   overflow: hidden;
   transition: all 0.3s ease;
 }
-
 .video-thumb img {
   width: 100%;
   height: auto;
   display: block;
   transition: all 0.3s ease;
 }
-
 .video-thumb .overlay {
   position: absolute;
   top: 0;
@@ -377,27 +328,22 @@
   opacity: 1;
   transition: all 0.3s ease;
 }
-
 .video-thumb.active .overlay {
   background-color: rgba(var(--color-gold-rgb), 0.3);
   border: 2px solid var(--color-gold);
 }
-
 .video-thumb:hover .overlay {
   background-color: rgba(var(--color-gold-rgb), 0.2);
 }
-
 .video-thumb .overlay i {
   color: var(--color-white);
   font-size: 1.5rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
-
 .video-thumb.active .overlay i {
   color: var(--color-gold);
 }
 
-/* Responsive styles for video gallery */
 @media (max-width: 991px) {
   .video-thumb .overlay i {
     font-size: 1.25rem;
@@ -408,11 +354,9 @@
   .video-thumb .overlay i {
     font-size: 1rem;
   }
-
   .video-thumbnails .row {
     margin: 0 -5px;
   }
-
   .video-thumbnails .col-3 {
     padding: 0 5px;
   }
@@ -422,11 +366,9 @@
   .video-thumb .overlay i {
     font-size: 0.875rem;
   }
-
   .video-thumbnails .row {
     margin: 0 -2px;
   }
-
   .video-thumbnails .col-3 {
     padding: 0 2px;
   }
@@ -436,20 +378,16 @@
   .about-section {
     padding: 3rem 0;
   }
-
   .section-heading {
     font-size: 2rem;
   }
-
   .section-subheading {
     font-size: 1.1rem;
   }
-
   .video-play-button span {
     width: 60px;
     height: 60px;
   }
-
   .video-play-button i {
     font-size: 2.5rem;
   }
@@ -459,78 +397,67 @@
   .about-section {
     padding: 2.5rem 0;
   }
-
   .section-heading {
     font-size: 1.75rem;
   }
-
   .section-subheading {
     font-size: 1rem;
   }
-
   .about-content {
     text-align: center;
   }
-
   .video-play-button span {
     width: 50px;
     height: 50px;
   }
-
   .video-play-button i {
     font-size: 2rem;
   }
-
-  /* Make stats numbers bigger on mobile */
   .stats-number .display-4 {
     font-size: 3rem;
   }
 }
 
-/* Stats Section with Counting Numbers */
 .stats-section {
   background: linear-gradient(to right, var(--color-black), var(--color-primary));
   padding: 4rem 0;
   color: var(--color-white);
 }
-
 .stats-section .section-heading {
   color: var(--color-gold);
 }
-
 .stats-section .lead {
   color: var(--color-white);
   opacity: 0.9;
 }
-
 .stats-item {
   padding: 1.5rem;
   transition: transform 0.3s ease;
 }
-
 .stats-number .display-4 {
   color: var(--color-gold) !important;
   font-weight: var(--weight-bold);
 }
-
 .stats-title {
   color: var(--color-white);
   font-weight: var(--weight-medium);
   margin-bottom: 0.5rem;
 }
-
+h3.stats-title {
+  color: var(--color-white);
+  font-weight: var(--weight-medium);
+  margin-bottom: 0.5rem;
+  font-size: inherit;
+}
 .stats-item p {
   color: var(--color-white);
   opacity: 0.8;
 }
-
-/* Parallax Section with Video Styling */
 .parallax-section {
   position: relative;
   height: 500px;
   overflow: hidden;
 }
-
 .parallax-video-bg {
   position: absolute;
   top: 0;
@@ -540,7 +467,6 @@
   z-index: 1;
   overflow: hidden;
 }
-
 .parallax-video {
   position: absolute;
   top: 50%;
@@ -553,7 +479,6 @@
   object-fit: cover;
 }
 
-/* Responsive adjustments for parallax video */
 @media (max-width: 991px) {
   .parallax-section {
     height: 400px;
@@ -566,14 +491,12 @@
   }
 }
 
-/* Overlapping Card Section */
 .overlap-section {
   position: relative;
   margin-top: -100px;
   z-index: 10;
   padding-bottom: 3rem;
 }
-
 .overlap-card {
   background: linear-gradient(135deg, var(--color-light) 0%, var(--color-light) 100%);
   border-radius: var(--border-radius-lg);
@@ -581,33 +504,26 @@
   padding: 2.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .overlap-card:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
-
 .overlap-card h3 {
   color: var(--color-primary);
   font-weight: var(--weight-bold);
 }
-
 .overlap-card p {
   color: var(--color-primary);
   opacity: 0.9;
 }
-
-/* Payment Steps Styling */
 .payment-card {
   background: linear-gradient(to bottom, var(--color-primary), var(--color-black));
   border-radius: var(--border-radius);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   height: 100%;
 }
-
 .payment-card .card-body {
   padding: 1.5rem;
 }
-
 .payment-step-icon {
   display: inline-flex;
   align-items: center;
@@ -616,27 +532,22 @@
   color: var(--color-gold);
   margin: 0 auto 1rem;
 }
-
 .payment-step-icon h5 {
   display: none;
 }
-
 .payment-card h5 {
   font-weight: var(--weight-semibold);
   color: var(--color-white);
   font-size: 1.1rem;
   margin-bottom: 1rem;
 }
-
 .payment-card ul li {
   color: var(--color-white);
   margin-bottom: 0.5rem;
 }
-
 .payment-card .fa-check {
   color: var(--color-gold);
 }
-
 .feature-icon {
   display: inline-flex;
   align-items: center;
@@ -649,65 +560,54 @@
   font-size: 1.75rem;
   margin: 0 auto;
 }
-
 .feature-item h5 {
   font-weight: var(--weight-semibold);
   color: var(--color-gold);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
-
 .feature-item p.small {
   color: var(--color-white);
   font-size: 0.875rem;
   line-height: 1.5;
   opacity: 0.8;
 }
-
-/* Procedures Tabbed Section */
 .procedures-section {
   padding: 5rem 0;
 }
-
 .procedure-tabs-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-  z-index: 50; /* Higher z-index for the entire container */
+  z-index: 50;
 }
-
-/* New wrapper for tabs */
 .tabs-wrapper {
   flex: 1;
   overflow: hidden;
   position: relative;
-  z-index: 1; /* Lower z-index than arrows */
-  margin: 0 50px; /* Make space for the arrows */
+  z-index: 1;
+  margin: 0 50px;
 }
-
 .procedure-tabs {
   border-bottom: none;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   max-width: 100%;
   position: relative;
-  z-index: 1; /* Ensure lower than arrows */
+  z-index: 1;
 }
-
 .procedure-tabs::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
-
 .procedure-tabs .nav-item {
   margin: 0 0.25rem;
   white-space: nowrap;
 }
-
 .procedure-tabs .nav-link {
   color: var(--color-primary);
   font-weight: var(--weight-medium);
@@ -716,25 +616,20 @@
   border-radius: var(--border-radius);
   transition: all 0.3s ease;
 }
-
 .procedure-tabs .nav-link:hover {
   background-color: rgba(var(--color-gold-rgb), 0.1);
   border-color: transparent;
 }
-
 .procedure-tabs .nav-link.active {
   color: var(--color-white);
   background-color: var(--color-gold);
   border-color: var(--color-gold);
 }
-
-/* Mobile Dropdown for Procedures */
 .procedure-dropdown {
   display: none;
   width: 100%;
   margin-bottom: 2rem;
 }
-
 .procedure-dropdown select {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -751,16 +646,13 @@
   background-size: 16px 12px;
   cursor: pointer;
 }
-
 .procedure-dropdown select:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(var(--color-gold-rgb), 0.25);
   border-color: var(--color-gold);
 }
-
-/* Improved arrow styling */
 .procedure-nav-arrow {
-  position: absolute; /* Position absolutely */
+  position: absolute;
   width: 40px;
   height: 40px;
   display: flex;
@@ -772,47 +664,39 @@
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 999; /* Very high z-index to ensure visibility above all elements */
+  z-index: 999;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: auto !important; /* Force pointer events to be enabled */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+  pointer-events: auto !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 .prev-arrow {
   left: 0;
 }
-
 .next-arrow {
   right: 0;
 }
-
 .procedure-nav-arrow:hover {
   background-color: var(--color-gold);
   color: var(--color-white);
 }
-
 .procedure-nav-arrow:focus {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }
-
 .procedure-nav-arrow i {
   font-size: 1rem;
 }
-
 .procedure-nav-arrow.disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
 
-/* Show dropdown on mobile, hide tabs */
 @media (max-width: 767px) {
   .procedure-tabs-container {
     display: none;
   }
-
   .procedure-dropdown {
     display: block;
   }
@@ -823,12 +707,10 @@
   font-weight: var(--weight-bold);
   color: var(--color-primary);
 }
-
 .procedure-links {
   display: flex;
   flex-direction: column;
 }
-
 .procedure-link {
   display: block;
   color: var(--color-primary);
@@ -836,33 +718,22 @@
   transition: all 0.3s ease;
   text-decoration: none;
 }
-
 .procedure-link i {
   color: var(--color-gold);
   margin-right: 0.5rem;
   transition: transform 0.3s ease;
 }
-
 .procedure-link:hover {
   color: var(--color-gold);
   text-decoration: none;
 }
-
-.procedure-link:hover i {
-  /* Removed transform animation */
-}
-
 .tab-content img {
   transition: none;
 }
-
-/* Two Column CTA Section */
 .cta-section {
   padding: 5rem 0;
   background-color: var(--color-light);
 }
-
-/* Info Card Styling */
 .info-card {
   display: flex;
   flex-direction: column;
@@ -872,24 +743,19 @@
   height: 100%;
   background-color: var(--color-white);
 }
-
-/* Card Image Container */
 .card-image {
   width: 100%;
   background-color: var(--color-black);
   overflow: hidden;
 }
-
 .card-image img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4/3; /* Maintain 800x600 aspect ratio */
+  aspect-ratio: 4/3;
   object-fit: cover;
   object-position: center;
   display: block;
 }
-
-/* Card Content */
 .card-content {
   padding: 2.5rem;
   background-color: var(--color-white);
@@ -899,14 +765,12 @@
   justify-content: space-between;
   flex: 1;
 }
-
 .card-content .card-title {
   font-size: 2rem;
   font-weight: var(--weight-bold);
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
-
 .card-content .card-text {
   color: var(--color-secondary);
   margin-bottom: 1.5rem;
@@ -914,7 +778,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
 .card-content .btn {
   background-color: var(--color-gold);
   color: var(--color-primary);
@@ -926,7 +789,6 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 .card-content .btn:hover {
   background-color: var(--color-white);
   color: var(--color-primary);
@@ -934,12 +796,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive adjustments */
 @media (max-width: 1199px) {
   .card-content {
     padding: 2rem;
   }
-
   .card-content .card-title {
     font-size: 1.75rem;
   }
@@ -949,11 +809,9 @@
   .cta-section {
     padding: 4rem 0;
   }
-
   .card-content .card-title {
     font-size: 1.5rem;
   }
-
   .card-content .btn {
     padding: 0.6rem 1.75rem;
   }
@@ -963,16 +821,13 @@
   .cta-section {
     padding: 3rem 0;
   }
-
   .card-content {
     padding: 1.75rem;
   }
-
   .card-content .card-title {
     font-size: 1.35rem;
     margin-bottom: 0.75rem;
   }
-
   .card-content .btn {
     padding: 0.5rem 1.5rem;
     font-size: 0.9rem;
@@ -983,47 +838,38 @@
   .card-content {
     padding: 1.5rem;
   }
-
   .card-content .card-title {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
   }
-
   .card-content .card-text {
     font-size: 0.9rem;
     margin-bottom: 1rem;
   }
-
   .card-content .btn {
     padding: 0.4rem 1.25rem;
     font-size: 0.8rem;
   }
 }
 
-/* Responsive adjustments for new sections */
 @media (max-width: 991px) {
   .overlap-section {
     margin-top: -70px;
   }
-
   .overlap-card {
     padding: 2rem;
   }
-
   .payment-step-icon {
     font-size: 2rem;
   }
-
   .feature-icon {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
   }
-
   .procedure-section {
     padding: 4rem 0;
   }
-
   .cta-section {
     padding: 4rem 0;
   }
@@ -1034,57 +880,46 @@
     margin-top: -50px;
     padding-bottom: 2rem;
   }
-
   .overlap-card {
     padding: 1.5rem;
   }
-
   .payment-step-icon {
     font-size: 1.75rem;
     margin-bottom: 0.75rem;
   }
-
   .payment-card h5 {
     font-size: 1rem;
     margin-bottom: 0.75rem;
   }
-
   .feature-icon {
     width: 45px;
     height: 45px;
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
   }
-
   .feature-item h5 {
     font-size: 1rem;
   }
-
   .procedure-section {
     padding: 3rem 0;
   }
-
   .procedure-list li {
     font-size: 1rem;
   }
-
   .cta-section {
     padding: 3rem 0;
   }
-
   .cta-card .card-body {
     padding: 1.25rem;
   }
 }
 
-/* Foundation Section with Fixed Background */
 .foundation-section {
   position: relative;
-  padding: 0; /* Remove padding to allow full height */
+  padding: 0;
   overflow: hidden;
-  height: 600px; /* Set a fixed height for the section */
+  height: 600px;
 }
-
 .foundation-bg {
   position: absolute;
   top: 0;
@@ -1096,8 +931,6 @@
   background-attachment: fixed;
   z-index: 1;
 }
-
-/* Add a semi-transparent overlay to create separation */
 .foundation-bg::after {
   content: "";
   position: absolute;
@@ -1108,65 +941,58 @@
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
-
 .foundation-section .container {
   position: relative;
   z-index: 3;
   height: 100%;
   display: flex;
-  align-items: flex-end; /* Align container content to bottom */
-  justify-content: center; /* Center content horizontally */
-  padding-bottom: 3rem; /* Add padding at the bottom */
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 3rem;
 }
-
 .foundation-content {
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: var(--border-radius);
   padding: 2rem 3rem;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   width: 100%;
-  /* Using Bootstrap's container width instead of fixed 800px */
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
 }
-
 .foundation-content p {
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
 }
-
 .foundation-section .section-heading {
   color: var(--color-white);
 }
-
 .foundation-section .section-subheading {
   color: var(--color-gold);
 }
-
+.foundation-section h3.section-subheading {
+  color: var(--color-gold);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
 .text-white {
   color: var(--color-white) !important;
 }
-
 .text-gold {
   color: var(--color-gold) !important;
 }
-
 .text-primary {
   color: var(--color-primary) !important;
 }
 
-/* Responsive adjustments for foundation section */
 @media (max-width: 991px) {
   .foundation-section {
     height: 550px;
   }
-
   .foundation-section .container {
     padding-bottom: 2.5rem;
   }
-
   .foundation-content {
     padding: 2rem;
   }
@@ -1176,11 +1002,9 @@
   .foundation-section {
     height: 500px;
   }
-
   .foundation-section .container {
     padding-bottom: 2rem;
   }
-
   .foundation-content {
     padding: 1.75rem;
   }
@@ -1190,17 +1014,14 @@
   .foundation-section {
     height: 450px;
   }
-
   .foundation-section .container {
     padding-bottom: 1.5rem;
   }
-
   .foundation-content {
     padding: 1.5rem;
   }
 }
 
-/* Standardized Button Styles */
 .btn-primary,
 .about-section .btn-primary,
 .procedures-section .btn-primary,
@@ -1216,7 +1037,6 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
 .btn-primary:hover,
 .about-section .btn-primary:hover,
 .procedures-section .btn-primary:hover,
@@ -1226,7 +1046,6 @@
   border-color: var(--color-white);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 .btn-outline-primary,
 .cta-section .btn-outline-primary {
   background-color: transparent;
@@ -1239,7 +1058,6 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
 .btn-outline-primary:hover,
 .cta-section .btn-outline-primary:hover {
   background-color: var(--color-gold);
