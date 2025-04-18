@@ -17,32 +17,40 @@ get_header(); ?>
         </div>
         <div class="carousel-inner">
 <div class="carousel-item active">
-  <img src="/wp-content/uploads/2025/04/Banner-GENERIC.jpg" 
-       srcset="/wp-content/uploads/2025/04/Banner-GENERIC-576w.jpg 576w,
-               /wp-content/uploads/2025/04/Banner-GENERIC-768w.jpg 768w,
-               /wp-content/uploads/2025/04/Banner-GENERIC-992w.jpg 992w,
-               /wp-content/uploads/2025/04/Banner-GENERIC-1200w.jpg 1200w,
-               /wp-content/uploads/2025/04/Banner-GENERIC.jpg 1600w"
-       sizes="(max-width: 576px) 576px,
-              (max-width: 768px) 768px,
-              (max-width: 992px) 992px,
-              (max-width: 1200px) 1200px,
-              1600px"
-       class="d-block w-100" alt="Promotional Banner 1" rel="preload" loading="eager" fetchpriority="high"/>
+  <?php 
+  // Use ACF image field with WordPress responsive image functionality
+  $banner1_id = get_field('banner_1'); // Get image ID from ACF field
+  if ($banner1_id) {
+    echo wp_get_attachment_image($banner1_id, 'large', false, array(
+      'class' => 'd-block w-100',
+      'alt' => 'Promotional Banner 1',
+      'loading' => 'eager',
+      'fetchpriority' => 'high',
+      'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 75vw, 1024px'
+    ));
+  } else {
+    // Fallback if ACF field is empty
+    echo '<img src="/wp-content/uploads/2025/04/Banner-GENERIC.jpg" class="d-block w-100" alt="Promotional Banner 1" loading="eager" fetchpriority="high"/>';
+  }
+  ?>
 </div>
 <div class="carousel-item">
-  <img src="/wp-content/uploads/2025/04/non-surgical-home-banner.jpg" 
-       srcset="/wp-content/uploads/2025/04/non-surgical-home-banner-576w.jpg 576w,
-               /wp-content/uploads/2025/04/non-surgical-home-banner-768w.jpg 768w,
-               /wp-content/uploads/2025/04/non-surgical-home-banner-992w.jpg 992w,
-               /wp-content/uploads/2025/04/non-surgical-home-banner-1200w.jpg 1200w,
-               /wp-content/uploads/2025/04/non-surgical-home-banner.jpg 1600w"
-       sizes="(max-width: 576px) 576px,
-              (max-width: 768px) 768px,
-              (max-width: 992px) 992px,
-              (max-width: 1200px) 1200px,
-              1600px"
-       class="d-block w-100" alt="Promotional Banner 2" loading="eager" fetchpriority="high"/>
+  <?php 
+  // Use ACF image field with WordPress responsive image functionality
+  $banner2_id = get_field('banner_2'); // Get image ID from ACF field
+  if ($banner2_id) {
+    echo wp_get_attachment_image($banner2_id, 'large', false, array(
+      'class' => 'd-block w-100',
+      'alt' => 'Promotional Banner 2',
+      'loading' => 'eager',
+      'fetchpriority' => 'high',
+      'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 75vw, 1024px'
+    ));
+  } else {
+    // Fallback if ACF field is empty
+    echo '<img src="/wp-content/uploads/2025/04/non-surgical-home-banner.jpg" class="d-block w-100" alt="Promotional Banner 2" loading="eager" fetchpriority="high"/>';
+  }
+  ?>
 </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#specialsCarousel" data-bs-slide="prev">
@@ -62,7 +70,19 @@ get_header(); ?>
     <!-- Top Box: Before & After -->
     <div class="content-box box-top position-relative">
       <div class="img-container">
-        <img src="/wp-content/uploads/2025/04/before-after-banner.jpg" alt="Before and After Background" class="content-image" />
+        <?php 
+        $before_after_img_id = get_field('ba_image'); // Get image ID from ACF field
+        if ($before_after_img_id) {
+          echo wp_get_attachment_image($before_after_img_id, 'large', false, array(
+            'class' => 'content-image',
+            'alt' => 'Before and After Background',
+            'sizes' => '(max-width: 767px) 50vw, (max-width: 991px) 33vw, 400px'
+          ));
+        } else {
+          // Fallback if ACF field is empty
+          echo '<img src="/wp-content/uploads/2025/04/before-after-banner.jpg" alt="Before and After Background" class="content-image" />';
+        }
+        ?>
       </div>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Before & After</h4>
@@ -75,7 +95,19 @@ get_header(); ?>
     <!-- Bottom Box: Financing -->
     <div class="content-box box-bottom position-relative">
       <div class="img-container">
-        <img src="/wp-content/uploads/2025/04/financing-home-banner.jpg" alt="Financing Options Background" class="content-image" />
+        <?php 
+        $financing_img_id = get_field('financing_image'); // Get image ID from ACF field
+        if ($financing_img_id) {
+          echo wp_get_attachment_image($financing_img_id, 'large', false, array(
+            'class' => 'content-image',
+            'alt' => 'Financing Options Background',
+            'sizes' => '(max-width: 767px) 50vw, (max-width: 991px) 33vw, 400px'
+          ));
+        } else {
+          // Fallback if ACF field is empty
+          echo '<img src="/wp-content/uploads/2025/04/financing-home-banner.jpg" alt="Financing Options Background" class="content-image" />';
+        }
+        ?>
       </div>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Financing</h4>
@@ -376,7 +408,19 @@ get_header(); ?>
       <div class="tab-pane fade show active" id="body-content" role="tabpanel" aria-labelledby="body-tab">
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <img src="/wp-content/uploads/2025/04/body-home.jpg" alt="Body Procedures" class="img-fluid rounded shadow">
+            <?php 
+            $body_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/body-home.jpg');
+            if ($body_img_id) {
+              echo wp_get_attachment_image($body_img_id, 'large', false, array(
+                'class' => 'img-fluid rounded shadow',
+                'alt' => 'Body Procedures',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/body-home.jpg" alt="Body Procedures" class="img-fluid rounded shadow">';
+            }
+            ?>
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Body Contouring</h3>
@@ -419,7 +463,19 @@ get_header(); ?>
       <div class="tab-pane fade" id="breast-content" role="tabpanel" aria-labelledby="breast-tab">
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <img src="/wp-content/uploads/2025/04/breast-home.jpg" alt="Breast Procedures" class="img-fluid rounded shadow">
+            <?php 
+            $breast_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/breast-home.jpg');
+            if ($breast_img_id) {
+              echo wp_get_attachment_image($breast_img_id, 'large', false, array(
+                'class' => 'img-fluid rounded shadow',
+                'alt' => 'Breast Procedures',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/breast-home.jpg" alt="Breast Procedures" class="img-fluid rounded shadow">';
+            }
+            ?>
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Breast Enhancement</h3>
@@ -462,7 +518,19 @@ get_header(); ?>
       <div class="tab-pane fade" id="face-content" role="tabpanel" aria-labelledby="face-tab">
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <img src="/wp-content/uploads/2025/04/face-2-home.jpg" alt="Facial Procedures" class="img-fluid rounded shadow">
+            <?php 
+            $face_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/face-2-home.jpg');
+            if ($face_img_id) {
+              echo wp_get_attachment_image($face_img_id, 'large', false, array(
+                'class' => 'img-fluid rounded shadow',
+                'alt' => 'Facial Procedures',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/face-2-home.jpg" alt="Facial Procedures" class="img-fluid rounded shadow">';
+            }
+            ?>
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Facial Rejuvenation</h3>
@@ -505,7 +573,19 @@ get_header(); ?>
       <div class="tab-pane fade" id="nonsurgical-content" role="tabpanel" aria-labelledby="nonsurgical-tab">
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <img src="/wp-content/uploads/2025/04/face-home.jpg" alt="Non-Surgical Procedures" class="img-fluid rounded shadow">
+            <?php 
+            $nonsurg_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/face-home.jpg');
+            if ($nonsurg_img_id) {
+              echo wp_get_attachment_image($nonsurg_img_id, 'large', false, array(
+                'class' => 'img-fluid rounded shadow',
+                'alt' => 'Non-Surgical Procedures',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/face-home.jpg" alt="Non-Surgical Procedures" class="img-fluid rounded shadow">';
+            }
+            ?>
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Non-Surgical Treatments</h3>
@@ -543,7 +623,19 @@ get_header(); ?>
       <div class="tab-pane fade" id="men-content" role="tabpanel" aria-labelledby="men-tab">
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <img src="/wp-content/uploads/2025/04/men-home.jpg" alt="Men's Procedures" class="img-fluid rounded shadow">
+            <?php 
+            $men_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/men-home.jpg');
+            if ($men_img_id) {
+              echo wp_get_attachment_image($men_img_id, 'large', false, array(
+                'class' => 'img-fluid rounded shadow',
+                'alt' => 'Men\'s Procedures',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/men-home.jpg" alt="Men\'s Procedures" class="img-fluid rounded shadow">';
+            }
+            ?>
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Men's Procedures</h3>
@@ -589,7 +681,19 @@ get_header(); ?>
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="info-card">
           <div class="card-image">
-            <img src="/wp-content/uploads/2025/04/locations-home.jpg" alt="Our Locations" class="img-fluid">
+            <?php 
+            $locations_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/locations-home.jpg');
+            if ($locations_img_id) {
+              echo wp_get_attachment_image($locations_img_id, 'large', false, array(
+                'class' => 'img-fluid',
+                'alt' => 'Our Locations',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/locations-home.jpg" alt="Our Locations" class="img-fluid">';
+            }
+            ?>
           </div>
           <div class="card-content text-center">
             <h3 class="card-title">Find a Location</h3>
@@ -603,7 +707,19 @@ get_header(); ?>
       <div class="col-lg-6">
         <div class="info-card">
           <div class="card-image">
-            <img src="/wp-content/uploads/2025/04/surgeons-home.jpg" alt="Our Surgeons" class="img-fluid">
+            <?php 
+            $surgeons_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/surgeons-home.jpg');
+            if ($surgeons_img_id) {
+              echo wp_get_attachment_image($surgeons_img_id, 'large', false, array(
+                'class' => 'img-fluid',
+                'alt' => 'Our Surgeons',
+                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
+              ));
+            } else {
+              // Fallback if image ID can't be found
+              echo '<img src="/wp-content/uploads/2025/04/surgeons-home.jpg" alt="Our Surgeons" class="img-fluid">';
+            }
+            ?>
           </div>
           <div class="card-content text-center">
             <h3 class="card-title">Meet Our Surgeons</h3>

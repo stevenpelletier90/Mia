@@ -135,24 +135,29 @@
   z-index: 10;
 }
 .carousel-indicators [data-bs-target] {
-  background-color: var(--color-gold);
-  width: 10px;
-  height: 10px;
+  background-color: var(--color-white);
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  margin: 0 6px;
-  opacity: 0.7;
+  margin: 0 8px;
+  opacity: 0.9;
+  border: 2px solid var(--color-white);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 767px) {
   .carousel-indicators [data-bs-target] {
-    width: 16px;
-    height: 16px;
-    margin: 0 10px;
+    width: 20px;
+    height: 20px;
+    margin: 0 12px;
+    border: 3px solid var(--color-white);
   }
 }
 
 .carousel-indicators .active {
   opacity: 1;
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
 }
 .carousel-control-prev,
 .carousel-control-next {
@@ -329,11 +334,11 @@ h3.section-subheading {
   transition: all 0.3s ease;
 }
 .video-thumb.active .overlay {
-  background-color: rgba(var(--color-gold-rgb), 0.3);
-  border: 2px solid var(--color-gold);
+  background-color: rgba(27, 27, 27, 0.3);
+  border: 2px solid var(--color-primary);
 }
 .video-thumb:hover .overlay {
-  background-color: rgba(var(--color-gold-rgb), 0.2);
+  background-color: rgba(27, 27, 27, 0.2);
 }
 .video-thumb .overlay i {
   color: var(--color-white);
@@ -341,7 +346,7 @@ h3.section-subheading {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 .video-thumb.active .overlay i {
-  color: var(--color-gold);
+  color: var(--color-white);
 }
 
 @media (max-width: 991px) {
@@ -555,7 +560,7 @@ h3.stats-title {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: rgba(var(--color-gold-rgb), 0.2);
+  background-color: rgba(200, 178, 115, 0.2);
   color: var(--color-gold);
   font-size: 1.75rem;
   margin: 0 auto;
@@ -617,7 +622,7 @@ h3.stats-title {
   transition: all 0.3s ease;
 }
 .procedure-tabs .nav-link:hover {
-  background-color: rgba(var(--color-gold-rgb), 0.1);
+  background-color: rgba(200, 178, 115, 0.1);
   border-color: transparent;
 }
 .procedure-tabs .nav-link.active {
@@ -648,7 +653,7 @@ h3.stats-title {
 }
 .procedure-dropdown select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(var(--color-gold-rgb), 0.25);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
   border-color: var(--color-gold);
 }
 .procedure-nav-arrow {
@@ -931,6 +936,21 @@ h3.stats-title {
   background-attachment: fixed;
   z-index: 1;
 }
+
+@media (max-width: 767px) {
+  .foundation-bg {
+    background-attachment: scroll; /* Disable fixed background on mobile */
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
 .foundation-bg::after {
   content: "";
   position: absolute;
@@ -940,6 +960,12 @@ h3.stats-title {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .foundation-bg::after {
+    background-color: rgba(0, 0, 0, 0.5); /* Darker overlay on mobile for better text visibility */
+  }
 }
 .foundation-section .container {
   position: relative;
@@ -970,6 +996,8 @@ h3.stats-title {
 }
 .foundation-section .section-subheading {
   color: var(--color-gold);
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 .foundation-section h3.section-subheading {
   color: var(--color-gold);
@@ -1004,6 +1032,18 @@ h3.stats-title {
   }
   .foundation-content {
     padding: 1.75rem;
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on mobile */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  .foundation-section .section-heading {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add text shadow for better readability */
+  }
+  .foundation-section .section-subheading {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+  .foundation-content p {
+    color: var(--color-white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
 }
 
