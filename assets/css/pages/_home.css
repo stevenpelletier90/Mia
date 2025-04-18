@@ -976,14 +976,11 @@ h3.stats-title {
   font-size: 1.25rem;
   font-weight: 500;
 }
-.text-white {
-  color: var(--color-white) !important;
-}
 .text-gold {
   color: var(--color-gold) !important;
 }
 .text-primary {
-  color: var(--color-primary) !important;
+  color: var(--color-primary);
 }
 
 @media (max-width: 991px) {
