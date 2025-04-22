@@ -298,84 +298,17 @@ h3.section-subheading {
   color: var(--color-secondary);
   margin-bottom: 1.5rem;
 }
-.video-gallery {
-  position: relative;
-}
-.featured-video {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-.video-thumbnails {
-  position: relative;
-}
-.video-thumb {
-  position: relative;
-  cursor: pointer;
-  border-radius: 4px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-.video-thumb img {
+/* About section image styles */
+.about-video img {
   width: 100%;
   height: auto;
-  display: block;
-  transition: all 0.3s ease;
-}
-.video-thumb .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1;
-  transition: all 0.3s ease;
-}
-.video-thumb.active .overlay {
-  background-color: rgba(27, 27, 27, 0.3);
-  border: 2px solid var(--color-primary);
-}
-.video-thumb:hover .overlay {
-  background-color: rgba(27, 27, 27, 0.2);
-}
-.video-thumb .overlay i {
-  color: var(--color-white);
-  font-size: 1.5rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-}
-.video-thumb.active .overlay i {
-  color: var(--color-white);
-}
-
-@media (max-width: 991px) {
-  .video-thumb .overlay i {
-    font-size: 1.25rem;
-  }
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 767px) {
-  .video-thumb .overlay i {
-    font-size: 1rem;
-  }
-  .video-thumbnails .row {
-    margin: 0 -5px;
-  }
-  .video-thumbnails .col-3 {
-    padding: 0 5px;
-  }
-}
-
-@media (max-width: 480px) {
-  .video-thumb .overlay i {
-    font-size: 0.875rem;
-  }
-  .video-thumbnails .row {
-    margin: 0 -2px;
-  }
-  .video-thumbnails .col-3 {
-    padding: 0 2px;
+  .about-video {
+    margin-top: 1.5rem;
   }
 }
 
