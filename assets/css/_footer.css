@@ -70,7 +70,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--bs-white-rgb), 0.1); /* Use BS variable */
   color: var(--color-white);
   transition: all 0.3s ease;
   text-decoration: none;
@@ -96,7 +96,7 @@
 .footer-divider {
   border: 0;
   height: 1px;
-  background: rgba(200, 178, 115, 0.4);
+  background: var(--color-gold-alpha-40); /* Use new variable */
   width: 100%;
   margin: 0;
 }
@@ -122,7 +122,7 @@
 
 .locations-section .accordion-item {
   background-color: var(--color-black);
-  border: 1px solid rgba(200, 178, 115, 0.2);
+  border: 1px solid var(--color-gold-alpha-20); /* Use new variable */
   border-radius: 0.25rem;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -173,7 +173,7 @@
 
 .locations-section .accordion-button:focus {
   box-shadow: none;
-  border-color: rgba(200, 178, 115, 0.5);
+  border-color: var(--color-gold-alpha-50); /* Use new variable */
 }
 
 .locations-section .accordion-button:not(.collapsed) {
@@ -202,9 +202,9 @@
 
 .locations-section .accordion-body {
   padding: 1rem 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(var(--bs-white-rgb), 0.9); /* Use BS variable */
   background-color: var(--color-black);
-  border-top: 1px solid rgba(200, 178, 115, 0.1);
+  border-top: 1px solid var(--color-gold-alpha-10); /* Use new variable */
 }
 
 .surgeons-list h6 {
@@ -277,13 +277,13 @@
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(var(--bs-white-rgb), 0.9); /* Use BS variable */
   font-weight: var(--weight-medium);
 }
 
 .disclaimer {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(var(--bs-white-rgb), 0.7); /* Use BS variable */
 }
 
 .footer-links {
@@ -302,7 +302,7 @@
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(var(--bs-white-rgb), 0.8); /* Use BS variable */
   text-decoration: none;
   transition: color 0.3s ease;
   font-size: 0.85rem;

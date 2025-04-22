@@ -16,12 +16,7 @@ function mia_aesthetics_enqueue_scripts() {
     $css_uri = $theme_uri . '/assets/css';
 
     // Third-party CSS
-    wp_enqueue_style(
-        'google-fonts',
-        'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap',
-        array(),
-        null
-    );
+    // Removed Google Fonts enqueue - Fonts are now loaded locally via _base.css
 
     // Consider removing Font Awesome if not actively used or if SVGs are preferred
     wp_enqueue_style(

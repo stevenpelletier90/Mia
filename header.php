@@ -29,7 +29,7 @@
         </a>
         <!-- Medium Mobile CTA - Only visible on medium mobile devices -->
         <div class="d-none d-sm-block d-xl-none mx-auto">
-          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn-cta btn-sm">
+          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn btn-primary btn-sm">
             Free Virtual Consultation
           </a>
         </div>
@@ -409,7 +409,7 @@
         </div>
         <!-- Right Side Items -->
         <div class="d-none d-xl-block ms-auto">
-          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn-cta">
+          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn btn-primary">
             Free Virtual Consultation
           </a>
         </div>
@@ -419,7 +419,7 @@
 </header>
 <!-- Mobile Floating CTA Button - Only visible on mobile -->
 <div class="mobile-cta-container">
-  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn-cta">
+  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn btn-primary">
     Free Virtual Consultation
   </a>
 </div>
