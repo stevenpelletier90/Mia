@@ -199,6 +199,10 @@ a {
 
 a:hover {
   color: var(--color-gold-dark);
+}
+
+/* Only apply underline to content links, not navigation */
+main a:hover {
   text-decoration: underline;
 }
 
@@ -293,6 +297,8 @@ ol {
   border-radius: var(--border-radius);
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
+  /* Ensure all button text is title case, not all caps */
+  text-transform: capitalize;
 }
 
 .btn:hover {
@@ -326,4 +332,95 @@ ol {
   background-color: var(--color-gold);
   border-color: var(--color-gold);
   box-shadow: none; /* Optional: remove default Bootstrap focus shadow if desired */
+}
+
+/*--------------------------------------------------------------
+# Custom Button Styles (Non-Bootstrap)
+--------------------------------------------------------------*/
+/* 
+ * These custom button styles are designed to not interfere with 
+ * Bootstrap 5's default classes while providing distinctive styling options
+ */
+
+/* Mia Primary Button - Gold gradient with shadow effect */
+.mia-btn-primary {
+  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  text-transform: capitalize;
+}
+
+.mia-btn-primary:hover,
+.mia-btn-primary:focus {
+  color: var(--color-white);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mia-btn-primary:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add transform effect only on larger screens where hover is intentional */
+@media (min-width: 992px) {
+  .mia-btn-primary:hover,
+  .mia-btn-primary:focus {
+    transform: translateY(-2px);
+  }
+
+  .mia-btn-primary:active {
+    transform: translateY(0);
+  }
+}
+
+/* Mia Secondary Button - Subtle elegant style */
+.mia-btn-secondary {
+  color: var(--color-primary);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gold-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 0.625rem 1.5rem;
+  font-weight: var(--weight-medium);
+  text-transform: capitalize;
+}
+
+.mia-btn-secondary:hover,
+.mia-btn-secondary:focus {
+  color: var(--color-primary);
+  background-color: var(--color-gold-alpha-10);
+  border-color: var(--color-gold);
+}
+
+/* Mia Outline Button - Minimalist style with animated border */
+.mia-btn-outline {
+  color: var(--color-gold-dark);
+  background-color: transparent;
+  border: 2px solid var(--color-gold-light);
+  padding: 0.5625rem 1.5rem;
+  font-weight: var(--weight-medium);
+  position: relative;
+  text-transform: capitalize;
+}
+
+.mia-btn-outline:hover,
+.mia-btn-outline:focus {
+  color: var(--color-gold-dark);
+  background-color: var(--color-gold-alpha-10);
+  border-color: var(--color-gold);
+}
+
+/* Button size variations */
+.mia-btn-sm {
+  padding: 0.375rem 1rem;
+  font-size: 0.875rem;
+}
+
+.mia-btn-lg {
+  padding: 0.75rem 2rem;
+  font-size: 1.125rem;
 }

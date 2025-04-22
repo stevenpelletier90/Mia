@@ -1,5 +1,6 @@
 .navbar-nav .nav-link {
   font-size: clamp(0.75rem, 1vw, 0.95rem);
+  font-weight: 600; /* Increased font weight for main menu items */
 }
 
 .navbar-nav .nav-item {
@@ -24,6 +25,12 @@
 }
 
 @media (min-width: 1200px) {
+  /* Make header taller on desktop */
+  .navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   .dropdown-menu.mega-menu {
     border-radius: 0;
     border-top: 3px solid var(--color-gold);
@@ -47,6 +54,12 @@
   .mega-menu-title:hover {
     color: var(--color-gold-dark);
     text-decoration: underline;
+  }
+
+  /* Style for Font Awesome arrows in mega menu titles */
+  .mega-menu-title .fa-arrow-right {
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
   }
 
   .mega-menu .dropdown-header {
@@ -138,6 +151,98 @@
   }
 }
 
+/* Navbar background gradient for more depth */
+.navbar.bg-dark {
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-black)) !important;
+}
+
+/* Remove underlines from nav links */
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-item,
+.mega-menu-title {
+  text-decoration: none !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .dropdown-item:hover,
+.mega-menu-title:hover {
+  text-decoration: none !important;
+}
+
+/* Header-specific button styles */
+.navbar .mia-btn-primary,
+.navbar .mia-btn-secondary,
+.navbar .mia-btn-outline {
+  font-size: 0.9rem;
+  padding: 0.5rem 1.25rem;
+}
+
+/* Custom header button style */
+.header-btn {
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid var(--color-gold);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+}
+
+/* Desktop CTA button - larger and more prominent but responsive */
+/* Special fix for the problematic 1200-1215px range */
+@media (min-width: 1200px) and (max-width: 1215px) {
+  .desktop-cta {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
+  /* Add some extra space between nav items */
+  .navbar-nav .nav-item {
+    margin: 0 0.05rem;
+  }
+
+  /* Slightly reduce padding on nav links */
+  .navbar-nav .nav-link {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
+}
+
+/* Medium desktop screens */
+@media (min-width: 1216px) and (max-width: 1399px) {
+  .desktop-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1400px) {
+  .desktop-cta {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+}
+
+.header-btn:hover,
+.header-btn:focus {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.navbar .btn {
+  /* Ensure all button text is title case, not all caps */
+  text-transform: capitalize;
+}
+
 @media (max-width: 1199.98px) and (min-width: 576px) {
   .mobile-cta-container {
     display: none;
@@ -147,15 +252,12 @@
     display: flex !important;
     align-items: center;
   }
-
-  /* .d-none.d-sm-block.d-xl-none .btn-cta { */ /* Removed - Handled by btn classes now */
-  /* padding: 0.5rem 2rem; */
-  /* } */
 }
 
 @media (max-width: 575.98px) {
   .mobile-cta-container {
-    display: block;
+    display: flex;
+    justify-content: center;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -165,9 +267,29 @@
     z-index: 999;
   }
 
-  /* .mobile-cta-container .btn-cta { */ /* Removed - Handled by btn classes now */
-  /* display: block; */
-  /* width: 100%; */
-  /* text-align: center; */
-  /* } */
+  .mobile-cta-container .header-btn {
+    display: inline-block;
+    width: auto;
+    background: #c8b273;
+    color: #000;
+    min-width: 80%;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-width: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .mobile-cta-container .header-btn:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  .mobile-cta-container .btn,
+  .mobile-cta-container .mia-btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }

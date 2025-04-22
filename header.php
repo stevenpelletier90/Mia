@@ -29,7 +29,7 @@
         </a>
         <!-- Medium Mobile CTA - Only visible on medium mobile devices -->
         <div class="d-none d-sm-block d-xl-none mx-auto">
-          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn btn-primary btn-sm">
+          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn">
             Free Virtual Consultation
           </a>
         </div>
@@ -61,7 +61,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-12 mb-3">
-                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/')); ?>">View All Procedures</a>
+                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/')); ?>">View All Procedures <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                       </div>
                       <div class="row">
@@ -180,8 +180,69 @@
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/weight-loss/')); ?>">Skinny Shot</a></li>
                   </ul>
                 </li>
-                <!-- Locations Dropdown -->
-                <li class="nav-item dropdown">
+                <!-- Desktop Locations Mega Menu (only visible on desktop) -->
+                <li class="nav-item dropdown position-static d-none d-xl-block">
+                  <a class="nav-link dropdown-toggle" href="<?php echo esc_url(home_url('/locations/')); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Locations
+                  </a>
+                  <div class="dropdown-menu mega-menu w-100 p-3">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-12 mb-3">
+                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/locations/')); ?>">View All Locations <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <?php
+                        // Query location custom post type - only parent pages
+                        $location_args = array(
+                          'post_type' => 'location',
+                          'posts_per_page' => -1,
+                          'orderby' => 'title',
+                          'order' => 'ASC',
+                          'post_parent' => 0 // Only get parent pages (no children)
+                        );
+                        $location_query = new WP_Query($location_args);
+                        if ($location_query->have_posts()) :
+                          // Count locations to distribute them evenly across columns
+                          $total_locations = $location_query->post_count;
+                          $locations_per_column = ceil($total_locations / 4); // 4 columns like surgeons
+                          $location_count = 0;
+                          $column_count = 0;
+                          // Start the first column
+                          echo '<div class="col-md-3 mb-3"><ul class="list-unstyled">';
+                          while ($location_query->have_posts()) : $location_query->the_post();
+                            // Get location name from the title
+                            $location_name = get_the_title();
+                            $location_url = get_permalink();
+                            // Output the location link
+                            echo '<li><a class="dropdown-item py-1" href="' . esc_url($location_url) . '">' . esc_html($location_name) . '</a></li>';
+                            $location_count++;
+                            // Start a new column if needed
+                            if ($location_count % $locations_per_column === 0 && $location_count < $total_locations) {
+                              $column_count++;
+                              echo '</ul></div><div class="col-md-3 mb-3"><ul class="list-unstyled">';
+                            }
+                          endwhile;
+                          // Close the last column
+                          echo '</ul></div>';
+                          // Fill any remaining columns if needed
+                          while ($column_count < 3) { // We need 4 columns total (0-3)
+                            $column_count++;
+                            echo '<div class="col-md-3 mb-3"></div>';
+                          }
+                          wp_reset_postdata();
+                        else:
+                          // Fallback if no locations found
+                          echo '<div class="col-12"><p>No locations found. <a href="' . esc_url(home_url('/locations/')) . '">View our locations page</a> for more information.</p></div>';
+                        endif;
+                        ?>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- Mobile Locations Dropdown (only visible on mobile) -->
+                <li class="nav-item dropdown d-xl-none">
                   <a class="nav-link dropdown-toggle" href="<?php echo esc_url(home_url('/locations/')); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Locations
                   </a>
@@ -225,7 +286,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-12 mb-3">
-                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/plastic-surgeons/')); ?>">View All Surgeons</a>
+                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/plastic-surgeons/')); ?>">View All Surgeons <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                       </div>
                       <div class="row">
@@ -320,12 +381,12 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-12 mb-3">
-                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/before-after/')); ?>">View All Before & After</a>
+                          <a class="mega-menu-title" href="<?php echo esc_url(home_url('/before-after/')); ?>">View All Before & After <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                       </div>
                       <div class="row">
                         <!-- Procedure Types -->
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                           <h6 class="dropdown-header">
                             <span class="text-dark fw-bold">By Procedure</span>
                           </h6>
@@ -341,7 +402,7 @@
                           </ul>
                         </div>
                         <!-- Other Categories -->
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                           <h6 class="dropdown-header">
                             <span class="text-dark fw-bold">By Category</span>
                           </h6>
@@ -349,16 +410,6 @@
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/patient-journeys/')); ?>">Patient Videos</a></li>
                           </ul>
-                        </div>
-                        <!-- Featured Image -->
-                        <div class="col-md-4 mb-3">
-                          <div class="p-3 bg-light rounded">
-                            <h6 class="text-center mb-2">Featured Results</h6>
-                            <p class="small text-center">See our amazing transformations and real patient results.</p>
-                            <div class="text-center mt-3">
-                              <a href="<?php echo esc_url(home_url('/before-after/')); ?>" class="btn btn-sm btn-outline-dark">View Gallery</a>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -409,7 +460,7 @@
         </div>
         <!-- Right Side Items -->
         <div class="d-none d-xl-block ms-auto">
-          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn btn-primary">
+          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn desktop-cta">
             Free Virtual Consultation
           </a>
         </div>
@@ -419,7 +470,7 @@
 </header>
 <!-- Mobile Floating CTA Button - Only visible on mobile -->
 <div class="mobile-cta-container">
-  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="btn btn-primary">
+  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn">
     Free Virtual Consultation
   </a>
 </div>

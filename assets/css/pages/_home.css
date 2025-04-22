@@ -105,7 +105,7 @@
   z-index: 2;
 }
 .responsive-heading {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
   font-weight: 700;
   color: var(--color-white);
   margin-bottom: 0.5rem;
@@ -199,7 +199,7 @@
 
 @media (max-width: 991px) {
   .responsive-heading {
-    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
     margin-bottom: 0.4rem;
   }
   .content-overlay {
@@ -223,7 +223,7 @@
     margin-top: 0.3rem;
   }
   .responsive-heading {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     margin-bottom: 0.3rem;
   }
   .content-overlay .btn-outline-light {
@@ -241,7 +241,7 @@
     margin-top: 0.2rem;
   }
   .responsive-heading {
-    font-size: 1rem;
+    font-size: 1.15rem;
     margin-bottom: 0.2rem;
   }
   .content-overlay .btn-outline-light {
@@ -255,7 +255,7 @@
 
 @media (min-width: 1400px) {
   .responsive-heading {
-    font-size: 3.25rem;
+    font-size: 2.75rem;
     margin-bottom: 0.6rem;
   }
   .content-overlay {
@@ -273,21 +273,23 @@
 .about-section {
   padding: 4rem 0;
 }
+/* Standardized Heading Styles */
 .section-heading {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 1rem;
-  position: relative;
+  line-height: 1.2;
 }
 .section-subheading {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 3vw, 1.25rem);
   font-weight: 500;
   color: var(--color-primary);
   margin-bottom: 1.5rem;
+  line-height: 1.4;
 }
 h3.section-subheading {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 3vw, 1.25rem);
   font-weight: 500;
   color: var(--color-primary);
   margin-bottom: 1.5rem;
@@ -298,17 +300,87 @@ h3.section-subheading {
   color: var(--color-secondary);
   margin-bottom: 1.5rem;
 }
-/* About section image styles */
-.about-video img {
+/* Video Gallery Styles */
+.video-gallery {
   width: 100%;
-  height: auto;
+}
+
+.featured-video {
+  position: relative;
   border-radius: 8px;
+  overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.video-thumbnails {
+  margin-top: 1rem;
+}
+
+.video-thumb {
+  position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  transition: all 0.2s ease;
+}
+
+.video-thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-thumb .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.video-thumb:hover .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.video-thumb.active .overlay {
+  background-color: rgba(200, 178, 115, 0.3);
+  border: 2px solid var(--color-gold);
+}
+
+.video-thumb .fa-play {
+  color: white;
+  font-size: 1.25rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+}
+
+/* Make sure thumbnails stay in a row on all screen sizes */
 @media (max-width: 767px) {
   .about-video {
     margin-top: 1.5rem;
+  }
+
+  .video-thumbnails .row {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .video-thumb .fa-play {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-thumb {
+    padding-bottom: 60%; /* Slightly taller aspect ratio on very small screens */
   }
 }
 
@@ -321,13 +393,6 @@ h3.section-subheading {
   }
   .section-subheading {
     font-size: 1.1rem;
-  }
-  .video-play-button span {
-    width: 60px;
-    height: 60px;
-  }
-  .video-play-button i {
-    font-size: 2.5rem;
   }
 }
 
@@ -344,13 +409,6 @@ h3.section-subheading {
   .about-content {
     text-align: center;
   }
-  .video-play-button span {
-    width: 50px;
-    height: 50px;
-  }
-  .video-play-button i {
-    font-size: 2rem;
-  }
   .stats-number .display-4 {
     font-size: 3rem;
   }
@@ -362,7 +420,8 @@ h3.section-subheading {
   color: var(--color-white);
 }
 .stats-section .section-heading {
-  color: var(--color-gold);
+  color: var(--color-white);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 .stats-section .lead {
   color: var(--color-white);
@@ -448,6 +507,12 @@ h3.stats-title {
 .overlap-card h3 {
   color: var(--color-primary);
   font-weight: var(--weight-bold);
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+}
+.overlap-card h4 {
+  color: var(--color-gold);
+  font-weight: var(--weight-semibold);
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
 }
 .overlap-card p {
   color: var(--color-primary);
@@ -641,9 +706,10 @@ h3.stats-title {
 }
 
 .procedure-title {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: var(--weight-bold);
   color: var(--color-primary);
+  line-height: 1.2;
 }
 .procedure-links {
   display: flex;
@@ -1004,7 +1070,7 @@ h3.stats-title {
   padding: 0.5rem 1.5rem;
   border-radius: var(--border-radius-sm);
   transition: all 0.3s ease;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.5px;
 }
 .btn-primary:hover,
@@ -1025,7 +1091,7 @@ h3.stats-title {
   padding: 0.5rem 1.5rem;
   border-radius: var(--border-radius-sm);
   transition: all 0.3s ease;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.5px;
 }
 .btn-outline-primary:hover,
@@ -1034,4 +1100,67 @@ h3.stats-title {
   color: var(--color-primary);
   border-color: var(--color-gold);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* New button style for Learn More buttons */
+.mia-btn-dark {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 2px solid var(--color-gold);
+  font-weight: 600;
+  padding: 0.6rem 1.75rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  width: auto;
+  min-width: 140px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.mia-btn-dark:hover,
+.mia-btn-dark:focus {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+  border-color: var(--color-gold);
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Size variations for the new button */
+.mia-btn-dark.btn-lg {
+  padding: 0.75rem 2rem;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  min-width: 160px;
+}
+
+/* Responsive adjustments for the button */
+@media (max-width: 1199px) {
+  .mia-btn-dark {
+    padding: 0.55rem 1.5rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .mia-btn-dark {
+    padding: 0.5rem 1.25rem;
+    min-width: 130px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mia-btn-dark {
+    padding: 0.45rem 1.2rem;
+    font-size: 0.95rem;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mia-btn-dark {
+    padding: 0.2rem 1rem;
+    font-size: 12px;
+    min-width: 110px;
+  }
 }

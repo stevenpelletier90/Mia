@@ -87,7 +87,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Before & After</h4>
         <div class="button-wrapper">
-          <a href="#gallery" class="btn btn-outline-light btn-sm">View Gallery</a>
+          <a href="#gallery" class="mia-btn-dark">View Gallery</a>
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Financing</h4>
         <div class="button-wrapper">
-          <a href="#financing" class="btn btn-outline-light btn-sm">Learn More</a>
+          <a href="#financing" class="mia-btn-dark">Learn More</a>
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@ get_header(); ?>
           <div class="video-thumbnails">
             <div class="row g-2">
               <!-- Video 1 -->
-              <div class="col-3">
+              <div class="col-3 col-sm-3 col-xs-3">
                 <div class="video-thumb active" data-video-id="OxigXlYTqH8">
                   <img src="https://img.youtube.com/vi/OxigXlYTqH8/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
                   <div class="overlay d-flex align-items-center justify-content-center">
@@ -158,7 +158,7 @@ get_header(); ?>
               </div>
               
               <!-- Video 2 -->
-              <div class="col-3">
+              <div class="col-3 col-sm-3 col-xs-3">
                 <div class="video-thumb" data-video-id="sb8Kapy8mzU">
                   <img src="https://img.youtube.com/vi/sb8Kapy8mzU/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
                   <div class="overlay d-flex align-items-center justify-content-center">
@@ -168,7 +168,7 @@ get_header(); ?>
               </div>
               
               <!-- Video 3 -->
-              <div class="col-3">
+              <div class="col-3 col-sm-3 col-xs-3">
                 <div class="video-thumb" data-video-id="4-B_ISCne28">
                   <img src="https://img.youtube.com/vi/4-B_ISCne28/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
                   <div class="overlay d-flex align-items-center justify-content-center">
@@ -178,7 +178,7 @@ get_header(); ?>
               </div>
               
               <!-- Video 4 -->
-              <div class="col-3">
+              <div class="col-3 col-sm-3 col-xs-3">
                 <div class="video-thumb" data-video-id="ykz9Z8Kh3Yo">
                   <img src="https://img.youtube.com/vi/ykz9Z8Kh3Yo/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
                   <div class="overlay d-flex align-items-center justify-content-center">
@@ -258,8 +258,8 @@ get_header(); ?>
         <div class="overlap-card position-relative w-100">
           <div class="row">
             <div class="col-12 text-center mb-4">
-              <h3 class="mb-2 text-primary">How Payments Work</h3>
-              <h4 class="text-gold">at Mia Aesthetics</h4>
+              <h2 class="section-heading mb-2">How Payments Work</h2>
+              <h3 class="section-subheading text-gold mb-4">at Mia Aesthetics</h3>
             </div>
           </div>
           <div class="row">
