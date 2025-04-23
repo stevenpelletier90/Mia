@@ -1,12 +1,10 @@
-/* Lato Fonts */
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Thin.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
-  font-display: swap; /* Use swap for better performance */
+  font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-ThinItalic.woff2") format("woff2");
@@ -14,7 +12,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Light.woff2") format("woff2");
@@ -22,7 +19,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-LightItalic.woff2") format("woff2");
@@ -30,7 +26,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Regular.woff2") format("woff2");
@@ -38,7 +33,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Italic.woff2") format("woff2");
@@ -46,7 +40,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Bold.woff2") format("woff2");
@@ -54,7 +47,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-BoldItalic.woff2") format("woff2");
@@ -62,7 +54,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Black.woff2") format("woff2");
@@ -70,7 +61,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-BlackItalic.woff2") format("woff2");
@@ -78,26 +68,20 @@
   font-style: italic;
   font-display: swap;
 }
-
-/* Montserrat Variable Fonts */
 @font-face {
   font-family: "Montserrat";
   src: url("fonts/Montserrat-VariableFont_wght.woff2") format("woff2-variations");
-  /* Define the weight range the variable font supports */
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Montserrat";
   src: url("fonts/Montserrat-Italic-VariableFont_wght.woff2") format("woff2-variations");
-  /* Define the weight range the variable font supports */
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
-
 :root {
   --color-primary: #1b1b1b;
   --color-black: #000;
@@ -108,12 +92,12 @@
   --color-secondary: #6c757d;
   --color-gold-light: #e5d7af;
   --color-gold-dark: #a89355;
-  --color-gold-alpha-10: rgba(200, 178, 115, 0.1); /* Added for light gold backgrounds */
-  --color-gold-alpha-20: rgba(200, 178, 115, 0.2); /* Added for light gold borders/hovers */
-  --color-gold-alpha-40: rgba(200, 178, 115, 0.4); /* Added for footer divider */
-  --color-gold-alpha-50: rgba(200, 178, 115, 0.5); /* Added for footer accordion focus */
+  --color-gold-alpha-10: rgba(200, 178, 115, 0.1);
+  --color-gold-alpha-20: rgba(200, 178, 115, 0.2);
+  --color-gold-alpha-40: rgba(200, 178, 115, 0.4);
+  --color-gold-alpha-50: rgba(200, 178, 115, 0.5);
   --font-heading: "Montserrat", sans-serif;
-  --font-body: "Lato", sans-serif; /* Updated from Open Sans */
+  --font-body: "Lato", sans-serif;
   --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
@@ -127,7 +111,6 @@
   --border-radius-xl: 1rem;
   --border-radius-pill: 50rem;
 }
-
 body {
   font-family: var(--font-body);
   font-weight: var(--weight-regular);
@@ -136,7 +119,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 h1,
 h2,
 h3,
@@ -156,97 +138,77 @@ h6,
   margin-bottom: 0.5rem;
   color: var(--color-primary);
 }
-
 h1,
 .h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
-
 h2,
 .h2 {
   font-size: calc(1.325rem + 0.9vw);
 }
-
 h3,
 .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
-
 h4,
 .h4 {
   font-size: calc(1.275rem + 0.3vw);
 }
-
 h5,
 .h5 {
   font-size: 1.25rem;
 }
-
 h6,
 .h6 {
   font-size: 1rem;
 }
-
 p {
   margin-bottom: 1rem;
 }
-
 a {
   color: var(--color-gold);
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
-
 a:hover {
   color: var(--color-gold-dark);
 }
-
-/* Only apply underline to content links, not navigation */
 main a:hover {
   text-decoration: underline;
 }
-
 ul,
 ol {
   margin-top: 0;
   margin-bottom: 1rem;
   padding-left: 2rem;
 }
-
 ::selection {
   background-color: var(--color-gold);
   color: var(--color-white);
 }
-
 .section-padding {
   padding: var(--section-padding);
 }
-
 .card-padding {
   padding: var(--card-padding);
 }
-
 .container-xxl {
   max-width: 1400px;
 }
-
 #breadcrumbs {
   margin-bottom: 0;
   padding: 1rem 0;
   font-family: var(--font-body);
 }
-
 #breadcrumbs a {
   color: var(--color-primary);
   text-decoration: none;
 }
-
 #breadcrumbs a:hover {
   opacity: 0.7;
   text-decoration: underline;
   transition: color 0.2s ease, text-decoration 0.2s ease;
 }
-
 #breadcrumbs .breadcrumb_last {
   color: var(--color-primary);
   font-weight: var(--weight-bold);
@@ -257,26 +219,20 @@ ol {
   .h1 {
     font-size: 2.5rem;
   }
-
   h2,
   .h2 {
     font-size: 2rem;
   }
-
   h3,
   .h3 {
     font-size: 1.75rem;
   }
-
   h4,
   .h4 {
     font-size: 1.5rem;
   }
 }
 
-/*--------------------------------------------------------------
-# Buttons
---------------------------------------------------------------*/
 .btn {
   display: inline-block;
   font-family: var(--font-heading);
@@ -292,57 +248,38 @@ ol {
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 0.5rem 1rem; /* Adjust padding as needed */
-  font-size: 1rem; /* Adjust font size as needed */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   border-radius: var(--border-radius);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  /* Ensure all button text is title case, not all caps */
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   text-transform: capitalize;
 }
-
 .btn:hover {
   text-decoration: none;
 }
-
-/* Primary Button */
 .btn-primary {
   color: var(--color-white);
   background-color: var(--color-gold);
   border-color: var(--color-gold);
 }
-
 .btn-primary:hover,
 .btn-primary:focus {
   color: var(--color-white);
   background-color: var(--color-gold-dark);
   border-color: var(--color-gold-dark);
-  box-shadow: none; /* Optional: remove default Bootstrap focus shadow if desired */
+  box-shadow: none;
 }
-
-/* Outline Primary Button */
 .btn-outline-primary {
   color: var(--color-gold);
   border-color: var(--color-gold);
 }
-
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
   color: var(--color-white);
   background-color: var(--color-gold);
   border-color: var(--color-gold);
-  box-shadow: none; /* Optional: remove default Bootstrap focus shadow if desired */
+  box-shadow: none;
 }
-
-/*--------------------------------------------------------------
-# Custom Button Styles (Non-Bootstrap)
---------------------------------------------------------------*/
-/* 
- * These custom button styles are designed to not interfere with 
- * Bootstrap 5's default classes while providing distinctive styling options
- */
-
-/* Mia Primary Button - Gold gradient with shadow effect */
 .mia-btn-primary {
   color: var(--color-white);
   background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
@@ -355,30 +292,25 @@ ol {
   z-index: 1;
   text-transform: capitalize;
 }
-
 .mia-btn-primary:hover,
 .mia-btn-primary:focus {
   color: var(--color-white);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-
 .mia-btn-primary:active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Add transform effect only on larger screens where hover is intentional */
 @media (min-width: 992px) {
   .mia-btn-primary:hover,
   .mia-btn-primary:focus {
     transform: translateY(-2px);
   }
-
   .mia-btn-primary:active {
     transform: translateY(0);
   }
 }
 
-/* Mia Secondary Button - Subtle elegant style */
 .mia-btn-secondary {
   color: var(--color-primary);
   background-color: var(--color-white);
@@ -388,15 +320,12 @@ ol {
   font-weight: var(--weight-medium);
   text-transform: capitalize;
 }
-
 .mia-btn-secondary:hover,
 .mia-btn-secondary:focus {
   color: var(--color-primary);
   background-color: var(--color-gold-alpha-10);
   border-color: var(--color-gold);
 }
-
-/* Mia Outline Button - Minimalist style with animated border */
 .mia-btn-outline {
   color: var(--color-gold-dark);
   background-color: transparent;
@@ -406,20 +335,16 @@ ol {
   position: relative;
   text-transform: capitalize;
 }
-
 .mia-btn-outline:hover,
 .mia-btn-outline:focus {
   color: var(--color-gold-dark);
   background-color: var(--color-gold-alpha-10);
   border-color: var(--color-gold);
 }
-
-/* Button size variations */
 .mia-btn-sm {
   padding: 0.375rem 1rem;
   font-size: 0.875rem;
 }
-
 .mia-btn-lg {
   padding: 0.75rem 2rem;
   font-size: 1.125rem;

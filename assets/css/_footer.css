@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Base Footer Styles
+   ========================================================================== */
+
 .site-footer {
   background: linear-gradient(to right, var(--color-black), var(--color-primary));
   color: var(--color-white);
@@ -14,12 +18,6 @@
   padding-right: 4rem;
 }
 
-.footer-columns {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
 .footer-heading {
   font-family: var(--font-heading);
   font-size: 1rem;
@@ -30,8 +28,19 @@
 }
 
 .text-gold {
+  /* Applied to some headings */
   color: var(--color-gold);
   margin-bottom: 1rem; /* Add space between headings and content below */
+}
+
+/* ==========================================================================
+   Footer Columns & Menus
+   ========================================================================== */
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
 .footer-menu {
@@ -57,10 +66,14 @@
   text-decoration: underline;
 }
 
-/* Social Icons */
+/* ==========================================================================
+   Social Icons
+   ========================================================================== */
+
 .social-icons {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem; /* Add gap for spacing */
 }
 
 .social-icon {
@@ -86,7 +99,10 @@
   font-size: 1.2rem;
 }
 
-/* Footer Dividers */
+/* ==========================================================================
+   Footer Divider
+   ========================================================================== */
+
 .footer-divider-container {
   width: 100%;
   padding: 0;
@@ -101,13 +117,17 @@
   margin: 0;
 }
 
-/* Locations Accordion */
+/* ==========================================================================
+   Locations Accordion Section
+   ========================================================================== */
+
 .locations-section {
   padding-top: 0; /* Remove top padding */
   margin-top: 0;
 }
 
-.locations-section h5 {
+.locations-section h5.footer-heading {
+  /* Target specific heading */
   padding-left: 0; /* Ensure heading aligns with columns above */
 }
 
@@ -115,7 +135,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  align-items: flex-start; /* This prevents items from stretching */
+  align-items: flex-start; /* Prevents items from stretching vertically */
   margin-top: 1rem;
   padding: 0; /* Remove any default padding */
 }
@@ -125,35 +145,12 @@
   border: 1px solid var(--color-gold-alpha-20); /* Use new variable */
   border-radius: 0.25rem;
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem; /* Consistent spacing */
   width: 100%; /* Ensure full width within grid cell */
-}
-
-/* Fix for accordion items to maintain their size */
-.locations-section .accordion-item {
-  height: auto !important;
+  height: auto !important; /* Override potential inline styles */
   min-height: 56px; /* Height of the button */
   display: flex;
   flex-direction: column;
-}
-
-.locations-section .accordion-button {
-  height: 56px; /* Fixed height for the button */
-  flex-shrink: 0;
-}
-
-/* Improved accordion transition */
-.locations-section .accordion-collapse {
-  transition: all 0.35s ease;
-}
-
-.locations-section .accordion-collapse.collapsing {
-  height: 0;
-  overflow: hidden;
-}
-
-.locations-section .accordion-collapse.show {
-  overflow: hidden;
 }
 
 .locations-section .accordion-button {
@@ -165,6 +162,8 @@
   border: none;
   box-shadow: none;
   transition: color 0.3s ease;
+  height: 56px; /* Fixed height */
+  flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 .locations-section .accordion-button:hover {
@@ -192,12 +191,29 @@
   width: auto;
   height: auto;
   color: var(--color-white);
+  transition: transform 0.35s ease; /* Add transition to icon */
 }
 
 .locations-section .accordion-button:not(.collapsed)::after {
   content: "\f068"; /* Font Awesome minus icon */
-  transform: none;
+  transform: none; /* Keep rotation default */
   color: var(--color-white);
+}
+
+/* Accordion Body & Content */
+.locations-section .accordion-collapse {
+  transition: height 0.35s ease; /* Smooth height transition */
+}
+
+.locations-section .accordion-collapse.collapsing {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+
+.locations-section .accordion-collapse.show {
+  height: auto; /* Let content determine height */
+  overflow: visible; /* Ensure content isn't clipped */
 }
 
 .locations-section .accordion-body {
@@ -205,38 +221,26 @@
   color: rgba(var(--bs-white-rgb), 0.9); /* Use BS variable */
   background-color: var(--color-black);
   border-top: 1px solid var(--color-gold-alpha-10); /* Use new variable */
+  flex-grow: 1; /* Allow body to fill remaining space */
 }
 
 .surgeons-list h6 {
   color: var(--color-gold-light);
   font-size: 0.9rem;
+  margin-bottom: 0.5rem; /* Add space below surgeon list title */
 }
 
 .surgeons-list ul {
-  margin-bottom: 0;
+  list-style: none; /* Ensure no bullets */
+  padding: 0;
+  margin: 0;
 }
 
-/* Location link styling */
+/* Location & Surgeon Links */
 .location-link a {
   text-decoration: none;
 }
 
-/* Gold location link styling */
-.surgeon-link.text-gold:hover {
-  color: var(--color-gold);
-  text-decoration: none;
-}
-
-.surgeon-link.text-gold:hover span {
-  text-decoration: underline;
-}
-
-.surgeon-link.text-gold:hover .surgeon-arrow {
-  opacity: 1;
-  color: var(--color-gold);
-}
-
-/* Surgeon links with arrows */
 .surgeon-link {
   color: var(--color-white);
   text-decoration: none;
@@ -245,6 +249,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.25rem 0;
+  font-size: 0.9rem; /* Consistent font size */
 }
 
 .surgeon-link:hover {
@@ -268,22 +273,43 @@
   color: var(--color-gold);
 }
 
-/* Footer Bottom Section - Simplified for better responsive behavior */
+/* Specific hover for gold links (if needed, though general hover should cover) */
+.surgeon-link.text-gold:hover {
+  color: var(--color-gold); /* Already gold, ensure it stays */
+  text-decoration: none;
+}
+
+.surgeon-link.text-gold:hover span {
+  text-decoration: underline;
+}
+
+.surgeon-link.text-gold:hover .surgeon-arrow {
+  opacity: 1;
+  color: var(--color-gold);
+}
+
+/* ==========================================================================
+   Footer Bottom Section
+   ========================================================================== */
+
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 2rem; /* Reduced from original, padding added to .site-footer */
   font-size: 0.85rem;
+  text-align: center; /* Center align content */
 }
 
 .copyright {
   color: rgba(var(--bs-white-rgb), 0.9); /* Use BS variable */
   font-weight: var(--weight-medium);
+  margin-bottom: 0.75rem; /* Space below copyright */
 }
 
 .disclaimer {
   font-size: 0.85rem;
   color: rgba(var(--bs-white-rgb), 0.7); /* Use BS variable */
+  margin-bottom: 1rem; /* Space below disclaimer */
 }
 
 .footer-links {
@@ -297,8 +323,8 @@
 }
 
 .footer-links li {
-  display: inline-block;
-  margin-bottom: 0.5rem;
+  display: inline-block; /* Already default for flex items */
+  margin-bottom: 0.5rem; /* Spacing for wrapped items */
 }
 
 .footer-links a {
@@ -314,6 +340,11 @@
   text-decoration: underline;
 }
 
+/* ==========================================================================
+   Media Queries (Consolidated)
+   ========================================================================== */
+
+/* XXL Screens (1800px and down) */
 @media (max-width: 1800px) {
   .wide-container {
     padding-left: 1.5rem;
@@ -321,52 +352,50 @@
   }
 }
 
+/* XL Screens (1200px and down) */
 @media (max-width: 1200px) {
   .footer-columns {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 2rem; /* Keep gap consistent */
   }
+  /* Locations grid stays 4 columns until 992px */
 }
 
+/* LG Screens (992px and down) */
 @media (max-width: 992px) {
-  .footer-columns {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  /* Adjust locations grid to 3 columns on medium screens */
+  /* Footer columns already 2-col from 1200px */
   .locations-section .accordion {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Adjust locations to 3 columns */
   }
 }
 
+/* MD Screens (768px and down) */
 @media (max-width: 768px) {
   .site-footer {
-    padding-bottom: 6rem; /* Increased padding for mobile to account for sticky button */
+    padding-bottom: 6rem; /* Increased padding for mobile sticky button */
   }
 
   .footer-columns {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack columns */
     gap: 2rem;
   }
 
   .footer-column:first-child {
-    text-align: center;
+    text-align: center; /* Center first column content (logo/social) */
   }
 
   .social-icons {
-    justify-content: center;
-  }
-
-  /* Adjust locations grid to 1 column on all mobile devices for consistency */
-  .locations-section .accordion {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    justify-content: center; /* Center social icons */
   }
 
   .locations-section {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
+    margin-top: 2.5rem; /* Adjust spacing */
+    padding-top: 2.5rem; /* Add top padding for divider effect */
+  }
+
+  .locations-section .accordion {
+    grid-template-columns: 1fr; /* Stack locations */
+    gap: 0.75rem;
   }
 
   .locations-section .accordion-button {
@@ -383,15 +412,15 @@
   }
 
   .surgeon-link {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Adjusted from original */
   }
 
-  /* Footer links on mobile */
   .footer-links {
-    gap: 1rem;
+    gap: 1rem; /* Adjust gap for footer links */
   }
 }
 
+/* SM Screens (480px and down) */
 @media (max-width: 480px) {
   .site-footer {
     padding-bottom: 7rem; /* Extra padding for smallest screens */
@@ -403,7 +432,7 @@
   }
 
   .social-icons {
-    gap: 2px;
+    gap: 0.25rem; /* Reduce gap for smaller icons */
   }
 
   .social-icon {
@@ -425,19 +454,17 @@
     font-size: 0.9rem;
   }
 
-  /* Adjust surgeon arrow size for smallest screens */
   .surgeon-arrow {
-    font-size: 0.7rem;
+    font-size: 0.7rem; /* Adjust arrow size */
   }
 
-  /* Footer links on smallest screens */
   .footer-links {
-    gap: 0.75rem;
+    gap: 0.75rem; /* Further reduce gap */
     justify-content: center;
   }
 
   .footer-links li {
-    margin: 0 0.25rem 0.5rem;
+    margin: 0 0.25rem 0.5rem; /* Adjust margins */
   }
 
   .footer-links a {
