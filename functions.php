@@ -878,5 +878,20 @@ function display_page_faqs() {
 // echo display_page_faqs();
 
 
+/**
+ * Modify the main query for the Location archive page.
+ * - Show all locations (no pagination).
+ * - Only show top-level locations (no children).
+ */
+function mia_modify_location_archive_query( $query ) {
+    // Check if it's the main query, on the frontend, and the location archive page
+    if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'location' ) ) {
+        // Show all posts
+        $query->set( 'posts_per_page', -1 );
+        // Only show top-level posts (pages with no parent)
+        $query->set( 'post_parent', 0 );
+    }
+}
+add_action( 'pre_get_posts', 'mia_modify_location_archive_query' );
 
 ?>

@@ -78,27 +78,21 @@ get_header();
                 <div class="col-lg-6">
                     <div class="video-container mb-4">
                         <?php 
-                        $video_url = get_field('video_url');
-                        $video_title = get_field('video_title');
+                        $video_details = get_field('video_details'); // Get the group field
+                        $video_id = isset($video_details['video_id']) ? $video_details['video_id'] : ''; // Get the video ID subfield
                         
-                        if ($video_url):
-                            // Convert "watch?v=" to "embed/" if needed
-                            if (strpos($video_url, 'watch?v=') !== false) {
-                                $video_url = str_replace('watch?v=', 'embed/', $video_url);
-                            }
+                        if ($video_id): 
+                            $youtube_embed_url = 'https://www.youtube.com/embed/' . esc_attr($video_id);
                         ?>
                             <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
                                 <iframe 
-                                    src="<?php echo esc_url($video_url); ?>" 
-                                    title="<?php echo esc_attr($video_title ? $video_title : 'YouTube Video'); ?>" 
+                                    src="<?php echo esc_url($youtube_embed_url); ?>" 
+                                    title="Location Video"  
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen
                                 ></iframe>
                             </div>
-                            <?php if ($video_title): ?>
-                                <p class="mt-2 text-center"><strong>Video Title:</strong> <?php echo esc_html($video_title); ?></p>
-                            <?php endif; ?>
                         <?php else: ?>
                             <p class="text-center text-muted">No video available for this location.</p>
                         <?php endif; ?>

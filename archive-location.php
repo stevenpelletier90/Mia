@@ -43,17 +43,6 @@ get_header(); ?>
                     <?php endwhile; ?>
                 </div>
 
-                <!-- Pagination -->
-                <div class="row mt-5">
-                    <div class="col">
-                        <?php the_posts_pagination([
-                            'prev_text' => '&laquo;',
-                            'next_text' => '&raquo;',
-                            'class' => 'pagination justify-content-center',
-                        ]); ?>
-                    </div>
-                </div>
-
             <?php else : ?>
                 <div class="row">
                     <div class="col">
