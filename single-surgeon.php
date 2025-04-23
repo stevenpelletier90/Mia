@@ -12,11 +12,36 @@ get_header(); ?>
         ?>
     </div>
 
-    <!-- Hero Section -->
-    <header class="surgeon-header py-5">
+    <section class="surgeon-hero py-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
+            <div class="row align-items-center"> <!-- Removed g-0 to allow for natural spacing -->
+                <div class="col-md-4 col-lg-3 order-md-1 order-1 mb-4 mb-md-0"> <!-- Reduced to col-lg-3 to decrease space -->
+                    <?php 
+                    $surgeon_headshot_id = get_field('surgeon_headshot');
+                    if($surgeon_headshot_id && is_numeric($surgeon_headshot_id)) : ?>
+                        <div class="surgeon-headshot-container text-center text-md-start">
+                            <?php 
+                            echo wp_get_attachment_image(
+                                $surgeon_headshot_id, 
+                                'medium', 
+                                false, 
+                                array(
+                                    'class' => 'img-fluid surgeon-headshot',
+                                    'alt' => get_the_title() . ' Headshot'
+                                )
+                            ); 
+                            ?>
+                        </div>
+                    <?php elseif(has_post_thumbnail()) : ?>
+                        <div class="surgeon-headshot-container text-center text-md-start">
+                            <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'medium')); ?>" 
+                                 alt="<?php echo esc_attr(get_the_title()); ?>" 
+                                 class="img-fluid surgeon-headshot">
+                        </div>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="col-md-8 col-lg-9 order-md-2 order-2 surgeon-info">
                     <h1><?php the_title(); ?></h1>
                     <p class="surgeon-role mb-4">Plastic Surgeon at Mia Aesthetics</p>
                     <?php 
@@ -26,123 +51,58 @@ get_header(); ?>
                     ?>
                     <p class="surgeon-location mb-4">Based Out of Our <?php echo esc_html($location_title); ?> Location</p>
                     <?php endif; ?>
-                    <div class="credentials">
-                        <span class="surgeon-badge me-2 mb-2">Board Certified</span>
-                        <span class="surgeon-badge me-2 mb-2">Stanford University Medical School</span>
-                        <span class="surgeon-badge me-2 mb-2">University of Pennsylvania</span>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <?php 
-                    $video_details = get_field('video_details');
-                    if($video_details && !empty($video_details['video_url'])) : 
-                        $video_url = $video_details['video_url'];
-                        $video_title = $video_details['video_title'];
-                        $video_thumbnail = $video_details['video_thumbnail'];
-                        $thumbnail_url = '';
-                        
-                        // Prepare YouTube URL with autoplay parameter
-                        if(strpos($video_url, 'youtube.com') !== false || strpos($video_url, 'youtu.be') !== false) {
-                            // Check if the URL already has parameters
-                            if(strpos($video_url, '?') !== false) {
-                                $video_url .= '&autoplay=1&mute=0';
-                            } else {
-                                $video_url .= '?autoplay=1&mute=0';
-                            }
-                        }
-                        
-                        if($video_thumbnail) {
-                            $thumbnail_url = $video_thumbnail['url'];
-                        } else {
-                            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
-                        }
-                    ?>
-                        <div class="video-container ratio ratio-16x9 shadow rounded overflow-hidden">
-                            <div class="video-placeholder" style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');">
-                                <div class="video-play-button">
-                                    <span class="play-icon"><i class="fa-solid fa-play"></i></span>
-                                </div>
-                            </div>
-                            <iframe 
-                                id="surgeon-video" 
-                                class="d-none"
-                                src="" 
-                                data-src="<?php echo esc_url($video_url); ?>" 
-                                title="<?php echo esc_attr($video_title ? $video_title : get_the_title()); ?>" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    <?php elseif(has_post_thumbnail()) : ?>
-                        <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
-                            <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="img-fluid">
-                        </div>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Main Content -->
     <article class="py-5">
         <div class="container">
             <div class="row">
-                <!-- Main Content Column -->
                 <div class="col-lg-8">
-                    <!-- About Section -->
                     <section class="mb-5">
                         <h2 class="section-title mb-4">About <?php echo get_the_title(); ?></h2>
-                        <?php 
-                        // Display the main content from the default WordPress editor
-                        the_content(); 
-                        ?>
+                        <?php the_content(); ?>
                     </section>
                 </div>
 
-                <!-- Sidebar -->
                 <div class="col-lg-4">
-                    <!-- Contact Card -->
-                    <div class="card consultation-card mb-4 shadow-sm">
+                    <!-- Before & After Gallery CTA Card -->
+                    <a href="#" class="card cta-card text-decoration-none text-dark mb-4 shadow-sm d-block">
+                        <img src="https://placehold.co/400x250" class="card-img-top" alt="Before and After Gallery Preview">
                         <div class="card-body p-3">
-                            <h3 class="h5 mb-4 text-center">Contact Information</h3>
-                            <div class="mb-3">
-                                <strong class="d-block mb-2">Office Location</strong>
-                                <p class="mb-0">
-                                    <?php
-                                    $location = get_field('surgeon_location');
-                                    if($location) {
-                                        echo 'Mia Aesthetics ' . esc_html(get_the_title($location)) . '<br>';
-                                    }
-                                    
-                                    $address = get_field('address');
-                                    if($address) {
-                                        echo nl2br(esc_html($address));
-                                    }
-                                    ?>
-                                </p>
-                            </div>
-                            <div class="mb-4">
-                                <button class="btn btn-primary w-100">Schedule Consultation</button>
-                            </div>
+                            <h3 class="h5 card-title mb-2 text-center">Before & After Gallery</h3>
+                            <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>
                         </div>
-                    </div>
+                    </a>
 
-                    <!-- Education & Training Card -->
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm procedures-card">
                         <div class="card-body">
-                            <h3 class="h5 mb-4">Education & Training</h3>
-                            <div class="mb-3">
-                                <strong class="d-block mb-2">Undergraduate</strong>
-                                <p>University of Pennsylvania - Bioengineering</p>
-                            </div>
-                            <div class="mb-3">
-                                <strong class="d-block mb-2">Medical School</strong>
-                                <p>Stanford University</p>
-                            </div>
-                            <div class="mb-0">
-                                <strong class="d-block mb-2">Residency</strong>
-                                <p class="mb-0">Loyola University Medical Center - Plastic Surgery</p>
-                            </div>
+                            <h3 class="h5 mb-4">Specialized Procedures</h3>
+                            <?php 
+                            $specialized_procedures = array(
+                                'Breast Augmentation',
+                                'Brazilian Butt Lift',
+                                'Tummy Tuck',
+                                'Liposuction',
+                                'Mommy Makeover'
+                            );
+                            
+                            if(!empty($specialized_procedures)) : 
+                                echo '<ul class="list-unstyled mb-0">';
+                                foreach($specialized_procedures as $procedure) :
+                                    // Wrap list item content in a link, add flex classes, set text white, remove text decoration
+                                    echo '<li class="mb-1">'; // Reduced bottom margin slightly
+                                    echo '<a href="#" class="d-flex justify-content-between align-items-center text-white text-decoration-none py-2 procedure-link">';
+                                    echo '<span>' . esc_html($procedure) . '</span>';
+                                    // Add right arrow icon with custom class for styling
+                                    echo '<i class="fa-solid fa-arrow-right procedure-arrow"></i>';
+                                    echo '</a>';
+                                    echo '</li>';
+                                endforeach;
+                                echo '</ul>';
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -150,7 +110,6 @@ get_header(); ?>
         </div>
     </article>
 
-    <!-- FAQ Section - Optional -->
     <?php
     $faq_section = get_field('faq_section');
     if($faq_section && !empty($faq_section['faqs'])): ?>
@@ -164,20 +123,4 @@ get_header(); ?>
     <?php endif; ?>
 </main>
 
-<script>
-jQuery(document).ready(function($) {
-    $('.video-play-button').on('click', function() {
-        var videoContainer = $(this).closest('.video-container');
-        var videoPlaceholder = videoContainer.find('.video-placeholder');
-        var iframe = videoContainer.find('iframe');
-        
-        // Load the video src from data attribute
-        iframe.attr('src', iframe.data('src'));
-        
-        // Hide placeholder and show iframe
-        videoPlaceholder.hide();
-        iframe.removeClass('d-none');
-    });
-});
-</script>
 <?php get_footer(); ?>

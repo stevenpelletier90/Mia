@@ -20,7 +20,7 @@
 
 .footer-heading {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 1rem; /* Reduced font size */
   font-weight: var(--weight-semibold);
   letter-spacing: 1px;
   margin-bottom: 1.5rem;
