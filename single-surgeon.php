@@ -3,7 +3,7 @@
  * Template for displaying single surgeon
  */
 get_header(); ?>
-<main>
+<main tabindex="0">
     <div class="container">
         <?php
         if ( function_exists('yoast_breadcrumb') ) {
@@ -56,14 +56,14 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Mobile-Only Navigation Tabs -->
-    <section class="surgeon-mobile-tabs d-md-none">
+    <!-- Navigation Tabs (visible on all devices) -->
+    <section class="surgeon-tabs">
         <div class="container">
             <div class="nav-scroller">
-                <nav class="nav nav-pills nav-justified">
-                    <a class="nav-link active" href="#about">About</a>
-                    <a class="nav-link" href="#before-after">Before & After</a>
-                    <a class="nav-link" href="#specialities">Specialities</a>
+                <nav id="surgeon-tabs" class="nav nav-pills nav-justified">
+                    <a class="nav-link" href="#surgeon-about">About</a>
+                    <a class="nav-link" href="#surgeon-before-after">Before & After</a>
+                    <a class="nav-link" href="#surgeon-specialities">Specialities</a>
                 </nav>
             </div>
         </div>
@@ -71,55 +71,61 @@ get_header(); ?>
 
     <article class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <section id="about" class="mb-5">
-                        <h2 class="section-title mb-4">About <?php echo get_the_title(); ?></h2>
-                        <?php the_content(); ?>
-                    </section>
-                </div>
+            <!-- Single Column Layout -->
+            <section id="surgeon-about" class="mb-5">
+                <h2 class="section-title mb-4">About <?php echo get_the_title(); ?></h2>
+                <?php the_content(); ?>
+            </section>
 
-                <div class="col-lg-4">
-                    <!-- Before & After Gallery CTA Card -->
-                    <a id="before-after" href="#" class="card cta-card text-decoration-none text-dark mb-4 shadow-sm d-block">
-                        <img src="https://placehold.co/400x250" class="card-img-top" alt="Before and After Gallery Preview">
-                        <div class="card-body p-3">
-                            <h3 class="h5 card-title mb-2 text-center">Before & After Gallery</h3>
-                            <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>
-                        </div>
-                    </a>
-
-                    <div id="specialities" class="card shadow-sm procedures-card">
-                        <div class="card-body">
-                            <h3 class="h5 mb-4">Specialized Procedures</h3>
-                            <?php 
-                            $specialized_procedures = array(
-                                'Breast Augmentation',
-                                'Brazilian Butt Lift',
-                                'Tummy Tuck',
-                                'Liposuction',
-                                'Mommy Makeover'
-                            );
-                            
-                            if(!empty($specialized_procedures)) : 
-                                echo '<ul class="list-unstyled mb-0">';
-                                foreach($specialized_procedures as $procedure) :
-                                    // Wrap list item content in a link, add flex classes, set text white, remove text decoration
-                                    echo '<li class="mb-1">'; // Reduced bottom margin slightly
-                                    echo '<a href="#" class="d-flex justify-content-between align-items-center text-white text-decoration-none py-2 procedure-link">';
-                                    echo '<span>' . esc_html($procedure) . '</span>';
-                                    // Add right arrow icon with custom class for styling
-                                    echo '<i class="fa-solid fa-arrow-right procedure-arrow"></i>';
-                                    echo '</a>';
-                                    echo '</li>';
-                                endforeach;
-                                echo '</ul>';
-                            endif;
-                            ?>
-                        </div>
+            <!-- Before & After Gallery Section -->
+            <section id="surgeon-before-after" class="mb-5">
+                <h2 class="section-title mb-4">Before & After</h2>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="#" class="card cta-card text-decoration-none text-dark shadow-sm d-block h-100">
+                            <img src="https://placehold.co/400x250" class="card-img-top" alt="Before and After Gallery Preview">
+                            <div class="card-body p-3">
+                                <h3 class="h5 card-title mb-2 text-center">Before & After Gallery</h3>
+                                <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Specialities Section (Redesigned) -->
+            <section id="surgeon-specialities" class="mb-5">
+                <h2 class="section-title mb-4">Specialities</h2>
+                <div class="row">
+                    <?php 
+                    $specialized_procedures = array(
+                        'Breast Augmentation',
+                        'Brazilian Butt Lift',
+                        'Tummy Tuck',
+                        'Liposuction',
+                        'Mommy Makeover'
+                    );
+                    
+                    if(!empty($specialized_procedures)) :
+                        foreach($specialized_procedures as $procedure) :
+                    ?>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <a href="#" class="card cta-card text-decoration-none text-dark shadow-sm d-block h-100">
+                                <div class="card-body p-3">
+                                    <h3 class="h5 card-title mb-2"><?php echo esc_html($procedure); ?></h3>
+                                    <p class="card-text small">Learn more about this specialized procedure.</p>
+                                    <div class="text-end">
+                                        <i class="fa-solid fa-arrow-right procedure-arrow"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <?php
+                        endforeach; 
+                    endif;
+                    ?>
+                </div>
+            </section>
         </div>
     </article>
 
@@ -134,6 +140,47 @@ get_header(); ?>
         </div>
     </section>
     <?php endif; ?>
+
+    <!-- Tab Navigation Script -->
+    <script>
+    (function() {
+        // Get all nav links
+        const navLinks = document.querySelectorAll('#surgeon-tabs .nav-link');
+        
+        // Add click event to each nav link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Remove active class from all links
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+            });
+        });
+
+        // Check if URL has a hash on page load
+        const setActiveTabFromHash = () => {
+            const hash = window.location.hash;
+            if (hash) {
+                // Remove active class from all links
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                // Find the link that matches the hash and add active class
+                const activeLink = document.querySelector(`#surgeon-tabs .nav-link[href="${hash}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            } else if (navLinks.length > 0) {
+                // If no hash, set first tab as active
+                navLinks[0].classList.add('active');
+            }
+        };
+
+        // Set active tab on page load
+        setActiveTabFromHash();
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', setActiveTabFromHash);
+    })();
+    </script>
 </main>
 
 <?php get_footer(); ?>

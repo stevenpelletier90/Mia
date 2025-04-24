@@ -17,7 +17,7 @@
   <?php wp_head(); ?>
   <!-- Bootstrap JS is already enqueued in functions.php -->
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> data-bs-spy="scroll" data-bs-target="#surgeon-tabs" data-bs-offset="120">
 <?php wp_body_open(); ?>
 <header class="position-sticky top-0 z-1030">
   <nav class="navbar navbar-expand-xl navbar-dark bg-dark">

@@ -3,8 +3,13 @@
   z-index: 1030;
 }
 
+:root {
+  --navbar-height: 65px; /* Defined navbar height */
+}
+
 .navbar.bg-dark {
   background: linear-gradient(to bottom, var(--color-primary), var(--color-black)) !important;
+  height: var(--navbar-height);
 }
 .navbar-nav .nav-item {
   margin: 0 0.1rem;

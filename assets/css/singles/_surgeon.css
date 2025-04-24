@@ -248,18 +248,19 @@
   color: var(--color-primary);
 }
 
-/* Mobile Navigation Tabs */
-.surgeon-mobile-tabs {
+/* Navigation Tabs (visible on all devices) */
+.surgeon-tabs {
   background-color: var(--color-white);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
-  top: 75px; /* Fixed value with buffer to prevent overlap */
+  top: var(--navbar-height, 65px); /* Use navbar height variable for perfect alignment */
   z-index: 1020;
   padding: 0.75rem 0;
   margin-bottom: 1rem;
+  margin-top: 0;
 }
 
-.surgeon-mobile-tabs .nav-scroller {
+.surgeon-tabs .nav-scroller {
   position: relative;
   z-index: 2;
   overflow-y: hidden;
@@ -267,11 +268,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.surgeon-mobile-tabs .nav-scroller::-webkit-scrollbar {
+.surgeon-tabs .nav-scroller::-webkit-scrollbar {
   display: none;
 }
 
-.surgeon-mobile-tabs .nav {
+.surgeon-tabs .nav {
   display: flex;
   flex-wrap: nowrap;
   padding-bottom: 0;
@@ -281,7 +282,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.surgeon-mobile-tabs .nav-link {
+.surgeon-tabs .nav-link {
   padding: 0.5rem 1rem;
   font-weight: var(--weight-medium);
   color: var(--color-primary);
@@ -291,25 +292,27 @@
   font-size: 0.9rem;
   transition: all 0.2s ease;
   border: 1px solid transparent;
+  text-decoration: none !important;
 }
 
-.surgeon-mobile-tabs .nav-link:first-child {
+.surgeon-tabs .nav-link:first-child {
   margin-left: 0;
 }
 
-.surgeon-mobile-tabs .nav-link:last-child {
+.surgeon-tabs .nav-link:last-child {
   margin-right: 0;
 }
 
-.surgeon-mobile-tabs .nav-link:hover {
+.surgeon-tabs .nav-link:hover {
   background-color: rgba(200, 178, 115, 0.1);
   color: var(--color-gold);
 }
 
-.surgeon-mobile-tabs .nav-link.active {
+.surgeon-tabs .nav-link.active {
   color: var(--color-white);
   background-color: var(--color-gold);
   border-color: var(--color-gold);
+  text-decoration: none;
 }
 
 /* Smooth scrolling for anchor links */
@@ -317,9 +320,39 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Scroll padding to account for both the fixed header and mobile tabs */
-html {
-  scroll-padding-top: 130px; /* Fixed value to ensure sufficient space */
+/* Simple scroll-margin for the fixed header and tabs */
+#surgeon-about,
+#surgeon-before-after,
+#surgeon-specialities {
+  padding-top: 25px;
+  scroll-margin-top: 120px;
+}
+
+/* Specialities section scroll and spacing */
+#surgeon-specialities {
+  margin-top: 10px;
+  scroll-margin-top: 120px;
+}
+
+/* Specialty card styling */
+#surgeon-specialities .card {
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+}
+
+#surgeon-specialities .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+#surgeon-specialities .procedure-arrow {
+  color: var(--color-gold);
+  font-size: 0.9em;
+  transition: transform 0.2s ease;
+}
+
+#surgeon-specialities .card:hover .procedure-arrow {
+  transform: translateX(5px);
 }
 
 .faq-container {
