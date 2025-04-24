@@ -35,7 +35,7 @@ function mia_aesthetics_enqueue_scripts() {
 
     wp_enqueue_style(
         'bootstrap-css',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css',
         array(),
         '5.3.3'
     );
@@ -43,7 +43,7 @@ function mia_aesthetics_enqueue_scripts() {
     // Bootstrap JS Bundle (includes Popper)
     wp_enqueue_script(
         'bootstrap-js',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js',
         array(), // Bootstrap 5 doesn't require jQuery as a dependency
         '5.3.3',
         true

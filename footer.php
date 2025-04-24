@@ -4,7 +4,7 @@
     <div class="container-fluid wide-container">
         <div class="footer-columns">     
             <div class="footer-column">
-                <h2 class="text-gold">Follow Us</h2>
+                <h2 class="footer-heading text-gold">Follow Us</h2>
                 <div class="social-icons d-flex flex-wrap gap-3 mb-3">
                     <a href="https://www.facebook.com/miaaesthetics" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon">
                         <i class="fab fa-facebook-f"></i>
@@ -29,7 +29,7 @@
 
             <!-- About Column -->
             <div class="footer-column">
-                <h2 class="text-gold">About</h2>
+                <h2 class="footer-heading text-gold">About</h2>
                 <ul class="footer-menu">
                     <li><a href="<?php echo esc_url(home_url('/our-story')); ?>">Our Story</a></li>
                     <li><a href="<?php echo esc_url(home_url('/mia-foundation')); ?>">Mia Foundation</a></li>
@@ -42,7 +42,7 @@
 
             <!-- Resources Column -->
             <div class="footer-column">
-                <h2 class="text-gold">Resources</h2>
+                <h2 class="footer-heading text-gold">Resources</h2>
                 <ul class="footer-menu">
                     <li><a href="<?php echo esc_url(home_url('/faqs')); ?>">FAQs</a></li>
                     <li><a href="<?php echo esc_url(home_url('/conditions-we-treat')); ?>">Conditions We Treat</a></li>
@@ -55,7 +55,7 @@
             
             <!-- Procedures Column -->
             <div class="footer-column">
-                <h2 class="text-gold">Procedures</h2>
+                <h2 class="footer-heading text-gold">Procedures</h2>
                 <ul class="footer-menu">
                     <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/')); ?>">Face Procedures</a></li>
                     <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/')); ?>">Body Procedures</a></li>
@@ -73,7 +73,7 @@
         
         <!-- Locations & Surgeons Section with Accordion -->
         <div class="locations-section mt-4">
-            <h2 class="text-gold mb-3">Locations & Surgeons</h2>
+            <h2 class="footer-heading text-gold mb-3">Locations & Surgeons</h2>
             <div class="accordion" id="locationsAccordion">
                 <?php
                 // Get only parent locations (no child pages)
