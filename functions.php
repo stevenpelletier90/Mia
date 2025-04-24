@@ -37,7 +37,7 @@ function mia_aesthetics_enqueue_scripts() {
         'bootstrap-css',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css',
         array(),
-        '5.3.3'
+        '5.3.5'
     );
 
     // Bootstrap JS Bundle (includes Popper)
@@ -45,7 +45,7 @@ function mia_aesthetics_enqueue_scripts() {
         'bootstrap-js',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js',
         array(), // Bootstrap 5 doesn't require jQuery as a dependency
-        '5.3.3',
+        '5.3.5',
         true
     );
 
