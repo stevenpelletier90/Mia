@@ -894,4 +894,18 @@ function mia_modify_location_archive_query( $query ) {
 }
 add_action( 'pre_get_posts', 'mia_modify_location_archive_query' );
 
+
+/**
+ * Modify the main query for the Surgeon archive page.
+ * - Show all surgeons (no pagination).
+ */
+function mia_modify_surgeon_archive_query( $query ) {
+    // Check if it's the main query, on the frontend, and the surgeon archive page
+    if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'surgeon' ) ) {
+        // Show all posts
+        $query->set( 'posts_per_page', -1 );
+    }
+}
+add_action( 'pre_get_posts', 'mia_modify_surgeon_archive_query' );
+
 ?>

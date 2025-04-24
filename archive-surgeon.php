@@ -37,36 +37,11 @@ get_header(); ?>
                 </div>
             </div>
             
-            <?php if (have_posts()) : ?>
-                <!-- Location Filters -->
-                <div class="surgeon-filters mb-4">
-                    <div class="d-flex flex-wrap justify-content-center">
-                        <button class="btn btn-outline-primary m-1 active" data-filter="all">All Locations</button>
-                        <?php
-                        // Get unique locations
-                        $locations = array();
-                        $temp_query = $wp_query;
-                        while(have_posts()) : the_post();
-                            $location = get_field('surgeon_location');
-                            if($location && is_numeric($location)) {
-                                $location_id = intval($location);
-                                $location_title = get_the_title($location_id);
-                                if(!isset($locations[$location_id]) && !empty($location_title)) {
-                                    $locations[$location_id] = $location_title;
-                                }
-                            }
-                        endwhile;
-                        rewind_posts(); // Reset the query
-                        
-                        // Output location filter buttons
-                        foreach($locations as $location_id => $location_title) {
-                            echo '<button class="btn btn-outline-primary m-1" data-filter="location-' . esc_attr($location_id) . '">' . esc_html($location_title) . '</button>';
-                        }
-                        ?>
-                    </div>
-                </div>
-                
-                <div class="surgeon-grid">
+            <?php 
+            // Default WordPress loop will handle the query for this archive
+            if (have_posts()) : 
+            ?>
+                <div class="row"> <?php // Bootstrap row for the grid ?>
                     <?php while (have_posts()) : the_post(); 
                         // Get surgeon location if available
                         $location = get_field('surgeon_location');
@@ -79,64 +54,49 @@ get_header(); ?>
                             $location_title = get_the_title($location_id);
                             $location_class = 'location-' . $location_id;
                         }
+                        
+                        // Get surgeon headshot ID
+                        $headshot_id = get_field('surgeon_headshot');
                     ?>
-                        <div class="surgeon-item <?php echo esc_attr($location_class); ?>">
-                            <div class="card surgeon-card shadow-sm border-0 h-100">
-                                <?php if($location_title) : ?>
-                                <div class="location-badge">
-                                    <span><?php echo esc_html($location_title); ?></span>
-                                </div>
-                                <?php endif; ?>
-                                
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <div class="surgeon-image-container">
-                                        <?php the_post_thumbnail('medium', ['class' => 'card-img-top']); ?>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <div class="card-body d-flex flex-column">
-                                    <h2 class="h4 mb-2">
+                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4 <?php echo esc_attr($location_class); ?>"> <?php // Bootstrap column classes ?>
+                            <div class="card surgeon-card shadow-sm border-0 h-100 text-center"> 
+                                <div class="card-body d-flex flex-column align-items-center pt-4"> 
+                                    <?php 
+                                    // Display headshot if ID exists
+                                    if($headshot_id && is_numeric($headshot_id)) : 
+                                        echo wp_get_attachment_image(
+                                            $headshot_id, 
+                                            'thumbnail', // Use thumbnail size for small circular image
+                                            false, 
+                                            array(
+                                                'class' => 'surgeon-archive-headshot rounded-circle mb-3', // Add classes for styling
+                                                'alt' => get_the_title() . ' Headshot'
+                                            )
+                                        ); 
+                                    // Fallback to post thumbnail if headshot field is empty but thumbnail exists
+                                    elseif (has_post_thumbnail()) : 
+                                        the_post_thumbnail('thumbnail', ['class' => 'surgeon-archive-headshot rounded-circle mb-3']);
+                                    // Optional: Add a placeholder if no image is available
+                                    // else :
+                                    //    echo '<img src="https://placeholder.co/150x150" class="surgeon-archive-headshot rounded-circle mb-3" alt="Placeholder">';
+                                    endif; 
+                                    ?>
+                                    
+                                    <h2 class="h5 mb-1"> 
                                         <a href="<?php the_permalink(); ?>" class="text-decoration-none">
                                             <?php the_title(); ?>
                                         </a>
                                     </h2>
                                     
-                                    <p class="text-muted mb-3">Plastic Surgeon</p>
-                                    
-                                    <div class="mb-3">
-                                        <span class="badge bg-primary me-1 mb-1">Board Certified</span>
-                                        <?php 
-                                        // Display specialties if they exist
-                                        $specialties = get_field('specialties');
-                                        if($specialties) {
-                                            $specialties_array = explode(',', $specialties);
-                                            foreach($specialties_array as $specialty) {
-                                                echo '<span class="badge bg-secondary me-1 mb-1">' . trim($specialty) . '</span>';
-                                            }
-                                        }
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="surgeon-excerpt">
-                                        <?php the_excerpt(); ?>
-                                    </div>
-                                    
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary mt-auto">View Profile</a>
+                                    <?php if($location_title) : ?>
+                                    <p class="text-muted small mb-0"> 
+                                        <?php echo esc_html($location_title); ?>
+                                    </p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                     <?php endwhile; ?>
-                </div>
-
-                <!-- Pagination -->
-                <div class="row mt-5">
-                    <div class="col">
-                        <?php the_posts_pagination([
-                            'prev_text' => '&laquo;',
-                            'next_text' => '&raquo;',
-                            'class' => 'pagination justify-content-center',
-                        ]); ?>
-                    </div>
                 </div>
 
             <?php else : ?>
@@ -149,57 +109,6 @@ get_header(); ?>
         </div>
     </section>
     
-    <!-- CTA Section -->
-    <section class="bg-light py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="h3 mb-4">Schedule Your Consultation Today</h2>
-                    <p class="mb-4">Take the first step toward achieving your aesthetic goals by scheduling a consultation with one of our expert surgeons.</p>
-                    <a href="/consultation" class="btn btn-primary">Book a Consultation</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Filter Script -->
-    <script>
-    jQuery(document).ready(function($) {
-        // Location filter functionality
-        $('.surgeon-filters .btn').on('click', function() {
-            // Update active button
-            $('.surgeon-filters .btn').removeClass('active');
-            $(this).addClass('active');
-            
-            // Get filter value
-            var filterValue = $(this).data('filter');
-            
-            // Show/hide surgeons based on filter
-            if (filterValue === 'all') {
-                $('.surgeon-item').show();
-            } else {
-                $('.surgeon-item').hide();
-                $('.surgeon-item.' + filterValue).show();
-            }
-            
-            // Animate items
-            $('.surgeon-item:visible').each(function(i) {
-                var item = $(this);
-                setTimeout(function() {
-                    item.addClass('animated');
-                }, i * 100);
-            });
-        });
-        
-        // Initial animation
-        $('.surgeon-item').each(function(i) {
-            var item = $(this);
-            setTimeout(function() {
-                item.addClass('animated');
-            }, i * 100);
-        });
-    });
-    </script>
 </main>
 
 <?php get_footer(); ?>
