@@ -19,7 +19,7 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header>
+<header class="position-sticky top-0 z-1030">
   <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="d-flex flex-wrap align-items-center w-100">

@@ -248,6 +248,80 @@
   color: var(--color-primary);
 }
 
+/* Mobile Navigation Tabs */
+.surgeon-mobile-tabs {
+  background-color: var(--color-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 75px; /* Fixed value with buffer to prevent overlap */
+  z-index: 1020;
+  padding: 0.75rem 0;
+  margin-bottom: 1rem;
+}
+
+.surgeon-mobile-tabs .nav-scroller {
+  position: relative;
+  z-index: 2;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.surgeon-mobile-tabs .nav-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.surgeon-mobile-tabs .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 0;
+  margin-top: -1px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.surgeon-mobile-tabs .nav-link {
+  padding: 0.5rem 1rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+  background-color: transparent;
+  border-radius: 30px;
+  margin: 0 0.25rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.surgeon-mobile-tabs .nav-link:first-child {
+  margin-left: 0;
+}
+
+.surgeon-mobile-tabs .nav-link:last-child {
+  margin-right: 0;
+}
+
+.surgeon-mobile-tabs .nav-link:hover {
+  background-color: rgba(200, 178, 115, 0.1);
+  color: var(--color-gold);
+}
+
+.surgeon-mobile-tabs .nav-link.active {
+  color: var(--color-white);
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll padding to account for both the fixed header and mobile tabs */
+html {
+  scroll-padding-top: 130px; /* Fixed value to ensure sufficient space */
+}
+
 .faq-container {
   background-color: #f8f8f8;
   border-radius: 8px;
