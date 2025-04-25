@@ -112,18 +112,55 @@
 }
 
 .surgeon-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
 }
 
 .surgeon-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.surgeon-image-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.surgeon-headshot-circular {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.surgeon-headshot-circular:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .surgeon-title {
   color: #555;
   font-size: 0.9rem;
   margin-bottom: 1rem;
+}
+
+/* Custom Button Style for Surgeon Profiles */
+.btn-surgeon {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-surgeon:hover,
+.btn-surgeon:focus {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #000000;
 }
 
 /* Consultation Form Card */
@@ -359,6 +396,20 @@
 
   .section-title {
     font-size: 1.5rem;
+  }
+
+  .surgeon-image-container {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .surgeon-headshot-circular {
+    width: 150px;
+    height: 150px;
+  }
+
+  .surgeon-card .card-body {
+    text-align: center;
+    padding-top: 0.5rem;
   }
 
   .faq-container {

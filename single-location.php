@@ -133,7 +133,7 @@ get_header();
     <section class="team-section py-5">
         <div class="container">
             <h2 class="section-title text-center mb-5">Our <?php echo get_the_title(); ?> Team</h2>
-            <div class="row g-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <?php
                 $args = array(
                     'post_type' => 'surgeon',
@@ -149,15 +149,24 @@ get_header();
 
                 if ($surgeons->have_posts()) :
                     while ($surgeons->have_posts()) : $surgeons->the_post(); ?>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col mb-4">
                             <div class="surgeon-card card border-0 shadow-sm h-100">
-                                <?php if (has_post_thumbnail()): ?>
-                                    <img src="<?php the_post_thumbnail_url(); ?>" class="card-img-top" alt="<?php the_title(); ?>" />
-                                <?php endif; ?>
-                                <div class="card-body text-center">
-                                    <h3 class="h4"><?php the_title(); ?></h3>
-                                    <p class="surgeon-title">Plastic Surgeon</p>
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary">View Profile</a>
+                                <div class="text-center">
+                                    <div class="surgeon-image-container">
+                                        <?php 
+                                        $surgeon_headshot_id = get_field('surgeon_headshot');
+                                        if($surgeon_headshot_id && is_numeric($surgeon_headshot_id)) : ?>
+                                            <img src="<?php echo esc_url(wp_get_attachment_image_url($surgeon_headshot_id, 'medium')); ?>" 
+                                                 class="surgeon-headshot-circular" alt="<?php the_title(); ?> Headshot" />
+                                        <?php elseif (has_post_thumbnail()): ?>
+                                            <img src="<?php the_post_thumbnail_url(); ?>" class="surgeon-headshot-circular" alt="<?php the_title(); ?>" />
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="h4"><?php the_title(); ?></h3>
+                                        <p class="surgeon-title">Plastic Surgeon</p>
+                                        <a href="<?php the_permalink(); ?>" class="btn btn-surgeon">View Profile</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
