@@ -87,7 +87,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Before & After</h4>
         <div class="button-wrapper">
-          <a href="#gallery" class="mia-button mia-button-hero">View Gallery</a>
+          <a href="/before-after/" class="mia-button mia-button-hero">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Financing</h4>
         <div class="button-wrapper">
-          <a href="#financing" class="mia-button mia-button-hero">Learn More</a>
+          <a href="/financing/" class="mia-button mia-button-hero">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@ get_header(); ?>
           Test Text
         </p>
         <div class="mt-4">
-          <a href="#learn-more" class="mia-button mia-button-gold">Learn More</a>
+          <a href="#learn-more" class="mia-button mia-button-white">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
       <div class="col-lg-6 about-video">
@@ -454,7 +454,7 @@ get_header(); ?>
               </div>
             </div>
             
-            <a href="#body-procedures" class="mia-button mia-button-gold">View All Body Procedures</a>
+            <a href="#body-procedures" class="mia-button mia-button-white">View All Body Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -509,7 +509,7 @@ get_header(); ?>
               </div>
             </div>
             
-            <a href="#breast-procedures" class="mia-button mia-button-gold">View All Breast Procedures</a>
+            <a href="#breast-procedures" class="mia-button mia-button-white">View All Breast Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -564,7 +564,7 @@ get_header(); ?>
               </div>
             </div>
             
-            <a href="#facial-procedures" class="mia-button mia-button-gold">View All Facial Procedures</a>
+            <a href="#facial-procedures" class="mia-button mia-button-white">View All Facial Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -614,7 +614,7 @@ get_header(); ?>
               </div>
             </div>
             
-            <a href="#non-surgical" class="mia-button mia-button-gold">View All Non-Surgical Treatments</a>
+            <a href="#non-surgical" class="mia-button mia-button-white">View All Non-Surgical Treatments <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -665,7 +665,7 @@ get_header(); ?>
               </div>
             </div>
             
-            <a href="#men-procedures" class="mia-button mia-button-gold">View All Men's Procedures</a>
+            <a href="#men-procedures" class="mia-button mia-button-white">View All Men's Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -698,7 +698,7 @@ get_header(); ?>
           <div class="card-content text-center">
             <h3 class="card-title">Find a Location</h3>
             <p class="card-text">With 12 convenient locations across the region, quality care is never far away. Find the MIA Aesthetics clinic nearest to you.</p>
-            <a href="#locations" class="mia-button mia-button-gold">View All Locations</a>
+            <a href="#locations" class="mia-button mia-button-white">View All Locations <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -724,7 +724,7 @@ get_header(); ?>
           <div class="card-content text-center">
             <h3 class="card-title">Meet Our Surgeons</h3>
             <p class="card-text">Our team of 26 board-certified specialists brings expertise and artistry to every procedure. Learn about their qualifications and specialties.</p>
-            <a href="#surgeons" class="mia-button mia-button-gold">Meet The Team</a>
+            <a href="#surgeons" class="mia-button mia-button-white">Meet The Team <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -742,7 +742,7 @@ get_header(); ?>
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
           <h3 class="section-subheading text-gold mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
-          <a href="/mia-foundation/" class="mia-button mia-button-gold">Learn More</a>
+          <a href="/mia-foundation/" class="mia-button mia-button-black">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -1030,5 +1030,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
 </main>
 <?php get_footer(); ?>

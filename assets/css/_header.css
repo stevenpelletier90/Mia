@@ -33,12 +33,23 @@
   font-size: 0.9rem;
   text-transform: capitalize;
   text-decoration: none;
+  font-family: var(--font-heading);
+  transition: all 0.2s ease;
 }
 .header-btn:hover,
 .header-btn:focus {
   background-color: var(--color-gold);
   color: #000;
   text-decoration: none;
+}
+.header-btn .fa-arrow-right {
+  margin-left: 0.5rem;
+  font-size: 0.8em;
+  transition: transform 0.2s ease;
+}
+.header-btn:hover .fa-arrow-right,
+.header-btn:focus .fa-arrow-right {
+  transform: translateX(3px);
 }
 .navbar-nav .nav-link,
 .navbar-nav .dropdown-item,
@@ -174,37 +185,78 @@
     border-color: var(--color-gold);
     color: var(--color-primary);
   }
-  @media (max-width: 1215px) {
-    .desktop-cta {
-      padding: 0.4rem 0.75rem;
-      font-size: 0.8rem;
-      font-weight: 700;
-      white-space: nowrap;
-      margin-left: 0.5rem;
-    }
-    .navbar-nav .nav-item {
-      margin: 0 0.05rem;
-    }
-    .navbar-nav .nav-link {
-      padding-left: 0.4rem;
-      padding-right: 0.4rem;
-    }
+}
+
+/* Desktop responsive adjustments */
+@media (min-width: 1200px) {
+  /* Adjust nav items for all desktop sizes */
+  .navbar-nav .nav-item {
+    margin: 0 0.05rem;
   }
-  @media (min-width: 1216px) and (max-width: 1399px) {
-    .desktop-cta {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
+
+  .navbar-nav .nav-link {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
   }
-  @media (min-width: 1400px) {
-    .desktop-cta {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
+
+  /* Override the clamp() size for nav links */
+  .navbar-nav .nav-link {
+    font-size: 0.8rem;
+  }
+
+  /* Default desktop CTA button */
+  .desktop-cta {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
+  .desktop-cta .fa-arrow-right {
+    margin-left: 0.4rem;
+    font-size: 0.75em;
+  }
+}
+
+/* Extra small desktop breakpoint specifically for problematic ~1255px area */
+@media (min-width: 1200px) and (max-width: 1280px) {
+  .desktop-cta {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+  }
+
+  .desktop-cta .fa-arrow-right {
+    margin-left: 0.25rem;
+    font-size: 0.65em;
+  }
+
+  .navbar-nav .nav-link {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1400px) {
+  .desktop-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .desktop-cta .fa-arrow-right {
+    margin-left: 0.5rem;
+    font-size: 0.8em;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 
@@ -235,6 +287,16 @@
     border-bottom: 0;
     border-left: 0.3em solid transparent;
   }
+  /* Medium mobile CTA adjustments */
+  .d-sm-block.d-xl-none .header-btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .d-sm-block.d-xl-none .header-btn .fa-arrow-right {
+    margin-left: 0.3rem;
+    font-size: 0.7em;
+  }
   @media (min-width: 576px) {
     .mobile-cta-container {
       display: none;
@@ -255,39 +317,54 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1rem;
-    background: #000000f2;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 1040;
-    box-shadow: 0 -2px 10px #00000033;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
   }
-  .mobile-cta-container .header-btn {
+  .mobile-consultation-btn {
     display: inline-block;
     width: auto;
-    min-width: 80%;
-    max-width: 300px;
-    background: var(--color-gold);
-    color: #000000;
+    min-width: 70%;
+    max-width: 260px;
+    background-color: transparent;
+    border: 2px solid var(--color-gold);
+    color: #ffffff;
     text-align: center;
-    font-size: 1.1rem;
-    padding: 0.75rem 1.5rem;
-    font-weight: 700;
-    border-width: 2px;
-    box-shadow: 0 2px 8px #00000033;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
-  .mobile-cta-container .header-btn:hover {
-    background: #000000;
-    color: #fff;
-    border-color: #fff;
+  .mobile-consultation-btn:hover,
+  .mobile-consultation-btn:focus {
+    background-color: var(--color-gold);
+    color: #000000;
+    text-decoration: none;
   }
-  .mobile-cta-container .btn:not(.header-btn),
-  .mobile-cta-container .mia-btn-primary:not(.header-btn) {
+  .mobile-consultation-btn .fa-arrow-right {
+    margin-left: 0.5rem;
+    font-size: 0.8em;
+    transition: transform 0.2s ease;
+  }
+  .mobile-consultation-btn:hover .fa-arrow-right {
+    transform: translateX(3px);
+  }
+  .mobile-cta-container .btn:not(.mobile-consultation-btn),
+  .mobile-cta-container .mia-btn-primary:not(.mobile-consultation-btn) {
     display: block;
     width: 100%;
     text-align: center;
     margin-bottom: 0.5rem;
   }
-  .mobile-cta-container .btn:not(.header-btn):last-child,
-  .mobile-cta-container .mia-btn-primary:not(.header-btn):last-child {
+  .mobile-cta-container .btn:not(.mobile-consultation-btn):last-child,
+  .mobile-cta-container .mia-btn-primary:not(.mobile-consultation-btn):last-child {
     margin-bottom: 0;
   }
 }
