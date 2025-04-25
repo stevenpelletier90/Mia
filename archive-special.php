@@ -368,10 +368,10 @@ get_header(); ?>
         top: 15px;
         right: 15px;
         background-color: var(--color-gold);
-        color: var(--color-white);
+        color: #fff;
         padding: 5px 10px;
         border-radius: 4px;
-        font-weight: var(--weight-semibold);
+        font-weight: 600;
         z-index: 1;
     }
     
@@ -385,7 +385,7 @@ get_header(); ?>
     
     .special-filters .nav-link.active {
         background-color: var(--color-gold);
-        color: var(--color-white);
+        color: #fff;
     }
     
     /* Newsletter Form */

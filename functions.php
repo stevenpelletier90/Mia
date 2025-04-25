@@ -81,7 +81,7 @@ function mia_aesthetics_enqueue_scripts() {
 
     // Homepage styles
     if (is_front_page()) {
-        $home_css = '/pages/_home.css';
+        $home_css = '/_home.css';
         if (file_exists($css_path . $home_css)) {
             wp_enqueue_style(
                 'mia-home',
@@ -93,7 +93,7 @@ function mia_aesthetics_enqueue_scripts() {
     }
     // 404 page styles
     elseif (is_404()) {
-        $error_css = '/pages/_404.css';
+        $error_css = '/_404.css';
         if (file_exists($css_path . $error_css)) {
             wp_enqueue_style(
                 'mia-404',
@@ -105,7 +105,7 @@ function mia_aesthetics_enqueue_scripts() {
     }
     // Search page styles
     elseif (is_search()) {
-        $search_css = '/pages/_search.css';
+        $search_css = '/_search.css';
         if (file_exists($css_path . $search_css)) {
             wp_enqueue_style(
                 'mia-search',
@@ -117,7 +117,7 @@ function mia_aesthetics_enqueue_scripts() {
     }
     // Taxonomy pages
     elseif (is_tax()) {
-        $tax_css = '/pages/_taxonomies.css';
+        $tax_css = '/_taxonomies.css';
         if (file_exists($css_path . $tax_css)) {
             wp_enqueue_style(
                 'mia-taxonomies',
@@ -130,10 +130,10 @@ function mia_aesthetics_enqueue_scripts() {
     // Handle Posts (Blog)
     elseif (is_home() || is_singular('post') || is_archive('post')) { // is_home() for blog page
          if (is_archive('post') || is_home()) {
-            $style_path = '/archives/_archive.css'; // Use generic archive for blog index/archive
+            $style_path = '/_archive.css'; // Use generic archive for blog index/archive
             $handle = 'mia-post-archive';
         } elseif (is_singular('post')) {
-            $style_path = '/singles/_single.css';
+            $style_path = '/_single.css';
             $handle = 'mia-post-single';
         }
 
@@ -148,7 +148,7 @@ function mia_aesthetics_enqueue_scripts() {
     }
     // Handle Pages
     elseif (is_page()) {
-        $style_path = '/pages/_page.css'; // General page style
+        $style_path = '/_page.css'; // General page style
         if (file_exists($css_path . $style_path)) {
             wp_enqueue_style(
                 'mia-page',
@@ -159,7 +159,7 @@ function mia_aesthetics_enqueue_scripts() {
         }
         // Page-specific styles based on slug
         $page_slug = get_post_field('post_name', get_post());
-        $page_specific_path = '/pages/_' . $page_slug . '.css';
+        $page_specific_path = '/_' . $page_slug . '.css';
         if (file_exists($css_path . $page_specific_path)) {
             wp_enqueue_style(
                 'mia-page-' . $page_slug,
@@ -179,7 +179,7 @@ function mia_aesthetics_enqueue_scripts() {
         
         // Check if we're on a surgeon archive page specifically
         if (is_post_type_archive('surgeon')) {
-            $css_file = '/archives/_surgeon-archive.css';
+            $css_file = '/_surgeon-archive.css';
             $handle = 'mia-surgeon-archive';
             
             if (file_exists($css_path . $css_file)) {
@@ -196,11 +196,11 @@ function mia_aesthetics_enqueue_scripts() {
         elseif (in_array($post_type, array('location', 'procedure', 'surgeon', 'condition', 'case', 'special'))) {
             if (is_archive()) {
                 // Archive view
-                $css_file = '/archives/_' . $post_type . '-archive.css';
+                $css_file = '/_' . $post_type . '-archive.css';
                 $handle = 'mia-' . $post_type . '-archive';
             } else {
                 // Single view (covers is_singular for CPTs)
-                $css_file = '/singles/_' . $post_type . '.css';
+                $css_file = '/_' . $post_type . '.css';
                 $handle = 'mia-' . $post_type . '-single';
             }
 
@@ -939,7 +939,7 @@ function mia_force_load_surgeon_archive_css() {
         $theme_path = get_template_directory();
         $css_path = $theme_path . '/assets/css';
         $css_uri = $theme_uri . '/assets/css';
-        $css_file = '/archives/_surgeon-archive.css';
+        $css_file = '/_surgeon-archive.css';
         
         if (file_exists($css_path . $css_file)) {
             wp_enqueue_style(

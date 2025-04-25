@@ -1,121 +1,99 @@
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Thin.woff2") format("woff2");
+  src: url("../fonts/Lato-Thin.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-ThinItalic.woff2") format("woff2");
+  src: url("../fonts/Lato-ThinItalic.woff2") format("woff2");
   font-weight: 100;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Light.woff2") format("woff2");
+  src: url("../fonts/Lato-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-LightItalic.woff2") format("woff2");
+  src: url("../fonts/Lato-LightItalic.woff2") format("woff2");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Regular.woff2") format("woff2");
+  src: url("../fonts/Lato-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Italic.woff2") format("woff2");
+  src: url("../fonts/Lato-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Bold.woff2") format("woff2");
+  src: url("../fonts/Lato-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-BoldItalic.woff2") format("woff2");
+  src: url("../fonts/Lato-BoldItalic.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Black.woff2") format("woff2");
+  src: url("../fonts/Lato-Black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-BlackItalic.woff2") format("woff2");
+  src: url("../fonts/Lato-BlackItalic.woff2") format("woff2");
   font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Montserrat";
-  src: url("fonts/Montserrat-VariableFont_wght.woff2") format("woff2-variations");
+  src: url("../fonts/Montserrat-VariableFont_wght.woff2") format("woff2-variations");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Montserrat";
-  src: url("fonts/Montserrat-Italic-VariableFont_wght.woff2") format("woff2-variations");
+  src: url("../fonts/Montserrat-Italic-VariableFont_wght.woff2") format("woff2-variations");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
 :root {
   --color-primary: #1b1b1b;
-  --color-black: #000;
   --color-gold: #c8b273;
-  --color-white: #fff;
-  --color-light: #f8f9fa;
-  --color-dark: #212529;
-  --color-secondary: #6c757d;
-  --color-gold-light: #e5d7af;
-  --color-gold-dark: #a89355;
-  --color-gold-alpha-10: rgba(200, 178, 115, 0.1);
-  --color-gold-alpha-20: rgba(200, 178, 115, 0.2);
-  --color-gold-alpha-40: rgba(200, 178, 115, 0.4);
-  --color-gold-alpha-50: rgba(200, 178, 115, 0.5);
   --font-heading: "Montserrat", sans-serif;
   --font-body: "Lato", sans-serif;
-  --weight-light: 300;
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-  --section-padding: 3rem 0;
-  --card-padding: 1.5rem;
-  --border-radius: 0.375rem;
-  --border-radius-sm: 0.25rem;
-  --border-radius-lg: 0.5rem;
-  --border-radius-xl: 1rem;
-  --border-radius-pill: 50rem;
+  --navbar-height: 65px;
 }
 body {
   font-family: var(--font-body);
-  font-weight: var(--weight-regular);
-  line-height: 1.5;
-  color: var(--color-primary);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #222222;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -132,7 +110,7 @@ h6,
 .h5,
 .h6 {
   font-family: var(--font-heading);
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
   line-height: 1.2;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -171,7 +149,7 @@ a {
   transition: color 0.2s ease-in-out;
 }
 a:hover {
-  color: var(--color-gold-dark);
+  color: var(--color-primary);
 }
 main a:hover {
   text-decoration: underline;
@@ -184,13 +162,13 @@ ol {
 }
 ::selection {
   background-color: var(--color-gold);
-  color: var(--color-white);
+  color: #fff;
 }
 .section-padding {
-  padding: var(--section-padding);
+  padding: 10px;
 }
 .card-padding {
-  padding: var(--card-padding);
+  padding: 10px;
 }
 .container-xxl {
   max-width: 1400px;
@@ -211,7 +189,7 @@ ol {
 }
 #breadcrumbs .breadcrumb_last {
   color: var(--color-primary);
-  font-weight: var(--weight-bold);
+  font-weight: 600;
 }
 
 @media (min-width: 1200px) {
@@ -233,12 +211,15 @@ ol {
   }
 }
 
-.btn {
+/* Custom Button Styles - Created from scratch */
+
+/* Base button style */
+.mia-button {
   display: inline-block;
-  font-family: var(--font-heading);
-  font-weight: var(--weight-medium);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
   line-height: 1.5;
-  color: var(--color-primary);
+  color: #1b1b1b;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
@@ -250,102 +231,124 @@ ol {
   border: 1px solid transparent;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  border-radius: var(--border-radius);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: 0.375rem;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease;
   text-transform: capitalize;
 }
-.btn:hover {
+
+.mia-button:hover {
   text-decoration: none;
 }
-.btn-primary {
-  color: var(--color-white);
-  background-color: var(--color-gold);
-  border-color: var(--color-gold);
+
+/* Gold button - Primary action */
+.mia-button-gold {
+  color: #fff;
+  background-color: #c8b273;
+  border-color: #c8b273;
 }
-.btn-primary:hover,
-.btn-primary:focus {
-  color: var(--color-white);
-  background-color: var(--color-gold-dark);
-  border-color: var(--color-gold-dark);
-  box-shadow: none;
+
+.mia-button-gold:hover,
+.mia-button-gold:focus {
+  color: #fff;
+  background-color: #a89355;
+  border-color: #a89355;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.btn-outline-primary {
-  color: var(--color-gold);
-  border-color: var(--color-gold);
+
+/* Gold outline button */
+.mia-button-gold-outline {
+  color: #c8b273;
+  border: 2px solid #c8b273;
+  background-color: transparent;
 }
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-  color: var(--color-white);
-  background-color: var(--color-gold);
-  border-color: var(--color-gold);
-  box-shadow: none;
+
+.mia-button-gold-outline:hover,
+.mia-button-gold-outline:focus {
+  color: #fff;
+  background-color: #c8b273;
+  border-color: #c8b273;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.mia-btn-primary {
-  color: var(--color-white);
-  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 0.625rem 1.5rem;
+
+/* Hero section transparent button with black border */
+.mia-button-hero {
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
   font-weight: 600;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  text-transform: capitalize;
-}
-.mia-btn-primary:hover,
-.mia-btn-primary:focus {
-  color: var(--color-white);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-.mia-btn-primary:active {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.6rem 1.75rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  width: auto;
+  min-width: 140px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.25rem;
 }
 
-@media (min-width: 992px) {
-  .mia-btn-primary:hover,
-  .mia-btn-primary:focus {
-    transform: translateY(-2px);
-  }
-  .mia-btn-primary:active {
-    transform: translateY(0);
-  }
+.mia-button-hero:hover,
+.mia-button-hero:focus {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.mia-btn-secondary {
-  color: var(--color-primary);
-  background-color: var(--color-white);
-  border: 1px solid var(--color-gold-light);
+/* White button with shadow */
+.mia-button-white {
+  color: #1b1b1b;
+  background-color: #fff;
+  border: 1px solid #e5d7af;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   padding: 0.625rem 1.5rem;
-  font-weight: var(--weight-medium);
-  text-transform: capitalize;
 }
-.mia-btn-secondary:hover,
-.mia-btn-secondary:focus {
-  color: var(--color-primary);
-  background-color: var(--color-gold-alpha-10);
-  border-color: var(--color-gold);
+
+.mia-button-white:hover,
+.mia-button-white:focus {
+  color: #1b1b1b;
+  background-color: rgba(200, 178, 115, 0.1);
+  border-color: #c8b273;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.mia-btn-outline {
-  color: var(--color-gold-dark);
-  background-color: transparent;
-  border: 2px solid var(--color-gold-light);
-  padding: 0.5625rem 1.5rem;
-  font-weight: var(--weight-medium);
-  position: relative;
-  text-transform: capitalize;
-}
-.mia-btn-outline:hover,
-.mia-btn-outline:focus {
-  color: var(--color-gold-dark);
-  background-color: var(--color-gold-alpha-10);
-  border-color: var(--color-gold);
-}
-.mia-btn-sm {
+
+/* Button size variants */
+.mia-button-sm {
   padding: 0.375rem 1rem;
   font-size: 0.875rem;
 }
-.mia-btn-lg {
+
+.mia-button-lg {
   padding: 0.75rem 2rem;
   font-size: 1.125rem;
+  min-width: 160px;
+}
+
+/* Responsive button adjustments */
+@media (max-width: 767px) {
+  .mia-button-hero {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    min-width: 130px;
+  }
+
+  .mia-button-lg {
+    padding: 0.6rem 1.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mia-button-hero {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    min-width: 110px;
+  }
+
+  .mia-button-lg {
+    padding: 0.4rem 1.25rem;
+    font-size: 0.9rem;
+  }
 }

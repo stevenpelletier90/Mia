@@ -6,7 +6,7 @@
 
 .surgeon-hero h1 {
   color: var(--color-primary);
-  font-weight: var(--weight-bold);
+  font-weight: 600;
   font-size: 42px;
   margin-bottom: 1.25rem;
   font-family: var(--font-heading);
@@ -59,7 +59,7 @@
 /* Specialized Procedures Card Styles */
 .procedures-card {
   background: linear-gradient(to bottom, #000000, #1b1b1b);
-  color: var(--color-white); /* Default text color for the card */
+  color: #fff; /* Default text color for the card */
 }
 
 .procedures-card .card-body {
@@ -67,7 +67,7 @@
 }
 
 .procedures-card h3 {
-  color: var(--color-white); /* Ensure heading is white */
+  color: #fff; /* Ensure heading is white */
   text-align: center; /* Center the heading */
   margin-bottom: 1.5rem; /* More space below heading */
 }
@@ -190,7 +190,7 @@
 }
 
 .play-icon {
-  color: var(--color-white);
+  color: #fff;
   font-size: 32px;
   line-height: 1;
   margin-left: 5px;
@@ -198,7 +198,7 @@
 
 .section-title {
   color: var(--color-primary);
-  font-weight: var(--weight-bold);
+  font-weight: 600;
   margin-bottom: 1.5rem;
   position: relative;
   padding-bottom: 0.75rem;
@@ -216,26 +216,26 @@
 
 .consultation-card {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: #fff;
   border-radius: 8px;
 }
 
 .consultation-card h3,
 .consultation-card strong,
 .consultation-card p {
-  color: var(--color-white);
+  color: #fff;
 }
 
 .consultation-card .btn-primary {
   background-color: var(--color-gold);
   border-color: var(--color-gold);
   color: var(--color-primary);
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
 }
 
 .consultation-card .btn-primary:hover {
-  background-color: var(--color-gold-light);
-  border-color: var(--color-gold-light);
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
   color: var(--color-primary);
 }
 
@@ -250,7 +250,7 @@
 
 /* Navigation Tabs (visible on all devices) */
 .surgeon-tabs {
-  background-color: var(--color-white);
+  background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: var(--navbar-height, 65px); /* Use navbar height variable for perfect alignment */
@@ -284,7 +284,7 @@
 
 .surgeon-tabs .nav-link {
   padding: 0.5rem 1rem;
-  font-weight: var(--weight-medium);
+  font-weight: 600;
   color: var(--color-primary);
   background-color: transparent;
   border-radius: 30px;
@@ -309,7 +309,7 @@
 }
 
 .surgeon-tabs .nav-link.active {
-  color: var(--color-white);
+  color: #fff;
   background-color: var(--color-gold);
   border-color: var(--color-gold);
   text-decoration: none;
@@ -364,7 +364,7 @@ html {
 
 .faqs-section h2 {
   color: var(--color-primary);
-  font-weight: var(--weight-bold);
+  font-weight: 600;
   position: relative;
   padding-bottom: 15px;
   margin-bottom: 25px;
@@ -406,7 +406,7 @@ html {
 
 .accordion-button {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: #fff;
   font-weight: 500;
   padding: 1.25rem;
   border-radius: 6px;
@@ -443,7 +443,7 @@ html {
 
 .accordion-body {
   padding: 1.5rem;
-  background-color: var(--color-white);
+  background-color: #fff;
   color: #333;
   line-height: 1.6;
   font-size: 1rem;

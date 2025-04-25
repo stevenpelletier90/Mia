@@ -3,12 +3,8 @@
   z-index: 1030;
 }
 
-:root {
-  --navbar-height: 65px; /* Defined navbar height */
-}
-
 .navbar.bg-dark {
-  background: linear-gradient(to bottom, var(--color-primary), var(--color-black)) !important;
+  background: linear-gradient(to bottom, var(--color-primary), #000) !important;
   height: var(--navbar-height);
 }
 .navbar-nav .nav-item {
@@ -41,7 +37,7 @@
 .header-btn:hover,
 .header-btn:focus {
   background-color: var(--color-gold);
-  color: var(--color-black);
+  color: #000;
   text-decoration: none;
 }
 .navbar-nav .nav-link,
@@ -82,7 +78,7 @@
   padding: 1rem;
 }
 .offcanvas.bg-dark .nav-link {
-  color: rgba(var(--bs-white-rgb), 0.85);
+  color: #ffffffbe;
 }
 .offcanvas.bg-dark .nav-link:hover {
   color: var(--color-gold);
@@ -115,7 +111,7 @@
   .dropdown-menu.mega-menu {
     border-radius: 0;
     border-top: 3px solid var(--color-gold);
-    box-shadow: 0 6px 12px rgba(var(--bs-black-rgb), 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     margin-top: 0;
     padding: 20px 0;
     left: 0;
@@ -124,14 +120,14 @@
   }
   .mega-menu-title {
     color: var(--color-gold);
-    font-weight: var(--weight-semibold);
+    font-weight: 600;
     font-size: 1.1rem;
     display: inline-block;
     margin-bottom: 0.5rem;
     text-decoration: none;
   }
   .mega-menu-title:hover {
-    color: var(--color-gold-dark);
+    color: #222222;
     text-decoration: none;
   }
   .mega-menu-title .fa-arrow-right {
@@ -141,15 +137,15 @@
   .mega-menu .dropdown-header {
     padding: 0.5rem 0;
     margin-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(var(--bs-black-rgb), 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 1.1rem;
     font-family: var(--font-body);
-    font-weight: var(--weight-bold);
+    font-weight: 600;
   }
   .mega-menu .dropdown-header a {
     text-decoration: none;
-    font-weight: var(--weight-bold);
-    color: var(--color-dark);
+    font-weight: 600;
+    color: #222222;
     font-size: 1.1rem;
   }
   .mega-menu .dropdown-header a:hover {
@@ -166,17 +162,17 @@
     font-family: var(--font-body);
   }
   .mega-menu .bg-light {
-    background-color: var(--color-gold-alpha-10) !important;
-    border: 1px solid var(--color-gold-alpha-20);
+    background-color: rgba(200, 178, 115, 0.1) !important;
+    border: 1px solid rgba(200, 178, 115, 0.2);
   }
   .mega-menu .btn-outline-dark {
-    color: var(--color-gold-dark);
+    color: var(--color-gold);
     border-color: var(--color-gold);
   }
   .mega-menu .btn-outline-dark:hover {
     background-color: var(--color-gold);
     border-color: var(--color-gold);
-    color: var(--color-dark);
+    color: var(--color-primary);
   }
   @media (max-width: 1215px) {
     .desktop-cta {
@@ -219,7 +215,7 @@
     margin-bottom: 0.25rem;
   }
   .offcanvas .dropdown-menu {
-    background-color: var(--color-white);
+    background-color: #fff;
     border-radius: 0.25rem;
     margin-left: 1rem;
     border-left: 2px solid var(--color-gold, #c8b273);
@@ -227,7 +223,7 @@
     padding-bottom: 0.5rem;
   }
   .offcanvas .dropdown-item {
-    color: var(--color-dark);
+    color: #222222;
     padding: 0.75rem 1rem;
     font-size: 1.1rem;
   }
@@ -260,9 +256,9 @@
     left: 0;
     width: 100%;
     padding: 1rem;
-    background: rgba(var(--bs-black-rgb), 0.95);
+    background: #000000f2;
     z-index: 1040;
-    box-shadow: 0 -2px 10px rgba(var(--bs-black-rgb), 0.2);
+    box-shadow: 0 -2px 10px #00000033;
   }
   .mobile-cta-container .header-btn {
     display: inline-block;
@@ -270,18 +266,18 @@
     min-width: 80%;
     max-width: 300px;
     background: var(--color-gold);
-    color: var(--color-black);
+    color: #000000;
     text-align: center;
     font-size: 1.1rem;
     padding: 0.75rem 1.5rem;
     font-weight: 700;
     border-width: 2px;
-    box-shadow: 0 2px 8px rgba(var(--bs-black-rgb), 0.2);
+    box-shadow: 0 2px 8px #00000033;
   }
   .mobile-cta-container .header-btn:hover {
-    background: var(--color-black);
-    color: var(--color-white);
-    border-color: var(--color-white);
+    background: #000000;
+    color: #fff;
+    border-color: #fff;
   }
   .mobile-cta-container .btn:not(.header-btn),
   .mobile-cta-container .mia-btn-primary:not(.header-btn) {
