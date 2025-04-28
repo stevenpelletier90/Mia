@@ -20,30 +20,39 @@ get_header(); ?>
                     
                     <!-- Main Before & After Images - side by side on all devices -->
                     <div class="row g-3">
+                        <?php 
+                        $before_photo = get_field('before_photo');
+                        $after_photo = get_field('after_photo');
+                        
+                        if ($before_photo) : ?>
                         <div class="col-6">
-                            <div class="position-relative">
-                                <img src="https://placehold.co/800x600" 
+                            <div class="position-relative case-image-container">
+                                <img src="<?php echo esc_url($before_photo['sizes']['medium_large']); ?>" 
                                      class="img-fluid rounded cursor-pointer" 
-                                     alt="Before Treatment"
+                                     alt="Before Treatment - <?php the_title(); ?>"
                                      data-bs-toggle="modal" 
                                      data-bs-target="#imageModal" 
-                                     data-bs-image="https://placehold.co/1200x900"
+                                     data-bs-image="<?php echo esc_url($before_photo['url']); ?>"
                                      data-bs-title="Before Treatment">
-                                <span class="position-absolute top-0 start-0 bg-dark text-white px-2 py-1 m-1 fs-6">Before</span>
+                                <span class="before-label">Before</span>
                             </div>
                         </div>
+                        <?php endif; 
+                        
+                        if ($after_photo) : ?>
                         <div class="col-6">
-                            <div class="position-relative">
-                                <img src="https://placehold.co/800x600" 
+                            <div class="position-relative case-image-container">
+                                <img src="<?php echo esc_url($after_photo['sizes']['medium_large']); ?>" 
                                      class="img-fluid rounded cursor-pointer" 
-                                     alt="After Treatment"
+                                     alt="After Treatment - <?php the_title(); ?>"
                                      data-bs-toggle="modal" 
                                      data-bs-target="#imageModal" 
-                                     data-bs-image="https://placehold.co/1200x900"
+                                     data-bs-image="<?php echo esc_url($after_photo['url']); ?>"
                                      data-bs-title="After Treatment">
-                                <span class="position-absolute top-0 start-0 bg-success text-white px-2 py-1 m-1 fs-6">After</span>
+                                <span class="after-label">After</span>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -56,70 +65,147 @@ get_header(); ?>
             <div class="row">
                 <!-- Main Content Column -->
                 <div class="col-lg-8">
+                    <?php if (get_field('case_background')) : ?>
                     <!-- Patient Background -->
                     <section class="mb-5">
                         <h2 class="h4 mb-3">Patient Background</h2>
-                        <p class="lead">Patient presented with concerns about [condition]. Their primary goals were to improve [specific goals].</p>
-                        <div class="bg-light p-3 rounded">
-                            <strong>Chief Concerns:</strong>
-                            <ul class="mb-0 mt-2">
-                                <li>Concern 1</li>
-                                <li>Concern 2</li>
-                                <li>Concern 3</li>
-                            </ul>
+                        <div class="case-background">
+                            <?php echo get_field('case_background'); ?>
                         </div>
                     </section>
+                    <?php endif; ?>
 
-                    <!-- Treatment Timeline -->
+                    <?php 
+                    // Get case information
+                    $case_info = get_field('case_information');
+                    if ($case_info) : 
+                    ?>
+                    <!-- Patient Information -->
                     <section class="mb-5">
-                        <h2 class="h4 mb-3">Treatment & Recovery Timeline</h2>
+                        <h2 class="h4 mb-3">Patient Information</h2>
                         <div class="row g-3">
-                            <div class="col-6 col-md-3">
-                                <div class="p-3 bg-light rounded h-100">
-                                    <h5 class="h6">Initial Consultation</h5>
-                                    <p class="small mb-0">Assessment and planning</p>
+                            <?php if (!empty($case_info['height'])) : ?>
+                            <div class="col-6 col-md-4">
+                                <div class="patient-info-card">
+                                    <h5 class="h6">Height</h5>
+                                    <p class="mb-0"><?php echo esc_html($case_info['height']); ?></p>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-3">
-                                <div class="p-3 bg-light rounded h-100">
-                                    <h5 class="h6">Procedure</h5>
-                                    <p class="small mb-0">Treatment details</p>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($case_info['weight'])) : ?>
+                            <div class="col-6 col-md-4">
+                                <div class="patient-info-card">
+                                    <h5 class="h6">Weight</h5>
+                                    <p class="mb-0"><?php echo esc_html($case_info['weight']); ?> lbs</p>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-3">
-                                <div class="p-3 bg-light rounded h-100">
-                                    <h5 class="h6">Early Recovery</h5>
-                                    <p class="small mb-0">Initial healing</p>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($case_info['bmi'])) : ?>
+                            <div class="col-6 col-md-4">
+                                <div class="patient-info-card">
+                                    <h5 class="h6">BMI</h5>
+                                    <p class="mb-0"><?php echo esc_html($case_info['bmi']); ?></p>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-3">
-                                <div class="p-3 bg-light rounded h-100">
-                                    <h5 class="h6">Final Results</h5>
-                                    <p class="small mb-0">Outcomes achieved</p>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="row g-3 mt-2">
+                            <?php 
+                            // Get surgeon information
+                            if (!empty($case_info['performed_by_surgeon'])) :
+                                $surgeon = $case_info['performed_by_surgeon'];
+                            ?>
+                            <div class="col-md-6">
+                                <div class="surgeon-info">
+                                    <h5 class="h6">Performed by</h5>
+                                    <p class="mb-0">
+                                        <a href="<?php echo get_permalink($surgeon); ?>" class="text-dark">
+                                            <i class="fas fa-user-md me-1"></i> <?php echo get_the_title($surgeon); ?>
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
+                            <?php endif; ?>
+                            
+                            <?php 
+                            // Get location information
+                            if (!empty($case_info['performed_at_location'])) :
+                                $location = $case_info['performed_at_location'];
+                            ?>
+                            <div class="col-md-6">
+                                <div class="location-info">
+                                    <h5 class="h6">Location</h5>
+                                    <p class="mb-0">
+                                        <a href="<?php echo get_permalink($location); ?>">
+                                            <i class="fas fa-map-marker-alt me-1"></i> <?php echo get_the_title($location); ?>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <?php endif; ?>
                         </div>
                     </section>
+                    <?php endif; ?>
+
 
                     <!-- Main Content -->
                     <div class="content">
                         <?php the_content(); ?>
                     </div>
+                    
+                    <?php 
+                    // Treatment & Recovery Links
+                    if (have_rows('treatment_recovery_links')) : 
+                    ?>
+                    <section class="mt-5">
+                        <h2 class="h4 mb-3">Treatment & Recovery Resources</h2>
+                        <div class="list-group treatment-recovery-links">
+                            <?php while (have_rows('treatment_recovery_links')) : the_row(); 
+                                $linked_page = get_sub_field('link_to_page');
+                                
+                                if ($linked_page) :
+                            ?>
+                                <a href="<?php echo get_permalink($linked_page); ?>" class="list-group-item list-group-item-action">
+                                    <?php echo get_the_title($linked_page); ?>
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            <?php 
+                                endif;
+                            endwhile; 
+                            ?>
+                        </div>
+                    </section>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Sidebar -->
                 <div class="col-lg-4">
-                    <!-- Call to Action -->
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h3 class="h5 mb-3">Interested in Treatment?</h3>
-                            <a href="/contact" class="btn btn-primary">Schedule a Consultation</a>
+                    <!-- Contact Card with Gravity Form -->
+                    <div class="card consultation-card mb-4 shadow-sm">
+                        <div class="card-body p-3">
+                            <h3 class="h5 mb-3 text-center">Schedule a Consultation</h3>
+                            <?php gravity_form(1, false, false, false, '', true); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </article>
+    <!-- FAQ Section - Standalone -->
+    <?php
+    $faq_section = get_field('faq_section');
+    if($faq_section && !empty($faq_section['faqs'])): ?>
+    <section class="py-5">
+        <div class="container">
+            <div class="faq-container">
+                <?php echo display_page_faqs(); ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 </main>
 
 <!-- Image Modal -->
@@ -140,13 +226,23 @@ get_header(); ?>
 <!-- Modal Initialization Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Get the modal element
     const imageModal = document.getElementById('imageModal');
+    
     if (imageModal) {
+        // Create a Bootstrap modal instance
+        const modal = new bootstrap.Modal(imageModal);
+        
+        // Handle modal show event
         imageModal.addEventListener('show.bs.modal', function(event) {
+            // Get the button that triggered the modal
             const button = event.relatedTarget;
+            
+            // Extract data attributes
             const image = button.getAttribute('data-bs-image');
             const title = button.getAttribute('data-bs-title');
             
+            // Update modal content
             const modalTitle = this.querySelector('.modal-title');
             const modalImage = this.querySelector('.modal-body img');
             
@@ -154,7 +250,20 @@ document.addEventListener('DOMContentLoaded', function() {
             modalImage.src = image;
             modalImage.alt = title;
         });
+        
+        // Handle image loading
+        const modalImage = imageModal.querySelector('.modal-body img');
+        modalImage.addEventListener('load', function() {
+            // Ensure modal position is updated after image loads
+            modal._adjustDialog();
+        });
     }
+    
+    // Make all images with data-bs-toggle="modal" clickable
+    const modalTriggers = document.querySelectorAll('[data-bs-toggle="modal"][data-bs-target="#imageModal"]');
+    modalTriggers.forEach(trigger => {
+        trigger.style.cursor = 'pointer';
+    });
 });
 </script>
 

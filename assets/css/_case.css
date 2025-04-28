@@ -1,0 +1,161 @@
+/* Case Page Styles */
+
+/* Before & After Images */
+.case-image-container {
+  max-width: 450px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Before & After Labels */
+.before-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1b1b1b;
+  color: #ffffff;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.after-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gold);
+  color: #000000;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Case Information Styles */
+.surgeon-info {
+  background-color: var(--color-gold);
+  color: #000000;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  height: 100%;
+}
+
+.location-info {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  height: 100%;
+}
+
+/* Patient Info Cards */
+.patient-info-card {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.375rem;
+  height: 100%;
+}
+
+/* Treatment & Recovery Links */
+.treatment-recovery-links .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.treatment-recovery-links .list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Image cursor for modal trigger */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Case Background */
+.case-background {
+  margin-bottom: 1.5rem;
+}
+
+/* Case Content */
+.case-content {
+  margin-top: 2rem;
+}
+
+/* Modal Styling */
+#imageModal .modal-dialog {
+  max-width: 800px;
+}
+
+#imageModal .modal-content {
+  border: none;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+#imageModal .modal-header {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-bottom: none;
+  padding: 1rem;
+}
+
+#imageModal .modal-title {
+  font-weight: 600;
+}
+
+#imageModal .modal-body {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0;
+  text-align: center;
+}
+
+#imageModal .modal-body img {
+  max-height: 80vh;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+#imageModal .btn-close {
+  background-color: transparent;
+  color: #fff;
+  opacity: 0.8;
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+#imageModal .btn-close:hover {
+  opacity: 1;
+}
+
+/* Ensure modal backdrop works properly */
+.modal-backdrop {
+  opacity: 0.5;
+}
+
+/* Consultation Form Card */
+.consultation-card {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.consultation-card h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.consultation-card .card-body {
+  padding: 15px;
+}
+
+/* FAQ Section - Styling moved to _base.css */
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .case-image-container {
+    max-width: 100%;
+  }
+}

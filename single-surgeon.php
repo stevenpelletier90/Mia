@@ -42,14 +42,21 @@ get_header(); ?>
                 </div>
                 
                 <div class="col-md-8 col-lg-9 order-md-2 order-2 surgeon-info">
-                    <h1><?php the_title(); ?></h1>
-                    <p class="surgeon-role mb-4">Plastic Surgeon at Mia Aesthetics</p>
+                    <h1 class="surgeon-name"><?php the_title(); ?></h1>
                     <?php 
                     $location = get_field('surgeon_location');
                     if($location) : 
                         $location_title = get_the_title($location);
+                        $location_url = get_permalink($location);
                     ?>
-                    <p class="surgeon-location">Based Out of Our <?php echo esc_html($location_title); ?> Location</p>
+                    <p class="surgeon-role mb-md-4 mb-0">
+                        Plastic Surgeon at 
+                        <a href="<?php echo esc_url($location_url); ?>" class="surgeon-title-link">
+                            Mia Aesthetics <?php echo esc_html($location_title); ?>
+                        </a>
+                    </p>
+                    <?php else: ?>
+                    <p class="surgeon-role mb-md-4 mb-0">Plastic Surgeon at Mia Aesthetics</p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -69,7 +76,7 @@ get_header(); ?>
         </div>
     </section>
 
-    <div class="pt-2 pb-5">
+    <div class="py-5">
         <div class="container">
             <div class="row">
                 <!-- Main Content Column -->
