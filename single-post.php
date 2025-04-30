@@ -35,7 +35,7 @@ get_header(); ?>
         <!-- Article Header -->
         <header class="post-header py-5">
             <div class="container">
-                <div class="row min-vh-50 d-flex align-items-center">
+                <div class="row">
                     <div class="col-lg-8">
                         
                         <h1 class="mb-3"><?php the_title(); ?></h1>
@@ -47,9 +47,6 @@ get_header(); ?>
                                 <span class="mx-2">•</span>
                                 <i class="far fa-clock me-2"></i>
                                 <span><?php echo $reading_time; ?> min read</span>
-                                <span class="mx-2">•</span>
-                                <i class="far fa-comment me-2"></i>
-                                <span><?php comments_number('0 comments', '1 comment', '% comments'); ?></span>
                             </div>
                         </div>
 
@@ -145,7 +142,7 @@ get_header(); ?>
                                     <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>0% financing available</li>
                                     <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Insurance accepted</li>
                                 </ul>
-                                <a href="/financing" class="mia-button mia-button-gold-outline mia-button-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                                <a href="/financing/" class="mia-button mia-button-gold-outline mia-button-sm">Learn More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
 

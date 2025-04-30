@@ -4,13 +4,7 @@
 .post-header {
   background-color: var(--color-primary);
   color: #fff;
-  padding: 3rem 0;
-  display: flex;
-  align-items: center;
-}
-
-.post-header .min-vh-50 {
-  min-height: 50vh;
+  padding: 2rem 0;
 }
 
 .post-header h1 {

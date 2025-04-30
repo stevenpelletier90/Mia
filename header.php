@@ -71,14 +71,17 @@
                             <a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/')); ?>" class="text-dark fw-bold text-decoration-none">Body</a>
                           </h6>
                           <ul class="list-unstyled">
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mia-corset/')); ?>">Mia Waist Corset&trade;</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/awake-liposuction/')); ?>">Awake Lipo</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/circumferential-body-lift/')); ?>">Body Lift</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/brazilian-butt-lift-bbl/')); ?>">Brazilian Butt Lift (BBL)</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/skinny-bbl/')); ?>">Skinny BBL</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/tummy-tuck/')); ?>">Tummy Tuck</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mommy-makeover/')); ?>">Mommy Makeover</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/lipo-360/')); ?>">Lipo 360</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/liposuction/')); ?>">Liposuction</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/tummy-tuck/')); ?>">Tummy Tuck</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mommy-makeover/')); ?>">Mommy Makeover</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/arm-lift/')); ?>">Arm Lift</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/thigh-lift/')); ?>">Thigh Lift</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/labiaplasty-labia-reduction-vaginal-rejuvenation/')); ?>">Vaginal Rejuvenation</a></li>
                           </ul>
                         </div>
                         <!-- Breast Section -->
@@ -88,9 +91,9 @@
                           </h6>
                           <ul class="list-unstyled">
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/augmentation-implants/')); ?>">Breast Augmentation</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/lift/')); ?>">Breast Lift</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/reduction/')); ?>">Breast Reduction</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/implant-revision-surgery/')); ?>">Implant Revision</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/lift/')); ?>">Breast Lift</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/implant-revision-surgery/')); ?>">Breast Implant Revision</a></li>
                           </ul>
                         </div>
                         <!-- Face Section -->
@@ -99,27 +102,27 @@
                             <a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/')); ?>" class="text-dark fw-bold text-decoration-none">Face</a>
                           </h6>
                           <ul class="list-unstyled">
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/nose-job-rhinoplasty/')); ?>">Rhinoplasty</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/brow-lift/')); ?>">Brow Lift</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/buccal-cheek-fat-removal/')); ?>">Buccal Fat Removal</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/eyelid-lift-blepharoplasty/')); ?>">Blepharoplasty</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/chin-lipo/')); ?>">Chin Lipo</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/facelift/')); ?>">Facelift</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/mini-facelift/')); ?>">Mini Facelift</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/neck-lift/')); ?>">Neck Lift</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/brow-lift/')); ?>">Brow Lift</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/eyelid-lift-blepharoplasty/')); ?>">Eyelid Lift</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/ear-pinning-otoplasty/')); ?>">Ear Pinning</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/buccal-cheek-fat-removal/')); ?>">Buccal Fat Removal</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/ear-pinning-otoplasty/')); ?>">Otoplasty</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/nose-job-rhinoplasty/')); ?>">Rhinoplasty</a></li>
                           </ul>
                         </div>
                         <!-- Men Section -->
                         <div class="col-md-3 mb-3">
                           <h6 class="dropdown-header">
-                            <a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/men/')); ?>" class="text-dark fw-bold text-decoration-none">Men</a>
+                            <a href="<?php echo esc_url(home_url('#')); ?>" class="text-dark fw-bold text-decoration-none">Men</a>
                           </h6>
                           <ul class="list-unstyled">
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-tummy-tuck/')); ?>">Male Tummy Tuck</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-liposuction/')); ?>">Male Liposuction</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-bbl/')); ?>">Male BBL</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/male-breast-procedures/')); ?>">Male Breast Reduction</a></li>
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/neck-lift/men/')); ?>">Male Neck Lift</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/male-breast-procedures/')); ?>">Male Breast Procedures</a></li>                            
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-liposuction/')); ?>">Male Liposuction</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-tummy-tuck/')); ?>">Male Tummy Tuck</a></li>                          
                           </ul>
                         </div>
                       </div>
@@ -135,40 +138,44 @@
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/')); ?>">View All Procedures</a></li>
                     <!-- Body Section -->
                     <li><a class="dropdown-item fw-bold" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/')); ?>">Body</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mia-corset/')); ?>">Mia Waist Corset&trade;</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/awake-liposuction/')); ?>">Awake Lipo</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/circumferential-body-lift/')); ?>">Body Lift</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/brazilian-butt-lift-bbl/')); ?>">Brazilian Butt Lift (BBL)</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/skinny-bbl/')); ?>">Skinny BBL</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/tummy-tuck/')); ?>">Tummy Tuck</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mommy-makeover/')); ?>">Mommy Makeover</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/lipo-360/')); ?>">Lipo 360</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/liposuction/')); ?>">Liposuction</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/tummy-tuck/')); ?>">Tummy Tuck</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mommy-makeover/')); ?>">Mommy Makeover</a></li>       
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/arm-lift/')); ?>">Arm Lift</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/thigh-lift/')); ?>">Thigh Lift</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/labiaplasty-labia-reduction-vaginal-rejuvenation/')); ?>">Vaginal Rejuvenation</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <!-- Breast Section -->
                     <li><a class="dropdown-item fw-bold" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/')); ?>">Breast</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/augmentation-implants/')); ?>">Breast Augmentation</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/lift/')); ?>">Breast Lift</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/reduction/')); ?>">Breast Reduction</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/implant-revision-surgery/')); ?>">Implant Revision</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/lift/')); ?>">Breast Lift</a></li>                    
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/implant-revision-surgery/')); ?>">Breast Implant Revision</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <!-- Face Section -->
                     <li><a class="dropdown-item fw-bold" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/')); ?>">Face</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/nose-job-rhinoplasty/')); ?>">Rhinoplasty</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/brow-lift/')); ?>">Brow Lift</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/buccal-cheek-fat-removal/')); ?>">Buccal Fat Removal</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/eyelid-lift-blepharoplasty/')); ?>">Blepharoplasty</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/chin-lipo/')); ?>">Chin Lipo</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/facelift/')); ?>">Facelift</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/mini-facelift/')); ?>">Mini Facelift</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/neck-lift/')); ?>">Neck Lift</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/brow-lift/')); ?>">Brow Lift</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/eyelid-lift-blepharoplasty/')); ?>">Eyelid Lift</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/ear-pinning-otoplasty/')); ?>">Ear Pinning</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/buccal-cheek-fat-removal/')); ?>">Buccal Fat Removal</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/neck-lift/')); ?>">Neck Lift</a></li>              
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/ear-pinning-otoplasty/')); ?>">Otoplasty</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/nose-job-rhinoplasty/')); ?>">Rhinoplasty</a></li>
+                    
                     <li><hr class="dropdown-divider"></li>
                     <!-- Men Section -->
-                    <li><a class="dropdown-item fw-bold" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/men/')); ?>">Men</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-tummy-tuck/')); ?>">Male Tummy Tuck</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-liposuction/')); ?>">Male Liposuction</a></li>
+                    <li><a class="dropdown-item fw-bold" href="<?php echo esc_url(home_url('#')); ?>">Men</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-bbl/')); ?>">Male BBL</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/male-breast-procedures/')); ?>">Male Breast Reduction</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/neck-lift/men/')); ?>">Male Neck Lift</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/male-breast-procedures/')); ?>">Male Breast Procedures</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-liposuction/')); ?>">Male Liposuction</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-tummy-tuck/')); ?>">Male Tummy Tuck</a></li>                
                   </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -299,27 +306,55 @@
                           'order' => 'ASC'
                         );
                         $surgeon_query = new WP_Query($surgeon_args);
+                        
+                        // Create an array to store surgeons with their last names
+                        $surgeons = array();
+                        
                         if ($surgeon_query->have_posts()) :
+                          while ($surgeon_query->have_posts()) : $surgeon_query->the_post();
+                            $surgeon_name = get_the_title();
+                            $surgeon_url = get_permalink();
+                            $surgeon_id = get_the_ID();
+                            
+                            // Extract last name (second word in the title)
+                            $name_parts = explode(' ', $surgeon_name);
+                            $last_name = isset($name_parts[1]) ? $name_parts[1] : $surgeon_name;
+                            
+                            // Store surgeon data
+                            $surgeons[] = array(
+                              'id' => $surgeon_id,
+                              'name' => $surgeon_name,
+                              'url' => $surgeon_url,
+                              'last_name' => $last_name
+                            );
+                          endwhile;
+                          
+                          // Sort surgeons by last name
+                          usort($surgeons, function($a, $b) {
+                            return strcasecmp($a['last_name'], $b['last_name']);
+                          });
+                          
                           // Count surgeons to distribute them evenly across columns
-                          $total_surgeons = $surgeon_query->post_count;
+                          $total_surgeons = count($surgeons);
                           $surgeons_per_column = ceil($total_surgeons / 4); // 4 columns
                           $surgeon_count = 0;
                           $column_count = 0;
+                          
                           // Start the first column
                           echo '<div class="col-md-3 mb-3"><ul class="list-unstyled">';
-                          while ($surgeon_query->have_posts()) : $surgeon_query->the_post();
-                            // Get surgeon name from ACF or use the post title
-                            $surgeon_name = get_the_title();
-                            $surgeon_url = get_permalink();
+                          
+                          // Display surgeons in the sorted order
+                          foreach ($surgeons as $surgeon) :
                             // Output the surgeon link
-                            echo '<li><a class="dropdown-item py-1" href="' . esc_url($surgeon_url) . '">' . esc_html($surgeon_name) . '</a></li>';
+                            echo '<li><a class="dropdown-item py-1" href="' . esc_url($surgeon['url']) . '">' . esc_html($surgeon['name']) . '</a></li>';
                             $surgeon_count++;
+                            
                             // Start a new column if needed
                             if ($surgeon_count % $surgeons_per_column === 0 && $surgeon_count < $total_surgeons) {
                               $column_count++;
                               echo '</ul></div><div class="col-md-3 mb-3"><ul class="list-unstyled">';
                             }
-                          endwhile;
+                          endforeach;
                           // Close the last column
                           echo '</ul></div>';
                           // Fill any remaining columns if needed
@@ -353,15 +388,38 @@
                       'order' => 'ASC'
                     );
                     $surgeon_query = new WP_Query($surgeon_args);
+                    
+                    // Create an array to store surgeons with their last names
+                    $surgeons = array();
+                    
                     if ($surgeon_query->have_posts()) :
                       while ($surgeon_query->have_posts()) : $surgeon_query->the_post();
-                        // Get surgeon name from ACF or use the post title
                         $surgeon_name = get_the_title();
                         $surgeon_url = get_permalink();
-                        ?>
-                        <li><a class="dropdown-item" href="<?php echo esc_url($surgeon_url); ?>"><?php echo esc_html($surgeon_name); ?></a></li>
-                        <?php
+                        
+                        // Extract last name (second word in the title)
+                        $name_parts = explode(' ', $surgeon_name);
+                        $last_name = isset($name_parts[1]) ? $name_parts[1] : $surgeon_name;
+                        
+                        // Store surgeon data
+                        $surgeons[] = array(
+                          'name' => $surgeon_name,
+                          'url' => $surgeon_url,
+                          'last_name' => $last_name
+                        );
                       endwhile;
+                      
+                      // Sort surgeons by last name
+                      usort($surgeons, function($a, $b) {
+                        return strcasecmp($a['last_name'], $b['last_name']);
+                      });
+                      
+                      // Display surgeons in the sorted order
+                      foreach ($surgeons as $surgeon) :
+                        ?>
+                        <li><a class="dropdown-item" href="<?php echo esc_url($surgeon['url']); ?>"><?php echo esc_html($surgeon['name']); ?></a></li>
+                        <?php
+                      endforeach;
                       wp_reset_postdata();
                     else:
                       // Fallback if no surgeons found
@@ -407,7 +465,7 @@
                             <span class="text-dark fw-bold">By Category</span>
                           </h6>
                           <ul class="list-unstyled">
-                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
+                            <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
                             <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/patient-journeys/')); ?>">Patient Videos</a></li>
                           </ul>
                         </div>
@@ -431,7 +489,7 @@
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/mommy-makeover/')); ?>">Mommy Makeover</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/tummy-tuck/')); ?>">Tummy Tuck</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/patient-journeys/')); ?>">Patient Videos</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -444,7 +502,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a class="dropdown-item" href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome">
+                      <a class="dropdown-item" href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome" target="_blank">
                         Patient Portal Login
                       </a>
                     </li>
