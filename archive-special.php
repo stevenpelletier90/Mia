@@ -5,6 +5,14 @@
  */
 get_header(); ?>
 <main>
+    <div class="container">
+        <?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+        }
+        ?>
+    </div>
+    
     <!-- Specials Archive Header -->
     <header class="bg-light py-5">
         <div class="container">
