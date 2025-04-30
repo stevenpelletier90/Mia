@@ -12,11 +12,11 @@ get_header(); ?>
     </div>
 
     <!-- Hero Section -->
-    <header class="bg-light py-5">
+    <header class="bg-light py-4">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
-                    <h1 class="display-4 mb-3"><?php the_title(); ?></h1>
+                    <h1><?php the_title(); ?></h1>
                     
                     <!-- Main Before & After Images - side by side on all devices -->
                     <div class="row g-3">
@@ -85,7 +85,7 @@ get_header(); ?>
                         <h2 class="h4 mb-3">Patient Information</h2>
                         <div class="row g-3">
                             <?php if (!empty($case_info['height'])) : ?>
-                            <div class="col-6 col-md-4">
+                            <div class="col-4 col-md-4">
                                 <div class="patient-info-card">
                                     <h5 class="h6">Height</h5>
                                     <p class="mb-0"><?php echo esc_html($case_info['height']); ?></p>
@@ -94,7 +94,7 @@ get_header(); ?>
                             <?php endif; ?>
                             
                             <?php if (!empty($case_info['weight'])) : ?>
-                            <div class="col-6 col-md-4">
+                            <div class="col-4 col-md-4">
                                 <div class="patient-info-card">
                                     <h5 class="h6">Weight</h5>
                                     <p class="mb-0"><?php echo esc_html($case_info['weight']); ?> lbs</p>
@@ -103,7 +103,7 @@ get_header(); ?>
                             <?php endif; ?>
                             
                             <?php if (!empty($case_info['bmi'])) : ?>
-                            <div class="col-6 col-md-4">
+                            <div class="col-4 col-md-4">
                                 <div class="patient-info-card">
                                     <h5 class="h6">BMI</h5>
                                     <p class="mb-0"><?php echo esc_html($case_info['bmi']); ?></p>
@@ -111,22 +111,56 @@ get_header(); ?>
                             </div>
                             <?php endif; ?>
                         </div>
-                        
-                        <div class="row g-3 mt-2">
+                    </section>
+                    
+                    <!-- Surgeon and Location Information -->
+                    <section class="mb-5">
+                        <div class="row g-3">
                             <?php 
                             // Get surgeon information
                             if (!empty($case_info['performed_by_surgeon'])) :
                                 $surgeon = $case_info['performed_by_surgeon'];
                             ?>
-                            <div class="col-md-6">
-                                <div class="surgeon-info">
-                                    <h5 class="h6">Performed by</h5>
-                                    <p class="mb-0">
-                                        <a href="<?php echo get_permalink($surgeon); ?>" class="text-dark">
-                                            <i class="fas fa-user-md me-1"></i> <?php echo get_the_title($surgeon); ?>
-                                        </a>
-                                    </p>
-                                </div>
+                            <div class="col-6">
+                                <h2 class="h4 mb-3">Performed by</h2>
+                                <a href="<?php echo get_permalink($surgeon); ?>" class="case-surgeon-link">
+                                    <span>
+                                    <?php 
+                                    // Check if there's a specific ACF field for last name
+                                    $last_name = get_field('last_name', $surgeon);
+                                    
+                                    // If there's no specific field, extract from title
+                                    if (empty($last_name)) {
+                                        $surgeon_name = get_the_title($surgeon);
+                                        $name_parts = explode(' ', $surgeon_name);
+                                        
+                                        // Get the last part of the name (handles multiple words)
+                                        if (count($name_parts) > 1) {
+                                            // If the last part contains a comma (e.g., "Smith, MD"), get the part before the comma
+                                            $last_part = end($name_parts);
+                                            if (strpos($last_part, ',') !== false) {
+                                                $last_name = explode(',', $last_part)[0];
+                                            } else {
+                                                // Check if second-to-last part might be the last name (in case of "John Smith MD")
+                                                $second_to_last = $name_parts[count($name_parts) - 2];
+                                                if (strpos($last_part, 'MD') !== false || strpos($last_part, 'DO') !== false) {
+                                                    $last_name = $second_to_last;
+                                                } else {
+                                                    $last_name = $last_part;
+                                                }
+                                            }
+                                        } else {
+                                            $last_name = $surgeon_name;
+                                        }
+                                    }
+                                    
+                                    // Remove any commas from the last name
+                                    $last_name = trim(str_replace(',', '', $last_name));
+                                    echo 'Dr. ' . $last_name;
+                                    ?>
+                                    </span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                             <?php endif; ?>
                             
@@ -135,15 +169,12 @@ get_header(); ?>
                             if (!empty($case_info['performed_at_location'])) :
                                 $location = $case_info['performed_at_location'];
                             ?>
-                            <div class="col-md-6">
-                                <div class="location-info">
-                                    <h5 class="h6">Location</h5>
-                                    <p class="mb-0">
-                                        <a href="<?php echo get_permalink($location); ?>">
-                                            <i class="fas fa-map-marker-alt me-1"></i> <?php echo get_the_title($location); ?>
-                                        </a>
-                                    </p>
-                                </div>
+                            <div class="col-6">
+                                <h2 class="h4 mb-3">Location</h2>
+                                <a href="<?php echo get_permalink($location); ?>" class="case-location-link">
+                                    <span><?php echo get_the_title($location); ?></span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                             <?php endif; ?>
                         </div>

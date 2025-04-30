@@ -412,29 +412,48 @@ ol {
 }
 
 .gform_wrapper {
-  padding: 15px;
-  max-width: 100%;
+  padding: 25px;
+  max-width: 600px;
   margin: 0 auto;
   background: transparent;
 }
 
+/* Consultation Card Styling - Common across templates */
+.consultation-card {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 8px;
+}
+
+.consultation-card h3 {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.consultation-card .card-body {
+  padding: 15px;
+}
+
+/* Uniform styling for all input fields */
 .gform_wrapper input[type="text"],
 .gform_wrapper input[type="email"],
 .gform_wrapper input[type="tel"],
 .gform_wrapper select {
   width: 100%;
-  padding: 8px 12px;
+  padding: 12px 15px;
   border: 1px solid #333;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   box-sizing: border-box;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   transition: border-color 0.3s, box-shadow 0.3s;
   background-color: #333;
   color: #fff;
 }
 
+/* Uniform focus state for all inputs */
 .gform_wrapper input[type="text"]:focus,
 .gform_wrapper input[type="email"]:focus,
 .gform_wrapper input[type="tel"]:focus,
@@ -444,12 +463,14 @@ ol {
   outline: none;
 }
 
+/* Make all placeholders consistent and more visible */
 .gform_wrapper input::placeholder,
 .gform_wrapper select::placeholder {
   color: #c0c0c0;
   opacity: 1;
 }
 
+/* Read Consent link styling */
 .gform_wrapper a[href="#consent-popup"] {
   color: #fff;
   text-decoration: underline;
@@ -460,14 +481,15 @@ ol {
   color: var(--color-gold);
 }
 
+/* Submit button */
 .gform_wrapper .gform_button {
   background-color: var(--color-gold);
   color: #000;
   border: 2px solid var(--color-gold);
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   transition: all 0.3s;
@@ -485,16 +507,37 @@ ol {
   padding-left: 8px;
   vertical-align: middle;
   color: #fff;
-  font-size: 13px;
 }
 
+/* Required field indicator */
 .gform_wrapper .gfield_required_asterisk {
   color: #e63946;
 }
 
+/* Make checkbox text slightly smaller and with proper line height */
+.gform_wrapper .gfield--type-checkbox label {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+/* Reduce space between checkbox fields */
 .gform_wrapper .gfield--type-checkbox {
-  margin-top: 3px;
-  margin-bottom: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Adjust field width on mobile */
+@media (max-width: 767px) {
+  .gform_wrapper input[type="text"],
+  .gform_wrapper input[type="email"],
+  .gform_wrapper input[type="tel"],
+  .gform_wrapper select {
+    font-size: 16px;
+  }
+
+  .gform_wrapper .gfield--width-half {
+    width: 100%;
+  }
 }
 
 /* FAQ Section Styling - Common across templates */

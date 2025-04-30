@@ -66,8 +66,8 @@ get_header();
                         <?php $location_maps_link = get_field('location_maps_link'); ?>
                         <?php if ($location_maps_link): ?>
                             <div class="location-directions mt-3">
-                                <a href="<?php echo esc_url($location_maps_link); ?>" class="btn btn-primary" target="_blank">
-                                    Get Directions
+                                <a href="<?php echo esc_url($location_maps_link); ?>" class="mia-button mia-button-gold" target="_blank">
+                                    Get Directions <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
                         <?php endif; ?>
@@ -165,7 +165,7 @@ get_header();
                                     <div class="card-body">
                                         <h3 class="h4"><?php the_title(); ?></h3>
                                         <p class="surgeon-title">Plastic Surgeon</p>
-                                        <a href="<?php the_permalink(); ?>" class="btn btn-surgeon">View Profile</a>
+                                        <a href="<?php the_permalink(); ?>" class="mia-button mia-button-white">View Profile <i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
