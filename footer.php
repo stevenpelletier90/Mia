@@ -34,7 +34,7 @@
                     <li><a href="<?php echo esc_url(home_url('/about-us/')); ?>">Our Story</a></li>
                     <li><a href="<?php echo esc_url(home_url('/mia-foundation/')); ?>">Mia Foundation</a></li>
                     <li><a href="<?php echo esc_url(home_url('/locations/')); ?>">Locations</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/surgeons/')); ?>">Surgeons</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/plastic-surgeons/')); ?>">Surgeons</a></li>
                     <li><a href="<?php echo esc_url(home_url('/careers/')); ?>">Careers</a></li>
                     <li><a href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=/s/home" target="_blank">Patient Portal</a></li>
                 </ul>
@@ -176,11 +176,11 @@
             <!-- Links Section - Centered -->
             <div class="text-center">
                 <ul class="footer-links">
-                    <li><a href="<?php echo esc_url(home_url('/privacy-policy')); ?>">Privacy Policy</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/patient-privacy-practices')); ?>">Patient Privacy Practices</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/terms-conditions')); ?>">Terms & Conditions</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/terms-of-use')); ?>">Terms of Use</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/sms-terms')); ?>">SMS Terms & Conditions</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/website-privacy-policy/')); ?>">Privacy Policy</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/patient-privacy-practices/')); ?>">Patient Privacy Practices</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/terms-and-conditions/')); ?>">Terms & Conditions</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/terms-of-use/')); ?>">Terms of Use</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/website-sms-terms-and-conditions/')); ?>">SMS Terms & Conditions</a></li>
                 </ul>
             </div>
         </div>

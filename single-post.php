@@ -187,27 +187,27 @@ get_header(); ?>
                             <h2 class="h5 mb-3">Patient Resources</h2>
                             <ul class="list-unstyled">
                                 <li class="mb-2">
-                                    <a href="/before-after" class="text-decoration-none">
+                                    <a href="/before-after/" class="text-decoration-none">
                                         <i class="fas fa-images text-primary me-2"></i>
                                         Before & After Gallery
                                     </a>
                                 </li>
                                 <li class="mb-2">
-                                    <a href="/patient-forms" class="text-decoration-none">
+                                    <a href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome" target="_blank" class="text-decoration-none">
                                         <i class="fas fa-file-alt text-primary me-2"></i>
-                                        Patient Forms
+                                        Patient Portal
                                     </a>
                                 </li>
                                 <li class="mb-2">
-                                    <a href="/faq" class="text-decoration-none">
+                                    <a href="/faqs/" class="text-decoration-none">
                                         <i class="fas fa-question-circle text-primary me-2"></i>
                                         FAQs
                                     </a>
                                 </li>
                                 <li class="mb-2">
-                                    <a href="/recovery" class="text-decoration-none">
+                                    <a href="/conditions/" class="text-decoration-none">
                                         <i class="fas fa-heart text-primary me-2"></i>
-                                        Recovery Guidelines
+                                        Conditions We Treat
                                     </a>
                                 </li>
                             </ul>
