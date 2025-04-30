@@ -114,8 +114,8 @@ get_header(); ?>
                                                 <div class="col-md-6">
                                                     <div class="before-after-card">
                                                         <div class="before-after-images">
-                                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/placeholder-before.jpg" alt="Before" class="img-fluid">
-                                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/placeholder-after.jpg" alt="After" class="img-fluid">
+                                                            <img src="https://placehold.co/400x300" alt="Before" class="img-fluid">
+                                                            <img src="https://placehold.co/400x300" alt="After" class="img-fluid">
                                                         </div>
                                                         <p class="caption mt-2">Actual patient results may vary</p>
                                                     </div>

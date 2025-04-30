@@ -33,37 +33,23 @@ get_header(); ?>
     ?>
 
         <!-- Article Header -->
-        <header class="bg-light py-4">
+        <header class="post-header py-5">
             <div class="container">
-                <div class="row">
+                <div class="row min-vh-50 d-flex align-items-center">
                     <div class="col-lg-8">
-                        <!-- Meta information -->
-                        <div class="mb-3">
-                            <?php
-                            $categories = get_the_category();
-                            if ($categories) {
-                                foreach($categories as $category) {
-                                    echo '<a href="' . get_category_link($category->term_id) . '" class="text-decoration-none me-2 text-primary">#' . $category->name . '</a>';
-                                }
-                            }
-                            ?>
-                        </div>
                         
                         <h1 class="mb-3"><?php the_title(); ?></h1>
                         
-                        <div class="d-flex align-items-center text-muted small mb-3">
-                            <?php 
-                            $author_id = get_the_author_meta('ID');
-                            $author_avatar = get_avatar_url($author_id, ['size' => 40]);
-                            ?>
-                            <img src="<?php echo $author_avatar; ?>" alt="<?php echo get_the_author(); ?>" class="me-2" width="40" height="40">
-                            <div>
-                                <div>By <a href="<?php echo get_author_posts_url($author_id); ?>" class="text-decoration-none"><?php the_author(); ?></a></div>
-                                <div>
-                                    <?php echo get_the_date(); ?> • 
-                                    <?php echo $reading_time; ?> min read • 
-                                    <?php comments_number('0 comments', '1 comment', '% comments'); ?>
-                                </div>
+                        <div class="post-meta text-muted small mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="far fa-calendar-alt me-2"></i>
+                                <span><?php echo get_the_date(); ?></span>
+                                <span class="mx-2">•</span>
+                                <i class="far fa-clock me-2"></i>
+                                <span><?php echo $reading_time; ?> min read</span>
+                                <span class="mx-2">•</span>
+                                <i class="far fa-comment me-2"></i>
+                                <span><?php comments_number('0 comments', '1 comment', '% comments'); ?></span>
                             </div>
                         </div>
 
@@ -108,23 +94,7 @@ get_header(); ?>
                             </div>
                         <?php endif; ?>
 
-                        <!-- Author Bio -->
-                        <?php if (get_the_author_meta('description')) : ?>
-                            <div class="border-top pt-4 mb-5">
-                                <h2 class="h5 mb-3">About the Author</h2>
-                                <div class="d-flex">
-                                    <?php echo get_avatar($author_id, 80, '', '', ['class' => 'me-3']); ?>
-                                    <div>
-                                        <h3 class="h6 mb-2"><?php the_author(); ?></h3>
-                                        <p class="mb-2"><?php echo get_the_author_meta('description'); ?></p>
-                                        <a href="<?php echo get_author_posts_url($author_id); ?>" class="text-decoration-none">View all posts</a>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
 
-                        <!-- Comments -->
-                        <?php comments_template(); ?>
                     </div>
                     
                     <div class="col-lg-4">
@@ -133,10 +103,7 @@ get_header(); ?>
                             <div class="card-body">
                                 <h2 class="h5 mb-3">Schedule a Consultation</h2>
                                 <p class="small mb-3">Interested in learning more? Schedule a private consultation to discuss your goals.</p>
-                                <a href="/consultation" class="btn btn-primary w-100">Book Your Consultation</a>
-                                <div class="text-center mt-2">
-                                    <small class="text-muted">Or call us at: (555) 123-4567</small>
-                                </div>
+                                <a href="/free-plastic-surgery-consultation/" class="mia-button mia-button-gold w-100">Book Your Consultation <i class="fas fa-arrow-right"></i></a>                               
                             </div>
                         </div>
 
@@ -165,7 +132,7 @@ get_header(); ?>
                             <?php endif;
                             wp_reset_postdata();
                             ?>
-                            <a href="/procedures" class="btn btn-outline-primary btn-sm">View All Procedures</a>
+                            <a href="/cosmetic-plastic-surgery/" class="mia-button mia-button-gold-outline mia-button-sm">View All Procedures <i class="fas fa-arrow-right"></i></a>
                         </div>
 
                         <!-- Financing Options -->
@@ -178,7 +145,7 @@ get_header(); ?>
                                     <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>0% financing available</li>
                                     <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Insurance accepted</li>
                                 </ul>
-                                <a href="/financing" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                <a href="/financing" class="mia-button mia-button-gold-outline mia-button-sm">Learn More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
 
