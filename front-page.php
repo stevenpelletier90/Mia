@@ -126,7 +126,7 @@ get_header(); ?>
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 about-content mb-4 mb-lg-0">
-        <h2 class="section-heading mb-3">About Us</h2>
+        <h1 class="section-heading mb-3">About Us</h1>
         <h3 class="section-subheading mb-4">Professional Care You Can Trust</h3>
         <p class="about-text">
           Test Text

@@ -31,12 +31,12 @@
             <div class="footer-column">
                 <h2 class="footer-heading text-gold">About</h2>
                 <ul class="footer-menu">
-                    <li><a href="<?php echo esc_url(home_url('/our-story')); ?>">Our Story</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/mia-foundation')); ?>">Mia Foundation</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/locations')); ?>">Locations</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/surgeons')); ?>">Surgeons</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/careers')); ?>">Careers</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/patient-portal')); ?>">Patient Portal</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/about-us/')); ?>">Our Story</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/mia-foundation/')); ?>">Mia Foundation</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/locations/')); ?>">Locations</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/surgeons/')); ?>">Surgeons</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/careers/')); ?>">Careers</a></li>
+                    <li><a href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=/s/home" target="_blank">Patient Portal</a></li>
                 </ul>
             </div>
 
@@ -44,12 +44,12 @@
             <div class="footer-column">
                 <h2 class="footer-heading text-gold">Resources</h2>
                 <ul class="footer-menu">
-                    <li><a href="<?php echo esc_url(home_url('/faqs')); ?>">FAQs</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/conditions-we-treat')); ?>">Conditions We Treat</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/calculate-bmi')); ?>">Calculate Your BMI</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/patient-resources')); ?>">Patient Resources</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/surgical-journey')); ?>">Surgical Journey</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/out-of-town-patients')); ?>">Out of Town Patients</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/faqs/')); ?>">FAQs</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/conditions/')); ?>">Conditions We Treat</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/calculate-your-bmi/')); ?>">Calculate Your BMI</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/patient-resources/')); ?>">Patient Resources</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/patient-resources/surgical-journey/')); ?>">Surgical Journey</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/out-of-town-patients/')); ?>">Out of Town Patients</a></li>
                 </ul>
             </div>
             

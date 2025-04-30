@@ -452,7 +452,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo esc_url(home_url('/shop')); ?>">Shop</a>
+                    <a class="nav-link" href="https://shop.miaaesthetics.com/" target="_blank">Shop</a>
                 </li>
               </ul>
             </div>
