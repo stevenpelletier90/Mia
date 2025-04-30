@@ -112,7 +112,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Financing</h4>
         <div class="button-wrapper">
-          <a href="/financing/" class="mia-button mia-button-hero">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/financing/" class="mia-button mia-button-hero" aria-label="Explore Financing Options">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@ get_header(); ?>
           Test Text
         </p>
         <div class="mt-4">
-          <a href="#learn-more" class="mia-button mia-button-white">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#learn-more" class="mia-button mia-button-white" aria-label="Learn more about Mia Aesthetics">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
       <div class="col-lg-6 about-video">
@@ -243,9 +243,15 @@ get_header(); ?>
 <!-- Parallax Section with Video Background -->
 <section class="parallax-section">
   <div class="parallax-video-bg">
-    <video autoplay muted loop playsinline class="parallax-video">
+    <!-- Fallback background image in case video fails to load -->
+    <div class="parallax-fallback-bg" style="background-image: url('/wp-content/uploads/2025/04/beach-fallback.jpg'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center;"></div>
+    
+    <video autoplay muted loop playsinline class="parallax-video" poster="/wp-content/uploads/2025/04/beach-fallback.jpg" onerror="this.style.display='none';">
+      <!-- Use full URL to avoid connection issues -->
+      <source src="https://mia-aesthetics.com/wp-content/uploads/2025/04/beach-movie.mp4" type="video/mp4">
+      <!-- Fallback to relative URL if the full URL fails -->
       <source src="/wp-content/uploads/2025/04/beach-movie.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      <!-- Browser will hide video and show fallback background if video fails to load -->
     </video>
   </div>
 </section>
@@ -270,7 +276,7 @@ get_header(); ?>
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <h5 class="mb-0">1</h5>
                   </div>
-                  <h5 class="card-title">Research Surgeons</h5>
+                  <h4 class="card-title">Research Surgeons</h4>
                   <ul class="list-unstyled text-start small">
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Choose from over 25 experienced surgeons</li>
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Review surgeon bios on our website</li>
@@ -286,7 +292,7 @@ get_header(); ?>
                     <i class="fa-solid fa-tag"></i>
                     <h5 class="mb-0">2</h5>
                   </div>
-                  <h5 class="card-title">Check Specials</h5>
+                  <h4 class="card-title">Check Specials</h4>
                   <ul class="list-unstyled text-start small">
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Contact a sales coordinator for specials</li>
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>New surgeons often offer reduced rates</li>
@@ -302,7 +308,7 @@ get_header(); ?>
                     <i class="fa-solid fa-lock"></i>
                     <h5 class="mb-0">3</h5>
                   </div>
-                  <h5 class="card-title">Lock in Your Price</h5>
+                  <h4 class="card-title">Lock in Your Price</h4>
                   <ul class="list-unstyled text-start small">
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Call us to secure a special price</li>
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Booking fee required to lock in price</li>
@@ -318,7 +324,7 @@ get_header(); ?>
                     <i class="fa-solid fa-credit-card"></i>
                     <h5 class="mb-0">4</h5>
                   </div>
-                  <h5 class="card-title">Complete Payments</h5>
+                  <h4 class="card-title">Complete Payments</h4>
                   <ul class="list-unstyled text-start small">
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Pay at your own pace</li>
                     <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Contact your patient concierge</li>
@@ -742,7 +748,7 @@ get_header(); ?>
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
           <h3 class="section-subheading text-gold mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
-          <a href="/mia-foundation/" class="mia-button mia-button-black">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/mia-foundation/" class="mia-button mia-button-black" aria-label="Discover Mia Aesthetics Foundation charitable work">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>

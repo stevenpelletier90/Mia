@@ -64,7 +64,13 @@
   width: 100%;
   height: 100%;
   padding: 2rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0.3) 25%, transparent 35%);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 15%,
+    rgba(0, 0, 0, 0.3) 25%,
+    transparent 35%
+  );
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -85,7 +91,6 @@
 .button-wrapper {
   margin-top: 0.5rem;
 }
-/* Hero section buttons use the mia-button-hero class from base.css */
 .content-overlay .mia-button-hero {
   font-size: clamp(0.875rem, 3vw, 1.125rem);
 }
@@ -223,7 +228,7 @@
 }
 .stats-number .display-4 {
   color: var(--color-gold) !important;
-  font-weight: 4px;
+  font-weight: 700;
 }
 .stats-title,
 h3.stats-title {
@@ -268,8 +273,8 @@ h3.stats-title {
   padding-bottom: 3rem;
 }
 .overlap-card {
-  background: linear-gradient(135deg, var(--color-light) 0%, var(--color-light) 100%);
-  border-radius: var(--border-radius-lg);
+  background: white;
+  border-radius: 3px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -279,7 +284,7 @@ h3.stats-title {
 }
 .overlap-card h3 {
   color: var(--color-primary);
-  font-weight: 4px;
+  font-weight: 700;
   font-size: clamp(1.4rem, 4vw, 1.8rem);
 }
 .overlap-card h4 {
@@ -470,7 +475,7 @@ h3.stats-title {
 }
 .procedure-title {
   font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 4px;
+  font-weight: 700;
   color: var(--color-primary);
   line-height: 1.2;
 }
@@ -498,7 +503,7 @@ h3.stats-title {
 }
 .cta-section {
   padding: 5rem 0;
-  background-color: var(--color-light);
+  background-color: white;
 }
 .info-card {
   display: flex;
@@ -533,7 +538,7 @@ h3.stats-title {
 }
 .card-content .card-title {
   font-size: 2rem;
-  font-weight: 4px;
+  font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
@@ -544,7 +549,6 @@ h3.stats-title {
   margin-left: auto;
   margin-right: auto;
 }
-/* Card content buttons use the mia-button-gold class from base.css with some specific styling */
 .card-content .mia-button-gold {
   padding: 0.75rem 2rem;
   text-transform: uppercase;
@@ -626,13 +630,6 @@ h3.section-subheading {
   margin-bottom: 1.5rem;
   line-height: 1.4;
 }
-.text-gold {
-  color: var(--color-gold) !important;
-}
-.text-primary {
-  color: var(--color-primary);
-}
-/* Button styles are now defined in _base.css */
 
 @media (min-width: 1400px) {
   .responsive-heading {
@@ -658,7 +655,6 @@ h3.section-subheading {
   .card-content .card-title {
     font-size: 1.75rem;
   }
-  /* Button styles are now defined in _base.css */
 }
 
 @media (max-width: 991px) {
@@ -721,7 +717,6 @@ h3.section-subheading {
   .foundation-content {
     padding: 2rem;
   }
-  /* Button styles are now defined in _base.css */
 }
 
 @media (max-width: 767px) {
@@ -881,10 +876,6 @@ h3.section-subheading {
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
-  /* Button styles are now defined in _base.css */
-}
-
-@media (max-width: 575px) {
 }
 
 @media (max-width: 480px) {
@@ -933,5 +924,4 @@ h3.section-subheading {
   .foundation-content {
     padding: 1.5rem;
   }
-  /* Button styles are now defined in _base.css */
 }
