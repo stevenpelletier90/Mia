@@ -6,22 +6,22 @@
             <div class="footer-column">
                 <h2 class="footer-heading text-gold">Follow Us</h2>
                 <div class="social-icons d-flex flex-wrap gap-3 mb-3">
-                    <a href="https://www.facebook.com/miaaesthetics" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon">
+                    <a href="https://www.facebook.com/miaaestheticssurgery/" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/miaaesthetics" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
+                    <a href="https://www.instagram.com/mia_aesthetics/?hl=en" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@miaaesthetics" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon">
+                    <a href="https://www.tiktok.com/@mia_aesthetics?lang=en" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon">
                         <i class="fab fa-tiktok"></i>
                     </a>
-                    <a href="https://twitter.com/miaaesthetics" target="_blank" rel="noopener" aria-label="Twitter" class="social-icon">
+                    <a href="https://x.com/mia_aesthetics?lang=en" target="_blank" rel="noopener" aria-label="Twitter" class="social-icon">
                         <i class="fab fa-twitter"></i>
                     </a>
                     <a href="https://www.snapchat.com/add/miaaesthetics" target="_blank" rel="noopener" aria-label="SnapChat" class="social-icon">
                         <i class="fab fa-snapchat-ghost"></i>
                     </a>
-                    <a href="https://www.youtube.com/c/miaaesthetics" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon">
+                    <a href="https://www.youtube.com/mia_aesthetics" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
@@ -59,8 +59,7 @@
                 <ul class="footer-menu">
                     <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/')); ?>">Face Procedures</a></li>
                     <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/')); ?>">Body Procedures</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/')); ?>">Breast Procedures</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/men/')); ?>">Men's Procedures</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/')); ?>">Breast Procedures</a></li>                  
                     <li><a href="<?php echo esc_url(home_url('/non-surgical/')); ?>">Non-Surgical Options</a></li>
                     <li><a href="<?php echo esc_url(home_url('/before-after/')); ?>">Before & After Gallery</a></li>
                 </ul>

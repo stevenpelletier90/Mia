@@ -112,7 +112,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Financing</h4>
         <div class="button-wrapper">
-          <a href="/financing/" class="mia-button mia-button-hero" aria-label="Explore Financing Options">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/financing/" class="mia-button mia-button-hero" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -127,7 +127,7 @@ get_header(); ?>
     <div class="row align-items-center">
       <div class="col-lg-6 about-content mb-4 mb-lg-0">
         <h1 class="section-heading mb-3">About Us</h1>
-        <h3 class="section-subheading mb-4">Professional Care You Can Trust</h3>
+        <h2 class="section-subheading mb-4">Professional Care You Can Trust</h2>
         <p class="about-text">
           Test Text
         </p>
@@ -748,7 +748,7 @@ get_header(); ?>
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
           <h3 class="section-subheading text-gold mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
-          <a href="/mia-foundation/" class="mia-button mia-button-black" aria-label="Discover Mia Aesthetics Foundation charitable work">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/mia-foundation/" class="mia-button mia-button-black" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
