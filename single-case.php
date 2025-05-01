@@ -64,7 +64,7 @@ get_header(); ?>
         <div class="container">
             <div class="row">
                 <!-- Main Content Column -->
-                <div class="col-lg-8">
+                <div class="col-xl-8 col-lg-12">
                     <?php if (get_field('case_background')) : ?>
                     <!-- Patient Background -->
                     <section class="mb-5">
@@ -213,7 +213,7 @@ get_header(); ?>
                 </div>
 
                 <!-- Sidebar -->
-                <div class="col-lg-4">
+                <div class="col-xl-4 col-lg-12">
                     <!-- Contact Card with Gravity Form -->
                     <div class="card consultation-card mb-4 shadow-sm">
                         <div class="card-body p-3">

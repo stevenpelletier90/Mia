@@ -1,5 +1,5 @@
 <?php
-get_header(); 
+get_header();
 ?>
 
 <main>
@@ -17,7 +17,12 @@ get_header();
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1>Mia Aesthetics <?php echo get_the_title(); ?></h1>
-                    
+
+                    <!-- Location Intro Blurb -->
+                    <div class="location-intro mb-4">
+                        <p>Welcome to our <?php echo get_the_title(); ?> location. Our state-of-the-art facility offers a wide range of plastic surgery and aesthetic procedures with a team of experienced surgeons dedicated to helping you achieve your aesthetic goals.</p>
+                    </div>
+
                     <!-- Quick Info Bar -->
                     <div class="location-info mb-4">
                         <!-- Address -->
@@ -43,7 +48,7 @@ get_header();
                                 </div>
                             </div>
                         <?php endif; ?>
-                        
+
                         <!-- Hours of Operation -->
                         <?php $hours_operation = get_field('hours_operation'); ?>
                         <?php if ($hours_operation): ?>
@@ -53,13 +58,6 @@ get_header();
                                     <span><?php echo esc_html($hours_operation); ?></span>
                                 </div>
                             </div>
-                        <?php else: ?>
-                            <div class="location-detail">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-clock location-icon"></i>
-                                    <span>Mon-Fri: 9am-5pm | Sat: 10am-2pm | Sun: Closed</span>
-                                </div>
-                            </div>
                         <?php endif; ?>
 
                         <!-- Google Maps Link -->
@@ -67,35 +65,22 @@ get_header();
                         <?php if ($location_maps_link): ?>
                             <div class="location-directions mt-3">
                                 <a href="<?php echo esc_url($location_maps_link); ?>" class="mia-button mia-button-gold" target="_blank">
-                                    Get Directions <i class="fa-solid fa-arrow-right"></i>
+                                    <i class="fa-solid fa-map-location-dot"></i> Get Directions
                                 </a>
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
 
-                <!-- Embedded Video -->
+                <!-- Consultation Form -->
                 <div class="col-lg-6">
-                    <div class="video-container mb-4">
-                        <?php 
-                        $video_details = get_field('video_details'); // Get the group field
-                        $video_id = isset($video_details['video_id']) ? $video_details['video_id'] : ''; // Get the video ID subfield
-                        
-                        if ($video_id): 
-                            $youtube_embed_url = 'https://www.youtube.com/embed/' . esc_attr($video_id);
-                        ?>
-                            <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
-                                <iframe 
-                                    src="<?php echo esc_url($youtube_embed_url); ?>" 
-                                    title="Location Video"  
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen
-                                ></iframe>
+                    <div class="card consultation-card shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h3 class="h5 mb-3 text-center">Schedule a Consultation</h3>
+                            <div class="location-form-container">
+                                <?php gravity_form(1, false, false, false, '', true); ?>
                             </div>
-                        <?php else: ?>
-                            <p class="text-center text-muted">No video available for this location.</p>
-                        <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,21 +92,53 @@ get_header();
         <div class="container">
             <div class="row">
                 <!-- Main Content Column - Using WordPress default content -->
-                <div class="col-lg-8">
+                <div class="col-12">
                     <?php while (have_posts()) : the_post(); ?>
                         <div class="location-content">
                             <?php the_content(); ?>
                         </div>
                     <?php endwhile; ?>
-                </div>
 
-                <!-- Sidebar -->
-                <div class="col-lg-4">
-                    <!-- Contact Card -->
-                    <div class="card consultation-card mb-4 shadow-sm">
-                        <div class="card-body p-3">
-                            <h3 class="h5 mb-3 text-center">Schedule a Consultation</h3>
-                            <?php gravity_form(1, false, false, false, '', true); ?>
+                    <div class="row mt-5">
+                        <!-- Business Hours Section -->
+                        <?php if(have_rows('business_hours')): ?>
+                        <div class="col-md-6 mb-5">
+                            <div class="business-hours-section">
+                                <h2 class="mb-3">Center Hours</h2>
+                                <div class="business-hours-container">
+                                    <?php while(have_rows('business_hours')): the_row();
+                                        $day = get_sub_field('day');
+                                        $hours = get_sub_field('hours');
+                                    ?>
+                                        <div class="business-hours-row">
+                                            <div class="business-hours-day"><?php echo esc_html($day); ?></div>
+                                            <div class="business-hours-time"><?php echo esc_html($hours); ?></div>
+                                        </div>
+                                    <?php endwhile; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
+                        <!-- Video Section -->
+                        <div class="col-md-6 mb-5">
+                            <?php
+                            $video_details = get_field('video_details'); // Get the group field
+                            $video_id = isset($video_details['video_id']) ? $video_details['video_id'] : ''; // Get the video ID subfield
+
+                            if ($video_id):
+                                $youtube_embed_url = 'https://www.youtube.com/embed/' . esc_attr($video_id);
+                            ?>
+                                <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+                                    <iframe
+                                        src="<?php echo esc_url($youtube_embed_url); ?>"
+                                        title="Location Video"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -153,10 +170,10 @@ get_header();
                             <div class="surgeon-card card border-0 shadow-sm h-100">
                                 <div class="text-center">
                                     <div class="surgeon-image-container">
-                                        <?php 
+                                        <?php
                                         $surgeon_headshot_id = get_field('surgeon_headshot');
                                         if($surgeon_headshot_id && is_numeric($surgeon_headshot_id)) : ?>
-                                            <img src="<?php echo esc_url(wp_get_attachment_image_url($surgeon_headshot_id, 'medium')); ?>" 
+                                            <img src="<?php echo esc_url(wp_get_attachment_image_url($surgeon_headshot_id, 'medium')); ?>"
                                                  class="surgeon-headshot-circular" alt="<?php the_title(); ?> Headshot" />
                                         <?php elseif (has_post_thumbnail()): ?>
                                             <img src="<?php the_post_thumbnail_url(); ?>" class="surgeon-headshot-circular" alt="<?php the_title(); ?>" />

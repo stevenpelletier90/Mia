@@ -275,9 +275,9 @@ header h1 {
   opacity: 0.8;
 }
 
-/* Improve spacing between form elements */
+/* Let the gap CSS handle spacing between form elements */
 .gform_wrapper .gfield {
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
 
 .gform_wrapper .gfield--type-checkbox {
@@ -299,7 +299,7 @@ header h1 {
 }
 
 /* Responsive Adjustments */
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   /* Add more space between main content and sidebar on desktop */
   .col-lg-8 {
     padding-right: 30px;
@@ -310,7 +310,7 @@ header h1 {
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .case-image-container {
     max-width: 100%;
   }
@@ -376,6 +376,69 @@ header h1 {
     height: 50px;
     margin-top: 15px;
   }
+
+  /* Custom mobile layout for Gravity Form fields using flexbox */
+  /* Make the main fields container a flex container */
+  #gform_fields_1.gform_fields {
+    display: flex !important;
+    flex-wrap: wrap !important; /* Allow fields to wrap to the next line */
+    gap: 15px !important; /* Add some space between fields */
+  }
+
+  /* Make the Full Name field (#field_1_13) full width */
+  #field_1_13 {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make Email (#field_1_2) and Phone (#field_1_3) side by side */
+  #field_1_2,
+  #field_1_3 {
+    width: calc(50% - 7.5px) !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make Country (#field_1_36) and Zip Code (#field_1_42) side by side */
+  #field_1_36,
+  #field_1_42 {
+    width: calc(50% - 7.5px) !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make Preferred Language (#field_1_33) and Procedure (#field_1_38) side by side */
+  #field_1_33,
+  #field_1_38 {
+    width: calc(50% - 7.5px) !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ensure the inputs/selects within these fields take up the full width available */
+  #gform_fields_1.gform_fields input[type="text"],
+  #gform_fields_1.gform_fields input[type="email"],
+  #gform_fields_1.gform_fields input[type="tel"],
+  #gform_fields_1.gform_fields select {
+    width: 100% !important;
+  }
+
+  /* Adjust the internal layout of the Full Name field (#field_1_13) */
+  /* to ensure First and Last Name stay side-by-side */
+  #field_1_13 .ginput_complex {
+    display: flex !important;
+    gap: 10px !important;
+  }
+
+  #field_1_13 .name_first,
+  #field_1_13 .name_last {
+    flex: 1 1 0% !important;
+  }
+
+  /* Ensure all other fields are full width */
+  #gform_fields_1.gform_fields
+    > .gfield:not(#field_1_13):not(#field_1_2):not(#field_1_3):not(#field_1_36):not(#field_1_42):not(#field_1_33):not(
+      #field_1_38
+    ) {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -392,17 +455,42 @@ header h1 {
   .gform_wrapper input[type="email"],
   .gform_wrapper input[type="tel"],
   .gform_wrapper select {
-    font-size: 15px;
-    height: 44px;
+    font-size: 16px;
+    height: 52px; /* Increased height for better touch targets on iPhone 13+ */
   }
 
   .gform_wrapper .gform_button {
-    height: 48px;
-    font-size: 15px;
+    height: 54px;
+    font-size: 16px;
   }
 
   /* Ensure consistent bottom spacing */
   .gform_wrapper .gform_footer {
     margin-top: 12px;
+  }
+
+  /* Adjust spacing between form fields on very small screens */
+  #gform_fields_1.gform_fields {
+    gap: 10px !important; /* Reduce gap for smaller screens */
+  }
+
+  /* Adjust width calculations for the smaller gap on very small screens */
+  #field_1_2,
+  #field_1_3,
+  #field_1_36,
+  #field_1_42,
+  #field_1_33,
+  #field_1_38 {
+    width: calc(50% - 5px) !important; /* Adjust width calculation for smaller gap */
+  }
+
+  /* Add a bit more padding for the form fields */
+  .consultation-card .card-body {
+    padding: 15px;
+  }
+
+  /* Ensure the name fields maintain proper spacing */
+  #field_1_13 .ginput_complex {
+    gap: 5px !important; /* Smaller gap between first and last name */
   }
 }

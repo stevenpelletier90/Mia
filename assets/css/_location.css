@@ -10,13 +10,21 @@
   color: var(--color-primary);
   font-weight: 600;
   font-size: 42px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-family: var(--font-heading);
+}
+
+/* Location Intro */
+.location-intro p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 /* Location Info */
 .location-info {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .location-detail {
@@ -44,6 +52,10 @@
 
 .location-directions {
   margin-top: 1.5rem;
+}
+
+.location-directions .mia-button i {
+  margin-right: 0.5rem;
 }
 
 /* Video Container */
@@ -147,7 +159,91 @@
 
 /* Surgeon profile buttons use mia-button-white from _base.css */
 
-/* Consultation Form Card - Moved to _base.css */
+/* Consultation Form in Header */
+.location-header .consultation-card {
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #000000, var(--color-primary));
+}
+
+.location-header .consultation-card .card-body {
+  padding: 1.5rem;
+}
+
+.location-header .consultation-card h3 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.location-form-container {
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+/* Location Features List */
+.location-features-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.location-features-list li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.location-features-list li:last-child {
+  margin-bottom: 0;
+}
+
+.location-features-list i {
+  color: var(--color-gold);
+  margin-right: 0.5rem;
+}
+
+.location-highlights {
+  color: #555;
+  line-height: 1.6;
+}
+
+.location-highlights p:last-child {
+  margin-bottom: 0;
+}
+
+/* Business Hours Section */
+.business-hours-section {
+  margin-top: 0;
+}
+
+.business-hours-container {
+  max-width: 100%;
+}
+
+.business-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.business-hours-row:last-child {
+  border-bottom: none;
+}
+
+.business-hours-day {
+  font-weight: 500;
+  color: var(--color-primary);
+  font-size: 1.05rem;
+}
+
+.business-hours-time {
+  color: var(--color-primary);
+  text-align: right;
+  font-size: 1.05rem;
+}
 
 /* FAQ Section - Styling moved to _base.css */
 
@@ -157,18 +253,38 @@
     font-size: 36px;
   }
 
+  .location-header .row {
+    row-gap: 2rem;
+  }
+
   .section-title {
     font-size: 1.75rem;
+  }
+
+  .location-intro p {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 767px) {
+  .location-header {
+    padding: 40px 0;
+  }
+
   .location-header h1 {
     font-size: 30px;
   }
 
+  .location-intro p {
+    font-size: 0.95rem;
+  }
+
   .location-detail {
     margin-bottom: 0.5rem;
+  }
+
+  .location-header .consultation-card {
+    margin-top: 1rem;
   }
 
   .section-title {
@@ -187,5 +303,19 @@
   .surgeon-card .card-body {
     text-align: center;
     padding-top: 0.5rem;
+  }
+
+  .business-hours-row {
+    padding: 0.5rem 0;
+  }
+
+  .business-hours-day,
+  .business-hours-time {
+    font-size: 0.95rem;
+  }
+
+  .location-features-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
   }
 }
