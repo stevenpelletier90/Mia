@@ -87,48 +87,98 @@ get_header(); ?>
                         <?php the_content(); ?>
                     </section>
 
+
+                    <?php 
+                    // Get specialties from the ACF relationship field
+                    $specialties = get_field('specialties');
+                    
+                    // Only show the section if specialties are selected
+                    if($specialties && !empty($specialties)): 
+                    ?>
                     <!-- Specialities Section (Redesigned) -->
                     <section id="surgeon-specialities" class="mb-5">
                         <h2 class="section-title mb-4">Specialities</h2>
                         <div class="row">
-                            <?php 
-                            $specialized_procedures = array(
-                                'Breast Augmentation',
-                                'Brazilian Butt Lift',
-                                'Tummy Tuck',
-                                'Liposuction',
-                                'Mommy Makeover'
-                            );
-                            
-                            if(!empty($specialized_procedures)) :
-                                foreach($specialized_procedures as $procedure) :
-                            ?>
+                            <?php foreach($specialties as $specialty): ?>
                                 <div class="col-md-6 mb-4">
-                                    <a href="#" class="card cta-card text-decoration-none text-dark shadow-sm d-block h-100">
+                                    <a href="<?php echo get_permalink($specialty->ID); ?>" class="card cta-card text-decoration-none text-dark d-block h-100">
                                         <div class="card-body p-3">
-                                            <h3 class="h5 card-title mb-2"><?php echo esc_html($procedure); ?></h3>
-                                            <p class="card-text small">Learn more about this specialized procedure.</p>
+                                            <h3 class="h5 card-title mb-2"><?php echo get_the_title($specialty->ID); ?></h3>
+                                            <?php 
+                                            // Get the excerpt, fallback to a portion of the content if no excerpt exists
+                                            $excerpt = get_the_excerpt($specialty->ID);
+                                            if(empty($excerpt)) {
+                                                $content = get_post_field('post_content', $specialty->ID);
+                                                $excerpt = wp_trim_words($content, 20, '...');
+                                            }
+                                            ?>
+                                            <p class="card-text small"><?php echo $excerpt; ?></p>
                                             <div class="text-end">
-                                                <i class="fa-solid fa-arrow-right procedure-arrow"></i>
+                                                <span>Learn More <i class="fa-solid fa-arrow-right procedure-arrow"></i></span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                            <?php
-                                endforeach; 
-                            endif;
-                            ?>
+                            <?php endforeach; ?>
                         </div>
                     </section>
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Sidebar Column -->
                 <div class="col-lg-4">
                     <div class="surgeon-sidebar">
+                        <?php 
+                        // Check if there's a video URL in the ACF field
+                        $video_url = get_field('video_details_video_url');
+                        if($video_url): 
+                            // Function to normalize YouTube URL to embed format
+                            function get_youtube_embed_url($youtube_url) {
+                                // Extract video ID from various YouTube URL formats
+                                $video_id = '';
+                                
+                                // Match standard YouTube URLs (youtu.be and youtube.com)
+                                if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                                    $video_id = $matches[1];
+                                } elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                                    $video_id = $matches[1];
+                                } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                                    $video_id = $matches[1];
+                                } elseif (preg_match('/youtube\.com\/v\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                                    $video_id = $matches[1];
+                                } elseif (preg_match('/youtube\.com\/user\/\w+\/\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                                    $video_id = $matches[1];
+                                }
+                                
+                                // If we found a video ID, return the embed URL
+                                if ($video_id) {
+                                    return 'https://www.youtube.com/embed/' . $video_id;
+                                }
+                                
+                                // If no valid YouTube URL format was found, return the original URL
+                                return $youtube_url;
+                            }
+                            
+                            // Get embed URL
+                            $embed_url = get_youtube_embed_url($video_url);
+                        ?>
+                        <!-- Video Section -->
+                        <section id="surgeon-video" class="mb-4 sidebar-section">
+                            <div class="video-container">
+                                <iframe 
+                                    src="<?php echo esc_url($embed_url); ?>" 
+                                    title="<?php echo esc_attr(get_the_title()); ?> Video"
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </section>
+                        <?php endif; ?>
+
                         <!-- Before & After Gallery Section -->
                         <section id="surgeon-before-after" class="mb-5 sidebar-section">
-                            <h2 class="section-title mb-4">Before & After</h2>
-                            <div class="card cta-card text-decoration-none text-dark shadow-sm mb-4">
+                            <div class="card cta-card text-decoration-none text-dark mb-4">
                                 <img src="https://placehold.co/400x250" class="card-img-top" alt="Before and After Gallery Preview">
                                 <div class="card-body p-3">
                                     <h3 class="h5 card-title mb-2 text-center">Before & After Gallery</h3>
@@ -139,16 +189,19 @@ get_header(); ?>
                                 </div>
                             </div>
                             
-                            <!-- CTA Buttons -->
+                            <!-- Enhanced CTA Buttons -->
                             <div class="sidebar-cta-buttons">
-                                <a href="#" class="btn btn-sidebar mb-3 w-100">
-                                    <i class="fa-solid fa-road-circle-check me-2"></i>Surgical Journey
+                                <a href="#" class="btn btn-sidebar">
+                                    <i class="fa-solid fa-road-circle-check"></i>
+                                    <span>Surgical Journey</span>
                                 </a>
-                                <a href="#" class="btn btn-sidebar mb-3 w-100">
-                                    <i class="fa-solid fa-plane-departure me-2"></i>Out of Town Patients
+                                <a href="#" class="btn btn-sidebar">
+                                    <i class="fa-solid fa-plane-departure"></i>
+                                    <span>Out of Town Patients</span>
                                 </a>
-                                <a href="#" class="btn btn-sidebar w-100">
-                                    <i class="fa-solid fa-credit-card me-2"></i>Financing
+                                <a href="#" class="btn btn-sidebar">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                    <span>Financing</span>
                                 </a>
                             </div>
                         </section>
@@ -176,8 +229,8 @@ get_header(); ?>
         // Get all nav links
         const navLinks = document.querySelectorAll('#surgeon-tabs .nav-link');
         
-        // Get all sections that we want to scroll to
-        const sections = document.querySelectorAll('#surgeon-about, #surgeon-before-after, #surgeon-specialities');
+        // Get all sections that we want to scroll to for navigation purposes
+        const sections = document.querySelectorAll('#surgeon-about, #surgeon-specialities, #surgeon-before-after');
         
         // Add click event to each nav link
         navLinks.forEach(link => {

@@ -1,83 +1,83 @@
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Thin.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Thin.woff2') format('woff2');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-ThinItalic.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-ThinItalic.woff2') format('woff2');
   font-weight: 100;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Light.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-LightItalic.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-LightItalic.woff2') format('woff2');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Regular.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Italic.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Bold.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-BoldItalic.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-BoldItalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Black.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Black.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-BlackItalic.woff2") format("woff2");
+  font-family: 'Lato';
+  src: url('../fonts/Lato-BlackItalic.woff2') format('woff2');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat-VariableFont_wght.woff2") format("woff2-variations");
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-VariableFont_wght.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat-Italic-VariableFont_wght.woff2") format("woff2-variations");
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Italic-VariableFont_wght.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -85,8 +85,8 @@
 :root {
   --color-primary: #1b1b1b;
   --color-gold: #c8b273;
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Lato", sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Lato', sans-serif;
   --navbar-height: 65px;
 }
 body {
@@ -411,7 +411,6 @@ ol {
 }
 
 .gform_wrapper {
-  padding: 25px;
   max-width: 600px;
   margin: 0 auto;
   background: transparent;
@@ -435,9 +434,9 @@ ol {
 }
 
 /* Uniform styling for all input fields */
-.gform_wrapper input[type="text"],
-.gform_wrapper input[type="email"],
-.gform_wrapper input[type="tel"],
+.gform_wrapper input[type='text'],
+.gform_wrapper input[type='email'],
+.gform_wrapper input[type='tel'],
 .gform_wrapper select {
   width: 100%;
   padding: 12px 15px;
@@ -453,9 +452,9 @@ ol {
 }
 
 /* Uniform focus state for all inputs */
-.gform_wrapper input[type="text"]:focus,
-.gform_wrapper input[type="email"]:focus,
-.gform_wrapper input[type="tel"]:focus,
+.gform_wrapper input[type='text']:focus,
+.gform_wrapper input[type='email']:focus,
+.gform_wrapper input[type='tel']:focus,
 .gform_wrapper select:focus {
   border-color: var(--color-gold);
   box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
@@ -470,13 +469,13 @@ ol {
 }
 
 /* Read Consent link styling */
-.gform_wrapper a[href="#consent-popup"] {
+.gform_wrapper a[href='#consent-popup'] {
   color: #fff;
   text-decoration: underline;
   transition: color 0.3s;
 }
 
-.gform_wrapper a[href="#consent-popup"]:hover {
+.gform_wrapper a[href='#consent-popup']:hover {
   color: var(--color-gold);
 }
 
@@ -527,9 +526,9 @@ ol {
 
 /* Adjust field width on mobile */
 @media (max-width: 767px) {
-  .gform_wrapper input[type="text"],
-  .gform_wrapper input[type="email"],
-  .gform_wrapper input[type="tel"],
+  .gform_wrapper input[type='text'],
+  .gform_wrapper input[type='email'],
+  .gform_wrapper input[type='tel'],
   .gform_wrapper select {
     font-size: 16px;
   }
@@ -541,6 +540,10 @@ ol {
 
 /* FAQ Section Styling - Common across templates */
 .faq-container {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .faqs-section h2 {
@@ -553,7 +556,7 @@ ol {
 }
 
 .faqs-section h2:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 0;
@@ -609,9 +612,9 @@ ol {
 }
 
 .accordion-button::after {
-  font-family: "Font Awesome 6 Free";
+  font-family: 'Font Awesome 6 Free';
   font-weight: 900;
-  content: "\f078"; /* fa-chevron-down */
+  content: '\f078'; /* fa-chevron-down */
   background-image: none;
   transition: transform 0.3s ease;
   color: var(--color-gold);
@@ -619,7 +622,7 @@ ol {
 
 .accordion-button:not(.collapsed)::after {
   transform: rotate(180deg);
-  content: "\f078"; /* Same icon, just rotated */
+  content: '\f078'; /* Same icon, just rotated */
   color: var(--color-gold);
 }
 

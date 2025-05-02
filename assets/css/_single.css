@@ -1,54 +1,41 @@
-/* Single Post CSS */
-
-/* Post Header Styling */
 .post-header {
   background-color: var(--color-primary);
   color: #fff;
   padding: 2rem 0;
 }
-
 .post-header h1 {
   color: #fff;
   font-weight: 600;
   margin-bottom: 1.5rem;
 }
-
 .post-header .lead {
   color: var(--color-gold);
   font-size: 1.2rem;
   font-weight: 400;
 }
-
-/* Post Meta Styling */
 .post-meta {
   color: rgba(255, 255, 255, 0.8) !important;
   font-size: 0.9rem;
 }
-
 .post-meta i {
   color: var(--color-gold);
 }
-
-/* Content Area Styling */
 .content {
   font-size: 1.05rem;
   line-height: 1.8;
 }
-
 .content h2,
 .content h3,
 .content h4 {
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
-
 .content img {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
   margin: 1.5rem 0;
 }
-
 .content blockquote {
   border-left: 4px solid var(--color-gold);
   padding-left: 1.5rem;
@@ -56,15 +43,12 @@
   font-style: italic;
   color: #555;
 }
-
-/* Tags Styling */
 .mb-5 .h5 {
   position: relative;
   padding-bottom: 0.5rem;
 }
-
 .mb-5 .h5:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 0;
@@ -72,8 +56,7 @@
   height: 2px;
   background-color: var(--color-gold);
 }
-
-.mb-5 a[href*="tag"] {
+.mb-5 a[href*='tag'] {
   display: inline-block;
   background-color: #f8f9fa;
   color: var(--color-primary) !important;
@@ -85,13 +68,10 @@
   transition: all 0.2s ease;
   text-decoration: none !important;
 }
-
-.mb-5 a[href*="tag"]:hover {
+.mb-5 a[href*='tag']:hover {
   background-color: var(--color-gold);
   color: #000 !important;
 }
-
-/* Sidebar Styling */
 .col-lg-4 .card {
   border-radius: 8px;
   overflow: hidden;
@@ -99,67 +79,52 @@
   border: none;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
-
 .col-lg-4 .card:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
-
 .col-lg-4 .card-body {
   padding: 1.5rem;
 }
-
 .col-lg-4 .h5 {
   font-weight: 600;
   margin-bottom: 1rem;
 }
-
 .col-lg-4 .list-unstyled li {
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-
 .col-lg-4 .list-unstyled li:last-child {
   border-bottom: none;
 }
-
 .col-lg-4 .list-unstyled a {
   color: var(--color-primary);
   transition: color 0.2s ease;
 }
-
 .col-lg-4 .list-unstyled a:hover {
   color: var(--color-gold);
 }
-
 .col-lg-4 .list-unstyled i {
   color: var(--color-gold);
 }
-
-/* Related Articles Styling */
 .col-lg-4 .h6 {
   font-weight: 600;
   line-height: 1.4;
 }
-
 .col-lg-4 .img-fluid {
   border-radius: 4px;
   transition: opacity 0.2s ease;
 }
-
 .col-lg-4 .img-fluid:hover {
   opacity: 0.9;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 991px) {
   .post-header {
     padding: 2rem 0;
   }
-
   .post-header h1 {
     font-size: 2rem;
   }
-
   .col-lg-4 {
     margin-top: 3rem;
   }
@@ -169,11 +134,9 @@
   .post-header {
     padding: 1.5rem 0;
   }
-
   .post-header h1 {
     font-size: 1.75rem;
   }
-
   .content {
     font-size: 1rem;
   }

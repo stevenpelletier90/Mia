@@ -1,18 +1,11 @@
-/* Case Page Styles */
-
-/* Before & After Images */
 .case-image-container {
   max-width: 450px;
   margin: 0 auto;
   position: relative;
 }
-
-/* Add spacing between title and before/after images */
 header h1 {
   margin-bottom: 1.5rem;
 }
-
-/* Before & After Labels */
 .before-label {
   position: absolute;
   top: 0;
@@ -23,7 +16,6 @@ header h1 {
   margin: 0.25rem;
   font-size: 0.875rem;
 }
-
 .after-label {
   position: absolute;
   top: 0;
@@ -34,8 +26,6 @@ header h1 {
   margin: 0.25rem;
   font-size: 0.875rem;
 }
-
-/* Case Information Styles */
 .surgeon-info {
   background-color: transparent;
   color: #000000;
@@ -43,7 +33,6 @@ header h1 {
   border-radius: 0.375rem;
   height: 100%;
 }
-
 .location-info {
   background-color: transparent;
   color: #000000;
@@ -51,8 +40,6 @@ header h1 {
   border-radius: 0.375rem;
   height: 100%;
 }
-
-/* Surgeon and Location Link Styles */
 .case-surgeon-link,
 .case-location-link {
   display: flex;
@@ -68,90 +55,69 @@ header h1 {
   color: #000000;
   margin-top: 0.5rem;
 }
-
 .case-surgeon-link:hover,
 .case-location-link:hover {
   background-color: #000000;
   color: #ffffff;
   text-decoration: none;
 }
-
 .case-surgeon-link i,
 .case-location-link i {
   font-size: 0.85rem;
   transition: transform 0.2s ease;
 }
-
 .case-surgeon-link:hover i,
 .case-location-link:hover i {
   transform: translateX(5px);
   color: #ffffff;
 }
-
-/* Patient Info Cards */
 .patient-info-card {
   padding: 1rem;
   background-color: #f8f9fa;
   border-radius: 0.375rem;
   height: 100%;
 }
-
-/* Treatment & Recovery Links */
 .treatment-recovery-links .list-group-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.2s ease;
 }
-
 .treatment-recovery-links .list-group-item:hover {
   background-color: #f8f9fa;
 }
-
-/* Image cursor for modal trigger */
 .cursor-pointer {
   cursor: pointer;
 }
-
-/* Case Background */
 .case-background {
   margin-bottom: 1.5rem;
 }
-
-/* Case Content */
 .case-content {
   margin-top: 2rem;
 }
-
-/* Modal Styling */
 #imageModal .modal-dialog {
   max-width: 800px;
 }
-
 #imageModal .modal-content {
   border: none;
   border-radius: 0.375rem;
   overflow: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
-
 #imageModal .modal-header {
   background-color: var(--color-primary);
   color: #fff;
   border-bottom: none;
   padding: 1rem;
 }
-
 #imageModal .modal-title {
   font-weight: 600;
 }
-
 #imageModal .modal-body {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 0;
   text-align: center;
 }
-
 #imageModal .modal-body img {
   max-height: 80vh;
   max-width: 100%;
@@ -159,152 +125,47 @@ header h1 {
   display: block;
   margin: 0 auto;
 }
-
 #imageModal .btn-close {
   background-color: transparent;
   color: #fff;
   opacity: 0.8;
   filter: invert(1) grayscale(100%) brightness(200%);
 }
-
 #imageModal .btn-close:hover {
   opacity: 1;
 }
-
-/* Ensure modal backdrop works properly */
 .modal-backdrop {
   opacity: 0.5;
 }
-
-/* Consultation Form Card - Moved to _base.css */
-
-/* FAQ Section - Styling moved to _base.css */
-
-/* Consultation Form Styling */
 .consultation-card {
   background: linear-gradient(to bottom, #000000, #1b1b1b);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   margin: 0 0 30px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
 .consultation-card h3 {
-  color: #ffffff;
-  font-weight: 600;
-  margin-bottom: 20px;
   text-align: center;
 }
-
 .consultation-card .card-body {
   padding: 25px;
 }
-
-/* Form container styling */
-.gform_wrapper {
-  padding: 0;
-  background: transparent;
-}
-
-/* Input field styling */
-.gform_wrapper input[type="text"],
-.gform_wrapper input[type="email"],
-.gform_wrapper input[type="tel"],
-.gform_wrapper select {
-  background-color: #333333;
-  border: 1px solid #444444;
-  color: #ffffff;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  height: 48px;
-  font-size: 16px;
-  width: 100%;
-}
-
-.gform_wrapper input[type="text"]:focus,
-.gform_wrapper input[type="email"]:focus,
-.gform_wrapper input[type="tel"]:focus,
-.gform_wrapper select:focus {
-  border-color: var(--color-gold);
-  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
-  outline: none;
-}
-
-/* Placeholder text */
-.gform_wrapper input::placeholder,
-.gform_wrapper select::placeholder {
-  color: #aaaaaa;
-}
-
-/* Submit button styling */
-.gform_wrapper .gform_button {
-  background-color: var(--color-gold);
-  color: #000000;
-  border: 2px solid var(--color-gold);
-  padding: 12px 24px;
-  font-weight: 600;
-  transition: all 0.3s;
-  margin-top: 20px;
-  width: 100%;
-  border-radius: 4px;
-  height: 54px;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-.gform_wrapper .gform_button:hover {
-  background-color: transparent;
-  color: var(--color-gold);
-}
-
-/* Checkbox styling */
-.gform_wrapper .gfield_checkbox label {
-  color: #ffffff;
-  font-size: 13px;
-}
-
-/* Read consent link */
-.gform_wrapper a[href="#consent-popup"] {
-  color: var(--color-gold);
+.gform_wrapper a[href='#consent-popup'] {
   font-size: 12px;
   display: inline-block;
   margin-bottom: 15px;
 }
-
-.gform_wrapper a[href="#consent-popup"]:hover {
-  opacity: 0.8;
+.gform_wrapper .gform_button {
+  margin-top: 20px;
+  height: 54px;
 }
-
-/* Let the gap CSS handle spacing between form elements */
-.gform_wrapper .gfield {
-  margin-bottom: 0;
-}
-
-.gform_wrapper .gfield--type-checkbox {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-/* Footer styling */
-.gform_footer {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  clear: both;
-}
-
-/* Ensure consistent spacing at the bottom of the form */
 .gform_wrapper .gform_footer {
   margin-top: 15px;
   margin-bottom: 0;
 }
 
-/* Responsive Adjustments */
 @media (min-width: 1200px) {
-  /* Add more space between main content and sidebar on desktop */
   .col-lg-8 {
     padding-right: 30px;
   }
-
   .col-lg-4 {
     padding-left: 30px;
   }
@@ -314,129 +175,88 @@ header h1 {
   .case-image-container {
     max-width: 100%;
   }
-
-  /* Add more spacing between treatment resources and consultation area on mobile */
   .treatment-recovery-links {
     margin-bottom: 3rem;
   }
-
-  /* Adjust patient info cards for mobile */
   .patient-info-card {
     padding: 0.75rem;
     font-size: 0.9rem;
   }
-
   .patient-info-card h5 {
     font-size: 0.9rem;
   }
-
-  /* Make section headings slightly smaller on mobile */
   .col-lg-8 h2.h4 {
     font-size: 1.25rem;
   }
-
-  /* Add spacing above the form on mobile */
   .consultation-card {
     margin-top: 40px;
   }
 }
 
-/* Additional mobile adjustments for smaller screens */
 @media (max-width: 767px) {
   .content h2 {
     font-size: 1.3rem;
   }
-
   .col-lg-8 h2.h4 {
     font-size: 1.15rem;
   }
-
-  /* Ensure consistent form field heights on mobile */
-  .gform_wrapper input[type="text"],
-  .gform_wrapper input[type="email"],
-  .gform_wrapper input[type="tel"],
+  .gform_wrapper input[type='text'],
+  .gform_wrapper input[type='email'],
+  .gform_wrapper input[type='tel'],
   .gform_wrapper select {
     height: 46px;
     margin-bottom: 12px;
   }
-
-  /* Adjust spacing for mobile */
   .consultation-card .card-body {
     padding: 20px;
   }
-
-  /* Ensure consistent spacing between checkbox items */
   .gform_wrapper .gfield--type-checkbox {
     margin-top: 4px;
     margin-bottom: 4px;
   }
-
-  /* Adjust submit button for mobile */
   .gform_wrapper .gform_button {
     height: 50px;
     margin-top: 15px;
   }
-
-  /* Custom mobile layout for Gravity Form fields using flexbox */
-  /* Make the main fields container a flex container */
   #gform_fields_1.gform_fields {
     display: flex !important;
-    flex-wrap: wrap !important; /* Allow fields to wrap to the next line */
-    gap: 15px !important; /* Add some space between fields */
+    flex-wrap: wrap !important;
+    gap: 15px !important;
   }
-
-  /* Make the Full Name field (#field_1_13) full width */
   #field_1_13 {
     width: 100% !important;
     box-sizing: border-box !important;
   }
-
-  /* Make Email (#field_1_2) and Phone (#field_1_3) side by side */
   #field_1_2,
   #field_1_3 {
     width: calc(50% - 7.5px) !important;
     box-sizing: border-box !important;
   }
-
-  /* Make Country (#field_1_36) and Zip Code (#field_1_42) side by side */
   #field_1_36,
   #field_1_42 {
     width: calc(50% - 7.5px) !important;
     box-sizing: border-box !important;
   }
-
-  /* Make Preferred Language (#field_1_33) and Procedure (#field_1_38) side by side */
   #field_1_33,
   #field_1_38 {
     width: calc(50% - 7.5px) !important;
     box-sizing: border-box !important;
   }
-
-  /* Ensure the inputs/selects within these fields take up the full width available */
-  #gform_fields_1.gform_fields input[type="text"],
-  #gform_fields_1.gform_fields input[type="email"],
-  #gform_fields_1.gform_fields input[type="tel"],
+  #gform_fields_1.gform_fields input[type='text'],
+  #gform_fields_1.gform_fields input[type='email'],
+  #gform_fields_1.gform_fields input[type='tel'],
   #gform_fields_1.gform_fields select {
     width: 100% !important;
   }
-
-  /* Adjust the internal layout of the Full Name field (#field_1_13) */
-  /* to ensure First and Last Name stay side-by-side */
   #field_1_13 .ginput_complex {
     display: flex !important;
     gap: 10px !important;
   }
-
   #field_1_13 .name_first,
   #field_1_13 .name_last {
     flex: 1 1 0% !important;
   }
-
-  /* Ensure all other fields are full width */
-  #gform_fields_1.gform_fields
-    > .gfield:not(#field_1_13):not(#field_1_2):not(#field_1_3):not(#field_1_36):not(#field_1_42):not(#field_1_33):not(
-      #field_1_38
-    ) {
+  #gform_fields_1.gform_fields > .gfield:not(#field_1_13):not(#field_1_2):not(#field_1_3):not(#field_1_36):not(#field_1_42):not(#field_1_33):not(#field_1_38) {
     width: 100% !important;
   }
 }
@@ -445,52 +265,38 @@ header h1 {
   .content h2 {
     font-size: 1.2rem;
   }
-
   .col-lg-8 h2.h4 {
     font-size: 1.15rem;
   }
-
-  /* Further adjustments for very small screens */
-  .gform_wrapper input[type="text"],
-  .gform_wrapper input[type="email"],
-  .gform_wrapper input[type="tel"],
+  .gform_wrapper input[type='text'],
+  .gform_wrapper input[type='email'],
+  .gform_wrapper input[type='tel'],
   .gform_wrapper select {
     font-size: 16px;
-    height: 52px; /* Increased height for better touch targets on iPhone 13+ */
+    height: 52px;
   }
-
   .gform_wrapper .gform_button {
     height: 54px;
     font-size: 16px;
   }
-
-  /* Ensure consistent bottom spacing */
   .gform_wrapper .gform_footer {
     margin-top: 12px;
   }
-
-  /* Adjust spacing between form fields on very small screens */
   #gform_fields_1.gform_fields {
-    gap: 10px !important; /* Reduce gap for smaller screens */
+    gap: 10px !important;
   }
-
-  /* Adjust width calculations for the smaller gap on very small screens */
   #field_1_2,
   #field_1_3,
   #field_1_36,
   #field_1_42,
   #field_1_33,
   #field_1_38 {
-    width: calc(50% - 5px) !important; /* Adjust width calculation for smaller gap */
+    width: calc(50% - 5px) !important;
   }
-
-  /* Add a bit more padding for the form fields */
   .consultation-card .card-body {
     padding: 15px;
   }
-
-  /* Ensure the name fields maintain proper spacing */
   #field_1_13 .ginput_complex {
-    gap: 5px !important; /* Smaller gap between first and last name */
+    gap: 5px !important;
   }
 }

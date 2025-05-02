@@ -1,76 +1,112 @@
-/* Location Page Styles */
-
-/* Location Header */
 .location-header {
   background-color: #f8f9fa;
   padding: 50px 0;
 }
-
 .location-header h1 {
   color: var(--color-primary);
   font-weight: 600;
   font-size: 42px;
-  margin-bottom: 1rem;
   font-family: var(--font-heading);
 }
-
-/* Location Intro */
 .location-intro p {
   color: #555;
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
 }
-
-/* Location Info */
 .location-info {
   margin-top: 0.5rem;
 }
-
 .location-detail {
   margin-bottom: 0.75rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
-
+.location-header .col-lg-6.ps-lg-5 {
+  padding-left: 2.5rem !important;
+}
+.location-detail .d-flex.flex-column span {
+  line-height: 1.4;
+  color: #333;
+  font-size: 1rem;
+}
 .location-icon {
   color: var(--color-gold);
   margin-right: 10px;
   width: 20px;
   text-align: center;
 }
-
 .location-phone {
   color: var(--color-primary);
   text-decoration: none;
   transition: color 0.3s ease;
 }
-
 .location-phone:hover {
   color: var(--color-gold);
 }
-
 .location-directions {
   margin-top: 1.5rem;
 }
-
-.location-directions .mia-button i {
-  margin-right: 0.5rem;
+.location-map-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
 }
-
-/* Video Container */
+.location-map-link:hover {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+.location-map-link i {
+  margin-right: 0.5rem;
+  color: var(--color-gold);
+}
 .video-container {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
 }
-
-/* Main Content Area */
+.location-details {
+  padding: 30px 0;
+}
+.location-info-repeat {
+  margin-bottom: 1.5rem;
+}
+.location-info-repeat .location-detail {
+  margin-bottom: 0.5rem;
+}
+.location-info-repeat .location-directions {
+  margin-top: 0.5rem;
+}
+.location-cta-links {
+  margin-bottom: 2rem;
+}
+.location-cta-links .btn {
+  padding: 0.75rem 1.25rem;
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.location-cta-links .btn i {
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+}
+.location-cta-links .btn:hover i {
+  transform: translateX(5px);
+}
+.location-cta-links .btn-outline-primary {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.location-cta-links .btn-outline-primary:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
 .location-content {
   color: #333;
   line-height: 1.6;
 }
-
 .location-content h2,
 .location-content h3,
 .location-content h4 {
@@ -79,31 +115,25 @@
   margin-bottom: 1rem;
   font-family: var(--font-heading);
 }
-
 .location-content p {
   margin-bottom: 1rem;
 }
-
 .location-content ul,
 .location-content ol {
   margin-bottom: 1.5rem;
   padding-left: 1.5rem;
 }
-
 .location-content img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   margin: 1.5rem 0;
 }
-
-/* Team Section */
 .team-section {
   background-color: #f8f9fa;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-
 .section-title {
   color: var(--color-primary);
   font-weight: 600;
@@ -112,9 +142,8 @@
   padding-bottom: 0.75rem;
   display: inline-block;
 }
-
 .section-title:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 0;
@@ -122,22 +151,18 @@
   height: 3px;
   background-color: var(--color-gold);
 }
-
 .surgeon-card {
   padding: 1.5rem;
   transition: box-shadow 0.3s ease;
 }
-
 .surgeon-card:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-
 .surgeon-image-container {
   display: flex;
   justify-content: center;
   padding: 1rem;
 }
-
 .surgeon-headshot-circular {
   width: 180px;
   height: 180px;
@@ -146,81 +171,76 @@
   border: 2px solid var(--color-gold);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
 .surgeon-headshot-circular:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
-
 .surgeon-title {
   color: #555;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
-
-/* Surgeon profile buttons use mia-button-white from _base.css */
-
-/* Consultation Form in Header */
-.location-header .consultation-card {
+.consultation-card {
   border: none;
   border-radius: 8px;
-  background: linear-gradient(to bottom, #000000, var(--color-primary));
+  background: linear-gradient(to bottom, #000000 15%, var(--color-primary) 85%);
 }
-
-.location-header .consultation-card .card-body {
+.consultation-card .card-body {
   padding: 1.5rem;
 }
-
-.location-header .consultation-card h3 {
+.consultation-card h2,
+.consultation-card h3 {
   color: #fff;
   font-weight: 600;
   margin-bottom: 1.25rem;
 }
-
 .location-form-container {
-  max-width: 85%;
+  max-width: 100%;
   margin: 0 auto;
 }
-
-/* Location Features List */
 .location-features-list {
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
 }
-
 .location-features-list li {
   margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
 }
-
 .location-features-list li:last-child {
   margin-bottom: 0;
 }
-
 .location-features-list i {
   color: var(--color-gold);
   margin-right: 0.5rem;
 }
-
 .location-highlights {
   color: #555;
   line-height: 1.6;
 }
-
 .location-highlights p:last-child {
   margin-bottom: 0;
 }
-
-/* Business Hours Section */
-.business-hours-section {
-  margin-top: 0;
-}
-
 .business-hours-container {
-  max-width: 100%;
+  max-width: 500px;
+  margin-bottom: 1.5rem;
 }
-
+.location-details h3.h5 {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.location-details .row.gx-5 {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+.location-details .row.gx-5 > div {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.location-details .col-md-5 {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
 .business-hours-row {
   display: flex;
   justify-content: space-between;
@@ -228,39 +248,30 @@
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .business-hours-row:last-child {
   border-bottom: none;
 }
-
 .business-hours-day {
   font-weight: 500;
   color: var(--color-primary);
   font-size: 1.05rem;
 }
-
 .business-hours-time {
   color: var(--color-primary);
   text-align: right;
   font-size: 1.05rem;
 }
 
-/* FAQ Section - Styling moved to _base.css */
-
-/* Responsive Adjustments */
 @media (max-width: 991px) {
   .location-header h1 {
     font-size: 36px;
   }
-
   .location-header .row {
     row-gap: 2rem;
   }
-
   .section-title {
     font-size: 1.75rem;
   }
-
   .location-intro p {
     font-size: 1rem;
   }
@@ -270,52 +281,64 @@
   .location-header {
     padding: 40px 0;
   }
-
+  .location-details .col-md-5 {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
   .location-header h1 {
     font-size: 30px;
   }
-
   .location-intro p {
     font-size: 0.95rem;
   }
-
   .location-detail {
     margin-bottom: 0.5rem;
   }
-
   .location-header .consultation-card {
     margin-top: 1rem;
   }
-
   .section-title {
     font-size: 1.5rem;
   }
-
   .surgeon-image-container {
     padding: 1rem 1rem 0.5rem;
   }
-
   .surgeon-headshot-circular {
     width: 150px;
     height: 150px;
   }
-
   .surgeon-card .card-body {
     text-align: center;
     padding-top: 0.5rem;
   }
-
   .business-hours-row {
     padding: 0.5rem 0;
   }
-
   .business-hours-day,
   .business-hours-time {
     font-size: 0.95rem;
   }
-
   .location-features-list li {
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
+  }
+  .location-cta-links .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+  .business-hours-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .location-cta-links .row {
+    row-gap: 0.75rem;
+  }
+  .location-cta-links .btn {
+    width: 100%;
+    justify-content: space-between;
   }
 }

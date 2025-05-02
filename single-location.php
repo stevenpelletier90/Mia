@@ -11,36 +11,36 @@ get_header();
         ?>
     </div>
 
-    <!-- Hero Section -->
     <header class="location-header py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1>Mia Aesthetics <?php echo get_the_title(); ?></h1>
-
-                    <!-- Location Intro Blurb -->
+                    <h1 class="mb-3">Mia Aesthetics <?php echo get_the_title(); ?></h1>
                     <div class="location-intro mb-4">
                         <p>Welcome to our <?php echo get_the_title(); ?> location. Our state-of-the-art facility offers a wide range of plastic surgery and aesthetic procedures with a team of experienced surgeons dedicated to helping you achieve your aesthetic goals.</p>
                     </div>
-
-                    <!-- Quick Info Bar -->
                     <div class="location-info mb-4">
-                        <!-- Address -->
-                        <?php $location_address = get_field('location_address'); ?>
-                        <?php if ($location_address): ?>
-                            <div class="location-detail">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-map-marker-alt location-icon"></i>
-                                    <span><?php echo esc_html($location_address); ?></span>
+                        <?php
+                        $location_address = get_field('location_address');
+                        if ($location_address):
+                            $address_parts = explode(',', $location_address, 2);
+                            $street_address = isset($address_parts[0]) ? trim($address_parts[0]) : $location_address;
+                            $city_state_zip = isset($address_parts[1]) ? trim($address_parts[1]) : '';
+                        ?>
+                            <div class="location-detail mb-2">
+                                <div class="d-flex flex-column">
+                                    <span><?php echo esc_html($street_address); ?></span>
+                                    <?php if ($city_state_zip): ?>
+                                        <span><?php echo esc_html($city_state_zip); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php endif; ?>
 
-                        <!-- Phone Number -->
                         <?php $phone_number = get_field('phone_number'); ?>
                         <?php if ($phone_number): ?>
-                            <div class="location-detail">
-                                <div class="d-flex align-items-center gap-2">
+                            <div class="location-detail mb-2">
+                                <div class="d-flex align-items-center">
                                     <i class="fas fa-phone location-icon"></i>
                                     <a href="tel:<?php echo esc_attr($phone_number); ?>" class="location-phone">
                                         <?php echo esc_html($phone_number); ?>
@@ -49,49 +49,52 @@ get_header();
                             </div>
                         <?php endif; ?>
 
-                        <!-- Hours of Operation -->
                         <?php $hours_operation = get_field('hours_operation'); ?>
                         <?php if ($hours_operation): ?>
-                            <div class="location-detail">
-                                <div class="d-flex align-items-center gap-2">
+                            <div class="location-detail mb-2">
+                                <div class="d-flex align-items-center">
                                     <i class="fas fa-clock location-icon"></i>
                                     <span><?php echo esc_html($hours_operation); ?></span>
                                 </div>
                             </div>
                         <?php endif; ?>
 
-                        <!-- Google Maps Link -->
                         <?php $location_maps_link = get_field('location_maps_link'); ?>
                         <?php if ($location_maps_link): ?>
                             <div class="location-directions mt-3">
-                                <a href="<?php echo esc_url($location_maps_link); ?>" class="mia-button mia-button-gold" target="_blank">
-                                    <i class="fa-solid fa-map-location-dot"></i> Get Directions
+                                <a href="<?php echo esc_url($location_maps_link); ?>" class="location-map-link" target="_blank">
+                                    <i class="fas fa-map-marker-alt location-icon"></i> Get Directions
                                 </a>
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
 
-                <!-- Consultation Form -->
-                <div class="col-lg-6">
-                    <div class="card consultation-card shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h3 class="h5 mb-3 text-center">Schedule a Consultation</h3>
-                            <div class="location-form-container">
-                                <?php gravity_form(1, false, false, false, '', true); ?>
-                            </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <?php
+                    $video_details = get_field('video_details');
+                    $video_id = isset($video_details['video_id']) ? $video_details['video_id'] : '';
+                    if ($video_id):
+                        $youtube_embed_url = 'https://www.youtube.com/embed/' . esc_attr($video_id);
+                    ?>
+                        <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+                            <iframe
+                                src="<?php echo esc_url($youtube_embed_url); ?>"
+                                title="Location Video"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            ></iframe>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <article class="py-5">
         <div class="container">
             <div class="row">
-                <!-- Main Content Column - Using WordPress default content -->
                 <div class="col-12">
                     <?php while (have_posts()) : the_post(); ?>
                         <div class="location-content">
@@ -99,12 +102,42 @@ get_header();
                         </div>
                     <?php endwhile; ?>
 
-                    <div class="row mt-5">
-                        <!-- Business Hours Section -->
-                        <?php if(have_rows('business_hours')): ?>
-                        <div class="col-md-6 mb-5">
-                            <div class="business-hours-section">
-                                <h2 class="mb-3">Center Hours</h2>
+                    <div class="location-details py-4">
+                        <div class="row gx-5">
+                            <div class="col-md-7">
+                                <div class="location-cta-links mb-4">
+                                    <div class="row row-cols-1 row-cols-sm-2 g-3">
+                                        <div class="col">
+                                            <a href="/contact" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100">
+                                                Contact Us <i class="fas fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <?php $phone_number = get_field('phone_number'); ?>
+                                            <?php if ($phone_number): ?>
+                                            <a href="tel:<?php echo esc_attr($phone_number); ?>" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100">
+                                                Call Now <i class="fas fa-arrow-right"></i>
+                                            </a>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="col">
+                                            <?php $location_maps_link = get_field('location_maps_link'); ?>
+                                            <?php if ($location_maps_link): ?>
+                                            <a href="<?php echo esc_url($location_maps_link); ?>" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100" target="_blank">
+                                                Get Directions <i class="fas fa-arrow-right"></i>
+                                            </a>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="col">
+                                            <a href="/procedures" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100">
+                                                View Procedures <i class="fas fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php if(have_rows('business_hours')): ?>
+                                <h3 class="mb-3 h5">Hours of Operation</h3>
                                 <div class="business-hours-container">
                                     <?php while(have_rows('business_hours')): the_row();
                                         $day = get_sub_field('day');
@@ -116,29 +149,19 @@ get_header();
                                         </div>
                                     <?php endwhile; ?>
                                 </div>
+                                <?php endif; ?>
                             </div>
-                        </div>
-                        <?php endif; ?>
 
-                        <!-- Video Section -->
-                        <div class="col-md-6 mb-5">
-                            <?php
-                            $video_details = get_field('video_details'); // Get the group field
-                            $video_id = isset($video_details['video_id']) ? $video_details['video_id'] : ''; // Get the video ID subfield
-
-                            if ($video_id):
-                                $youtube_embed_url = 'https://www.youtube.com/embed/' . esc_attr($video_id);
-                            ?>
-                                <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
-                                    <iframe
-                                        src="<?php echo esc_url($youtube_embed_url); ?>"
-                                        title="Location Video"
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen
-                                    ></iframe>
+                            <div class="col-md-5">
+                                <div class="card consultation-card shadow-sm h-100">
+                                    <div class="card-body p-4">
+                                        <h2 class="h5 mb-3 text-center">Schedule a Consultation</h2>
+                                        <div class="location-form-container">
+                                            <?php gravity_form(1, false, false, false, '', true); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,7 +169,6 @@ get_header();
         </div>
     </article>
 
-    <!-- Team Section -->
     <section class="team-section py-5">
         <div class="container">
             <h2 class="section-title text-center mb-5">Our <?php echo get_the_title(); ?> Team</h2>
@@ -194,7 +216,6 @@ get_header();
         </div>
     </section>
 
-    <!-- FAQ Section - Standalone -->
     <?php
     $faq_section = get_field('faq_section');
     if($faq_section && !empty($faq_section['faqs'])): ?>
