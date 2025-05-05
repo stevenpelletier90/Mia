@@ -8,11 +8,9 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
+        <?php if (function_exists("yoast_breadcrumb")) {
+            yoast_breadcrumb('<p id="breadcrumbs">', "</p>");
+        } ?>
     </div>
     
     <!-- Archive Header -->
@@ -29,13 +27,16 @@ get_header(); ?>
     <!-- Archive Content -->
     <section class="py-5">
         <div class="container">
-            <?php if (have_posts()) : ?>
+            <?php if (have_posts()): ?>
                 <div class="row g-4">
-                    <?php while (have_posts()) : the_post(); ?>
+                    <?php while (have_posts()):
+                        the_post(); ?>
                         <div class="col-md-6 col-lg-4">
                             <div class="card h-100">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <?php the_post_thumbnail('medium', ['class' => 'card-img-top']); ?>
+                                <?php if (has_post_thumbnail()): ?>
+                                    <?php the_post_thumbnail("medium", [
+                                        "class" => "card-img-top",
+                                    ]); ?>
                                 <?php endif; ?>
                                 
                                 <div class="card-body">
@@ -48,21 +49,22 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                    <?php endwhile; ?>
+                    <?php
+                    endwhile; ?>
                 </div>
 
                 <!-- Pagination -->
                 <div class="row mt-5">
                     <div class="col">
                         <?php the_posts_pagination([
-                            'prev_text' => '&laquo;',
-                            'next_text' => '&raquo;',
-                            'class' => 'pagination justify-content-center',
+                            "prev_text" => "&laquo;",
+                            "next_text" => "&raquo;",
+                            "class" => "pagination justify-content-center",
                         ]); ?>
                     </div>
                 </div>
 
-            <?php else : ?>
+            <?php else: ?>
                 <div class="row">
                     <div class="col">
                         <p>No posts found.</p>

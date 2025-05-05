@@ -15,11 +15,9 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
+        <?php if (function_exists("yoast_breadcrumb")) {
+            yoast_breadcrumb('<p id="breadcrumbs">', "</p>");
+        } ?>
     </div>
     <!-- Blog Header -->
     <header class="bg-light py-5">
@@ -36,13 +34,16 @@ get_header(); ?>
     <!-- Blog Content -->
     <section class="py-5">
         <div class="container">
-            <?php if (have_posts()) : ?>
+            <?php if (have_posts()): ?>
                 <div class="row g-4">
-                    <?php while (have_posts()) : the_post(); ?>
+                    <?php while (have_posts()):
+                        the_post(); ?>
                         <div class="col-md-6 col-lg-4">
                             <div class="card h-100 blog-card">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <?php the_post_thumbnail('medium', ['class' => 'card-img-top']); ?>
+                                <?php if (has_post_thumbnail()): ?>
+                                    <?php the_post_thumbnail("medium", [
+                                        "class" => "card-img-top",
+                                    ]); ?>
                                 <?php endif; ?>
                                 
                                 <div class="card-body">
@@ -54,16 +55,30 @@ get_header(); ?>
                                     <div class="post-meta mb-3">
                                         <small class="text-muted">
                                             <i class="far fa-calendar-alt me-1"></i> <?php echo get_the_date(); ?>
-                                            <?php 
+                                            <?php
                                             // Display categories
                                             $categories = get_the_category();
                                             if ($categories) {
                                                 echo ' <span class="mx-1">|</span> <i class="far fa-folder me-1"></i> ';
-                                                $cat_links = array();
-                                                foreach ($categories as $category) {
-                                                    $cat_links[] = '<a href="' . esc_url(get_category_link($category->term_id)) . '" class="text-decoration-none">' . esc_html($category->name) . '</a>';
+                                                $cat_links = [];
+                                                foreach (
+                                                    $categories
+                                                    as $category
+                                                ) {
+                                                    $cat_links[] =
+                                                        '<a href="' .
+                                                        esc_url(
+                                                            get_category_link(
+                                                                $category->term_id
+                                                            )
+                                                        ) .
+                                                        '" class="text-decoration-none">' .
+                                                        esc_html(
+                                                            $category->name
+                                                        ) .
+                                                        "</a>";
                                                 }
-                                                echo implode(', ', $cat_links);
+                                                echo implode(", ", $cat_links);
                                             }
                                             ?>
                                         </small>
@@ -72,21 +87,22 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                    <?php endwhile; ?>
+                    <?php
+                    endwhile; ?>
                 </div>
 
                 <!-- Pagination -->
                 <div class="row mt-5">
                     <div class="col">
                         <?php the_posts_pagination([
-                            'prev_text' => '&laquo;',
-                            'next_text' => '&raquo;',
-                            'class' => 'pagination justify-content-center',
+                            "prev_text" => "&laquo;",
+                            "next_text" => "&raquo;",
+                            "class" => "pagination justify-content-center",
                         ]); ?>
                     </div>
                 </div>
 
-            <?php else : ?>
+            <?php else: ?>
                 <div class="row">
                     <div class="col text-center py-5">
                         <div class="alert alert-info">
