@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
-  background: var(--color-light);
+  background: #f8f9fa;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid #c7b07133;
 }
@@ -21,7 +21,7 @@
   width: var(--img-size);
   height: var(--img-size);
   object-fit: cover;
-  border: 2px solid var(--color-gold);
+  border: 2px solid #c8b273;
   background-color: #fff;
   padding: 0;
   border-radius: 50%;
@@ -31,13 +31,13 @@
   flex: 1;
 }
 .surgeon-card h2.h5 {
-  color: var(--color-primary);
+  color: #1b1b1b;
 }
 .surgeon-card .surgeon-bio-link {
-  color: var(--color-gold-dark);
+  color: #a89355;
 }
 .surgeon-card .location-link {
-  color: var(--color-secondary);
+  color: #6c757d;
 }
 .surgeon-bio-link {
   position: relative;

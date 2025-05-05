@@ -125,7 +125,7 @@ get_header(); ?>
                                     </div>
                                 <?php endif; ?>
                                 <div class="text-center mt-4">
-                                    <a href="/before-after/" class="btn btn-primary">View More Results</a>
+                                    <a href="/before-after/" class="mia-button mia-button-gold">View More Results</a>
                                 </div>
                             </div>
                         </div>

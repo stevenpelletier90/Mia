@@ -138,7 +138,7 @@
 }
 .locations-section .accordion-button::after {
   content: "\f067";
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 6 Free";
   font-weight: 900;
   background-image: none;
   font-size: 0.8rem;
