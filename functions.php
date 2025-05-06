@@ -702,6 +702,7 @@ case 'location':
 add_action('wp_head', 'mia_add_schema', 20); // Add schema later in the head, Yoast defaults usually run at 10
 
 
+
 /**
  * Add organization schema with address information for the homepage
  * This adds address details that the free Yoast SEO doesn't provide
@@ -967,5 +968,6 @@ function mia_ensure_surgeon_archive_body_class($classes) {
     return $classes;
 }
 add_filter('body_class', 'mia_ensure_surgeon_archive_body_class', 999); // Run late to ensure it's not overridden
+
 
 ?>

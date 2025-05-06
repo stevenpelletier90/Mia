@@ -12,81 +12,87 @@ get_header(); ?>
         ?>
     </div>
 
-    <section class="surgeon-hero py-5" style="background-image: url('https://miaprod.wpenginepowered.com/wp-content/uploads/2025/04/atlanta.jpg');">
+    <div class="surgeon-hero-section">
         <div class="container">
-            <div class="row align-items-center"> <!-- Removed g-0 to allow for natural spacing -->
-                <div class="col-md-4 col-lg-3 order-md-1 order-1 mb-4 mb-md-0"> <!-- Reduced to col-lg-3 to decrease space -->
-                    <?php 
-                    $surgeon_headshot_id = get_field('surgeon_headshot');
-                    if($surgeon_headshot_id && is_numeric($surgeon_headshot_id)) : ?>
-                        <div class="surgeon-headshot-container text-center text-md-start">
-                            <?php 
-                            echo wp_get_attachment_image(
-                                $surgeon_headshot_id, 
-                                'medium', 
-                                false, 
-                                array(
-                                    'class' => 'img-fluid surgeon-headshot',
-                                    'alt' => get_the_title() . ' Headshot'
-                                )
-                            ); 
-                            ?>
-                        </div>
-                    <?php elseif(has_post_thumbnail()) : ?>
-                        <div class="surgeon-headshot-container text-center text-md-start">
-                            <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'medium')); ?>" 
-                                 alt="<?php echo esc_attr(get_the_title()); ?>" 
-                                 class="img-fluid surgeon-headshot">
-                        </div>
-                    <?php endif; ?>
-                </div>
+            <div class="surgeon-hero-content">
+                <h1><?php echo get_the_title(); ?></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Surgeon Navigation - Only visible on mobile -->
+    <div class="surgeon-mobile-nav d-md-none sticky-top" style="top: var(--navbar-height);">
+        <div class="container">
+            <div class="surgeon-nav-buttons">
+                <a href="#surgeon-about" class="surgeon-nav-btn active">About</a>
+                <a href="#surgeon-specialities" class="surgeon-nav-btn">Specialities</a>
+                <a href="#surgeon-before-after" class="surgeon-nav-btn">Before & After</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="surgeon-content-section">
+        <div class="container">
+            <?php 
+            // Check if there's a video URL in the ACF field
+            $video_url = get_field('video_details_video_url');
+            if($video_url): 
+                // Function to normalize YouTube URL to embed format
+                function get_youtube_embed_url($youtube_url) {
+                    // Extract video ID from various YouTube URL formats
+                    $video_id = '';
+                    
+                    // Match standard YouTube URLs (youtu.be and youtube.com)
+                    if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                        $video_id = $matches[1];
+                    } elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                        $video_id = $matches[1];
+                    } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                        $video_id = $matches[1];
+                    } elseif (preg_match('/youtube\.com\/v\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                        $video_id = $matches[1];
+                    } elseif (preg_match('/youtube\.com\/user\/\w+\/\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                        $video_id = $matches[1];
+                    }
+                    
+                    // If we found a video ID, return the embed URL
+                    if ($video_id) {
+                        return 'https://www.youtube.com/embed/' . $video_id;
+                    }
+                    
+                    // If no valid YouTube URL format was found, return the original URL
+                    return $youtube_url;
+                }
                 
-                <div class="col-md-8 col-lg-9 order-md-2 order-2 surgeon-info">
-                    <h1 class="surgeon-name"><?php the_title(); ?></h1>
-                    <?php 
-                    $location = get_field('surgeon_location');
-                    if($location) : 
-                        $location_title = get_the_title($location);
-                        $location_url = get_permalink($location);
-                    ?>
-                    <p class="surgeon-role mb-md-4 mb-0">
-                        Plastic Surgeon at 
-                        <a href="<?php echo esc_url($location_url); ?>" class="surgeon-title-link">
-                            Mia Aesthetics <?php echo esc_html($location_title); ?>
-                        </a>
-                    </p>
-                    <?php else: ?>
-                    <p class="surgeon-role mb-md-4 mb-0">Plastic Surgeon at Mia Aesthetics</p>
-                    <?php endif; ?>
+                // Get embed URL
+                $embed_url = get_youtube_embed_url($video_url);
+            ?>
+            <!-- Video Section (visible on mobile before content) -->
+            <div class="row d-lg-none">
+                <div class="col-12">
+                    <section id="surgeon-video-mobile" class="sidebar-section" style="border-radius: 0;">
+                        <div class="video-container">
+                            <iframe 
+                                src="<?php echo esc_url($embed_url); ?>" 
+                                title="<?php echo esc_attr(get_the_title()); ?> Video"
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </section>
+            <?php endif; ?>
 
-    <!-- Navigation Tabs (visible only on mobile) -->
-    <section class="surgeon-tabs d-md-none mb-2">
-        <div class="container">
-            <div class="nav-scroller">
-                <nav id="surgeon-tabs" class="nav nav-pills nav-justified">
-                    <a class="nav-link" href="#surgeon-about">About</a>
-                    <a class="nav-link" href="#surgeon-specialities">Specialities</a>
-                    <a class="nav-link" href="#surgeon-before-after">Before & After</a>
-                </nav>
-            </div>
-        </div>
-    </section>
-
-    <div class="py-5">
-        <div class="container">
             <div class="row">
                 <!-- Main Content Column -->
                 <div class="col-lg-8">
                     <!-- About Section -->
-                    <section id="surgeon-about" class="mb-5">
-                        <h2 class="section-title mb-4">About <?php echo get_the_title(); ?></h2>
+                    <section id="surgeon-about">
+                        <h2 class="section-title">About <?php echo get_the_title(); ?></h2>
                         <?php the_content(); ?>
                     </section>
-
 
                     <?php 
                     // Get specialties from the ACF relationship field
@@ -96,14 +102,14 @@ get_header(); ?>
                     if($specialties && !empty($specialties)): 
                     ?>
                     <!-- Specialities Section (Redesigned) -->
-                    <section id="surgeon-specialities" class="mb-5">
-                        <h2 class="section-title mb-4">Specialities</h2>
+                    <section id="surgeon-specialities">
+                        <h2 class="section-title">Specialities</h2>
                         <div class="row">
                             <?php foreach($specialties as $specialty): ?>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-6 specialty-card-wrapper">
                                     <a href="<?php echo get_permalink($specialty->ID); ?>" class="card cta-card text-decoration-none text-dark d-block h-100">
-                                        <div class="card-body p-3">
-                                            <h3 class="h5 card-title mb-2"><?php echo get_the_title($specialty->ID); ?></h3>
+                                        <div class="card-body">
+                                            <h3 class="h5 card-title"><?php echo get_the_title($specialty->ID); ?></h3>
                                             <?php 
                                             // Get the excerpt, fallback to a portion of the content if no excerpt exists
                                             $excerpt = get_the_excerpt($specialty->ID);
@@ -128,42 +134,9 @@ get_header(); ?>
                 <!-- Sidebar Column -->
                 <div class="col-lg-4">
                     <div class="surgeon-sidebar">
-                        <?php 
-                        // Check if there's a video URL in the ACF field
-                        $video_url = get_field('video_details_video_url');
-                        if($video_url): 
-                            // Function to normalize YouTube URL to embed format
-                            function get_youtube_embed_url($youtube_url) {
-                                // Extract video ID from various YouTube URL formats
-                                $video_id = '';
-                                
-                                // Match standard YouTube URLs (youtu.be and youtube.com)
-                                if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                                    $video_id = $matches[1];
-                                } elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                                    $video_id = $matches[1];
-                                } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                                    $video_id = $matches[1];
-                                } elseif (preg_match('/youtube\.com\/v\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                                    $video_id = $matches[1];
-                                } elseif (preg_match('/youtube\.com\/user\/\w+\/\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                                    $video_id = $matches[1];
-                                }
-                                
-                                // If we found a video ID, return the embed URL
-                                if ($video_id) {
-                                    return 'https://www.youtube.com/embed/' . $video_id;
-                                }
-                                
-                                // If no valid YouTube URL format was found, return the original URL
-                                return $youtube_url;
-                            }
-                            
-                            // Get embed URL
-                            $embed_url = get_youtube_embed_url($video_url);
-                        ?>
-                        <!-- Video Section -->
-                        <section id="surgeon-video" class="mb-4 sidebar-section">
+                        <?php if($video_url): ?>
+                        <!-- Video Section (visible only on desktop) -->
+                        <section id="surgeon-video" class="sidebar-section d-none d-lg-block" style="border-radius: 0;">
                             <div class="video-container">
                                 <iframe 
                                     src="<?php echo esc_url($embed_url); ?>" 
@@ -177,13 +150,13 @@ get_header(); ?>
                         <?php endif; ?>
 
                         <!-- Before & After Gallery Section -->
-                        <section id="surgeon-before-after" class="mb-5 sidebar-section">
-                            <div class="card cta-card text-decoration-none text-dark mb-4">
+                        <section id="surgeon-before-after" class="sidebar-section">
+                            <div class="card cta-card text-decoration-none text-dark">
                                 <img src="https://placehold.co/400x250" class="card-img-top" alt="Before and After Gallery Preview">
-                                <div class="card-body p-3">
-                                    <h3 class="h5 card-title mb-2 text-center">Before & After Gallery</h3>
+                                <div class="card-body">
+                                    <h3 class="h5 card-title text-center">Before & After Gallery</h3>
                                     <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>
-                                    <div class="text-center mt-3">
+                                    <div class="text-center card-action">
                                         <a href="#" class="mia-button mia-button-gold">View Gallery</a>
                                     </div>
                                 </div>
@@ -214,7 +187,7 @@ get_header(); ?>
     <?php
     $faq_section = get_field('faq_section');
     if($faq_section && !empty($faq_section['faqs'])): ?>
-    <section class="py-5">
+    <section class="faq-section">
         <div class="container">
             <div class="faq-container">
                 <?php echo display_page_faqs(); ?>
@@ -222,77 +195,122 @@ get_header(); ?>
         </div>
     </section>
     <?php endif; ?>
-
-    <!-- Tab Navigation Script -->
-    <script>
-    (function() {
-        // Get all nav links
-        const navLinks = document.querySelectorAll('#surgeon-tabs .nav-link');
-        
-        // Get all sections that we want to scroll to for navigation purposes
-        const sections = document.querySelectorAll('#surgeon-about, #surgeon-specialities, #surgeon-before-after');
-        
-        // Add click event to each nav link
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Get the target section
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    // Smooth scroll to the section
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Update URL hash without scrolling
-                    history.pushState(null, null, targetId);
-                    
-                    // Update active state
-                    navLinks.forEach(navLink => navLink.classList.remove('active'));
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        // Function to set active tab based on scroll position
-        const setActiveTabOnScroll = () => {
-            // Get current scroll position
-            const scrollPosition = window.scrollY;
-            
-            // Find the current section
-            let currentSection = sections[0];
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 160; // Adjust offset to account for sticky header
-                if (scrollPosition >= sectionTop) {
-                    currentSection = section;
-                }
-            });
-            
-            // Set active class on the corresponding nav link
-            const currentId = currentSection.getAttribute('id');
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === `#${currentId}`) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        };
-        
-        // Set active tab on page load
-        if (navLinks.length > 0) {
-            navLinks[0].classList.add('active');
-        }
-        
-        // Listen for scroll events
-        window.addEventListener('scroll', setActiveTabOnScroll);
-        
-        // Initial check for active section
-        setActiveTabOnScroll();
-    })();
-    </script>
 </main>
 
 <?php get_footer(); ?>
+
+<script>
+// Function to calculate and set the hero section height
+function setSurgeonHeroHeight() {
+    // Get the elements
+    const header = document.querySelector('header');
+    const breadcrumbs = document.getElementById('breadcrumbs');
+    const mobileCta = document.querySelector('.mobile-cta-container');
+    const mobileNav = document.querySelector('.surgeon-mobile-nav');
+    const surgeonHero = document.querySelector('.surgeon-hero-section');
+    
+    if (!surgeonHero) return;
+    
+    // Check if we're on mobile (max-width: 767px)
+    if (window.innerWidth <= 767) {
+        // Get the heights
+        const headerHeight = header ? header.offsetHeight : 0;
+        const breadcrumbsHeight = breadcrumbs ? breadcrumbs.offsetHeight : 0;
+        const mobileCtaHeight = mobileCta ? mobileCta.offsetHeight : 0;
+        const mobileNavHeight = mobileNav ? mobileNav.offsetHeight : 0;
+        
+        // Calculate the total height to subtract
+        // Include mobileNav in the calculation even though it appears after the hero
+        const subtractHeight = headerHeight + breadcrumbsHeight + mobileCtaHeight + mobileNavHeight;
+        
+        // Set the hero height
+        surgeonHero.style.height = `calc(100vh - ${subtractHeight}px)`;
+        
+        console.log('Mobile view detected');
+        console.log('Header height:', headerHeight);
+        console.log('Breadcrumbs height:', breadcrumbsHeight);
+        console.log('Mobile CTA height:', mobileCtaHeight);
+        console.log('Mobile Nav height:', mobileNavHeight);
+        console.log('Total height subtracted:', subtractHeight);
+    } else {
+        // On desktop, use the CSS default (350px)
+        surgeonHero.style.height = '';
+    }
+}
+
+// Function to handle active state of navigation buttons
+function handleNavActiveState() {
+    const navBtns = document.querySelectorAll('.surgeon-nav-btn');
+    const sections = Array.from(navBtns).map(btn => {
+        const targetId = btn.getAttribute('href').substring(1);
+        return document.getElementById(targetId);
+    });
+    
+    if (navBtns.length === 0 || sections.some(section => !section)) return;
+    
+    // Get current scroll position
+    const scrollPosition = window.scrollY;
+    
+    // Find which section is currently in view
+    let activeIndex = 0;
+    sections.forEach((section, index) => {
+        if (!section) return;
+        
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop - 200 && 
+            scrollPosition < sectionTop + sectionHeight - 200) {
+            activeIndex = index;
+        }
+    });
+    
+    // Update active class
+    navBtns.forEach((btn, index) => {
+        if (index === activeIndex) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setSurgeonHeroHeight();
+    
+    // Add click event listeners to nav buttons for smooth scrolling
+    document.querySelectorAll('.surgeon-nav-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const mobileNavHeight = document.querySelector('.surgeon-mobile-nav').offsetHeight;
+                const offset = headerHeight + mobileNavHeight;
+                
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
+// Run on window resize
+window.addEventListener('resize', setSurgeonHeroHeight);
+
+// Run on scroll
+window.addEventListener('scroll', handleNavActiveState);
+
+// Run after a short delay to ensure all elements are fully rendered
+setTimeout(function() {
+    setSurgeonHeroHeight();
+    handleNavActiveState();
+}, 500);
+</script>

@@ -1,103 +1,138 @@
-.surgeon-hero {
-  background-color: #f5f5f5;
-  padding: 60px 0;
-  color: #fff;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-.surgeon-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(3px);
-  z-index: 1;
+/* ==========================================================================
+   1. Layout and Structure
+   ========================================================================== */
+/* Mobile Surgeon Navigation */
+.surgeon-mobile-nav {
+  background-color: var(--color-primary);
+  padding: 0.75rem 0;
+  z-index: 1020;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 767px) {
-  .surgeon-hero::before {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 33%, rgba(0, 0, 0, 0.4) 66%, rgba(0, 0, 0, 0.1) 100%);
-    backdrop-filter: none;
-  }
+.surgeon-nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.surgeon-hero .container {
-  position: relative;
-  z-index: 2;
-}
-.surgeon-name {
+.surgeon-nav-btn {
   color: #fff;
+  text-align: center;
+  padding: 0.5rem 0.25rem;
   font-weight: 600;
-  font-size: 52px;
-  margin-bottom: 1.25rem;
-  font-family: var(--font-heading);
-  line-height: 1.1;
-}
-.surgeon-role {
-  font-size: 1.5rem;
-  color: #fff;
-  margin-bottom: 1.5rem;
-}
-.surgeon-title-link {
-  color: var(--color-gold);
+  font-size: 0.9rem;
+  flex: 1;
   text-decoration: none;
+  position: relative;
   transition: color 0.2s ease;
 }
-.surgeon-title-link:hover {
+
+.surgeon-nav-btn:after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background-color: var(--color-gold);
+  transition: width 0.2s ease;
+}
+
+.surgeon-nav-btn.active {
   color: var(--color-gold);
-  text-decoration: underline;
 }
-.surgeon-headshot-container {
+
+.surgeon-nav-btn.active:after {
+  width: 30px;
+}
+
+.surgeon-nav-btn:hover {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+/* Surgeon Hero Section */
+.surgeon-hero-section {
+  background-color: #000;
+  color: #fff;
+  position: relative;
+  padding: 3rem 0;
+  height: 350px; /* Fixed height for desktop */
+}
+
+.surgeon-hero-content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-}
-.surgeon-headshot {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid var(--color-gold);
-  background-color: #fff;
+  height: 100%;
 }
 
-@media (min-width: 768px) {
-  .surgeon-hero .container {
-    width: 100%;
-  }
-  .surgeon-headshot-container {
-    justify-content: flex-start;
-    max-width: 300px;
-    margin: 0;
-  }
-  .text-md-start {
-    text-align: left !important;
-  }
+.surgeon-hero-content h1 {
+  color: #fff;
+  margin-bottom: 1rem;
 }
 
+/* Content Section */
+.surgeon-content-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* ==========================================================================
+   2. Section Titles and Common Elements
+   ========================================================================== */
+.section-title {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+/* Content section spacing */
+#surgeon-about,
+#surgeon-video,
+#surgeon-before-after,
+#surgeon-specialities {
+  padding-top: 20px;
+  margin-bottom: 3rem;
+}
+
+/* ==========================================================================
+   3. Sidebar Components
+   ========================================================================== */
 .surgeon-sidebar {
-  position: sticky;
-  top: calc(var(--navbar-height) + 60px);
+  position: relative;
 }
+
 .sidebar-section {
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
+  margin-bottom: 2rem;
 }
+
 .sidebar-section .section-title {
   font-size: 1.5rem;
 }
+
 .sidebar-cta-buttons {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
 .btn-sidebar {
   background-color: var(--color-primary);
   color: #fff;
@@ -110,235 +145,87 @@
   display: flex;
   align-items: center;
 }
+
 .btn-sidebar:hover {
   background-color: var(--color-gold);
   color: var(--color-primary);
 }
+
 .btn-sidebar i {
   color: var(--color-gold);
   transition: all 0.2s ease;
   font-size: 1.2rem;
   margin-right: 12px;
 }
+
 .btn-sidebar:hover i {
   color: var(--color-primary);
 }
+
+/* ==========================================================================
+   4. Cards and CTAs
+   ========================================================================== */
+.card {
+  border: none;
+  border-radius: 8px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-body strong {
+  color: var(--color-primary);
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-action {
+  margin-top: 1rem;
+}
+
 .cta-card {
   transition: color 0.2s ease-in-out;
 }
 
-@media (min-width: 992px) {
-  .surgeon-hero .container {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .surgeon-headshot-container {
-    justify-content: flex-start;
-  }
-  .surgeon-info {
-    padding-left: 10px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .surgeon-hero .container,
-  .container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .surgeon-info {
-    padding-left: 10px;
-  }
-}
-
-@media (min-width: 1800px) {
-  .surgeon-hero .container,
-  .container {
-    max-width: 1320px;
-  }
-  .surgeon-info {
-    padding-left: 10px;
-  }
-}
-
-.section-title {
-  color: var(--color-primary);
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-bottom: 0.75rem;
-}
-.section-title:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 60px;
-  height: 3px;
-  background-color: var(--color-gold);
-}
 .consultation-card {
   background-color: var(--color-primary);
   color: #fff;
   border-radius: 8px;
 }
+
 .consultation-card h3,
 .consultation-card strong,
 .consultation-card p {
   color: #fff;
 }
+
 .consultation-card .btn-primary {
   background-color: var(--color-gold);
   border-color: var(--color-gold);
   color: var(--color-primary);
   font-weight: 600;
 }
+
 .consultation-card .btn-primary:hover {
   background-color: var(--color-gold);
   border-color: var(--color-gold);
   color: var(--color-primary);
 }
-.card {
-  border: none;
-  border-radius: 8px;
-}
-.card-body strong {
-  color: var(--color-primary);
-}
-.surgeon-tabs {
-  background-color: #fff;
-  border-bottom: 2px solid var(--color-gold);
-  position: sticky;
-  top: var(--navbar-height, 65px);
-  z-index: 1020;
-  padding: 0.5rem 0;
-  overflow: visible;
-}
-.surgeon-tabs .nav-scroller {
-  position: relative;
-  z-index: 2;
-  overflow-y: visible;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0.25rem;
-}
-.surgeon-tabs .nav-scroller::-webkit-scrollbar {
-  display: none;
-}
-.surgeon-tabs .nav {
-  display: flex;
-  flex-wrap: nowrap;
-  padding-bottom: 0;
-  margin-top: -1px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-.surgeon-tabs .nav-link {
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  background-color: transparent;
-  border-radius: 30px;
-  margin: 0 0.25rem;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  border: 1px solid var(--color-primary);
-  text-decoration: none !important;
-}
-.surgeon-tabs .nav-link:first-child {
-  margin-left: 0;
-}
-.surgeon-tabs .nav-link:last-child {
-  margin-right: 0;
-}
-.surgeon-tabs .nav-link:hover {
-  color: var(--color-primary);
-  background-color: rgba(255, 255, 255, 0.8);
-  border-color: var(--color-primary);
-  text-decoration: none !important;
-}
-.surgeon-tabs .nav-link.active {
-  color: #fff;
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  text-decoration: none !important;
-}
-html {
-  scroll-behavior: smooth;
-}
-#surgeon-about,
-#surgeon-video,
-#surgeon-before-after,
-#surgeon-specialities {
-  padding-top: 20px;
-  scroll-margin-top: 120px;
-}
-.video-container {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.video-container iframe {
-  display: block;
-  border-radius: 8px;
-  border: none;
-  width: 100%;
-}
-.col-lg-8 .video-container iframe {
-  height: 450px;
-}
-.surgeon-sidebar #surgeon-video .video-container {
-  margin-bottom: 0;
-  border-radius: 8px;
-  position: relative;
-  padding-top: 56.25%;
-  height: 0;
-  overflow: hidden;
-}
-.surgeon-sidebar #surgeon-video .video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-.surgeon-sidebar #surgeon-video {
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-}
 
-@media (max-width: 991px) {
-  .col-lg-8 .video-container iframe {
-    height: 400px;
-  }
-}
-
-@media (max-width: 767px) {
-  .col-lg-8 .video-container iframe {
-    height: 300px;
-  }
-}
-
-@media (max-width: 767px) {
-  #surgeon-about,
-  #surgeon-before-after,
-  #surgeon-specialities {
-    padding-top: 15px;
-  }
-  .mb-5 {
-    margin-bottom: 2rem !important;
-  }
-}
-
+/* ==========================================================================
+   5. Specialties Section
+   ========================================================================== */
 #surgeon-specialities {
   margin-top: 10px;
 }
+
+.specialty-card-wrapper {
+  margin-bottom: 1.5rem;
+}
+
 #surgeon-specialities .card {
   transition: all 0.3s ease-in-out;
   height: 100%;
@@ -347,17 +234,20 @@ html {
   flex-direction: column;
   min-height: 180px;
 }
+
 #surgeon-specialities .card:hover {
   background-color: var(--color-primary);
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+
 #surgeon-specialities .card-body {
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 1.25rem;
 }
+
 #surgeon-specialities .card-title {
   color: var(--color-primary);
   margin-bottom: 0.75rem;
@@ -367,9 +257,11 @@ html {
   align-items: center;
   transition: color 0.3s ease;
 }
+
 #surgeon-specialities .card:hover .card-title {
   color: var(--color-gold);
 }
+
 #surgeon-specialities .card-text {
   margin-bottom: 1rem;
   flex-grow: 1;
@@ -380,18 +272,22 @@ html {
   -webkit-box-orient: vertical;
   transition: color 0.3s ease;
 }
+
 #surgeon-specialities .card:hover .card-text {
   color: #ffffff;
 }
+
 #surgeon-specialities .procedure-arrow {
   color: var(--color-gold);
   font-size: 0.9em;
   margin-left: 5px;
   transition: transform 0.3s ease;
 }
+
 #surgeon-specialities .card:hover .procedure-arrow {
   transform: translateX(3px);
 }
+
 #surgeon-specialities .text-end {
   text-align: left !important;
   margin-top: auto;
@@ -399,145 +295,83 @@ html {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   transition: color 0.3s ease, border-color 0.3s ease;
 }
+
 #surgeon-specialities .card:hover .text-end {
   color: #ffffff;
   border-top-color: rgba(255, 255, 255, 0.2);
 }
-.faq-container {
-  background-color: #f8f8f8;
-  border-radius: 8px;
-  padding: 2rem;
-}
-.faqs-section h2 {
-  color: var(--color-primary);
-  font-weight: 600;
-  position: relative;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-  font-family: var(--font-heading);
-}
-.faqs-section h2:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 80px;
-  height: 3px;
-  background-color: var(--color-gold);
-}
-.faq-description {
-  color: #666;
-  font-size: 1.1rem;
+
+/* ==========================================================================
+   7. Video Components
+   ========================================================================== */
+#surgeon-video-mobile {
   margin-bottom: 2rem;
 }
-.accordion-item {
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 6px;
-  overflow: hidden;
-  transition: background-color 0.3s ease;
-}
-.accordion-header {
-  margin: 0;
-}
-.accordion-button {
-  background-color: var(--color-primary);
-  color: #fff;
-  font-weight: 500;
-  padding: 1.25rem;
-  border-radius: 6px;
-  box-shadow: none;
-  font-family: var(--font-heading);
+
+.video-container {
   position: relative;
-}
-.accordion-button:not(.collapsed) {
-  background-color: var(--color-primary);
-  color: var(--color-gold);
-  box-shadow: none;
-}
-.accordion-button:focus {
-  box-shadow: none;
-  border-color: transparent;
-}
-.accordion-button::after {
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-  content: '\f078';
-  background-image: none;
-  transition: transform 0.3s ease;
-  color: var(--color-gold);
-}
-.accordion-button:not(.collapsed)::after {
-  transform: rotate(180deg);
-  content: '\f078';
-  color: var(--color-gold);
-}
-.accordion-body {
-  padding: 1.5rem;
-  background-color: #fff;
-  color: #333;
-  line-height: 1.6;
-  font-size: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
 }
 
+.video-container iframe {
+  display: block;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.surgeon-sidebar #surgeon-video {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   8. Media Queries
+   ========================================================================== */
 @media (max-width: 991px) {
-  .surgeon-hero h1 {
-    font-size: 36px;
-  }
   .section-title {
     font-size: 1.75rem;
-  }
-  .surgeon-role {
-    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 767px) {
-  .surgeon-hero {
-    padding: 40px 0;
-  }
-  .surgeon-name {
-    font-size: 36px;
-    margin-bottom: 0.75rem;
-  }
-  .surgeon-headshot-container {
+  /* Hero section mobile styling */
+  .surgeon-hero-section {
+    /* Height is now dynamically calculated with JavaScript */
     display: flex;
-    justify-content: center;
-    padding: 0 0 15px 0;
+    align-items: center;
+    padding: 0;
   }
-  .surgeon-headshot {
-    width: 170px;
-    height: 170px;
-  }
-  .surgeon-info {
+
+  .surgeon-hero-content {
     text-align: center;
-    margin-left: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
   }
-  .surgeon-role {
-    font-size: 1.2rem;
-    margin-bottom: 0;
+
+  #surgeon-about,
+  #surgeon-before-after,
+  #surgeon-specialities {
+    padding-top: 15px;
+    margin-bottom: 2rem;
   }
+
   .section-title {
     font-size: 1.5rem;
   }
-  .faq-container {
-    padding: 1.5rem;
-  }
+
   .accordion-button {
     padding: 1rem;
   }
-  .accordion-body {
-    padding: 1.25rem;
-  }
+
   .surgeon-sidebar {
     position: static;
     margin-top: 2rem;
-  }
-  .sidebar-section {
-    margin-bottom: 2rem;
   }
 }
 
