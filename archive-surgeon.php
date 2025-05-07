@@ -89,13 +89,13 @@ get_header(); ?>
                                         
                                         <?php if($location_title && $location_id) : ?>
                                         <p class="small mb-2"> 
-                                            <a href="<?php echo esc_url(get_permalink($location_id)); ?>" class="text-gold location-link">
+                                            <a href="<?php echo esc_url(get_permalink($location_id)); ?>" class="location-link">
                                                 <?php echo esc_html($location_title); ?>
                                             </a>
                                         </p>
                                         <?php endif; ?>
                                         
-                                        <a href="<?php the_permalink(); ?>" class="surgeon-bio-link text-gold">View Bio <i class="fas fa-arrow-right"></i></a>
+                                        <a href="<?php the_permalink(); ?>" class="surgeon-bio-link">View Bio <i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

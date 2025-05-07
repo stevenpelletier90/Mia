@@ -19,10 +19,7 @@
   letter-spacing: 1px;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
-}
-.text-gold {
   color: var(--color-gold);
-  margin-bottom: 1rem;
 }
 .footer-columns {
   display: grid;
@@ -211,14 +208,18 @@
   opacity: 1;
   color: var(--color-gold);
 }
-.surgeon-link.text-gold:hover {
+/* Styles for location links in the footer */
+.location-link .surgeon-link {
+  color: var(--color-gold);
+}
+.location-link .surgeon-link:hover {
   color: var(--color-gold);
   text-decoration: none;
 }
-.surgeon-link.text-gold:hover span {
+.location-link .surgeon-link:hover span {
   text-decoration: underline;
 }
-.surgeon-link.text-gold:hover .surgeon-arrow {
+.location-link .surgeon-link:hover .surgeon-arrow {
   opacity: 1;
   color: var(--color-gold);
 }

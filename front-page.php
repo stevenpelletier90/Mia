@@ -265,7 +265,7 @@ get_header(); ?>
           <div class="row">
             <div class="col-12 text-center mb-4">
               <h2 class="section-heading mb-2">How Payments Work</h2>
-              <h3 class="section-subheading text-gold mb-4">at Mia Aesthetics</h3>
+              <h3 class="section-subheading mb-4">at Mia Aesthetics</h3>
             </div>
           </div>
           <div class="row">
@@ -746,7 +746,7 @@ get_header(); ?>
       <div class="col-12">
         <div class="foundation-content text-center">
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
-          <h3 class="section-subheading text-gold mb-4">Gives Back</h3>
+              <h3 class="section-subheading mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
           <a href="/mia-foundation/" class="mia-button mia-button-black" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
         </div>

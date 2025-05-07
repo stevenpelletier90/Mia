@@ -3,7 +3,7 @@
   z-index: 1030;
 }
 
-.navbar.bg-dark {
+.navbar {
   background: linear-gradient(to bottom, var(--color-primary), #000) !important;
   height: var(--navbar-height);
 }
@@ -84,14 +84,16 @@
 .offcanvas {
   width: 320px !important;
   max-width: 80% !important;
+  background-color: #212529;
+  color: #fff;
 }
 .offcanvas-header {
   padding: 1rem;
 }
-.offcanvas.bg-dark .nav-link {
+.offcanvas .nav-link {
   color: #ffffffbe;
 }
-.offcanvas.bg-dark .nav-link:hover {
+.offcanvas .nav-link:hover {
   color: var(--color-gold);
 }
 .mobile-cta-container {
