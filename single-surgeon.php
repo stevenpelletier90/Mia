@@ -14,8 +14,41 @@ get_header(); ?>
 
     <div class="surgeon-hero-section">
         <div class="container">
-            <div class="surgeon-hero-content">
-                <h1><?php echo get_the_title(); ?></h1>
+            <div class="row align-items-center g-0">
+                <div class="col-md-3 col-lg-2 mb-4 mb-md-0">
+                    <?php 
+                    // Get surgeon headshot
+                    $headshot_id = get_field('surgeon_headshot');
+                    if($headshot_id): 
+                        // Get image URL from ID
+                        $headshot_url = wp_get_attachment_image_url($headshot_id, 'full');
+                        ?>
+                        <div class="surgeon-headshot">
+                            <img src="<?php echo esc_url($headshot_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="img-fluid rounded-circle">
+                        </div>
+                    <?php else: ?>
+                        <div class="surgeon-headshot surgeon-headshot-placeholder">
+                            <div class="placeholder-circle">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="col-md-9 col-lg-10">
+                    <div class="surgeon-hero-content ms-md-4">
+                        <h1><?php echo get_the_title(); ?></h1>
+                        <?php 
+                        // Get surgeon location
+                        $location = get_field('surgeon_location');
+                        if($location): 
+                            // Get location title and remove state abbreviation (e.g., ", IL")
+                            $location_title = get_the_title($location);
+                            $location_title = preg_replace('/, [A-Z]{2}$/', '', $location_title);
+                        ?>
+                            <p class="surgeon-location">Plastic Surgeon at Mia Aesthetics <?php echo $location_title; ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -220,18 +253,27 @@ function setSurgeonHeroHeight() {
         const mobileNavHeight = mobileNav ? mobileNav.offsetHeight : 0;
         
         // Calculate the total height to subtract
-        // Include mobileNav in the calculation even though it appears after the hero
         const subtractHeight = headerHeight + breadcrumbsHeight + mobileCtaHeight + mobileNavHeight;
         
-        // Set the hero height
-        surgeonHero.style.height = `calc(100vh - ${subtractHeight}px)`;
+        // Get the actual viewport height (works better on iOS)
+        const windowHeight = window.innerHeight;
+        
+        // Set the hero height with a minimum to prevent it from becoming too small
+        const calculatedHeight = windowHeight - subtractHeight;
+        const minHeight = 250; // Minimum height in pixels
+        
+        // Use the larger of the calculated height or minimum height
+        surgeonHero.style.height = `${Math.max(calculatedHeight, minHeight)}px`;
         
         console.log('Mobile view detected');
+        console.log('Window height:', windowHeight);
         console.log('Header height:', headerHeight);
         console.log('Breadcrumbs height:', breadcrumbsHeight);
         console.log('Mobile CTA height:', mobileCtaHeight);
         console.log('Mobile Nav height:', mobileNavHeight);
         console.log('Total height subtracted:', subtractHeight);
+        console.log('Calculated height:', calculatedHeight);
+        console.log('Final height:', Math.max(calculatedHeight, minHeight));
     } else {
         // On desktop, use the CSS default (350px)
         surgeonHero.style.height = '';

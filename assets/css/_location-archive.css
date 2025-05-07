@@ -1,0 +1,108 @@
+/* 
+ * Location Archive Styles
+ * Styling for the location archive page
+ */
+
+/* Location Archive Header */
+.location-archive-section .lead {
+  color: #555;
+  max-width: 800px;
+}
+
+/* Location Cards */
+.location-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.location-image {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.location-image img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.location-card:hover .location-image img {
+  transform: scale(1.05);
+}
+
+.location-content {
+  background-color: #fff;
+}
+
+.location-content h2 a {
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.location-content h2 a:hover {
+  color: #0d6efd;
+}
+
+/* Location Details */
+.location-detail {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.location-icon {
+  color: #0d6efd;
+  width: 16px;
+  text-align: center;
+}
+
+.location-phone {
+  color: #555;
+  transition: color 0.2s ease;
+}
+
+.location-phone:hover {
+  color: #0d6efd;
+}
+
+/* CTA Buttons */
+.location-cta-buttons {
+  margin-top: auto;
+}
+
+.location-cta-buttons .btn {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.location-cta-buttons .btn i {
+  transition: transform 0.2s ease;
+}
+
+.location-cta-buttons .btn:hover i {
+  transform: translateX(3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+  .location-image {
+    height: 180px;
+  }
+
+  .location-content {
+    padding: 1.25rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .location-card {
+    min-height: 500px;
+  }
+}

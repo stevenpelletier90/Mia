@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template for displaying single case studies
+ *
+ * @package Mia_Aesthetics
+ */
 
 get_header(); ?>
 
