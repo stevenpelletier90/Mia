@@ -154,8 +154,10 @@ a:hover {
   color: var(--color-gold);
 }
 main a {
+  color: var(--color-primary);
 }
 main a:hover {
+  color: var(--color-gold);
 }
 ul,
 ol {
@@ -305,7 +307,6 @@ ol {
   margin-left: 0.5rem;
   font-size: 0.85em;
 }
-/* Gravity Forms styles removed to start from scratch */
 .consultation-card {
   background-color: var(--color-primary);
   color: #fff;
@@ -434,7 +435,6 @@ ol {
   .mia-button-white .fa-arrow-right {
     margin-left: 0.4rem;
   }
-  /* Gravity Forms styles removed */
   .faq-container {
     padding: 1.5rem;
   }
