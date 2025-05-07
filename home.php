@@ -91,14 +91,57 @@ get_header(); ?>
                     endwhile; ?>
                 </div>
 
-                <!-- Pagination -->
+                <!-- Simplified Pagination -->
                 <div class="row mt-5">
                     <div class="col">
-                        <?php the_posts_pagination([
-                            "prev_text" => "&laquo;",
-                            "next_text" => "&raquo;",
-                            "class" => "pagination justify-content-center",
-                        ]); ?>
+                        <nav aria-label="Page navigation">
+                            <?php
+                            global $wp_query;
+                            
+                            // Don't display pagination if there's only one page
+                            if ($wp_query->max_num_pages > 1) :
+                                
+                                // Get current page
+                                $current_page = max(1, get_query_var('paged'));
+                                
+                                // Get total pages
+                                $total_pages = $wp_query->max_num_pages;
+                                
+                                echo '<div class="d-flex justify-content-between align-items-center pagination-container">';
+                                
+                                // Previous button
+                                if ($current_page > 1) {
+                                    echo '<a href="' . get_pagenum_link($current_page - 1) . '" class="btn btn-outline-primary" aria-label="Previous page"><i class="fas fa-chevron-left me-1"></i> Previous</a>';
+                                } else {
+                                    echo '<button class="btn btn-outline-primary disabled" aria-label="Previous page" disabled><i class="fas fa-chevron-left me-1"></i> Previous</button>';
+                                }
+                                
+                                // Page indicator
+                                echo '<span class="page-indicator">Page ' . $current_page . ' of ' . $total_pages . '</span>';
+                                
+                                // Next button
+                                if ($current_page < $total_pages) {
+                                    echo '<a href="' . get_pagenum_link($current_page + 1) . '" class="btn btn-outline-primary" aria-label="Next page">Next <i class="fas fa-chevron-right ms-1"></i></a>';
+                                } else {
+                                    echo '<button class="btn btn-outline-primary disabled" aria-label="Next page" disabled>Next <i class="fas fa-chevron-right ms-1"></i></button>';
+                                }
+                                
+                                echo '</div>';
+                                
+                                // Add some custom CSS for the pagination
+                                echo '<style>
+                                    .pagination-container {
+                                        max-width: 100%;
+                                        overflow: hidden;
+                                    }
+                                    .page-indicator {
+                                        font-weight: 500;
+                                        color: #495057;
+                                    }
+                                </style>';
+                            endif;
+                            ?>
+                        </nav>
                     </div>
                 </div>
 

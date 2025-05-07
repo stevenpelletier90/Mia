@@ -37,6 +37,27 @@ get_header(); ?>
                             </div>
                         <?php endif; ?>
                         
+                        <?php 
+                        // Check if overview_details repeater field exists and has rows
+                        if (have_rows('overview_details')): ?>
+                            <div class="overview-section mb-4">
+                                <h2>Overview</h2>
+                                <div class="overview-content">
+                                    <?php 
+                                    // Loop through the repeater field rows
+                                    while (have_rows('overview_details')): the_row(); 
+                                        // Get the overview_item text area value
+                                        $overview_item = get_sub_field('overview_item');
+                                        if ($overview_item): ?>
+                                            <div class="overview-item">
+                                                <?php echo $overview_item; ?>
+                                            </div>
+                                        <?php endif;
+                                    endwhile; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        
                         <div class="content">
                             <?php the_content(); ?>
                         </div>
@@ -56,6 +77,18 @@ get_header(); ?>
             </div>
         </article>
     <?php endwhile; ?>
+    
+    <?php
+    $faq_section = get_field('faq_section');
+    if($faq_section && !empty($faq_section['faqs'])): ?>
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-container">
+                <?php echo display_page_faqs(); ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 </main>
 
 <script>

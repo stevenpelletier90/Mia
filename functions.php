@@ -974,4 +974,65 @@ function mia_ensure_surgeon_archive_body_class($classes) {
 add_filter('body_class', 'mia_ensure_surgeon_archive_body_class', 999); // Run late to ensure it's not overridden
 
 
+/**
+ * Completely disable comments functionality
+ */
+function mia_disable_comments() {
+    // Close comments on the front-end
+    add_filter('comments_open', '__return_false', 20, 2);
+    add_filter('pings_open', '__return_false', 20, 2);
+    
+    // Hide existing comments
+    add_filter('comments_array', '__return_empty_array', 10, 2);
+    
+    // Remove comments page in menu
+    add_action('admin_menu', function() {
+        remove_menu_page('edit-comments.php');
+    });
+    
+    // Remove comments from admin bar
+    add_action('wp_before_admin_bar_render', function() {
+        global $wp_admin_bar;
+        $wp_admin_bar->remove_menu('comments');
+    });
+    
+    // Disable support for comments and trackbacks in post types
+    add_action('admin_init', function() {
+        $post_types = get_post_types();
+        foreach ($post_types as $post_type) {
+            if (post_type_supports($post_type, 'comments')) {
+                remove_post_type_support($post_type, 'comments');
+                remove_post_type_support($post_type, 'trackbacks');
+            }
+        }
+    });
+    
+    // Redirect any user trying to access comments page
+    add_action('admin_init', function() {
+        global $pagenow;
+        
+        if ($pagenow === 'edit-comments.php') {
+            wp_redirect(admin_url());
+            exit;
+        }
+    });
+    
+    // Remove comments metabox from dashboard
+    add_action('admin_init', function() {
+        remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+    });
+    
+    // Disable comments REST API endpoint
+    add_filter('rest_endpoints', function($endpoints) {
+        if (isset($endpoints['/wp/v2/comments'])) {
+            unset($endpoints['/wp/v2/comments']);
+        }
+        if (isset($endpoints['/wp/v2/comments/(?P<id>[\\d]+)'])) {
+            unset($endpoints['/wp/v2/comments/(?P<id>[\\d]+)']);
+        }
+        return $endpoints;
+    });
+}
+add_action('init', 'mia_disable_comments');
+
 ?>
