@@ -44,8 +44,10 @@ get_header(); ?>
                             // Get location title and remove state abbreviation (e.g., ", IL")
                             $location_title = get_the_title($location);
                             $location_title = preg_replace('/, [A-Z]{2}$/', '', $location_title);
+                            // Get location URL
+                            $location_url = get_permalink($location);
                         ?>
-                            <p class="surgeon-location">Plastic Surgeon at Mia Aesthetics <?php echo $location_title; ?></p>
+                            <p class="surgeon-location">Plastic Surgeon at <a href="<?php echo esc_url($location_url); ?>">Mia Aesthetics <?php echo $location_title; ?></a></p>
                         <?php endif; ?>
                     </div>
                 </div>

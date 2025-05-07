@@ -148,19 +148,7 @@ header h1 {
 .consultation-card .card-body {
   padding: 25px;
 }
-.gform_wrapper a[href='#consent-popup'] {
-  font-size: 12px;
-  display: inline-block;
-  margin-bottom: 15px;
-}
-.gform_wrapper .gform_button {
-  margin-top: 20px;
-  height: 54px;
-}
-.gform_wrapper .gform_footer {
-  margin-top: 15px;
-  margin-bottom: 0;
-}
+/* Gravity Forms styles removed to start from scratch */
 
 @media (min-width: 1200px) {
   .col-lg-8 {
@@ -200,65 +188,10 @@ header h1 {
   .col-lg-8 h2.h4 {
     font-size: 1.15rem;
   }
-  .gform_wrapper input[type='text'],
-  .gform_wrapper input[type='email'],
-  .gform_wrapper input[type='tel'],
-  .gform_wrapper select {
-    height: 46px;
-    margin-bottom: 12px;
-  }
   .consultation-card .card-body {
     padding: 20px;
   }
-  .gform_wrapper .gfield--type-checkbox {
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  .gform_wrapper .gform_button {
-    height: 50px;
-    margin-top: 15px;
-  }
-  #gform_fields_1.gform_fields {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 15px !important;
-  }
-  #field_1_13 {
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  #field_1_2,
-  #field_1_3 {
-    width: calc(50% - 7.5px) !important;
-    box-sizing: border-box !important;
-  }
-  #field_1_36,
-  #field_1_42 {
-    width: calc(50% - 7.5px) !important;
-    box-sizing: border-box !important;
-  }
-  #field_1_33,
-  #field_1_38 {
-    width: calc(50% - 7.5px) !important;
-    box-sizing: border-box !important;
-  }
-  #gform_fields_1.gform_fields input[type='text'],
-  #gform_fields_1.gform_fields input[type='email'],
-  #gform_fields_1.gform_fields input[type='tel'],
-  #gform_fields_1.gform_fields select {
-    width: 100% !important;
-  }
-  #field_1_13 .ginput_complex {
-    display: flex !important;
-    gap: 10px !important;
-  }
-  #field_1_13 .name_first,
-  #field_1_13 .name_last {
-    flex: 1 1 0% !important;
-  }
-  #gform_fields_1.gform_fields > .gfield:not(#field_1_13):not(#field_1_2):not(#field_1_3):not(#field_1_36):not(#field_1_42):not(#field_1_33):not(#field_1_38) {
-    width: 100% !important;
-  }
+  /* Gravity Forms styles removed to start from scratch */
 }
 
 @media (max-width: 576px) {
@@ -268,35 +201,8 @@ header h1 {
   .col-lg-8 h2.h4 {
     font-size: 1.15rem;
   }
-  .gform_wrapper input[type='text'],
-  .gform_wrapper input[type='email'],
-  .gform_wrapper input[type='tel'],
-  .gform_wrapper select {
-    font-size: 16px;
-    height: 52px;
-  }
-  .gform_wrapper .gform_button {
-    height: 54px;
-    font-size: 16px;
-  }
-  .gform_wrapper .gform_footer {
-    margin-top: 12px;
-  }
-  #gform_fields_1.gform_fields {
-    gap: 10px !important;
-  }
-  #field_1_2,
-  #field_1_3,
-  #field_1_36,
-  #field_1_42,
-  #field_1_33,
-  #field_1_38 {
-    width: calc(50% - 5px) !important;
-  }
   .consultation-card .card-body {
     padding: 15px;
   }
-  #field_1_13 .ginput_complex {
-    gap: 5px !important;
-  }
+  /* Gravity Forms styles removed to start from scratch */
 }

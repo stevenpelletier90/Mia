@@ -301,97 +301,7 @@ ol {
   margin-left: 0.5rem;
   font-size: 0.85em;
 }
-.gform_wrapper {
-  max-width: 600px;
-  margin: 0 auto;
-  background: transparent;
-}
-.gform_wrapper .gfield_label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-.gform_wrapper .gform_required_legend {
-  display: none;
-}
-.gform_wrapper input[type="text"],
-.gform_wrapper input[type="email"],
-.gform_wrapper input[type="tel"],
-.gform_wrapper select {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #333;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 1.5;
-  box-sizing: border-box;
-  margin-bottom: 15px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  background-color: #333;
-  color: #fff;
-}
-.gform_wrapper input[type="text"]:focus,
-.gform_wrapper input[type="email"]:focus,
-.gform_wrapper input[type="tel"]:focus,
-.gform_wrapper select:focus {
-  border-color: var(--color-gold);
-  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
-  outline: none;
-}
-.gform_wrapper input::placeholder,
-.gform_wrapper select::placeholder {
-  color: #c0c0c0;
-  opacity: 1;
-}
-.gform_wrapper a[href="#consent-popup"] {
-  color: #fff;
-  text-decoration: underline;
-  transition: color 0.3s;
-}
-.gform_wrapper a[href="#consent-popup"]:hover {
-  color: var(--color-gold);
-}
-.gform_wrapper .gform_button {
-  background-color: var(--color-gold);
-  color: #000;
-  border: 2px solid var(--color-gold);
-  padding: 12px 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: all 0.3s;
-  width: 100%;
-}
-.gform_wrapper .gform_button:hover {
-  background-color: transparent;
-  color: #fff;
-  border-color: var(--color-gold);
-}
-.gform_wrapper .gfield_checkbox label {
-  display: inline-block;
-  padding-left: 8px;
-  vertical-align: middle;
-  color: #fff;
-}
-.gform_wrapper .gfield_required_asterisk {
-  color: #e63946;
-}
-.gform_wrapper .gfield--type-checkbox label {
-  font-size: 14px;
-  line-height: 1.3;
-}
-.gform_wrapper .gfield--type-checkbox {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+/* Gravity Forms styles removed to start from scratch */
 .consultation-card {
   background-color: var(--color-primary);
   color: #fff;
@@ -520,15 +430,7 @@ ol {
   .mia-button-white .fa-arrow-right {
     margin-left: 0.4rem;
   }
-  .gform_wrapper input[type="text"],
-  .gform_wrapper input[type="email"],
-  .gform_wrapper input[type="tel"],
-  .gform_wrapper select {
-    font-size: 16px;
-  }
-  .gform_wrapper .gfield--width-half {
-    width: 100%;
-  }
+  /* Gravity Forms styles removed */
   .faq-container {
     padding: 1.5rem;
   }
