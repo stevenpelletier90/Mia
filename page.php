@@ -38,7 +38,7 @@ get_header(); ?>
         <article class="py-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col">
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="mb-4">
                                 <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
@@ -48,10 +48,6 @@ get_header(); ?>
                         <div class="content">
                             <?php the_content(); ?>
                         </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <!-- Sidebar content can go here if needed -->
                     </div>
                 </div>
             </div>
