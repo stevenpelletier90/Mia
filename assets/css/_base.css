@@ -169,9 +169,7 @@ ol {
   background-color: var(--color-gold);
   color: #fff;
 }
-.container-xxl {
-  max-width: 1400px;
-}
+
 #breadcrumbs {
   margin-bottom: 0;
   padding: 1rem 0;
