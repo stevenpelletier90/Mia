@@ -144,15 +144,14 @@ p {
   margin-bottom: 1rem;
 }
 a {
-  color: var(--color-gold);
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-a:hover {
   color: var(--color-primary);
 }
+a:hover {
+  color: var(--color-gold);
+}
+main a {
+}
 main a:hover {
-  text-decoration: underline;
 }
 ul,
 ol {
@@ -179,10 +178,313 @@ ol {
 #breadcrumbs a:hover {
   opacity: 0.7;
   text-decoration: underline;
-  transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 #breadcrumbs .breadcrumb_last {
   color: var(--color-primary);
+}
+.mia-button {
+  display: inline-block;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #1b1b1b;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  border-radius: 3px;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  text-transform: capitalize;
+}
+.mia-button:hover {
+  text-decoration: none;
+}
+.mia-button-gold {
+  color: #000000;
+  background-color: #c8b273;
+  border-color: #c8b273;
+}
+.mia-button-gold:hover,
+.mia-button-gold:focus {
+  color: var(--color-gold);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.mia-button-gold-outline {
+  color: #c8b273;
+  border: 2px solid #c8b273;
+  background-color: transparent;
+}
+.mia-button-gold-outline:hover,
+.mia-button-gold-outline:focus {
+  color: #fff;
+  background-color: #c8b273;
+  border-color: #c8b273;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.mia-button-hero {
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  font-weight: 600;
+  padding: 0.6rem 1.75rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  width: auto;
+  min-width: 140px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+}
+.mia-button-hero:hover,
+.mia-button-hero:focus {
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  border-color: #000000;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.mia-button-white {
+  color: #000000;
+  background-color: transparent;
+  border: 2px solid #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 0.625rem 1.5rem;
+}
+.mia-button-white:hover,
+.mia-button-white:focus {
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.mia-button-black {
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 0.625rem 1.5rem;
+}
+.mia-button-black:hover,
+.mia-button-black:focus {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.mia-button-sm {
+  padding: 0.375rem 1rem;
+  font-size: 0.875rem;
+}
+.mia-button-lg {
+  padding: 0.75rem 2rem;
+  font-size: 1.125rem;
+  min-width: 160px;
+}
+.mia-button .fa-arrow-right {
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+}
+.mia-button-white .fa-arrow-right {
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+}
+.gform_wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  background: transparent;
+}
+.gform_wrapper .gfield_label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.gform_wrapper .gform_required_legend {
+  display: none;
+}
+.gform_wrapper input[type="text"],
+.gform_wrapper input[type="email"],
+.gform_wrapper input[type="tel"],
+.gform_wrapper select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #333;
+  color: #fff;
+}
+.gform_wrapper input[type="text"]:focus,
+.gform_wrapper input[type="email"]:focus,
+.gform_wrapper input[type="tel"]:focus,
+.gform_wrapper select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
+  outline: none;
+}
+.gform_wrapper input::placeholder,
+.gform_wrapper select::placeholder {
+  color: #c0c0c0;
+  opacity: 1;
+}
+.gform_wrapper a[href="#consent-popup"] {
+  color: #fff;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+.gform_wrapper a[href="#consent-popup"]:hover {
+  color: var(--color-gold);
+}
+.gform_wrapper .gform_button {
+  background-color: var(--color-gold);
+  color: #000;
+  border: 2px solid var(--color-gold);
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  width: 100%;
+}
+.gform_wrapper .gform_button:hover {
+  background-color: transparent;
+  color: #fff;
+  border-color: var(--color-gold);
+}
+.gform_wrapper .gfield_checkbox label {
+  display: inline-block;
+  padding-left: 8px;
+  vertical-align: middle;
+  color: #fff;
+}
+.gform_wrapper .gfield_required_asterisk {
+  color: #e63946;
+}
+.gform_wrapper .gfield--type-checkbox label {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.gform_wrapper .gfield--type-checkbox {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.consultation-card {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 8px;
+}
+.consultation-card h3 {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.consultation-card .card-body {
+  padding: 15px;
+}
+.faq-container {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.faqs-section h2 {
+  color: var(--color-primary);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  font-family: var(--font-heading);
+}
+.faqs-section h2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+.faq-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.accordion-item {
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.accordion-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.accordion-header {
+  margin: 0;
+}
+.accordion-button {
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: 500;
+  padding: 1.25rem;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: var(--font-heading);
+  position: relative;
+}
+.accordion-button:not(.collapsed) {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+  box-shadow: none;
+}
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+.accordion-button::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f078";
+  background-image: none;
+  transition: transform 0.3s ease;
+  color: var(--color-gold);
+}
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  content: "\f078";
+  color: var(--color-gold);
+}
+.accordion-body {
+  padding: 1.5rem;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
 @media (min-width: 1200px) {
@@ -204,168 +506,37 @@ ol {
   }
 }
 
-/* Custom Button Styles - Created from scratch */
-
-/* Base button style */
-.mia-button {
-  display: inline-block;
-  font-weight: 600;
-  line-height: 1.5;
-  color: #1b1b1b;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.5rem 1rem;
-  font-size: 16px;
-  border-radius: 3px;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  text-transform: capitalize;
-}
-
-.mia-button:hover {
-  text-decoration: none;
-}
-
-/* Gold button - Primary action */
-.mia-button-gold {
-  color: #000000;
-  background-color: #c8b273;
-  border-color: #c8b273;
-}
-
-.mia-button-gold:hover,
-.mia-button-gold:focus {
-  color: var(--color-gold);
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Gold outline button */
-.mia-button-gold-outline {
-  color: #c8b273;
-  border: 2px solid #c8b273;
-  background-color: transparent;
-}
-
-.mia-button-gold-outline:hover,
-.mia-button-gold-outline:focus {
-  color: #fff;
-  background-color: #c8b273;
-  border-color: #c8b273;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Hero section transparent button with black border */
-.mia-button-hero {
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  font-weight: 600;
-  padding: 0.6rem 1.75rem;
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-  width: auto;
-  min-width: 140px;
-  transition: all 0.2s ease;
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 0.25rem;
-}
-
-.mia-button-hero:hover,
-.mia-button-hero:focus {
-  background-color: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fff;
-  border-color: #000000;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* White button with shadow */
-.mia-button-white {
-  color: #000000;
-  background-color: transparent;
-  border: 2px solid #000000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  padding: 0.625rem 1.5rem;
-}
-
-.mia-button-white:hover,
-.mia-button-white:focus {
-  color: #ffffff;
-  background-color: #000000;
-  border-color: #000000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Gold outline button */
-.mia-button-black {
-  color: #ffffff;
-  background-color: transparent;
-  border: 2px solid #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  padding: 0.625rem 1.5rem;
-}
-
-.mia-button-black:hover,
-.mia-button-black:focus {
-  color: #000000;
-  background-color: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Button size variants */
-.mia-button-sm {
-  padding: 0.375rem 1rem;
-  font-size: 0.875rem;
-}
-
-.mia-button-lg {
-  padding: 0.75rem 2rem;
-  font-size: 1.125rem;
-  min-width: 160px;
-}
-
-/* Button arrow styling */
-.mia-button .fa-arrow-right {
-  margin-left: 0.5rem;
-  font-size: 0.85em;
-}
-
-/* Ensure white buttons have the same arrow styling */
-.mia-button-white .fa-arrow-right {
-  margin-left: 0.5rem;
-  font-size: 0.85em;
-}
-
-/* Responsive button adjustments */
 @media (max-width: 767px) {
   .mia-button-hero {
     padding: 0.5rem 1.25rem;
     font-size: 0.95rem;
     min-width: 130px;
   }
-
   .mia-button-lg {
     padding: 0.6rem 1.5rem;
     font-size: 1.05rem;
   }
-
   .mia-button .fa-arrow-right,
   .mia-button-white .fa-arrow-right {
     margin-left: 0.4rem;
+  }
+  .gform_wrapper input[type="text"],
+  .gform_wrapper input[type="email"],
+  .gform_wrapper input[type="tel"],
+  .gform_wrapper select {
+    font-size: 16px;
+  }
+  .gform_wrapper .gfield--width-half {
+    width: 100%;
+  }
+  .faq-container {
+    padding: 1.5rem;
+  }
+  .accordion-button {
+    padding: 1rem;
+  }
+  .accordion-body {
+    padding: 1.25rem;
   }
 }
 
@@ -375,270 +546,12 @@ ol {
     font-size: 0.9rem;
     min-width: 110px;
   }
-
   .mia-button-lg {
     padding: 0.4rem 1.25rem;
     font-size: 0.9rem;
   }
-
   .mia-button .fa-arrow-right,
   .mia-button-white .fa-arrow-right {
     margin-left: 0.3rem;
-  }
-}
-
-/* Gravity Forms Styling - Common across templates */
-.gform_wrapper .gfield_label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.gform_wrapper .gform_required_legend {
-  display: none;
-}
-
-.gform_wrapper {
-  max-width: 600px;
-  margin: 0 auto;
-  background: transparent;
-}
-
-/* Consultation Card Styling - Common across templates */
-.consultation-card {
-  background-color: var(--color-primary);
-  color: #fff;
-  border-radius: 8px;
-}
-
-.consultation-card h3 {
-  color: #fff;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.consultation-card .card-body {
-  padding: 15px;
-}
-
-/* Uniform styling for all input fields */
-.gform_wrapper input[type="text"],
-.gform_wrapper input[type="email"],
-.gform_wrapper input[type="tel"],
-.gform_wrapper select {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #333;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 1.5;
-  box-sizing: border-box;
-  margin-bottom: 15px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  background-color: #333;
-  color: #fff;
-}
-
-/* Uniform focus state for all inputs */
-.gform_wrapper input[type="text"]:focus,
-.gform_wrapper input[type="email"]:focus,
-.gform_wrapper input[type="tel"]:focus,
-.gform_wrapper select:focus {
-  border-color: var(--color-gold);
-  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
-  outline: none;
-}
-
-/* Make all placeholders consistent and more visible */
-.gform_wrapper input::placeholder,
-.gform_wrapper select::placeholder {
-  color: #c0c0c0;
-  opacity: 1;
-}
-
-/* Read Consent link styling */
-.gform_wrapper a[href="#consent-popup"] {
-  color: #fff;
-  text-decoration: underline;
-  transition: color 0.3s;
-}
-
-.gform_wrapper a[href="#consent-popup"]:hover {
-  color: var(--color-gold);
-}
-
-/* Submit button */
-.gform_wrapper .gform_button {
-  background-color: var(--color-gold);
-  color: #000;
-  border: 2px solid var(--color-gold);
-  padding: 12px 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: all 0.3s;
-  width: 100%;
-}
-
-.gform_wrapper .gform_button:hover {
-  background-color: transparent;
-  color: #fff;
-  border-color: var(--color-gold);
-}
-
-.gform_wrapper .gfield_checkbox label {
-  display: inline-block;
-  padding-left: 8px;
-  vertical-align: middle;
-  color: #fff;
-}
-
-/* Required field indicator */
-.gform_wrapper .gfield_required_asterisk {
-  color: #e63946;
-}
-
-/* Make checkbox text slightly smaller and with proper line height */
-.gform_wrapper .gfield--type-checkbox label {
-  font-size: 14px;
-  line-height: 1.3;
-}
-
-/* Reduce space between checkbox fields */
-.gform_wrapper .gfield--type-checkbox {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-/* Adjust field width on mobile */
-@media (max-width: 767px) {
-  .gform_wrapper input[type="text"],
-  .gform_wrapper input[type="email"],
-  .gform_wrapper input[type="tel"],
-  .gform_wrapper select {
-    font-size: 16px;
-  }
-
-  .gform_wrapper .gfield--width-half {
-    width: 100%;
-  }
-}
-
-/* FAQ Section Styling - Common across templates */
-.faq-container {
-  background-color: #f8f8f8;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.faqs-section h2 {
-  color: var(--color-primary);
-  font-weight: 600;
-  position: relative;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-  font-family: var(--font-heading);
-}
-
-.faqs-section h2:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 80px;
-  height: 3px;
-  background-color: var(--color-gold);
-}
-
-.faq-description {
-  color: #666;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-}
-
-/* Accordion Styling with Font Awesome 6 */
-.accordion-item {
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.accordion-item:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-  margin: 0;
-}
-
-.accordion-button {
-  background-color: var(--color-primary);
-  color: #fff;
-  font-weight: 500;
-  padding: 1.25rem;
-  border-radius: 6px;
-  box-shadow: none;
-  font-family: var(--font-heading);
-  position: relative;
-}
-
-.accordion-button:not(.collapsed) {
-  background-color: var(--color-primary);
-  color: var(--color-gold);
-  box-shadow: none;
-}
-
-.accordion-button:focus {
-  box-shadow: none;
-  border-color: transparent;
-}
-
-.accordion-button::after {
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  content: "\f078"; /* fa-chevron-down */
-  background-image: none;
-  transition: transform 0.3s ease;
-  color: var(--color-gold);
-}
-
-.accordion-button:not(.collapsed)::after {
-  transform: rotate(180deg);
-  content: "\f078"; /* Same icon, just rotated */
-  color: var(--color-gold);
-}
-
-.accordion-body {
-  padding: 1.5rem;
-  background-color: #fff;
-  color: #333;
-  line-height: 1.6;
-  font-size: 1rem;
-}
-
-/* Responsive FAQ Adjustments */
-@media (max-width: 767px) {
-  .faq-container {
-    padding: 1.5rem;
-  }
-
-  .accordion-button {
-    padding: 1rem;
-  }
-
-  .accordion-body {
-    padding: 1.25rem;
   }
 }
