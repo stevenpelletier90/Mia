@@ -855,7 +855,7 @@ add_action('wp_head', 'mia_add_organization_address_schema', 11); // Run right a
  * Uses the data populated by ACF.
  * Returns the HTML string or empty string.
  */
-function display_page_faqs() {
+function display_page_faqs($show_heading = true) {
     $faq_section = get_field('faq_section'); // Field group name
 
     // Ensure the section and the repeater field exist and have data
@@ -868,17 +868,19 @@ function display_page_faqs() {
 
     ob_start(); // Start output buffering
     ?>
-    <section class="faqs-section my-5" aria-labelledby="faq-heading-<?php echo get_the_ID(); ?>">
-        <?php // Section Title (Optional)
-        $section_title = !empty($faq_section['title']) ? $faq_section['title'] : __('Frequently Asked Questions', 'mia-aesthetics'); // Default title with translation
+    <section class="faqs-section my-5" <?php if($show_heading) { echo 'aria-labelledby="faq-heading-' . get_the_ID() . '"'; } ?>>
+        <?php if ($show_heading): 
+            // Section Title (Optional)
+            $section_title = !empty($faq_section['title']) ? $faq_section['title'] : __('Frequently Asked Questions', 'mia-aesthetics'); // Default title with translation
         ?>
-        <h2 id="faq-heading-<?php echo get_the_ID(); ?>" class="h2 mb-4 text-center"><?php echo esc_html($section_title); ?></h2>
+            <h2 id="faq-heading-<?php echo get_the_ID(); ?>" class="mb-4"><?php echo esc_html($section_title); ?></h2>
 
-        <?php // Section Description (Optional)
-        if (!empty($faq_section['description'])): ?>
-            <div class="faq-description mb-4 text-center">
-                <?php echo wp_kses_post($faq_section['description']); // Allows safe HTML ?>
-            </div>
+            <?php // Section Description (Optional)
+            if (!empty($faq_section['description'])): ?>
+                <div class="faq-description mb-4">
+                    <?php echo wp_kses_post($faq_section['description']); // Allows safe HTML ?>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
 
         <?php if (!empty($faqs)): ?>

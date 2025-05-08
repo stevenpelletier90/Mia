@@ -1,12 +1,24 @@
 /* Condition Template Styles */
 
+/* Post Header Styling */
+.post-header {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.post-header h1 {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
 /* Overview Section Styles */
 .overview-section {
-  background-color: #b3b3b3;
+  background: linear-gradient(135deg, #000 0%, #1b1b1b 100%);
   border-radius: 8px;
   padding: 25px;
   margin-bottom: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: #fff;
 }
 
 .overview-section h2 {
@@ -15,7 +27,7 @@
   font-size: 1.5rem;
   border-bottom: 1px solid #dee2e6;
   padding-bottom: 10px;
-  color: var(--color-primary);
+  color: var(--color-gold);
 }
 
 .overview-content {
@@ -25,6 +37,16 @@
 
 .overview-item {
   margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75em;
+}
+
+.overview-check {
+  color: var(--color-gold);
+  margin-right: 0.5em;
+  font-size: 1.1em;
+  flex-shrink: 0;
 }
 
 .overview-item:last-child {
@@ -33,6 +55,42 @@
 
 .overview-item p:last-child {
   margin-bottom: 0;
+}
+
+/* FAQ Section Heading Consistency */
+/* Make FAQ heading use the same style as content h2 */
+.single-condition .faqs-section h2 {
+  padding-top: 20px;
+  margin-top: 15px;
+  scroll-margin-top: calc(var(--navbar-height) + 10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-align: left;
+  position: relative;
+}
+
+/* Override the gold divider specifically for condition template */
+.single-condition .faqs-section h2:after {
+  display: none;
+}
+
+/* Fix vertical alignment of overview checkmark and text */
+.overview-item {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.overview-check {
+  color: var(--color-gold);
+  margin-right: 0.5em;
+  font-size: 1.2em;
+  flex-shrink: 0;
 }
 
 /* Table of Contents Styles */
@@ -115,8 +173,17 @@ html {
 /* Responsive adjustments */
 @media (max-width: 991.98px) {
   .toc-container {
-    position: relative;
-    top: 0;
+    display: none; /* Hide TOC on mobile */
+  }
+
+  /* Adjust spacing for condition template elements */
+  .single-condition .overview-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .single-condition article {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
   }
 }
 

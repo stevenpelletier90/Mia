@@ -49,21 +49,54 @@ get_header(); ?>
                                 </div>
                                 
                                 <div class="location-content p-4">
-                                    <h2 class="h4 mb-3">
-                                        <a href="<?php the_permalink(); ?>" class="text-decoration-none">
-                                            Mia Aesthetics <?php the_title(); ?>
-                                        </a>
-                                    </h2>
+<h2 class="h4 mb-3">
+    <a href="<?php the_permalink(); ?>" class="text-decoration-none">
+        <?php
+            $full_title = get_the_title();
+            $city_only = explode(',', $full_title)[0];
+        ?>
+        Mia Aesthetics <?php echo esc_html(trim($city_only)); ?>
+    </a>
+</h2>
                                     
                                     <div class="location-details mb-3">
-                                        <?php if ($location_address): ?>
-                                            <div class="location-detail mb-2">
-                                                <div class="d-flex align-items-start">
-                                                    <i class="fas fa-map-marker-alt me-2 mt-1 location-icon"></i>
-                                                    <span><?php echo esc_html($location_address); ?></span>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
+<?php
+    $street_address = get_field('street_address');
+    $city = get_field('city');
+    $state = get_field('state');
+    $zip_code = get_field('zip_code');
+?>
+<?php if ($street_address || $city || $state || $zip_code): ?>
+    <div class="location-detail mb-2">
+        <span>
+            <?php if ($street_address): ?>
+                <?php echo esc_html($street_address); ?>
+            <?php endif; ?>
+            <?php if ($city || $state || $zip_code): ?>
+                <br>
+                <?php
+                    $city_state_zip = '';
+                    if ($city) {
+                        $city_state_zip .= esc_html($city);
+                    }
+                    if ($state) {
+                        if ($city_state_zip !== '') {
+                            $city_state_zip .= ', ';
+                        }
+                        $city_state_zip .= esc_html($state);
+                    }
+                    if ($zip_code) {
+                        if ($city_state_zip !== '') {
+                            $city_state_zip .= ' ';
+                        }
+                        $city_state_zip .= esc_html($zip_code);
+                    }
+                    echo $city_state_zip;
+                ?>
+            <?php endif; ?>
+        </span>
+    </div>
+<?php endif; ?>
                                         
                                         <?php if ($phone_number): ?>
                                             <div class="location-detail mb-2">

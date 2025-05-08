@@ -16,7 +16,7 @@ get_header(); ?>
     </div>
     <?php while (have_posts()) : the_post(); ?>
         <!-- Page Header -->
-        <header class="bg-light py-5">
+        <header class="post-header py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -27,7 +27,7 @@ get_header(); ?>
         </header>
 
         <!-- Content -->
-        <article class="py-5">
+        <article class="py-4">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -36,19 +36,20 @@ get_header(); ?>
                         if (have_rows('overview_details')): ?>
                             <div class="overview-section mb-4">
                                 <h2 id="overview">Overview</h2>
-                                <div class="overview-content">
-                                    <?php 
-                                    // Loop through the repeater field rows
-                                    while (have_rows('overview_details')): the_row(); 
-                                        // Get the overview_item text area value
-                                        $overview_item = get_sub_field('overview_item');
-                                        if ($overview_item): ?>
-                                            <div class="overview-item">
-                                                <?php echo $overview_item; ?>
-                                            </div>
-                                        <?php endif;
-                                    endwhile; ?>
-                                </div>
+<div class="overview-content">
+    <?php 
+    // Loop through the repeater field rows
+    while (have_rows('overview_details')): the_row(); 
+        // Get the overview_item text area value
+        $overview_item = get_sub_field('overview_item');
+        if ($overview_item): ?>
+            <div class="overview-item">
+                <i class="fa-solid fa-check-circle overview-check"></i>
+                <?php echo $overview_item; ?>
+            </div>
+        <?php endif;
+    endwhile; ?>
+</div>
                             </div>
                         <?php endif; ?>
 
@@ -61,6 +62,10 @@ get_header(); ?>
                         <div class="content">
                             <?php the_content(); ?>
                         </div>
+                        <?php
+                        // Using display_page_faqs(true) to show heading from custom field
+                        echo display_page_faqs(true);
+                        ?>
                     </div>
                     
                     <div class="col-lg-4">
@@ -78,17 +83,6 @@ get_header(); ?>
         </article>
     <?php endwhile; ?>
     
-    <?php
-    $faq_section = get_field('faq_section');
-    if($faq_section && !empty($faq_section['faqs'])): ?>
-    <section class="faq-section">
-        <div class="container">
-            <div class="faq-container">
-                <?php echo display_page_faqs(); ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
 </main>
 
 
