@@ -223,15 +223,42 @@ function mia_aesthetics_enqueue_scripts() {
 
 
     // Theme JS - Load last
-    $js_file = $theme_path . '/assets/js/main.js';
-    if (file_exists($js_file)) {
-        wp_enqueue_script(
-            'mia-aesthetics-script',
-            $theme_uri . '/assets/js/main.js',
-            array('bootstrap-js'), // Only depend on Bootstrap, not jQuery
-            filemtime($js_file),
-            true // Load in footer
-        );
+    if ( is_singular( 'condition' ) ) {
+        // Load script specific to single Condition pages
+        $condition_js = $theme_path . '/assets/js/condition.js';
+        if ( file_exists( $condition_js ) ) {
+            wp_enqueue_script(
+                'mia-condition-script',
+                $theme_uri . '/assets/js/condition.js',
+                array( 'bootstrap-js' ),
+                filemtime( $condition_js ),
+                true
+            );
+        }
+    } elseif ( is_singular( 'surgeon' ) ) {
+        // Load script specific to single Surgeon pages
+        $surgeon_js = $theme_path . '/assets/js/surgeon.js';
+        if ( file_exists( $surgeon_js ) ) {
+            wp_enqueue_script(
+                'mia-surgeon-script',
+                $theme_uri . '/assets/js/surgeon.js',
+                array( 'bootstrap-js' ),
+                filemtime( $surgeon_js ),
+                true
+            );
+        }
+    } else {
+        // Load global script on all other pages
+        $js_file = $theme_path . '/assets/js/main.js';
+        if ( file_exists( $js_file ) ) {
+            wp_enqueue_script(
+                'mia-aesthetics-script',
+                $theme_uri . '/assets/js/main.js',
+                array( 'bootstrap-js' ), // Only depend on Bootstrap, not jQuery
+                filemtime( $js_file ),
+                true // Load in footer
+            );
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
