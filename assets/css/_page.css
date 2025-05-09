@@ -1,0 +1,111 @@
+/* Page Template Styles */
+
+/* Page content styles */
+.page-content {
+  padding: 2rem 0;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.page-subheading {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-section {
+  margin-bottom: 3rem;
+}
+
+.page-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Accordions for Page Template */
+.accordion-item {
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: 500;
+  padding: 1.25rem;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: var(--font-heading);
+  position: relative;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.accordion-button::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f078";
+  background-image: none;
+  transition: transform 0.3s ease;
+  color: var(--color-gold);
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  content: "\f078";
+  color: var(--color-gold);
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 767px) {
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .page-subheading {
+    font-size: 1.05rem;
+  }
+
+  .accordion-button {
+    padding: 1rem;
+  }
+
+  .accordion-body {
+    padding: 1.25rem;
+  }
+}

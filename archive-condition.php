@@ -40,7 +40,7 @@ get_header(); ?>
             if ($top_level_conditions->have_posts()) : ?>
                 <div class="row">
                     <div class="col-12">
-                        <div class="conditions-accordion accordion" id="conditionsAccordion">
+                        <div class="conditions-accordion" id="conditionsAccordion">
                             <?php 
                             $accordion_index = 0;
                             while ($top_level_conditions->have_posts()) : $top_level_conditions->the_post(); 
@@ -63,12 +63,12 @@ get_header(); ?>
                                     $has_children = true;
                                 }
                             ?>
-                                <div class="accordion-item condition-item mb-3">
-                                    <h2 class="accordion-header d-flex align-items-center justify-content-between" id="<?php echo $heading_id; ?>">
+                                <div class="condition-item mb-3">
+                                    <h2 class="condition-header d-flex align-items-center justify-content-between" id="<?php echo $heading_id; ?>">
                                         <div class="d-flex align-items-center">
                                             <?php if ($has_children) : ?>
                                                 <button 
-                                                    class="accordion-button collapsed p-0 pe-3" 
+                                                    class="condition-button collapsed p-0 pe-3" 
                                                     type="button" 
                                                     data-bs-toggle="collapse" 
                                                     data-bs-target="#<?php echo $collapse_id; ?>" 
@@ -84,24 +84,28 @@ get_header(); ?>
                                                 </a>
                                             <?php endif; ?>
                                         </div>
-                                        <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-outline-primary view-condition-btn">
+                                        <a href="<?php the_permalink(); ?>" class="view-condition-link">
                                             View Condition
                                         </a>
                                     </h2>
                                     
                                     <?php if ($has_children) : ?>
+                                        <a href="<?php the_permalink(); ?>" class="view-main-condition-link d-block mb-2">
+                                            View Condition
+                                        </a>
                                         <div 
                                             id="<?php echo $collapse_id; ?>" 
-                                            class="accordion-collapse collapse" 
+                                            class="condition-collapse collapse" 
                                             aria-labelledby="<?php echo $heading_id; ?>" 
                                             data-bs-parent="#conditionsAccordion">
-                                            <div class="accordion-body">
+                                            <div class="condition-body">
                                                 <div class="child-conditions-list">
                                                     <ul class="list-unstyled mb-0">
                                                         <?php while ($child_conditions->have_posts()) : $child_conditions->the_post(); ?>
                                                             <li class="child-condition-item">
-                                                                <a href="<?php the_permalink(); ?>" class="child-condition-link">
-                                                                    <i class="fa-solid fa-caret-right me-2"></i><?php the_title(); ?>
+                                                                <a href="<?php the_permalink(); ?>" class="child-condition-link d-flex justify-content-between align-items-center">
+                                                                    <span><?php the_title(); ?></span>
+                                                                    <i class="fa-solid fa-arrow-right"></i>
                                                                 </a>
                                                             </li>
                                                         <?php endwhile; ?>

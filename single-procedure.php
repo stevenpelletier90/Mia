@@ -198,16 +198,17 @@ get_header(); ?>
                 // FAQ Section
                 $faq_section = get_field('faq_section');
                 if ($faq_section && !empty($faq_section['faqs'])): ?>
-                <div class="row mt-5">
-                    <div class="col-12">
+                <section class="py-5">
+                    <div class="container">
                         <div class="faq-container">
                             <?php echo display_page_faqs(); ?>
                         </div>
                     </div>
-                </div>
+                </section>
                 <?php endif; ?>
             </div>
         </article>
     <?php endwhile; ?>
 </main>
+
 <?php get_footer(); ?>

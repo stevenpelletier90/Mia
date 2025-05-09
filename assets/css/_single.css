@@ -48,7 +48,7 @@
   padding-bottom: 0.5rem;
 }
 .mb-5 .h5:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -56,7 +56,7 @@
   height: 2px;
   background-color: var(--color-gold);
 }
-.mb-5 a[href*='tag'] {
+.mb-5 a[href*="tag"] {
   display: inline-block;
   background-color: #f8f9fa;
   color: var(--color-primary) !important;
@@ -68,7 +68,7 @@
   transition: all 0.2s ease;
   text-decoration: none !important;
 }
-.mb-5 a[href*='tag']:hover {
+.mb-5 a[href*="tag"]:hover {
   background-color: var(--color-gold);
   color: #000 !important;
 }
@@ -116,6 +116,69 @@
 }
 .col-lg-4 .img-fluid:hover {
   opacity: 0.9;
+}
+
+/* Accordion Styles for Single Template (for FAQ) */
+.accordion-item {
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: 500;
+  padding: 1.25rem;
+  border-radius: 6px;
+  box-shadow: none;
+  font-family: var(--font-heading);
+  position: relative;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.accordion-button::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f078";
+  background-image: none;
+  transition: transform 0.3s ease;
+  color: var(--color-gold);
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  content: "\f078";
+  color: var(--color-gold);
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
 @media (max-width: 991px) {

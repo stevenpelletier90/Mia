@@ -216,9 +216,6 @@ get_header();
         </div>
     </section>
 
-    <?php
-    $faq_section = get_field('faq_section');
-    if($faq_section && !empty($faq_section['faqs'])): ?>
     <section class="py-5">
         <div class="container">
             <div class="faq-container">
@@ -226,6 +223,5 @@ get_header();
             </div>
         </div>
     </section>
-    <?php endif; ?>
 
 <?php get_footer(); ?>
