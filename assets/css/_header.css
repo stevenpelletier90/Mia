@@ -1,8 +1,6 @@
-/* Custom z-index class for bootstrap */
 .z-1030 {
   z-index: 1030;
 }
-
 .navbar {
   background: linear-gradient(to bottom, var(--color-primary), #000) !important;
   height: var(--navbar-height);
@@ -72,7 +70,7 @@
 .mega-menu .col-12 a:hover,
 .dropdown-menu.mega-menu a:not(.dropdown-item):hover {
   color: var(--color-gold);
-  text-decoration: none !important;
+  text-decoration: none;
 }
 .dropdown-item:active,
 .dropdown-item:focus,
@@ -84,14 +82,14 @@
 .offcanvas {
   width: 320px !important;
   max-width: 80% !important;
-  background-color: #212529;
+  background-color: #1b1b1b;
   color: #fff;
 }
 .offcanvas-header {
   padding: 1rem;
 }
 .offcanvas .nav-link {
-  color: #ffffffbe;
+  color: #ffffff;
 }
 .offcanvas .nav-link:hover {
   color: var(--color-gold);
@@ -187,26 +185,14 @@
     border-color: var(--color-gold);
     color: var(--color-primary);
   }
-}
-
-/* Desktop responsive adjustments */
-@media (min-width: 1200px) {
-  /* Adjust nav items for all desktop sizes */
   .navbar-nav .nav-item {
     margin: 0 0.05rem;
   }
-
   .navbar-nav .nav-link {
     padding-left: 0.4rem;
     padding-right: 0.4rem;
-  }
-
-  /* Override the clamp() size for nav links */
-  .navbar-nav .nav-link {
     font-size: 0.8rem;
   }
-
-  /* Default desktop CTA button */
   .desktop-cta {
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
@@ -214,26 +200,22 @@
     white-space: nowrap;
     margin-left: 0.5rem;
   }
-
   .desktop-cta .fa-arrow-right {
     margin-left: 0.4rem;
     font-size: 0.75em;
   }
 }
 
-/* Extra small desktop breakpoint specifically for problematic ~1255px area */
 @media (min-width: 1200px) and (max-width: 1280px) {
   .desktop-cta {
     padding: 0.3rem 0.5rem;
     font-size: 0.75rem;
     margin-left: 0.3rem;
   }
-
   .desktop-cta .fa-arrow-right {
     margin-left: 0.25rem;
     font-size: 0.65em;
   }
-
   .navbar-nav .nav-link {
     padding-left: 0.3rem;
     padding-right: 0.3rem;
@@ -241,7 +223,6 @@
   }
 }
 
-/* Large desktop */
 @media (min-width: 1400px) {
   .desktop-cta {
     padding: 0.5rem 1rem;
@@ -249,12 +230,10 @@
     font-weight: 700;
     letter-spacing: 0.01em;
   }
-
   .desktop-cta .fa-arrow-right {
     margin-left: 0.5rem;
     font-size: 0.8em;
   }
-
   .navbar-nav .nav-link {
     font-size: 0.9rem;
     padding-left: 0.5rem;
@@ -289,7 +268,6 @@
     border-bottom: 0;
     border-left: 0.3em solid transparent;
   }
-  /* Medium mobile CTA adjustments */
   .d-sm-block.d-xl-none .header-btn {
     padding: 0.35rem 0.7rem;
     font-size: 0.8rem;

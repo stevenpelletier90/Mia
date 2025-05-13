@@ -129,9 +129,6 @@ h3,
   font-size: calc(1.3rem + 0.6vw);
 }
 
-.section-subheading {
-  color: var(--color-gold);
-}
 h4,
 .h4 {
   font-size: calc(1.275rem + 0.3vw);

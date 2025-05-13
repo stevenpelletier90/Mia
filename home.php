@@ -52,38 +52,12 @@ get_header(); ?>
                                             <?php the_title(); ?>
                                         </a>
                                     </h2>
-                                    <div class="post-meta mb-3">
-                                        <small class="text-muted">
-                                            <i class="far fa-calendar-alt me-1"></i> <?php echo get_the_date(); ?>
-                                            <?php
-                                            // Display categories
-                                            $categories = get_the_category();
-                                            if ($categories) {
-                                                echo ' <span class="mx-1">|</span> <i class="far fa-folder me-1"></i> ';
-                                                $cat_links = [];
-                                                foreach (
-                                                    $categories
-                                                    as $category
-                                                ) {
-                                                    $cat_links[] =
-                                                        '<a href="' .
-                                                        esc_url(
-                                                            get_category_link(
-                                                                $category->term_id
-                                                            )
-                                                        ) .
-                                                        '" class="text-decoration-none">' .
-                                                        esc_html(
-                                                            $category->name
-                                                        ) .
-                                                        "</a>";
-                                                }
-                                                echo implode(", ", $cat_links);
-                                            }
-                                            ?>
-                                        </small>
-                                    </div>
                                     <?php the_excerpt(); ?>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <a href="<?php the_permalink(); ?>" class="read-more-link" style="color: #000; text-decoration: none; font-weight: 500;">
+                                        Read More <i class="fas fa-arrow-right" style="color: #D4AF37;"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>

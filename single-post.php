@@ -83,7 +83,7 @@ get_header(); ?>
                         <?php
                         $tags = get_the_tags();
                         if ($tags) : ?>
-                            <div class="mb-5">
+                            <div class="related-topics mb-5">
                                 <h2 class="h5 mb-3">Related Topics</h2>
                                 <?php foreach($tags as $tag) : ?>
                                     <a href="<?php echo get_tag_link($tag->term_id); ?>" class="text-decoration-none me-2 text-primary">#<?php echo $tag->name; ?></a>
@@ -94,87 +94,35 @@ get_header(); ?>
 
                     </div>
                     
-                    <div class="col-lg-4">
-                        <!-- Schedule Consultation CTA -->
-                        <div class="card border-0 bg-light mb-4">
-                            <div class="card-body">
-                                <h2 class="h5 mb-3">Schedule a Consultation</h2>
-                                <p class="small mb-3">Interested in learning more? Schedule a private consultation to discuss your goals.</p>
-                                <a href="/free-plastic-surgery-consultation/" class="mia-button mia-button-gold w-100">Book Your Consultation <i class="fas fa-arrow-right"></i></a>                               
-                            </div>
-                        </div>
+                    <div class="col-lg-4 sidebar">
 
-                        <!-- Featured Procedures -->
-                        <div class="mb-4">
-                            <h2 class="h5 mb-3">Popular Procedures</h2>
-                            <?php
-                            $procedures = new WP_Query([
-                                'post_type' => 'procedures',
-                                'posts_per_page' => 5,
-                                'orderby' => 'menu_order',
-                                'order' => 'ASC'
-                            ]);
 
-                            if ($procedures->have_posts()) : ?>
-                                <ul class="list-unstyled">
-                                    <?php while ($procedures->have_posts()) : $procedures->the_post(); ?>
-                                        <li class="mb-2">
-                                            <a href="<?php the_permalink(); ?>" class="text-decoration-none d-flex align-items-center">
-                                                <i class="fas fa-chevron-right text-primary me-2 small"></i>
-                                                <?php the_title(); ?>
-                                            </a>
-                                        </li>
-                                    <?php endwhile; ?>
-                                </ul>
-                            <?php endif;
-                            wp_reset_postdata();
-                            ?>
-                            <a href="/cosmetic-plastic-surgery/" class="mia-button mia-button-gold-outline mia-button-sm">View All Procedures <i class="fas fa-arrow-right"></i></a>
-                        </div>
-
-                        <!-- Financing Options -->
-                        <div class="card border-0 bg-light mb-4">
-                            <div class="card-body">
-                                <h2 class="h5 mb-3">Financing Options</h2>
-                                <p class="small mb-3">We offer various financing options to help make your procedure more affordable.</p>
-                                <ul class="list-unstyled mb-3">
-                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Multiple payment plans</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>0% financing available</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Insurance accepted</li>
-                                </ul>
-                                <a href="/financing/" class="mia-button mia-button-gold-outline mia-button-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
 
                         <!-- Patient Resources -->
-                        <div class="mb-4">
-                            <h2 class="h5 mb-3">Patient Resources</h2>
-                            <ul class="list-unstyled">
-                                <li class="mb-2">
-                                    <a href="/before-after/" class="text-decoration-none">
-                                        <i class="fas fa-images text-primary me-2"></i>
-                                        Before & After Gallery
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome" target="_blank" class="text-decoration-none">
-                                        <i class="fas fa-file-alt text-primary me-2"></i>
-                                        Patient Portal
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a href="/faqs/" class="text-decoration-none">
-                                        <i class="fas fa-question-circle text-primary me-2"></i>
-                                        FAQs
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a href="/conditions/" class="text-decoration-none">
-                                        <i class="fas fa-heart text-primary me-2"></i>
-                                        Conditions We Treat
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h2 class="h5 mb-3">Patient Resources</h2>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <a href="/before-after/" class="text-decoration-none">
+                                            <i class="fas fa-images me-2"></i>
+                                            Before & After Gallery
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="/faqs/" class="text-decoration-none">
+                                            <i class="fas fa-question-circle me-2"></i>
+                                            Frequently Asked Questions
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="/conditions/" class="text-decoration-none">
+                                            <i class="fas fa-heart me-2"></i>
+                                            Conditions We Treat
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <!-- Related Posts -->
@@ -194,19 +142,20 @@ get_header(); ?>
                             ]);
 
                             if ($related_posts->have_posts()) : ?>
-                                <div class="mb-4">
-                                    <h2 class="h5 mb-3">Related Articles</h2>
-                                    <?php while ($related_posts->have_posts()) : $related_posts->the_post(); ?>
-                                        <div class="mb-3">
-                                            <?php if (has_post_thumbnail()) : ?>
-                                                <a href="<?php the_permalink(); ?>">
-                                                    <?php the_post_thumbnail('thumbnail', ['class' => 'img-fluid mb-2']); ?>
-                                                </a>
-                                            <?php endif; ?>
-                                            <h3 class="h6 mb-1"><a href="<?php the_permalink(); ?>" class="text-decoration-none"><?php the_title(); ?></a></h3>
-                                            <div class="text-muted small"><?php echo get_the_date(); ?></div>
-                                        </div>
-                                    <?php endwhile; ?>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h2 class="h5 mb-3">Related Articles</h2>
+                                        <?php while ($related_posts->have_posts()) : $related_posts->the_post(); ?>
+                                            <div class="mb-3">
+                                                <?php if (has_post_thumbnail()) : ?>
+                                                    <a href="<?php the_permalink(); ?>">
+                                                        <?php the_post_thumbnail('thumbnail', ['class' => 'img-fluid mb-2']); ?>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <h3 class="h6 mb-1"><a href="<?php the_permalink(); ?>" class="text-decoration-none"><?php the_title(); ?></a></h3>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
                                 </div>
                             <?php endif;
                             wp_reset_postdata();

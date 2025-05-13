@@ -43,11 +43,11 @@
   font-style: italic;
   color: #555;
 }
-.mb-5 .h5 {
+.related-topics .h5 {
   position: relative;
   padding-bottom: 0.5rem;
 }
-.mb-5 .h5:after {
+.related-topics .h5:after {
   content: "";
   position: absolute;
   left: 0;
@@ -56,7 +56,7 @@
   height: 2px;
   background-color: var(--color-gold);
 }
-.mb-5 a[href*="tag"] {
+.related-topics a[href*="tag"] {
   display: inline-block;
   background-color: #f8f9fa;
   color: var(--color-primary) !important;
@@ -68,54 +68,127 @@
   transition: all 0.2s ease;
   text-decoration: none !important;
 }
-.mb-5 a[href*="tag"]:hover {
+.related-topics a[href*="tag"]:hover {
   background-color: var(--color-gold);
   color: #000 !important;
 }
-.col-lg-4 .card {
-  border-radius: 8px;
+.sidebar {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.sidebar .card {
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
-  border: none;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s;
+  border: 1px solid #e5e5e5;
+  box-shadow: none;
+  background: #fff;
+  margin-bottom: 2rem;
 }
-.col-lg-4 .card:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+.sidebar .card:hover {
+  border-color: #c8b273;
+  box-shadow: none;
 }
-.col-lg-4 .card-body {
-  padding: 1.5rem;
+.sidebar .card-body {
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
 }
-.col-lg-4 .h5 {
-  font-weight: 600;
-  margin-bottom: 1rem;
+
+.sidebar .h5 {
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--color-primary);
+  letter-spacing: 0.01em;
+  font-family: var(--font-heading);
+  border-left: 4px solid var(--color-gold);
+  padding-left: 0.75rem;
 }
-.col-lg-4 .list-unstyled li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+.sidebar .list-unstyled {
+  margin-bottom: 0;
 }
-.col-lg-4 .list-unstyled li:last-child {
+.sidebar .list-unstyled li {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sidebar .list-unstyled li:last-child {
   border-bottom: none;
 }
-.col-lg-4 .list-unstyled a {
+.sidebar .list-unstyled a {
   color: var(--color-primary);
-  transition: color 0.2s ease;
+  font-weight: 500;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 4px;
+  padding: 0.15rem 0.25rem;
+  text-decoration: none;
 }
-.col-lg-4 .list-unstyled a:hover {
+.sidebar .list-unstyled a:hover {
   color: var(--color-gold);
+  background: #f8f9fa;
+  text-decoration: none;
 }
-.col-lg-4 .list-unstyled i {
+.sidebar .list-unstyled i {
   color: var(--color-gold);
+  font-size: 1.15em;
+  min-width: 1.5em;
+  text-align: center;
 }
-.col-lg-4 .h6 {
+
+.sidebar .h6 {
   font-weight: 600;
   line-height: 1.4;
+  color: var(--color-primary);
 }
-.col-lg-4 .img-fluid {
-  border-radius: 4px;
-  transition: opacity 0.2s ease;
+
+.sidebar .img-fluid {
+  border-radius: 6px;
+  transition: opacity 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-.col-lg-4 .img-fluid:hover {
-  opacity: 0.9;
+.sidebar .img-fluid:hover {
+  opacity: 0.92;
+}
+
+.sidebar .text-muted {
+  color: #888 !important;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 991px) {
+  .post-header {
+    padding: 2rem 0;
+  }
+  .post-header h1 {
+    font-size: 2rem;
+  }
+  .sidebar {
+    margin-top: 2.5rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .post-header {
+    padding: 1.5rem 0;
+  }
+  .post-header h1 {
+    font-size: 1.75rem;
+  }
+  .content {
+    font-size: 1rem;
+  }
+  .sidebar {
+    margin-top: 2rem;
+    padding: 0;
+  }
 }
 
 /* Accordion Styles for Single Template (for FAQ) */

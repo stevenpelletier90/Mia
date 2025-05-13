@@ -15,23 +15,49 @@ get_header();
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="mb-3">Mia Aesthetics <?php echo get_the_title(); ?></h1>
+                    <h1 class="mb-3"><?php echo get_the_title(); ?></h1>
                     <div class="location-intro mb-4">
-                        <p>Welcome to our <?php echo get_the_title(); ?> location. Our state-of-the-art facility offers a wide range of plastic surgery and aesthetic procedures with a team of experienced surgeons dedicated to helping you achieve your aesthetic goals.</p>
+                        <p>Welcome to our <?php 
+                        $location_title = get_the_title();
+                        $location_title = str_replace('Mia Aesthetics', '', $location_title);
+                        echo trim($location_title); 
+                        ?> location. Our state-of-the-art facility offers a wide range of plastic surgery and aesthetic procedures with a team of experienced surgeons dedicated to helping you achieve your aesthetic goals.</p>
                     </div>
                     <div class="location-info mb-4">
-                        <?php
-                        $location_address = get_field('location_address');
-                        if ($location_address):
-                            $address_parts = explode(',', $location_address, 2);
-                            $street_address = isset($address_parts[0]) ? trim($address_parts[0]) : $location_address;
-                            $city_state_zip = isset($address_parts[1]) ? trim($address_parts[1]) : '';
-                        ?>
+<?php
+                        $street_address = get_field('street_address');
+                        $city = get_field('city');
+                        $state = get_field('state');
+                        $zip_code = get_field('zip_code');
+                        if ($street_address || $city || $state || $zip_code):
+                    ?>
                             <div class="location-detail mb-2">
                                 <div class="d-flex flex-column">
-                                    <span><?php echo esc_html($street_address); ?></span>
-                                    <?php if ($city_state_zip): ?>
-                                        <span><?php echo esc_html($city_state_zip); ?></span>
+                                    <?php if ($street_address): ?>
+                                        <span><?php echo esc_html($street_address); ?></span>
+                                    <?php endif; ?>
+                                    <?php if ($city || $state || $zip_code): ?>
+                                        <span>
+                                            <?php
+                                            $city_state_zip = '';
+                                            if ($city) {
+                                                $city_state_zip .= esc_html($city);
+                                            }
+                                            if ($state) {
+                                                if ($city_state_zip !== '') {
+                                                    $city_state_zip .= ', ';
+                                                }
+                                                $city_state_zip .= esc_html($state);
+                                            }
+                                            if ($zip_code) {
+                                                if ($city_state_zip !== '') {
+                                                    $city_state_zip .= ' ';
+                                                }
+                                                $city_state_zip .= esc_html($zip_code);
+                                            }
+                                            echo $city_state_zip;
+                                            ?>
+                                        </span>
                                     <?php endif; ?>
                                 </div>
                             </div>

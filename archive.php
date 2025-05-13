@@ -68,12 +68,12 @@ get_header(); ?>
                                             <?php the_title(); ?>
                                         </a>
                                     </h2>
-                                    <div class="post-meta mb-3">
-                                        <small class="text-muted">
-                                            <?php echo get_the_date(); ?>
-                                        </small>
-                                    </div>
                                     <?php the_excerpt(); ?>
+                                </div>
+                                <div class="card-footer bg-white border-top-0">
+                                    <a href="<?php the_permalink(); ?>" class="read-more-link" style="color: #000; text-decoration: none; font-weight: 500;">
+                                        Read More <i class="fas fa-arrow-right" style="color: #D4AF37;"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>

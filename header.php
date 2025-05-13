@@ -219,11 +219,16 @@
                           // Start the first column
                           echo '<div class="col-md-3 mb-3"><ul class="list-unstyled">';
                           while ($location_query->have_posts()) : $location_query->the_post();
-                            // Get location name from the title
-                            $location_name = get_the_title();
-                            $location_url = get_permalink();
-                            // Output the location link
-                            echo '<li><a class="dropdown-item py-1" href="' . esc_url($location_url) . '">' . esc_html($location_name) . '</a></li>';
+$location_title = get_the_title();
+$state = get_field('state');
+$location_url = get_permalink();
+// Remove "Mia Aesthetics" from the title
+$display_city = trim(str_ireplace('Mia Aesthetics', '', $location_title));
+// Get state abbreviation using helper
+$abbr = mia_get_state_abbr($state);
+// Build menu label
+$menu_label = $state ? $display_city . ', ' . $abbr : $display_city;
+echo '<li><a class="dropdown-item py-1" href="' . esc_url($location_url) . '">' . esc_html($menu_label) . '</a></li>';
                             $location_count++;
                             // Start a new column if needed
                             if ($location_count % $locations_per_column === 0 && $location_count < $total_locations) {
@@ -267,12 +272,15 @@
                     $location_query = new WP_Query($location_args);
                     if ($location_query->have_posts()) :
                       while ($location_query->have_posts()) : $location_query->the_post();
-                        // Get location name from the title
-                        $location_name = get_the_title();
-                        $location_url = get_permalink();
-                        ?>
-                        <li><a class="dropdown-item" href="<?php echo esc_url($location_url); ?>"><?php echo esc_html($location_name); ?></a></li>
-                        <?php
+$location_title = get_the_title();
+$state = get_field('state');
+$location_url = get_permalink();
+$display_city = trim(str_ireplace('Mia Aesthetics', '', $location_title));
+$abbr = mia_get_state_abbr($state);
+$menu_label = $state ? $display_city . ', ' . $abbr : $display_city;
+?>
+<li><a class="dropdown-item" href="<?php echo esc_url($location_url); ?>"><?php echo esc_html($menu_label); ?></a></li>
+<?php
                       endwhile;
                       wp_reset_postdata();
                     else:

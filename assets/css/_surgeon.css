@@ -64,8 +64,12 @@
   color: var(--color-gold);
   font-size: 1.2rem;
   margin-bottom: 0;
-  font-weight: 300;
+  font-weight: 400;
 }
+.surgeon-location a {
+  color: #fff;
+}
+
 .surgeon-headshot {
   display: flex;
   justify-content: flex-start;
