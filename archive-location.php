@@ -50,9 +50,9 @@ get_header();
         $bg_image_url = '';
     }
     ?>
-    <div class="location-card h-100 shadow-sm rounded overflow-hidden bg-white">
+    <div class="location-card">
         <?php if ($bg_image_url): ?>
-            <img src="<?php echo esc_url($bg_image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="location-card-img-top w-100" style="object-fit:cover; height:200px;">
+            <img src="<?php echo esc_url($bg_image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="location-card-img-top w-100">
         <?php endif; ?>
         <div class="location-content p-4">
             <h2 class="h4 mb-3">
@@ -112,8 +112,8 @@ get_header();
                 <?php endif; ?>
             </div>
 
-            <div class="location-cta-buttons d-flex flex-column gap-2">
-                <a href="<?php the_permalink(); ?>" class="btn mia-button-gold d-flex justify-content-between align-items-center" role="button">
+            <div class="location-cta-buttons">
+                <a href="<?php the_permalink(); ?>" class="btn mia-button-gold" role="button">
                     View Location <i class="fas fa-arrow-right"></i>
                 </a>
             </div>

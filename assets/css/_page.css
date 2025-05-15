@@ -16,7 +16,7 @@
 
 .page-subheading {
   color: var(--color-gold);
-  font-size: 1.2rem;
+  /* font-size removed: use base or utility class */
   margin-bottom: 1.5rem;
 }
 
@@ -88,17 +88,17 @@
   background-color: #fff;
   color: #333;
   line-height: 1.6;
-  font-size: 1rem;
+  /* font-size removed: use base or utility class */
 }
 
 /* Media queries for responsive design */
 @media (max-width: 767px) {
   .page-header h1 {
-    font-size: 1.75rem;
+    /* font-size removed: use base or utility class */
   }
 
   .page-subheading {
-    font-size: 1.05rem;
+    /* font-size removed: use base or utility class */
   }
 
   .accordion-button {

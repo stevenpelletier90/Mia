@@ -10,18 +10,18 @@
 }
 .post-header .lead {
   color: var(--color-gold);
-  font-size: 1.2rem;
+  /* font-size removed: use base or utility class */
   font-weight: 400;
 }
 .post-meta {
   color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 0.9rem;
+  /* font-size removed: use base or utility class */
 }
 .post-meta i {
   color: var(--color-gold);
 }
 .content {
-  font-size: 1.05rem;
+  /* font-size removed: use base or utility class */
   line-height: 1.8;
 }
 .content h2,
@@ -64,7 +64,7 @@
   border-radius: 30px;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  font-size: 0.85rem;
+  /* font-size removed: use base or utility class */
   transition: all 0.2s ease;
   text-decoration: none !important;
 }
@@ -120,7 +120,7 @@
 .sidebar .list-unstyled a {
   color: var(--color-primary);
   font-weight: 500;
-  font-size: 1.05rem;
+  /* font-size removed: use base or utility class */
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -136,7 +136,7 @@
 }
 .sidebar .list-unstyled i {
   color: var(--color-gold);
-  font-size: 1.15em;
+  /* font-size removed: use base or utility class */
   min-width: 1.5em;
   text-align: center;
 }
@@ -158,7 +158,7 @@
 
 .sidebar .text-muted {
   color: #888 !important;
-  font-size: 0.95rem;
+  /* font-size removed: use base or utility class */
 }
 
 @media (max-width: 991px) {
@@ -251,7 +251,7 @@
   background-color: #fff;
   color: #333;
   line-height: 1.6;
-  font-size: 1rem;
+  /* font-size removed: use base or utility class */
 }
 
 @media (max-width: 991px) {
@@ -259,7 +259,7 @@
     padding: 2rem 0;
   }
   .post-header h1 {
-    font-size: 2rem;
+    /* font-size removed: use base or utility class */
   }
   .col-lg-4 {
     margin-top: 3rem;
@@ -271,9 +271,9 @@
     padding: 1.5rem 0;
   }
   .post-header h1 {
-    font-size: 1.75rem;
+    /* font-size removed: use base or utility class */
   }
   .content {
-    font-size: 1rem;
+    /* font-size removed: use base or utility class */
   }
 }

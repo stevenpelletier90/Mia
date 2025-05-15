@@ -75,12 +75,47 @@ get_header();
                             </div>
                         <?php endif; ?>
 
-                        <?php $hours_operation = get_field('hours_operation'); ?>
-                        <?php if ($hours_operation): ?>
+                        <?php
+                        // Grouped hours of operation (short format)
+                        $short_days = array(
+                            'Monday' => 'Mon', 'Tuesday' => 'Tue', 'Wednesday' => 'Wed',
+                            'Thursday' => 'Thu', 'Friday' => 'Fri', 'Saturday' => 'Sat', 'Sunday' => 'Sun'
+                        );
+                        $hours_rows = array();
+                        if (have_rows('business_hours')) {
+                            while (have_rows('business_hours')): the_row();
+                                $day = get_sub_field('day');
+                                $hours = get_sub_field('hours');
+                                if ($day && $hours) {
+                                    $hours_rows[] = array('day' => $day, 'hours' => $hours);
+                                }
+                            endwhile;
+                        }
+                        $output = array();
+                        $n = count($hours_rows);
+                        $i = 0;
+                        while ($i < $n) {
+                            $start = $i;
+                            $current_hours = $hours_rows[$i]['hours'];
+                            while (
+                                $i + 1 < $n &&
+                                $hours_rows[$i + 1]['hours'] === $current_hours
+                            ) {
+                                $i++;
+                            }
+                            if ($start == $i) {
+                                $label = $short_days[$hours_rows[$start]['day']];
+                            } else {
+                                $label = $short_days[$hours_rows[$start]['day']] . '–' . $short_days[$hours_rows[$i]['day']];
+                            }
+                            $output[] = $label . ' ' . $current_hours;
+                            $i++;
+                        }
+                        if (!empty($output)) : ?>
                             <div class="location-detail mb-2">
                                 <div class="d-flex align-items-center">
                                     <i class="fas fa-clock location-icon"></i>
-                                    <span><?php echo esc_html($hours_operation); ?></span>
+                                    <span><?php echo implode(' | ', $output); ?></span>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -131,51 +166,7 @@ get_header();
                     <div class="location-details py-4">
                         <div class="row gx-5">
                             <div class="col-md-7">
-                                <div class="location-cta-links mb-4">
-                                    <div class="row row-cols-1 row-cols-sm-2 g-3">
-                                        <div class="col">
-                                            <a href="/contact" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100">
-                                                Contact Us <i class="fas fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <?php $phone_number = get_field('phone_number'); ?>
-                                            <?php if ($phone_number): ?>
-                                            <a href="tel:<?php echo esc_attr($phone_number); ?>" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100">
-                                                Call Now <i class="fas fa-arrow-right"></i>
-                                            </a>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="col">
-                                            <?php $location_maps_link = get_field('location_maps_link'); ?>
-                                            <?php if ($location_maps_link): ?>
-                                            <a href="<?php echo esc_url($location_maps_link); ?>" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100" target="_blank">
-                                                Get Directions <i class="fas fa-arrow-right"></i>
-                                            </a>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="col">
-                                            <a href="/procedures" class="btn btn-outline-primary d-flex justify-content-between align-items-center w-100">
-                                                View Procedures <i class="fas fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <?php if(have_rows('business_hours')): ?>
-                                <h3 class="mb-3 h5">Hours of Operation</h3>
-                                <div class="business-hours-container">
-                                    <?php while(have_rows('business_hours')): the_row();
-                                        $day = get_sub_field('day');
-                                        $hours = get_sub_field('hours');
-                                    ?>
-                                        <div class="business-hours-row">
-                                            <div class="business-hours-day"><?php echo esc_html($day); ?></div>
-                                            <div class="business-hours-time"><?php echo esc_html($hours); ?></div>
-                                        </div>
-                                    <?php endwhile; ?>
-                                </div>
-                                <?php endif; ?>
+                                
                             </div>
 
                             <div class="col-md-5">

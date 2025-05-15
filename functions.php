@@ -77,89 +77,90 @@ function mia_aesthetics_enqueue_scripts() {
         }
     }
 
-    // --- Conditional Styles based on Page Type ---
-
-    // Homepage styles
+    // --- Load CSS based on current template ---
+    
+    // 1. Determine the CSS file to load based on current page/post type
+    $css_file = null;
+    $handle = null;
+    
+    // Front page
     if (is_front_page()) {
-        $home_css = '/_home.css';
-        if (file_exists($css_path . $home_css)) {
-            wp_enqueue_style(
-                'mia-home',
-                $css_uri . $home_css,
-                array('mia-base'),
-                filemtime($css_path . $home_css)
-            );
-        }
+        $css_file = '/_home.css';
+        $handle = 'mia-home';
     }
-    // 404 page styles
+    // 404 page
     elseif (is_404()) {
-        $error_css = '/_404.css';
-        if (file_exists($css_path . $error_css)) {
-            wp_enqueue_style(
-                'mia-404',
-                $css_uri . $error_css,
-                array('mia-base'),
-                filemtime($css_path . $error_css)
-            );
-        }
+        $css_file = '/_404.css';
+        $handle = 'mia-404';
     }
-    // Search page styles
+    // Search page
     elseif (is_search()) {
-        $search_css = '/_search.css';
-        if (file_exists($css_path . $search_css)) {
-            wp_enqueue_style(
-                'mia-search',
-                $css_uri . $search_css,
-                array('mia-base'),
-                filemtime($css_path . $search_css)
-            );
-        }
+        $css_file = '/_search.css';
+        $handle = 'mia-search';
     }
     // Taxonomy pages
     elseif (is_tax()) {
-        $tax_css = '/_taxonomies.css';
-        if (file_exists($css_path . $tax_css)) {
-            wp_enqueue_style(
-                'mia-taxonomies',
-                $css_uri . $tax_css,
-                array('mia-base'),
-                filemtime($css_path . $tax_css)
-            );
+        $css_file = '/_taxonomies.css';
+        $handle = 'mia-taxonomies';
+    }
+    // Blog index/archive
+    elseif (is_home() || (is_archive() && get_post_type() == 'post')) {
+        $css_file = '/_archive.css';
+        $handle = 'mia-post-archive';
+    }
+    // Single post
+    elseif (is_singular('post')) {
+        $css_file = '/_single.css';
+        $handle = 'mia-post-single';
+    }
+    // Regular pages
+    elseif (is_page()) {
+        $css_file = '/_page.css';
+        $handle = 'mia-page';
+    }
+    // Custom post types - archives
+    elseif (is_post_type_archive()) {
+        $post_type = get_post_type();
+        if (!$post_type) {
+            // Get post type from query var if get_post_type() fails
+            $post_type = get_query_var('post_type');
+        }
+        
+        if ($post_type) {
+            $css_file = '/_' . $post_type . '-archive.css';
+            $handle = 'mia-' . $post_type . '-archive';
         }
     }
-    // Handle Posts (Blog)
-    elseif (is_home() || is_singular('post') || is_archive('post')) { // is_home() for blog page
-         if (is_archive('post') || is_home()) {
-            $style_path = '/_archive.css'; // Use generic archive for blog index/archive
-            $handle = 'mia-post-archive';
-        } elseif (is_singular('post')) {
-            $style_path = '/_single.css';
-            $handle = 'mia-post-single';
+    // Custom post types - single
+    elseif (is_singular()) {
+        $post_type = get_post_type();
+        
+        if ($post_type && $post_type !== 'post' && $post_type !== 'page') {
+            $css_file = '/_' . $post_type . '.css';
+            $handle = 'mia-' . $post_type . '-single';
         }
-
-        if (isset($style_path) && file_exists($css_path . $style_path)) {
+    }
+    
+    // 2. Load the determined CSS file if it exists
+    if ($css_file && $handle) {
+        if (file_exists($css_path . $css_file)) {
             wp_enqueue_style(
                 $handle,
-                $css_uri . $style_path,
+                $css_uri . $css_file,
                 array('mia-base'),
-                filemtime($css_path . $style_path)
+                filemtime($css_path . $css_file)
             );
+        } else {
+            // Log missing CSS file for debugging
+            error_log('Mia Aesthetics Theme: CSS file not found: ' . $css_file);
         }
     }
-    // Handle Pages
-    elseif (is_page()) {
-        $style_path = '/_page.css'; // General page style
-        if (file_exists($css_path . $style_path)) {
-            wp_enqueue_style(
-                'mia-page',
-                $css_uri . $style_path,
-                array('mia-base'),
-                filemtime($css_path . $style_path)
-            );
-        }
-        // Page-specific styles based on slug
+    
+    // 3. Page-specific styles based on slug (for regular pages only)
+    if (is_page()) {
         $page_slug = get_post_field('post_name', get_post());
         $page_specific_path = '/_' . $page_slug . '.css';
+        
         if (file_exists($css_path . $page_specific_path)) {
             wp_enqueue_style(
                 'mia-page-' . $page_slug,
@@ -169,96 +170,35 @@ function mia_aesthetics_enqueue_scripts() {
             );
         }
     }
-    // Handle Custom Post Types (Singles and Archives)
-    else {
-        $post_type = get_post_type();
-        $cpt_styles_loaded = false;
-        
-        // Debug: Output the current post type and whether it's an archive
-        // error_log('Post Type: ' . $post_type . ', Is Archive: ' . (is_archive() ? 'Yes' : 'No'));
-        
-        // Check if we're on a surgeon archive page specifically
-        if (is_post_type_archive('surgeon')) {
-            $css_file = '/_surgeon-archive.css';
-            $handle = 'mia-surgeon-archive';
-            
-            if (file_exists($css_path . $css_file)) {
-                wp_enqueue_style(
-                    $handle,
-                    $css_uri . $css_file,
-                    array('mia-base'),
-                    filemtime($css_path . $css_file)
-                );
-                $cpt_styles_loaded = true;
-            }
-        }
-        // Handle other CPTs
-        elseif (in_array($post_type, array('location', 'procedure', 'surgeon', 'condition', 'case', 'special'))) {
-            if (is_archive()) {
-                // Archive view
-                $css_file = '/_' . $post_type . '-archive.css';
-                $handle = 'mia-' . $post_type . '-archive';
-            } else {
-                // Single view (covers is_singular for CPTs)
-                $css_file = '/_' . $post_type . '.css';
-                $handle = 'mia-' . $post_type . '-single';
-            }
 
-            if (file_exists($css_path . $css_file)) {
-                wp_enqueue_style(
-                    $handle,
-                    $css_uri . $css_file,
-                    array('mia-base'),
-                    filemtime($css_path . $css_file)
-                );
-                $cpt_styles_loaded = true;
-            }
-        }
-
-        // Fallback if no specific CPT style found (optional)
-        // if (!$cpt_styles_loaded && !is_front_page() && !is_404() && !is_search() && !is_tax() && !is_page() && !is_home() && !is_singular('post') && !is_archive('post')) {
-        //     // Maybe load a generic CPT style or the _page.css style as a fallback
-        // }
-    }
-
-
-    // Theme JS - Load last
-    if ( is_singular( 'condition' ) ) {
+    // --- JavaScript Loading ---
+    
+    // Determine which JS file to load
+    if (is_singular('condition')) {
         // Load script specific to single Condition pages
-        $condition_js = $theme_path . '/assets/js/condition.js';
-        if ( file_exists( $condition_js ) ) {
-            wp_enqueue_script(
-                'mia-condition-script',
-                $theme_uri . '/assets/js/condition.js',
-                array( 'bootstrap-js' ),
-                filemtime( $condition_js ),
-                true
-            );
-        }
-    } elseif ( is_singular( 'surgeon' ) ) {
+        $js_file = $theme_path . '/assets/js/condition.js';
+        $handle = 'mia-condition-script';
+    } 
+    elseif (is_singular('surgeon')) {
         // Load script specific to single Surgeon pages
-        $surgeon_js = $theme_path . '/assets/js/surgeon.js';
-        if ( file_exists( $surgeon_js ) ) {
-            wp_enqueue_script(
-                'mia-surgeon-script',
-                $theme_uri . '/assets/js/surgeon.js',
-                array( 'bootstrap-js' ),
-                filemtime( $surgeon_js ),
-                true
-            );
-        }
-    } else {
+        $js_file = $theme_path . '/assets/js/surgeon.js';
+        $handle = 'mia-surgeon-script';
+    } 
+    else {
         // Load global script on all other pages
         $js_file = $theme_path . '/assets/js/main.js';
-        if ( file_exists( $js_file ) ) {
-            wp_enqueue_script(
-                'mia-aesthetics-script',
-                $theme_uri . '/assets/js/main.js',
-                array( 'bootstrap-js' ), // Only depend on Bootstrap, not jQuery
-                filemtime( $js_file ),
-                true // Load in footer
-            );
-        }
+        $handle = 'mia-aesthetics-script';
+    }
+    
+    // Load the determined JS file if it exists
+    if (isset($js_file) && file_exists($js_file)) {
+        wp_enqueue_script(
+            $handle,
+            $theme_uri . '/assets/js/' . basename($js_file),
+            array('bootstrap-js'),
+            filemtime($js_file),
+            true // Load in footer
+        );
     }
 }
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
@@ -937,7 +877,6 @@ function display_page_faqs($show_heading = true) {
                         id="<?php echo esc_attr($collapse_id); ?>"
                         class="accordion-collapse collapse <?php echo $is_first ? 'show' : ''; ?>"
                         aria-labelledby="<?php echo esc_attr($heading_id); ?>"
-                        data-bs-parent="#<?php echo esc_attr($accordion_id); ?>"
                     >
                         <div class="accordion-body">
                             <?php echo wp_kses_post($faq['answer']); // Use wp_kses_post to allow safe HTML formatting ?>
@@ -979,54 +918,82 @@ add_action( 'pre_get_posts', 'mia_modify_location_archive_query' );
 /**
  * Modify the main query for the Surgeon archive page.
  * - Show all surgeons (no pagination).
+ * - Sort by menu_order (post order) which can be manually set in the admin.
  */
 function mia_modify_surgeon_archive_query( $query ) {
     // Check if it's the main query, on the frontend, and the surgeon archive page
     if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'surgeon' ) ) {
         // Show all posts
         $query->set( 'posts_per_page', -1 );
+        
+        // Sort by menu_order (post order)
+        $query->set( 'orderby', 'menu_order' );
+        $query->set( 'order', 'ASC' );
     }
 }
 add_action( 'pre_get_posts', 'mia_modify_surgeon_archive_query' );
 
 /**
- * Force-load the surgeon archive CSS on the surgeon archive page
- * This is a direct approach to ensure the CSS is loaded
+ * Fallback CSS loader for specific templates that might have issues with the main loader
+ * This is a safety net to ensure critical CSS files are always loaded
  */
-function mia_force_load_surgeon_archive_css() {
+function mia_fallback_css_loader() {
+    $theme_uri = get_template_directory_uri();
+    $theme_path = get_template_directory();
+    $css_path = $theme_path . '/assets/css';
+    $css_uri = $theme_uri . '/assets/css';
+    
+    // Array of critical CSS files to ensure are loaded for specific templates
+    $critical_css = array();
+    
+    // Add surgeon archive CSS if on surgeon archive page
     if (is_post_type_archive('surgeon')) {
-        $theme_uri = get_template_directory_uri();
-        $theme_path = get_template_directory();
-        $css_path = $theme_path . '/assets/css';
-        $css_uri = $theme_uri . '/assets/css';
-        $css_file = '/_surgeon-archive.css';
-        
-        if (file_exists($css_path . $css_file)) {
+        $critical_css['mia-surgeon-archive-fallback'] = '/_surgeon-archive.css';
+    }
+    
+    // Add location archive CSS if on location archive page
+    if (is_post_type_archive('location')) {
+        $critical_css['mia-location-archive-fallback'] = '/_location-archive.css';
+    }
+    
+    // Add other critical CSS files here as needed
+    
+    // Load all critical CSS files
+    foreach ($critical_css as $handle => $file) {
+        if (file_exists($css_path . $file) && !wp_style_is('mia-' . str_replace('-fallback', '', $handle), 'enqueued')) {
             wp_enqueue_style(
-                'mia-surgeon-archive-direct',
-                $css_uri . $css_file,
-                array(),
-                filemtime($css_path . $css_file)
+                $handle,
+                $css_uri . $file,
+                array('mia-base'),
+                filemtime($css_path . $file)
             );
         }
     }
 }
-add_action('wp_enqueue_scripts', 'mia_force_load_surgeon_archive_css', 999); // Run after the main enqueue function
+add_action('wp_enqueue_scripts', 'mia_fallback_css_loader', 999); // Run after the main enqueue function
 
 /**
- * Ensure the correct body class is added for the surgeon archive page
- * This is a failsafe to make sure the post-type-archive-surgeon class is added
+ * Ensure the correct body class is added for archive pages
+ * This is a failsafe to make sure the post-type-archive classes are added
  */
-function mia_ensure_surgeon_archive_body_class($classes) {
+function mia_ensure_archive_body_class($classes) {
     if (is_post_type_archive('surgeon')) {
         // Make sure the post-type-archive-surgeon class is added
         if (!in_array('post-type-archive-surgeon', $classes)) {
             $classes[] = 'post-type-archive-surgeon';
         }
     }
+    
+    if (is_post_type_archive('location')) {
+        // Make sure the post-type-archive-location class is added
+        if (!in_array('post-type-archive-location', $classes)) {
+            $classes[] = 'post-type-archive-location';
+        }
+    }
+    
     return $classes;
 }
-add_filter('body_class', 'mia_ensure_surgeon_archive_body_class', 999); // Run late to ensure it's not overridden
+add_filter('body_class', 'mia_ensure_archive_body_class', 999); // Run late to ensure it's not overridden
 
 
 /**

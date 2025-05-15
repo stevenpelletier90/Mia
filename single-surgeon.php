@@ -47,7 +47,7 @@ get_header(); ?>
                             // Get location URL
                             $location_url = get_permalink($location);
                         ?>
-                            <p class="surgeon-location">Plastic Surgeon at <a href="<?php echo esc_url($location_url); ?>">Mia Aesthetics <?php echo $location_title; ?></a></p>
+                            <p class="surgeon-location">Plastic Surgeon at <a href="<?php echo esc_url($location_url); ?>"> <?php echo $location_title; ?></a></p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -56,10 +56,10 @@ get_header(); ?>
     </div>
 
     <!-- Mobile Surgeon Navigation - Only visible on mobile -->
-    <div class="surgeon-mobile-nav d-md-none sticky-top" style="top: var(--navbar-height);">
+    <div id="surgeon-mobile-nav" class="surgeon-mobile-nav d-md-none sticky-top" style="top: var(--navbar-height);">
         <div class="container">
             <div class="surgeon-nav-buttons">
-                <a href="#surgeon-about" class="surgeon-nav-btn active">About</a>
+                <a href="#surgeon-about" class="surgeon-nav-btn">About</a>
                 <a href="#surgeon-specialities" class="surgeon-nav-btn">Specialities</a>
                 <a href="#surgeon-before-after" class="surgeon-nav-btn">Before & After</a>
             </div>
@@ -105,7 +105,7 @@ get_header(); ?>
             <!-- Video Section (visible on mobile before content) -->
             <div class="row d-lg-none">
                 <div class="col-12">
-                    <section id="surgeon-video-mobile" class="sidebar-section" style="border-radius: 0;">
+                    <div class="sidebar-section" style="border-radius: 0;">
                         <div class="video-container">
                             <iframe 
                                 src="<?php echo esc_url($embed_url); ?>" 
@@ -115,7 +115,7 @@ get_header(); ?>
                                 allowfullscreen>
                             </iframe>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </div>
             <?php endif; ?>
@@ -129,16 +129,16 @@ get_header(); ?>
                         <?php the_content(); ?>
                     </section>
 
-                    <?php 
-                    // Get specialties from the ACF relationship field
-                    $specialties = get_field('specialties');
-                    
-                    // Only show the section if specialties are selected
-                    if($specialties && !empty($specialties)): 
-                    ?>
-                    <!-- Specialities Section (Redesigned) -->
+                    <!-- Specialities Section -->
                     <section id="surgeon-specialities">
                         <h2 class="section-title">Specialities</h2>
+                        <?php 
+                        // Get specialties from the ACF relationship field
+                        $specialties = get_field('specialties');
+                        
+                        // Only show specialties if they exist
+                        if($specialties && !empty($specialties)): 
+                        ?>
                         <div class="row">
                             <?php foreach($specialties as $specialty): ?>
                                 <div class="col-md-6 specialty-card-wrapper">
@@ -162,8 +162,10 @@ get_header(); ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                        <?php else: ?>
+                            <p>No specialities available for this surgeon.</p>
+                        <?php endif; ?>
                     </section>
-                    <?php endif; ?>
                 </div>
                 
                 <!-- Sidebar Column -->
@@ -171,7 +173,7 @@ get_header(); ?>
                     <div class="surgeon-sidebar">
                         <?php if($video_url): ?>
                         <!-- Video Section (visible only on desktop) -->
-                        <section id="surgeon-video" class="sidebar-section d-none d-lg-block" style="border-radius: 0;">
+                        <div class="sidebar-section d-none d-lg-block" style="border-radius: 0;">
                             <div class="video-container">
                                 <iframe 
                                     src="<?php echo esc_url($embed_url); ?>" 
@@ -181,7 +183,7 @@ get_header(); ?>
                                     allowfullscreen>
                                 </iframe>
                             </div>
-                        </section>
+                        </div>
                         <?php endif; ?>
 
                         <!-- Before & After Gallery Section -->

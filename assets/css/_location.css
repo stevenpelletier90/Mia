@@ -5,12 +5,12 @@
 .location-header h1 {
   color: var(--color-primary);
   font-weight: 600;
-  font-size: 42px;
+  /* font-size removed: use base h1 */
   font-family: var(--font-heading);
 }
 .location-intro p {
   color: #555;
-  font-size: 1.1rem;
+  /* font-size removed: use base p */
   line-height: 1.6;
 }
 .location-info {
@@ -27,7 +27,7 @@
 .location-detail .d-flex.flex-column span {
   line-height: 1.4;
   color: #333;
-  font-size: 1rem;
+  /* font-size removed: use base */
 }
 .location-icon {
   color: var(--color-gold);
@@ -141,9 +141,10 @@
   position: relative;
   padding-bottom: 0.75rem;
   display: inline-block;
+  /* font-size removed: use .h2 or utility class */
 }
 .section-title:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -226,7 +227,7 @@
   margin-bottom: 1.5rem;
 }
 .location-details h3.h5 {
-  font-size: 1.1rem;
+  /* font-size removed: use .h5 or utility class */
   color: var(--color-primary);
   font-weight: 600;
 }
@@ -254,26 +255,26 @@
 .business-hours-day {
   font-weight: 500;
   color: var(--color-primary);
-  font-size: 1.05rem;
+  /* font-size removed: use base or utility class */
 }
 .business-hours-time {
   color: var(--color-primary);
   text-align: right;
-  font-size: 1.05rem;
+  /* font-size removed: use base or utility class */
 }
 
 @media (max-width: 991px) {
   .location-header h1 {
-    font-size: 36px;
+    /* font-size removed: use base h1 */
   }
   .location-header .row {
     row-gap: 2rem;
   }
   .section-title {
-    font-size: 1.75rem;
+    /* font-size removed: use .h2 or utility class */
   }
   .location-intro p {
-    font-size: 1rem;
+    /* font-size removed: use base p */
   }
 }
 
@@ -288,10 +289,10 @@
     padding-top: 1.5rem;
   }
   .location-header h1 {
-    font-size: 30px;
+    /* font-size removed: use base h1 */
   }
   .location-intro p {
-    font-size: 0.95rem;
+    /* font-size removed: use base p */
   }
   .location-detail {
     margin-bottom: 0.5rem;
@@ -300,7 +301,7 @@
     margin-top: 1rem;
   }
   .section-title {
-    font-size: 1.5rem;
+    /* font-size removed: use .h2 or utility class */
   }
   .surgeon-image-container {
     padding: 1rem 1rem 0.5rem;
@@ -318,11 +319,11 @@
   }
   .business-hours-day,
   .business-hours-time {
-    font-size: 0.95rem;
+    /* font-size removed: use base or utility class */
   }
   .location-features-list li {
     margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+    /* font-size removed: use base or utility class */
   }
   .location-cta-links .btn {
     font-size: 0.9rem;
@@ -384,9 +385,9 @@
 }
 
 .accordion-button::after {
-  font-family: 'Font Awesome 6 Free';
+  font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  content: '\f078';
+  content: "\f078";
   background-image: none;
   transition: transform 0.3s ease;
   color: var(--color-gold);
@@ -394,7 +395,7 @@
 
 .accordion-button:not(.collapsed)::after {
   transform: rotate(180deg);
-  content: '\f078';
+  content: "\f078";
   color: var(--color-gold);
 }
 
@@ -403,5 +404,21 @@
   background-color: #fff;
   color: #333;
   line-height: 1.6;
-  font-size: 1rem;
+  /* font-size removed: use base */
+}
+
+/* Single-line business hours styling */
+.business-hours-single-line {
+  /* font-size removed: use base or utility class */
+  color: var(--color-primary);
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  word-break: break-word;
+  white-space: normal;
+}
+.business-hours-single-line span,
+.business-hours-single-line strong {
+  font-weight: 600;
+  color: var(--color-primary);
 }
