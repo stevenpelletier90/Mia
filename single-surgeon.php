@@ -24,7 +24,15 @@ get_header(); ?>
                         $headshot_url = wp_get_attachment_image_url($headshot_id, 'full');
                         ?>
                         <div class="surgeon-headshot">
-                            <img src="<?php echo esc_url($headshot_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="img-fluid rounded-circle">
+<img 
+    src="<?php echo esc_url($headshot_url); ?>" 
+    alt="<?php echo esc_attr(get_the_title()); ?>" 
+    class="img-fluid rounded-circle"
+    fetchpriority="high"
+    width="200"
+    height="200"
+    sizes="(max-width: 767px) 120px, 200px"
+>
                         </div>
                     <?php else: ?>
                         <div class="surgeon-headshot surgeon-headshot-placeholder">
@@ -57,12 +65,10 @@ get_header(); ?>
 
     <!-- Mobile Surgeon Navigation - Only visible on mobile -->
     <div id="surgeon-mobile-nav" class="surgeon-mobile-nav d-md-none sticky-top" style="top: var(--navbar-height);">
-        <div class="container">
-            <div class="surgeon-nav-buttons">
-                <a href="#surgeon-about" class="surgeon-nav-btn">About</a>
-                <a href="#surgeon-specialities" class="surgeon-nav-btn">Specialities</a>
-                <a href="#surgeon-before-after" class="surgeon-nav-btn">Before & After</a>
-            </div>
+        <div class="surgeon-nav-buttons">
+            <a href="#surgeon-about" class="surgeon-nav-btn">About</a>
+            <a href="#surgeon-specialities" class="surgeon-nav-btn">Specialities</a>
+            <a href="#surgeon-before-after" class="surgeon-nav-btn">Before & After</a>
         </div>
     </div>
 

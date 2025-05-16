@@ -1,33 +1,24 @@
 html {
   scroll-behavior: smooth;
 }
-
 body.single-surgeon {
   scroll-padding-top: 120px;
   overflow-y: auto;
   overflow-x: hidden;
 }
-
 .surgeon-mobile-nav {
   background-color: var(--color-primary);
   padding: 0.5rem 0;
   z-index: 1020;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  top: var(--navbar-height);
-  width: 100%;
+  width: 100vw;
 }
-.surgeon-mobile-nav .container {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .surgeon-nav-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   width: 100%;
 }
-
 .surgeon-nav-btn {
   color: #fff;
   text-align: center;
@@ -37,8 +28,11 @@ body.single-surgeon {
   position: relative;
   transition: all 0.1s ease;
   font-size: 0.95rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
-
+.surgeon-nav-btn:last-child {
+  border-right: none;
+}
 .surgeon-nav-btn:after {
   content: "";
   position: absolute;
@@ -50,15 +44,12 @@ body.single-surgeon {
   background-color: var(--color-gold);
   transition: width 0.1s ease;
 }
-
 .surgeon-nav-btn.active {
   color: var(--color-gold);
 }
-
 .surgeon-nav-btn.active:after {
   width: 40%;
 }
-
 .surgeon-nav-btn:hover {
   color: var(--color-gold);
   text-decoration: none;
@@ -91,7 +82,6 @@ body.single-surgeon {
 .surgeon-location a {
   color: #fff;
 }
-
 .surgeon-headshot {
   display: flex;
   justify-content: flex-start;
@@ -156,7 +146,6 @@ body.single-surgeon {
   position: relative;
   z-index: 1;
 }
-
 .video-container {
   scroll-margin-top: 120px;
 }
@@ -333,7 +322,6 @@ body.single-surgeon {
   border-radius: 8px;
   overflow: hidden;
 }
-
 @media (max-width: 991px) {
 }
 
@@ -341,26 +329,32 @@ body.single-surgeon {
   body.single-surgeon {
     scroll-padding-top: 150px;
   }
-
   #surgeon-about,
   #surgeon-specialities,
   #surgeon-before-after {
     scroll-margin-top: 150px;
     padding-top: 20px;
   }
-
   .video-container {
     scroll-margin-top: 150px;
   }
-
   .surgeon-hero-section {
     display: flex;
     align-items: center;
-    padding: 1.5rem 0;
-    min-height: 250px;
+    justify-content: center;
+    padding: 3.5rem 0;
     height: auto;
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
+    min-height: 320px;
+    transform: none;
+    -webkit-transform: none;
+  }
+  .surgeon-hero-section .container {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  .surgeon-hero-section .row {
+    gap: 1.5rem;
+    padding: 15px 0;
   }
   .surgeon-hero-content {
     text-align: center;
@@ -371,24 +365,15 @@ body.single-surgeon {
   }
   .surgeon-headshot img,
   .placeholder-circle {
-    max-width: 150px;
+    max-width: 200px;
     width: 100%;
-    height: auto;
-  }
-  .placeholder-circle {
-    height: 150px;
-  }
-  .surgeon-location {
-  }
-  .surgeon-hero-content h1 {
+    height: 200px;
   }
   #surgeon-about,
   #surgeon-before-after,
   #surgeon-specialities {
     padding-top: 15px;
     margin-bottom: 2rem;
-  }
-  .section-title {
   }
   .accordion-button {
     padding: 1rem;
@@ -414,15 +399,12 @@ body.single-surgeon {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
-
 .accordion-item:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
-
 .accordion-header {
   margin: 0;
 }
-
 .accordion-button {
   background-color: var(--color-primary);
   color: #fff;
@@ -433,18 +415,15 @@ body.single-surgeon {
   font-family: var(--font-heading);
   position: relative;
 }
-
 .accordion-button:not(.collapsed) {
   background-color: var(--color-primary);
   color: var(--color-gold);
   box-shadow: none;
 }
-
 .accordion-button:focus {
   box-shadow: none;
   border-color: transparent;
 }
-
 .accordion-button::after {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
@@ -453,13 +432,11 @@ body.single-surgeon {
   transition: transform 0.3s ease;
   color: var(--color-gold);
 }
-
 .accordion-button:not(.collapsed)::after {
   transform: rotate(180deg);
   content: "\f078";
   color: var(--color-gold);
 }
-
 .accordion-body {
   padding: 1.5rem;
   background-color: #fff;

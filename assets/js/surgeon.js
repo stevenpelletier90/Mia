@@ -2,49 +2,9 @@
  * JavaScript specific to the "Surgeon" single template
  */
 
-// Function to calculate and set the hero section height
-function setSurgeonHeroHeight() {
-  // Get the elements
-  const header = document.querySelector("header");
-  const breadcrumbs = document.getElementById("breadcrumbs");
-  const mobileCta = document.querySelector(".mobile-cta-container");
-  const mobileNav = document.querySelector(".surgeon-mobile-nav");
-  const surgeonHero = document.querySelector(".surgeon-hero-section");
-
-  if (!surgeonHero) return;
-
-  // Check if we're on mobile (max-width: 767px)
-  if (window.innerWidth <= 767) {
-    // Get the heights
-    const headerHeight = header ? header.offsetHeight : 0;
-    const breadcrumbsHeight = breadcrumbs ? breadcrumbs.offsetHeight : 0;
-    const mobileCtaHeight = mobileCta ? mobileCta.offsetHeight : 0;
-    const mobileNavHeight = mobileNav ? mobileNav.offsetHeight : 0;
-
-    // Calculate the total height to subtract
-    const subtractHeight = headerHeight + breadcrumbsHeight + mobileCtaHeight + mobileNavHeight;
-
-    // Get the actual viewport height (works better on iOS)
-    const windowHeight = window.innerHeight;
-
-    // Set the hero height with a minimum to prevent it from becoming too small
-    const calculatedHeight = windowHeight - subtractHeight;
-    const minHeight = 250; // Minimum height in pixels
-
-    // Use the larger of the calculated height or minimum height
-    surgeonHero.style.height = `${Math.max(calculatedHeight, minHeight)}px`;
-  } else {
-    // On desktop, use the CSS default (350px)
-    surgeonHero.style.height = "";
-  }
-}
-
 // Modern Scrollspy Implementation using Intersection Observer API
 
-// Run on page load
 document.addEventListener("DOMContentLoaded", function () {
-  setSurgeonHeroHeight();
-
   // Disable any Bootstrap scrollspy
   disableBootstrapScrollspy();
 
@@ -240,12 +200,4 @@ function getNavbarHeight() {
   return headerHeight + mobileNavHeight;
 }
 
-// Handle window resize
-window.addEventListener("resize", function () {
-  setSurgeonHeroHeight();
-});
-
-// Run after initial load
-setTimeout(function () {
-  setSurgeonHeroHeight();
-}, 500);
+// (Removed dynamic hero height logic)
