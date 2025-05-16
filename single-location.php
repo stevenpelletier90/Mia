@@ -310,10 +310,8 @@ get_header();
     </section>
 
     <section class="py-5">
-        <div class="container">
-            <div class="faq-container">
-                <?php echo display_page_faqs(); ?>
-            </div>
+        <div class="container">            
+            <?php echo display_page_faqs(); ?>           
         </div>
     </section>
 
