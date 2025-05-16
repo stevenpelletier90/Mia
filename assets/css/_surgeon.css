@@ -69,6 +69,7 @@ body.single-surgeon {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  margin-left: 1.5rem; /* Add consistent left margin at all breakpoints */
 }
 .surgeon-hero-content h1 {
   color: #fff;
@@ -317,12 +318,70 @@ body.single-surgeon {
   width: 100%;
   height: 100%;
 }
+/* Video thumbnail styles */
+.video-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+}
+.video-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.video-thumbnail:hover img {
+  transform: scale(1.05);
+}
+.video-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  border: 3px solid var(--color-gold);
+}
+.video-play-button i {
+  color: var(--color-gold);
+  font-size: 24px;
+  margin-left: 5px; /* Slightly adjust to make the play icon appear centered */
+}
+.video-thumbnail:hover .video-play-button {
+  background-color: var(--color-gold);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.video-thumbnail:hover .video-play-button i {
+  color: var(--color-primary);
+}
 .surgeon-sidebar #surgeon-video {
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
 }
 @media (max-width: 991px) {
+}
+
+/* Add standard gutter between row items to replace g-0 we removed from HTML */
+.surgeon-hero-section .row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.surgeon-hero-section .row > div {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 @media (max-width: 767px) {
@@ -342,23 +401,22 @@ body.single-surgeon {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3.5rem 0;
+    padding: 1.5rem 0;
     height: auto;
     min-height: 320px;
     transform: none;
     -webkit-transform: none;
   }
-  .surgeon-hero-section .container {
-    padding-left: 25px;
-    padding-right: 25px;
-  }
+
   .surgeon-hero-section .row {
     gap: 1.5rem;
-    padding: 15px 0;
   }
   .surgeon-hero-content {
     text-align: center;
+    padding-top: 15px;
+    margin-left: 0; /* Remove left margin on mobile */
   }
+
   .surgeon-headshot,
   .surgeon-headshot-placeholder {
     justify-content: center;

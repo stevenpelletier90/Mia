@@ -14,8 +14,8 @@ get_header(); ?>
 
     <div class="surgeon-hero-section">
         <div class="container">
-            <div class="row align-items-center g-0">
-                <div class="col-md-3 col-lg-2 mb-4 mb-md-0">
+            <div class="row align-items-center">
+                <div class="col-md-3 col-lg-2">
                     <?php 
                     // Get surgeon headshot
                     $headshot_id = get_field('surgeon_headshot');
@@ -43,7 +43,7 @@ get_header(); ?>
                     <?php endif; ?>
                 </div>
                 <div class="col-md-9 col-lg-10">
-                    <div class="surgeon-hero-content ms-md-4">
+                    <div class="surgeon-hero-content">
                         <h1><?php echo get_the_title(); ?></h1>
                         <?php 
                         // Get surgeon location
@@ -78,9 +78,8 @@ get_header(); ?>
             // Check if there's a video URL in the ACF field
             $video_url = get_field('video_details_video_url');
             if($video_url): 
-                // Function to normalize YouTube URL to embed format
-                function get_youtube_embed_url($youtube_url) {
-                    // Extract video ID from various YouTube URL formats
+                // Function to extract YouTube video ID from various URL formats
+                function get_youtube_video_id($youtube_url) {
                     $video_id = '';
                     
                     // Match standard YouTube URLs (youtu.be and youtube.com)
@@ -96,30 +95,44 @@ get_header(); ?>
                         $video_id = $matches[1];
                     }
                     
-                    // If we found a video ID, return the embed URL
-                    if ($video_id) {
-                        return 'https://www.youtube.com/embed/' . $video_id;
-                    }
-                    
-                    // If no valid YouTube URL format was found, return the original URL
-                    return $youtube_url;
+                    return $video_id;
                 }
                 
-                // Get embed URL
-                $embed_url = get_youtube_embed_url($video_url);
+                // Get video ID
+                $video_id = get_youtube_video_id($video_url);
+                
+                // Get YouTube embed URL
+                $embed_url = $video_id ? 'https://www.youtube.com/embed/' . $video_id : $video_url;
+                
+                // Get video thumbnail from ACF field only (no YouTube fallback)
+                $video_thumbnail = get_field('video_thumbnail');
+                $thumbnail_url = '';
+
+                if ($video_thumbnail) {
+                    // If we have a custom thumbnail in ACF, use that
+                    $thumbnail_url = wp_get_attachment_image_url($video_thumbnail, 'full');
+                }
             ?>
             <!-- Video Section (visible on mobile before content) -->
             <div class="row d-lg-none">
                 <div class="col-12">
                     <div class="sidebar-section" style="border-radius: 0;">
                         <div class="video-container">
-                            <iframe 
-                                src="<?php echo esc_url($embed_url); ?>" 
-                                title="<?php echo esc_attr(get_the_title()); ?> Video"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
+                            <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
+                                <?php if ($thumbnail_url): ?>
+                                <img 
+                                    src="<?php echo esc_url($thumbnail_url); ?>" 
+                                    alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
+                                    class="img-fluid"
+                                    loading="lazy"
+                                    width="640"
+                                    height="360"
+                                />
+                                <div class="video-play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,13 +194,21 @@ get_header(); ?>
                         <!-- Video Section (visible only on desktop) -->
                         <div class="sidebar-section d-none d-lg-block" style="border-radius: 0;">
                             <div class="video-container">
-                                <iframe 
-                                    src="<?php echo esc_url($embed_url); ?>" 
-                                    title="<?php echo esc_attr(get_the_title()); ?> Video"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
+                                <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
+                                    <?php if ($thumbnail_url): ?>
+                                    <img 
+                                        src="<?php echo esc_url($thumbnail_url); ?>" 
+                                        alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
+                                        class="img-fluid"
+                                        loading="lazy"
+                                        width="640"
+                                        height="360"
+                                    />
+                                    <div class="video-play-button">
+                                        <i class="fa-solid fa-play"></i>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                         <?php endif; ?>
@@ -195,7 +216,14 @@ get_header(); ?>
                         <!-- Before & After Gallery Section -->
                         <section id="surgeon-before-after" class="sidebar-section">
                             <div class="card cta-card text-decoration-none text-dark">
-                                <img src="https://placehold.co/400x250" class="card-img-top" alt="Before and After Gallery Preview">
+                                <img 
+                                    src="https://placehold.co/400x250" 
+                                    class="card-img-top" 
+                                    alt="Before and After Gallery Preview"
+                                    loading="lazy"
+                                    width="400" 
+                                    height="250"
+                                >
                                 <div class="card-body">
                                     <h3 class="h5 card-title text-center">Before & After Gallery</h3>
                                     <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>
@@ -232,9 +260,7 @@ get_header(); ?>
     if($faq_section && !empty($faq_section['faqs'])): ?>
     <section class="faq-section">
         <div class="container">
-            <div class="faq-container">
-                <?php echo display_page_faqs(); ?>
-            </div>
+            <?php echo display_page_faqs(); ?>
         </div>
     </section>
     <?php endif; ?>
