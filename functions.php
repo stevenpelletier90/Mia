@@ -1,29 +1,20 @@
 <?php
 /**
- * Theme Functions
- *
  * @package Mia_Aesthetics
  */
 
 add_theme_support( 'post-thumbnails' );
 
-// Enqueue Scripts and Styles
 function mia_aesthetics_enqueue_scripts() {
-    // Theme paths
     $theme_path = get_template_directory();
     $theme_uri = get_template_directory_uri();
     $css_path = $theme_path . '/assets/css';
     $css_uri = $theme_uri . '/assets/css';
-
-    // Third-party CSS
-    // Removed Google Fonts enqueue - Fonts are now loaded locally via _base.css
-
-    // Consider removing Font Awesome if not actively used or if SVGs are preferred
     wp_enqueue_style(
         'font-awesome',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css', // Check latest version
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
         array(),
-        '6.7.2' // Update version number if you update the URL
+        '6.7.2'
     );
 
     wp_enqueue_style(
@@ -40,27 +31,24 @@ function mia_aesthetics_enqueue_scripts() {
         '5.3.6'
     );
 
-    // Bootstrap JS Bundle (includes Popper)
     wp_enqueue_script(
         'bootstrap-js',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js',
-        array(), // Bootstrap 5 doesn't require jQuery as a dependency
+        array(),
         '5.3.6',
         true
     );
 
-    // Base Styles - Always Load
     $base_file = '/_base.css';
     if (file_exists($css_path . $base_file)) {
         wp_enqueue_style(
             'mia-base',
             $css_uri . $base_file,
-            array('bootstrap-css', 'normalize'), // Dependencies
+            array('bootstrap-css', 'normalize'),
             filemtime($css_path . $base_file)
         );
     }
 
-    // Component Styles - Always Load (Header/Footer)
     $component_styles = array(
         'header' => '/_header.css',
         'footer' => '/_footer.css'
@@ -71,58 +59,39 @@ function mia_aesthetics_enqueue_scripts() {
             wp_enqueue_style(
                 'mia-' . $name,
                 $css_uri . $file,
-                array('mia-base'), // Depends on base
+                array('mia-base'),
                 filemtime($css_path . $file)
             );
         }
     }
 
-    // --- Load CSS based on current template ---
-    
-    // 1. Determine the CSS file to load based on current page/post type
     $css_file = null;
     $handle = null;
     
-    // Front page
     if (is_front_page()) {
         $css_file = '/_home.css';
         $handle = 'mia-home';
-    }
-    // 404 page
-    elseif (is_404()) {
+    } elseif (is_404()) {
         $css_file = '/_404.css';
         $handle = 'mia-404';
-    }
-    // Search page
-    elseif (is_search()) {
+    } elseif (is_search()) {
         $css_file = '/_search.css';
         $handle = 'mia-search';
-    }
-    // Taxonomy pages
-    elseif (is_tax()) {
+    } elseif (is_tax()) {
         $css_file = '/_taxonomies.css';
         $handle = 'mia-taxonomies';
-    }
-    // Blog index/archive
-    elseif (is_home() || (is_archive() && get_post_type() == 'post')) {
+    } elseif (is_home() || (is_archive() && get_post_type() == 'post')) {
         $css_file = '/_archive.css';
         $handle = 'mia-post-archive';
-    }
-    // Single post
-    elseif (is_singular('post')) {
+    } elseif (is_singular('post')) {
         $css_file = '/_single.css';
         $handle = 'mia-post-single';
-    }
-    // Regular pages
-    elseif (is_page()) {
+    } elseif (is_page()) {
         $css_file = '/_page.css';
         $handle = 'mia-page';
-    }
-    // Custom post types - archives
-    elseif (is_post_type_archive()) {
+    } elseif (is_post_type_archive()) {
         $post_type = get_post_type();
         if (!$post_type) {
-            // Get post type from query var if get_post_type() fails
             $post_type = get_query_var('post_type');
         }
         
@@ -130,9 +99,7 @@ function mia_aesthetics_enqueue_scripts() {
             $css_file = '/_' . $post_type . '-archive.css';
             $handle = 'mia-' . $post_type . '-archive';
         }
-    }
-    // Custom post types - single
-    elseif (is_singular()) {
+    } elseif (is_singular()) {
         $post_type = get_post_type();
         
         if ($post_type && $post_type !== 'post' && $post_type !== 'page') {
@@ -141,7 +108,7 @@ function mia_aesthetics_enqueue_scripts() {
         }
     }
     
-    // 2. Load the determined CSS file if it exists
+    // Load the determined CSS file
     if ($css_file && $handle) {
         if (file_exists($css_path . $css_file)) {
             wp_enqueue_style(
@@ -151,12 +118,10 @@ function mia_aesthetics_enqueue_scripts() {
                 filemtime($css_path . $css_file)
             );
         } else {
-            // Log missing CSS file for debugging
             error_log('Mia Aesthetics Theme: CSS file not found: ' . $css_file);
         }
     }
     
-    // 3. Page-specific styles based on slug (for regular pages only)
     if (is_page()) {
         $page_slug = get_post_field('post_name', get_post());
         $page_specific_path = '/_' . $page_slug . '.css';
@@ -165,27 +130,21 @@ function mia_aesthetics_enqueue_scripts() {
             wp_enqueue_style(
                 'mia-page-' . $page_slug,
                 $css_uri . $page_specific_path,
-                array('mia-page'), // Depends on general page style
+                array('mia-page'),
                 filemtime($css_path . $page_specific_path)
             );
         }
     }
 
-    // --- JavaScript Loading ---
-    
-    // Determine which JS file to load
     if (is_singular('condition')) {
-        // Load script specific to single Condition pages
         $js_file = $theme_path . '/assets/js/condition.js';
         $handle = 'mia-condition-script';
     } 
     elseif (is_singular('surgeon')) {
-        // Load script specific to single Surgeon pages
         $js_file = $theme_path . '/assets/js/surgeon.js';
         $handle = 'mia-surgeon-script';
     } 
     else {
-        // Load global script on all other pages
         $js_file = $theme_path . '/assets/js/main.js';
         $handle = 'mia-aesthetics-script';
     }
@@ -197,8 +156,21 @@ function mia_aesthetics_enqueue_scripts() {
             $theme_uri . '/assets/js/' . basename($js_file),
             array('bootstrap-js'),
             filemtime($js_file),
-            true // Load in footer
+            true
         );
+    }
+    
+    if (is_singular('surgeon') || is_singular('location')) {
+        $video_js_file = $theme_path . '/assets/js/video.js';
+        if (file_exists($video_js_file)) {
+            wp_enqueue_script(
+                'mia-video-script',
+                $theme_uri . '/assets/js/video.js',
+                array('bootstrap-js'),
+                filemtime($video_js_file),
+                true
+            );
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
@@ -304,7 +276,6 @@ function mia_add_schema() {
     $post_type = get_post_type();
     $schema = null; // Initialize schema as null, only output if populated
 
-    // --- Generate Schema for Specific Post Types ---
     switch ($post_type) {
         case 'procedure':
             if (is_singular('procedure')) {
@@ -312,11 +283,11 @@ function mia_add_schema() {
                     '@context'    => 'https://schema.org',
                     '@type'       => 'MedicalProcedure',
                     'name'        => get_the_title(),
-                    'description' => wp_strip_all_tags(get_the_excerpt()), // Use stripped excerpt
-                    'url'         => get_permalink() // Add URL
+                    'description' => wp_strip_all_tags(get_the_excerpt()),
+                    'url'         => get_permalink()
                 ];
                 if ($procedure_type = get_field('procedure_type')) {
-                    $schema['procedureType'] = $procedure_type; // Assuming 'procedure_type' field exists
+                    $schema['procedureType'] = $procedure_type;
                 }
                  // Consider adding 'bodyLocation', 'indication', 'outcome' if available in fields
             }
@@ -326,43 +297,38 @@ function mia_add_schema() {
             if (is_singular('surgeon')) {
                 $schema = [
                     '@context'      => 'https://schema.org',
-                    '@type'         => 'Physician', // More specific than Person
+                    '@type'         => 'Physician',
                     'name'          => get_the_title(),
                     'description'   => wp_strip_all_tags(get_the_excerpt()),
                     'url'           => get_permalink(),
-                    'address'       => [ // Address is often required/recommended for Physician
+                    'address'       => [
                         '@type'          => 'PostalAddress',
-                        'addressCountry' => 'US' // Assume US, make dynamic if needed
+                        'addressCountry' => 'US'
                     ],
-                    // Required/Recommended Properties (provide fallbacks or ensure fields exist)
-                    'telephone'     => get_field('phone_number') ?: '', // Add fallback if field is empty
-                    'priceRange'    => get_field('price_range') ?: '$-$$$', // Default price range
-                    'image'         => '' // Initialize image
+                    'telephone'     => get_field('phone_number') ?: '',
+                    'priceRange'    => get_field('price_range') ?: '$-$$$',
+                    'image'         => ''
                 ];
 
-                // Populate Address fields (using potential variations)
                 $street = get_field('street_address') ?: get_field('address');
                 if ($street) $schema['address']['streetAddress'] = $street;
                 if ($city = get_field('city')) $schema['address']['addressLocality'] = $city;
                 if ($state = get_field('state')) $schema['address']['addressRegion'] = $state;
                 if ($zip = get_field('zip_code')) $schema['address']['postalCode'] = $zip;
 
-                // Populate Image (Required for Physician, provide fallback)
                 if (has_post_thumbnail()) {
                     $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                } elseif ($image_field = get_field('image')) { // Assuming 'image' is an ACF image field
+                } elseif ($image_field = get_field('image')) {
                     $schema['image'] = is_array($image_field) ? $image_field['url'] : $image_field;
                 } else {
-                    $schema['image'] = get_template_directory_uri() . '/assets/images/default-doctor.jpg'; // Default image
+                    $schema['image'] = get_template_directory_uri() . '/assets/images/default-doctor.jpg';
                 }
 
-                // Optional but Recommended Properties
                 if ($specialty = get_field('medical_specialty')) {
                     $schema['medicalSpecialty'] = $specialty;
                 }
 
-                // Work Location (MedicalClinic) - Nested
-                $location_id = get_field('surgeon_location'); // Assuming ACF relationship field
+                $location_id = get_field('surgeon_location');
                 if ($location_id && is_numeric($location_id)) {
                     $work_location = [
                         '@type' => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'],
@@ -372,26 +338,23 @@ function mia_add_schema() {
                             '@type' => 'PostalAddress',
                             'addressCountry' => 'US'
                         ],
-                        'telephone' => get_field('phone_number', $location_id) ?: (get_field('location_phone', $location_id) ?: ''), // Try multiple phone fields for location
+                        'telephone' => get_field('phone_number', $location_id) ?: (get_field('location_phone', $location_id) ?: ''),
                         'image' => ''
                     ];
-                     // Populate location address
                     $loc_street = get_field('street_address', $location_id) ?: get_field('location_address', $location_id);
                     if ($loc_street) $work_location['address']['streetAddress'] = $loc_street;
                     if ($loc_city = get_field('city', $location_id)) $work_location['address']['addressLocality'] = $loc_city;
                     if ($loc_state = get_field('state', $location_id)) $work_location['address']['addressRegion'] = $loc_state;
                     if ($loc_zip = get_field('zip_code', $location_id)) $work_location['address']['postalCode'] = $loc_zip;
 
-                    // Populate location image
                     if (has_post_thumbnail($location_id)) {
                         $work_location['image'] = get_the_post_thumbnail_url($location_id, 'full');
                     } else {
-                         $work_location['image'] = get_template_directory_uri() . '/assets/images/default-location.jpg'; // Default location image
+                         $work_location['image'] = get_template_directory_uri() . '/assets/images/default-location.jpg';
                     }
                     $schema['workLocation'] = $work_location;
                 }
 
-                // Member Of (Organization) - Nested Reference
                 $schema['memberOf'] = [
                     '@type' => 'MedicalOrganization',
                     'name' => get_bloginfo('name'),
@@ -399,16 +362,14 @@ function mia_add_schema() {
                     'telephone' => get_field('company_phone', 'option') ?: '',
                     'address' => [
                         '@type' => 'PostalAddress',
-                        'streetAddress' => '123 Main Street', // Replace with actual address 
-                        'addressLocality' => 'Miami', // Replace with actual city
-                        'addressRegion' => 'FL', // Replace with actual state
-                        'postalCode' => '33101', // Replace with actual zip code
+                        'streetAddress' => '123 Main Street',
+                        'addressLocality' => 'Miami',
+                        'addressRegion' => 'FL',
+                        'postalCode' => '33101',
                         'addressCountry' => 'US'
                     ]
                 ];
 
-                 // Note: A better approach uses Yoast filters to link this Physician
-                 // to the main Organization node generated by Yoast using '@id'.
             }
             break;
 
@@ -416,7 +377,7 @@ case 'location':
      if (is_singular('location')) {
         $schema = [
             '@context'    => 'https://schema.org',
-            '@type'       => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'], // Complete type hierarchy
+            '@type'       => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'],
             'name'        => get_the_title(),
             'description' => wp_strip_all_tags(get_the_excerpt()),
             'url'         => get_permalink(),
@@ -424,44 +385,35 @@ case 'location':
                 '@type'          => 'PostalAddress',
                 'addressCountry' => 'US'
             ],
-            'telephone'   => '', // Initialize
-            'priceRange'  => get_field('price_range') ?: '$-$$$', // Default price range
-            'image'       => '', // Initialize image
-            'currenciesAccepted' => 'USD', // Standard currency format
-            'paymentAccepted' => get_field('payment_methods') ?: 'Cash, Credit Card, Insurance', // Default payment methods
-            'medicalSpecialty' => get_field('medical_specialty') ?: [] // Initialize medical specialty
+            'telephone'   => '',
+            'priceRange'  => get_field('price_range') ?: '$-$$$',
+            'image'       => '',
+            'currenciesAccepted' => 'USD',
+            'paymentAccepted' => get_field('payment_methods') ?: 'Cash, Credit Card, Insurance',
+            'medicalSpecialty' => get_field('medical_specialty') ?: []
         ];
 
-        // Populate Address fields
         $street = get_field('street_address') ?: get_field('location_address');
         if ($street) $schema['address']['streetAddress'] = $street;
         if ($city = get_field('city')) $schema['address']['addressLocality'] = $city;
         if ($state = get_field('state')) $schema['address']['addressRegion'] = $state;
         if ($zip = get_field('zip_code')) $schema['address']['postalCode'] = $zip;
 
-        // Populate Telephone (try multiple fields)
         $schema['telephone'] = get_field('phone_number') ?: (get_field('location_phone') ?: '');
 
-        // Populate Image
         if (has_post_thumbnail()) {
             $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
         } elseif ($image_field = get_field('image')) {
             $schema['image'] = is_array($image_field) ? $image_field['url'] : $image_field;
         } else {
-            $schema['image'] = get_template_directory_uri() . '/assets/images/default-location.jpg'; // Default image
+            $schema['image'] = get_template_directory_uri() . '/assets/images/default-location.jpg';
         }
 
-        // Opening Hours - Properly formatted for Schema.org
         if ($hours = get_field('opening_hours')) {
-            // If the field already returns schema-compatible format (e.g., "Mo-Fr 09:00-17:00")
             $schema['openingHours'] = $hours;
         } elseif ($hours_array = get_field('hours_of_operation')) {
-            // If using a more complex field structure, format it properly
-            // This is a placeholder for custom formatting logic based on your field structure
-            // Example: $schema['openingHours'] = format_hours_for_schema($hours_array);
         }
 
-        // Opening Hours Specification (more detailed alternative to openingHours)
         $hours_spec = get_field('opening_hours_specification');
         if (!empty($hours_spec) && is_array($hours_spec)) {
             $schema['openingHoursSpecification'] = [];
@@ -469,26 +421,24 @@ case 'location':
                 if (!empty($spec['day_of_week']) && !empty($spec['opens']) && !empty($spec['closes'])) {
                     $schema['openingHoursSpecification'][] = [
                         '@type' => 'OpeningHoursSpecification',
-                        'dayOfWeek' => $spec['day_of_week'], // Should be schema.org day format (e.g., "Monday")
-                        'opens' => $spec['opens'],           // Should be 24-hour format (e.g., "09:00")
-                        'closes' => $spec['closes']          // Should be 24-hour format (e.g., "17:00")
+                        'dayOfWeek' => $spec['day_of_week'],
+                        'opens' => $spec['opens'],
+                        'closes' => $spec['closes']
                     ];
                 }
             }
         }
 
-        // Available Services (MedicalProcedure, MedicalTest, or MedicalTherapy)
         $services = get_field('available_services');
         if (!empty($services) && is_array($services)) {
             $schema['availableService'] = [];
             foreach ($services as $service) {
                 if (!empty($service['name'])) {
                     $service_schema = [
-                        '@type' => 'MedicalProcedure', // Or MedicalTest or MedicalTherapy based on service type
+                        '@type' => 'MedicalProcedure',
                         'name' => $service['name']
                     ];
                     
-                    // Add description if available
                     if (!empty($service['description'])) {
                         $service_schema['description'] = $service['description'];
                     }
@@ -498,15 +448,13 @@ case 'location':
             }
         }
 
-        // Medical Specialty
         $specialties = get_field('medical_specialties');
         if (!empty($specialties) && is_array($specialties)) {
-            $schema['medicalSpecialty'] = $specialties; // Array of specialties
+            $schema['medicalSpecialty'] = $specialties;
         } elseif ($single_specialty = get_field('medical_specialty')) {
-            $schema['medicalSpecialty'] = $single_specialty; // Single specialty
+            $schema['medicalSpecialty'] = $single_specialty;
         }
 
-        // Geo Coordinates
         $latitude = get_field('latitude');
         $longitude = get_field('longitude');
         if ($latitude && $longitude) {
@@ -517,19 +465,16 @@ case 'location':
             ];
         }
         
-        // Map URL (if available)
         $map_url = get_field('map_url');
         if (!empty($map_url)) {
             $schema['hasMap'] = $map_url;
         }
         
-        // Is accepting new patients (from MedicalOrganization)
         $accepting_patients = get_field('accepting_new_patients');
         if (isset($accepting_patients)) {
             $schema['isAcceptingNewPatients'] = (bool)$accepting_patients;
         }
         
-        // Health Plan Network IDs (from MedicalOrganization)
         $network_ids = get_field('health_plan_network_ids');
         if (!empty($network_ids) && is_array($network_ids)) {
             $schema['healthPlanNetworkId'] = $network_ids;
@@ -537,7 +482,6 @@ case 'location':
             $schema['healthPlanNetworkId'] = $network_ids;
         }
         
-        // Accessibility features
         $accessibility = get_field('accessibility_features');
         if (!empty($accessibility) && is_array($accessibility)) {
             $schema['amenityFeature'] = [];
@@ -552,17 +496,16 @@ case 'location':
             }
         }
 
-        // Parent Organization Reference
         $schema['parentOrganization'] = [
             '@type' => 'MedicalOrganization',
             'name' => get_bloginfo('name'),
             'url' => home_url(),
             'address' => [
                 '@type' => 'PostalAddress',
-                'streetAddress' => '123 Main Street', // Replace with actual address
-                'addressLocality' => 'Miami', // Replace with actual city
-                'addressRegion' => 'FL', // Replace with actual state
-                'postalCode' => '33101', // Replace with actual zip code
+                'streetAddress' => '123 Main Street',
+                'addressLocality' => 'Miami',
+                'addressRegion' => 'FL',
+                'postalCode' => '33101',
                 'addressCountry' => 'US'
             ]
         ];
@@ -598,36 +541,30 @@ case 'location':
     }
 
 
-    // --- Add Video Schema if video details exist ---
-    // Try to get video details from various possible field names
     $video_details_field = null;
-    $possible_video_fields = ['video_details', 'featured_video', 'video']; // Add other potential field names
+    $possible_video_fields = ['video_details', 'featured_video', 'video'];
     foreach ($possible_video_fields as $field_name) {
         $video_details_field = get_field($field_name);
         if (!empty($video_details_field)) {
-            // Check if it's an array (like ACF group) or just a URL string
             if (is_array($video_details_field) && !empty($video_details_field['video_url'])) {
-                 // Looks like an ACF group, use it
                  break;
             } elseif (is_string($video_details_field) && filter_var($video_details_field, FILTER_VALIDATE_URL)) {
-                 // Looks like a direct URL, structure it like the array
                  $video_details_field = [
                     'video_url'         => $video_details_field,
-                    'video_title'       => '', // Fallback title/desc needed
+                    'video_title'       => '',
                     'video_description' => '',
                     'video_thumbnail'   => ''
                  ];
                  break;
             } else {
-                 $video_details_field = null; // Reset if format isn't recognized
+                 $video_details_field = null;
             }
         }
     }
 
-    // Process video data if we found valid details
     if (!empty($video_details_field) && !empty($video_details_field['video_url'])) {
         $video_url = is_array($video_details_field['video_url']) ? $video_details_field['video_url']['url'] : $video_details_field['video_url'];
-        $video_data = get_video_details($video_url); // Use the helper function
+        $video_data = get_video_details($video_url);
 
         if ($video_data) {
             $video_schema = [
@@ -635,14 +572,12 @@ case 'location':
                 '@type'       => 'VideoObject',
                 'name'        => !empty($video_details_field['video_title']) ? $video_details_field['video_title'] : get_the_title(),
                 'description' => !empty($video_details_field['video_description']) ? wp_strip_all_tags($video_details_field['video_description']) : wp_strip_all_tags(get_the_excerpt()),
-                'uploadDate'  => get_the_date('c'), // ISO 8601 format
-                'contentUrl'  => $video_data['url'], // Direct URL to the video file/page
-                'embedUrl'    => $video_data['embed_url'], // URL for embedding
-                'thumbnailUrl'=> '' // Initialize thumbnail
-                // 'duration' => $video_data['duration'], // Add if get_video_details can fetch it
+                'uploadDate'  => get_the_date('c'),
+                'contentUrl'  => $video_data['url'],
+                'embedUrl'    => $video_data['embed_url'],
+                'thumbnailUrl'=> ''
             ];
 
-            // Add thumbnail
             if (!empty($video_details_field['video_thumbnail'])) {
                 $thumb = $video_details_field['video_thumbnail'];
                 $video_schema['thumbnailUrl'] = is_array($thumb) ? $thumb['url'] : $thumb;
@@ -650,7 +585,6 @@ case 'location':
                 $video_schema['thumbnailUrl'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
             }
 
-             // Output video schema only if essential fields are present
              if (!empty($video_schema['name']) && !empty($video_schema['contentUrl'])) {
                  echo '<script type="application/ld+json" class="mia-video-schema">';
                  $video_schema_filtered = array_filter($video_schema, function($value) { return $value !== ''; });
@@ -661,9 +595,8 @@ case 'location':
     }
 
 
-    // --- Add FAQ Schema if FAQs exist (using ACF repeater/group) ---
-    $faq_section = get_field('faq_section'); // Assuming 'faq_section' is the group/flexible content field name
-    if (!empty($faq_section) && !empty($faq_section['faqs']) && is_array($faq_section['faqs'])) { // Check if 'faqs' repeater exists and is not empty
+    $faq_section = get_field('faq_section');
+    if (!empty($faq_section) && !empty($faq_section['faqs']) && is_array($faq_section['faqs'])) {
         $faq_schema = [
             '@context'   => 'https://schema.org',
             '@type'      => 'FAQPage',
@@ -677,14 +610,12 @@ case 'location':
                     'name'           => wp_strip_all_tags($faq_item['question']),
                     'acceptedAnswer' => [
                         '@type' => 'Answer',
-                        'text'  => wp_kses_post($faq_item['answer']) // Allow basic HTML in answer text
-                        // Consider using wp_strip_all_tags() if only plain text is desired/allowed by Google
+                        'text'  => wp_kses_post($faq_item['answer'])
                     ]
                 ];
             }
         }
 
-        // Output FAQ schema only if valid questions/answers were added
         if (!empty($faq_schema['mainEntity'])) {
             echo '<script type="application/ld+json" class="mia-faq-schema">';
             echo json_encode($faq_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT);
@@ -713,10 +644,10 @@ function mia_add_organization_address_schema() {
         'url' => home_url(),
         'address' => [
             '@type' => 'PostalAddress',
-            'streetAddress' => '123 Main Street', // Replace with actual address
-            'addressLocality' => 'Miami', // Replace with actual city
-            'addressRegion' => 'FL', // Replace with actual state
-            'postalCode' => '33101', // Replace with actual zip code
+            'streetAddress' => '123 Main Street',
+            'addressLocality' => 'Miami',
+            'addressRegion' => 'FL',
+            'postalCode' => '33101',
             'addressCountry' => 'US'
         ],
         'telephone' => get_field('company_phone', 'option') ?: '',
@@ -731,7 +662,6 @@ function mia_add_organization_address_schema() {
         'priceRange' => get_field('company_price_range', 'option') ?: '$-$$$'
     ];
     
-    // Add social media profiles if available
     $social_profiles = get_field('social_profiles', 'option');
     if (!empty($social_profiles) && is_array($social_profiles)) {
         $org_schema['sameAs'] = [];
@@ -742,13 +672,11 @@ function mia_add_organization_address_schema() {
         }
     }
     
-    // Add opening hours if available
     $hours = get_field('company_hours', 'option');
     if (!empty($hours)) {
         $org_schema['openingHours'] = $hours;
     }
     
-    // Add locations if available (branch locations)
     $locations = get_field('company_locations', 'option');
     if (!empty($locations) && is_array($locations)) {
         $org_schema['location'] = [];
@@ -763,7 +691,6 @@ function mia_add_organization_address_schema() {
                     ]
                 ];
                 
-                // Add location address if available
                 if (!empty($location['address'])) {
                     $location_schema['address']['streetAddress'] = $location['address'];
                 }
@@ -777,12 +704,10 @@ function mia_add_organization_address_schema() {
                     $location_schema['address']['postalCode'] = $location['zip'];
                 }
                 
-                // Add location phone if available
                 if (!empty($location['phone'])) {
                     $location_schema['telephone'] = $location['phone'];
                 }
                 
-                // Add location URL if available
                 if (!empty($location['url'])) {
                     $location_schema['url'] = $location['url'];
                 }
@@ -792,7 +717,6 @@ function mia_add_organization_address_schema() {
         }
     }
     
-    // Add aggregate rating if available
     $rating = get_field('company_rating', 'option');
     $rating_count = get_field('company_rating_count', 'option');
     if (!empty($rating) && !empty($rating_count)) {
@@ -803,7 +727,6 @@ function mia_add_organization_address_schema() {
         ];
     }
     
-    // Filter out empty values before encoding
     $org_schema_filtered = array_filter($org_schema, function($value) {
         return $value !== '' && $value !== null && (!is_array($value) || !empty(array_filter($value)));
     });
@@ -836,15 +759,14 @@ function display_page_faqs($show_heading = true) {
     ?>
     <section class="faqs-section my-5" <?php if($show_heading) { echo 'aria-labelledby="faq-heading-' . get_the_ID() . '"'; } ?>>
         <?php if ($show_heading): 
-            // Section Title (Optional)
-            $section_title = !empty($faq_section['title']) ? $faq_section['title'] : __('Frequently Asked Questions', 'mia-aesthetics'); // Default title with translation
+            $section_title = !empty($faq_section['title']) ? $faq_section['title'] : __('Frequently Asked Questions', 'mia-aesthetics');
         ?>
             <h2 id="faq-heading-<?php echo get_the_ID(); ?>" class="mb-4"><?php echo esc_html($section_title); ?></h2>
 
-            <?php // Section Description (Optional)
+            <?php
             if (!empty($faq_section['description'])): ?>
                 <div class="faq-description mb-4">
-                    <?php echo wp_kses_post($faq_section['description']); // Allows safe HTML ?>
+                    <?php echo wp_kses_post($faq_section['description']); ?>
                 </div>
             <?php endif; ?>
         <?php endif; ?>
@@ -852,13 +774,12 @@ function display_page_faqs($show_heading = true) {
         <?php if (!empty($faqs)): ?>
         <div class="accordion" id="<?php echo esc_attr($accordion_id); ?>">
             <?php foreach ($faqs as $index => $faq):
-                // Ensure both question and answer exist for each item
                 if (empty($faq['question']) || empty($faq['answer'])) continue;
 
                 $item_id = 'faq-' . get_the_ID() . '-' . $index;
                 $heading_id = 'heading-' . $item_id;
                 $collapse_id = 'collapse-' . $item_id;
-                $is_first = ($index === 0); // Check if it's the first item
+                $is_first = ($index === 0);
             ?>
                 <div class="accordion-item">
                     <h3 class="accordion-header" id="<?php echo esc_attr($heading_id); ?>">
@@ -879,7 +800,7 @@ function display_page_faqs($show_heading = true) {
                         aria-labelledby="<?php echo esc_attr($heading_id); ?>"
                     >
                         <div class="accordion-body">
-                            <?php echo wp_kses_post($faq['answer']); // Use wp_kses_post to allow safe HTML formatting ?>
+                            <?php echo wp_kses_post($faq['answer']); ?>
                         </div>
                     </div>
                 </div>
@@ -890,8 +811,6 @@ function display_page_faqs($show_heading = true) {
     <?php
     return ob_get_clean(); // Return buffered content
 }
-// Usage: In your template file (e.g., single-surgeon.php, page.php), you would call:
-// echo display_page_faqs();
 
 
 /**
@@ -934,8 +853,7 @@ function mia_modify_surgeon_archive_query( $query ) {
 add_action( 'pre_get_posts', 'mia_modify_surgeon_archive_query' );
 
 /**
- * Fallback CSS loader for specific templates that might have issues with the main loader
- * This is a safety net to ensure critical CSS files are always loaded
+ * Fallback CSS loader to ensure critical CSS files are always loaded
  */
 function mia_fallback_css_loader() {
     $theme_uri = get_template_directory_uri();
@@ -943,22 +861,24 @@ function mia_fallback_css_loader() {
     $css_path = $theme_path . '/assets/css';
     $css_uri = $theme_uri . '/assets/css';
     
-    // Array of critical CSS files to ensure are loaded for specific templates
     $critical_css = array();
     
-    // Add surgeon archive CSS if on surgeon archive page
     if (is_post_type_archive('surgeon')) {
         $critical_css['mia-surgeon-archive-fallback'] = '/_surgeon-archive.css';
     }
     
-    // Add location archive CSS if on location archive page
     if (is_post_type_archive('location')) {
         $critical_css['mia-location-archive-fallback'] = '/_location-archive.css';
     }
     
-    // Add other critical CSS files here as needed
+    if (is_singular('surgeon')) {
+        $critical_css['mia-surgeon-single-fallback'] = '/_surgeon.css';
+    }
     
-    // Load all critical CSS files
+    if (is_singular('location')) {
+        $critical_css['mia-location-single-fallback'] = '/_location.css';
+    }
+    
     foreach ($critical_css as $handle => $file) {
         if (file_exists($css_path . $file) && !wp_style_is('mia-' . str_replace('-fallback', '', $handle), 'enqueued')) {
             wp_enqueue_style(
@@ -970,7 +890,7 @@ function mia_fallback_css_loader() {
         }
     }
 }
-add_action('wp_enqueue_scripts', 'mia_fallback_css_loader', 999); // Run after the main enqueue function
+add_action('wp_enqueue_scripts', 'mia_fallback_css_loader', 999);
 
 /**
  * Ensure the correct body class is added for archive pages
@@ -978,14 +898,12 @@ add_action('wp_enqueue_scripts', 'mia_fallback_css_loader', 999); // Run after t
  */
 function mia_ensure_archive_body_class($classes) {
     if (is_post_type_archive('surgeon')) {
-        // Make sure the post-type-archive-surgeon class is added
         if (!in_array('post-type-archive-surgeon', $classes)) {
             $classes[] = 'post-type-archive-surgeon';
         }
     }
     
     if (is_post_type_archive('location')) {
-        // Make sure the post-type-archive-location class is added
         if (!in_array('post-type-archive-location', $classes)) {
             $classes[] = 'post-type-archive-location';
         }
@@ -1000,25 +918,20 @@ add_filter('body_class', 'mia_ensure_archive_body_class', 999); // Run late to e
  * Completely disable comments functionality
  */
 function mia_disable_comments() {
-    // Close comments on the front-end
     add_filter('comments_open', '__return_false', 20, 2);
     add_filter('pings_open', '__return_false', 20, 2);
     
-    // Hide existing comments
     add_filter('comments_array', '__return_empty_array', 10, 2);
     
-    // Remove comments page in menu
     add_action('admin_menu', function() {
         remove_menu_page('edit-comments.php');
     });
     
-    // Remove comments from admin bar
     add_action('wp_before_admin_bar_render', function() {
         global $wp_admin_bar;
         $wp_admin_bar->remove_menu('comments');
     });
     
-    // Disable support for comments and trackbacks in post types
     add_action('admin_init', function() {
         $post_types = get_post_types();
         foreach ($post_types as $post_type) {
@@ -1029,7 +942,6 @@ function mia_disable_comments() {
         }
     });
     
-    // Redirect any user trying to access comments page
     add_action('admin_init', function() {
         global $pagenow;
         
@@ -1039,12 +951,10 @@ function mia_disable_comments() {
         }
     });
     
-    // Remove comments metabox from dashboard
     add_action('admin_init', function() {
         remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
     });
     
-    // Disable comments REST API endpoint
     add_filter('rest_endpoints', function($endpoints) {
         if (isset($endpoints['/wp/v2/comments'])) {
             unset($endpoints['/wp/v2/comments']);

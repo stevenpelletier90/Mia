@@ -24,15 +24,15 @@ get_header(); ?>
                         $headshot_url = wp_get_attachment_image_url($headshot_id, 'full');
                         ?>
                         <div class="surgeon-headshot">
-<img 
-    src="<?php echo esc_url($headshot_url); ?>" 
-    alt="<?php echo esc_attr(get_the_title()); ?>" 
-    class="img-fluid rounded-circle"
-    fetchpriority="high"
-    width="200"
-    height="200"
-    sizes="(max-width: 767px) 120px, 200px"
->
+                            <img 
+                                src="<?php echo esc_url($headshot_url); ?>" 
+                                alt="<?php echo esc_attr(get_the_title()); ?>" 
+                                class="img-fluid rounded-circle"
+                                fetchpriority="high"
+                                width="200"
+                                height="200"
+                                sizes="(max-width: 767px) 120px, 200px"
+                            >
                         </div>
                     <?php else: ?>
                         <div class="surgeon-headshot surgeon-headshot-placeholder">
@@ -75,9 +75,17 @@ get_header(); ?>
     <div class="surgeon-content-section">
         <div class="container">
             <?php 
+            // Get video fields from the "video_details" group
+            $video_details = get_field('video_details');
+            $video_url = '';
+            $video_thumbnail = '';
+            $thumbnail_url = '';
+            $embed_url = '';
+            
             // Check if there's a video URL in the ACF field
-            $video_url = get_field('video_details_video_url');
-            if($video_url): 
+            if(!empty($video_details) && isset($video_details['video_url'])) {
+                $video_url = $video_details['video_url'];
+                
                 // Function to extract YouTube video ID from various URL formats
                 function get_youtube_video_id($youtube_url) {
                     $video_id = '';
@@ -104,14 +112,23 @@ get_header(); ?>
                 // Get YouTube embed URL
                 $embed_url = $video_id ? 'https://www.youtube.com/embed/' . $video_id : $video_url;
                 
-                // Get video thumbnail from ACF field only (no YouTube fallback)
-                $video_thumbnail = get_field('video_thumbnail');
-                $thumbnail_url = '';
-
-                if ($video_thumbnail) {
-                    // If we have a custom thumbnail in ACF, use that
-                    $thumbnail_url = wp_get_attachment_image_url($video_thumbnail, 'full');
+                // Get video thumbnail
+                if (isset($video_details['video_thumbnail'])) {
+                    $video_thumbnail = $video_details['video_thumbnail'];
+                    
+                    // Handle the video_thumbnail which returns an array with all image data
+                    if ($video_thumbnail && is_array($video_thumbnail)) {
+                        // The URL is directly accessible in the array
+                        $thumbnail_url = $video_thumbnail['url'];
+                    } elseif ($video_thumbnail && is_numeric($video_thumbnail)) {
+                        // Handle the case where it might be just an ID
+                        $thumbnail_url = wp_get_attachment_image_url($video_thumbnail, 'full');
+                    }
                 }
+            }
+            
+            // Only display video section if we have both a URL and thumbnail
+            if($video_url && $thumbnail_url): 
             ?>
             <!-- Video Section (visible on mobile before content) -->
             <div class="row d-lg-none">
@@ -119,7 +136,6 @@ get_header(); ?>
                     <div class="sidebar-section" style="border-radius: 0;">
                         <div class="video-container">
                             <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
-                                <?php if ($thumbnail_url): ?>
                                 <img 
                                     src="<?php echo esc_url($thumbnail_url); ?>" 
                                     alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
@@ -131,7 +147,6 @@ get_header(); ?>
                                 <div class="video-play-button">
                                     <i class="fa-solid fa-play"></i>
                                 </div>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -190,12 +205,11 @@ get_header(); ?>
                 <!-- Sidebar Column -->
                 <div class="col-lg-4">
                     <div class="surgeon-sidebar">
-                        <?php if($video_url): ?>
+                        <?php if($video_url && $thumbnail_url): ?>
                         <!-- Video Section (visible only on desktop) -->
                         <div class="sidebar-section d-none d-lg-block" style="border-radius: 0;">
                             <div class="video-container">
                                 <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
-                                    <?php if ($thumbnail_url): ?>
                                     <img 
                                         src="<?php echo esc_url($thumbnail_url); ?>" 
                                         alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
@@ -207,7 +221,6 @@ get_header(); ?>
                                     <div class="video-play-button">
                                         <i class="fa-solid fa-play"></i>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

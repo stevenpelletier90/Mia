@@ -133,20 +133,96 @@ get_header();
 
                 <div class="col-lg-6 ps-lg-5">
                     <?php
+                    // Looking at different methods to get the fields
+                    
+                    // Try method 1: direct field access
+                    $video_id = get_field('video_id');
+                    $video_url = get_field('video_url');
+                    $video_thumbnail = get_field('video_thumbnail');
+                    
+                    // Try method 2: accessing through the group
                     $video_details = get_field('video_details');
-                    $video_id = isset($video_details['video_id']) ? $video_details['video_id'] : '';
-                    if ($video_id):
-                        $youtube_embed_url = 'https://www.youtube.com/embed/' . esc_attr($video_id);
+                    if (!empty($video_details)) {
+                        if (empty($video_id) && isset($video_details['video_id'])) {
+                            $video_id = $video_details['video_id'];
+                        }
+                        if (empty($video_url) && isset($video_details['video_url'])) {
+                            $video_url = $video_details['video_url'];
+                        }
+                        if (empty($video_thumbnail) && isset($video_details['video_thumbnail'])) {
+                            $video_thumbnail = $video_details['video_thumbnail'];
+                        }
+                    }
+                    
+                    // Try method 3: try the field group name
+                    $featured_video = get_field('featured_video');
+                    if (!empty($featured_video)) {
+                        if (empty($video_id) && isset($featured_video['video_id'])) {
+                            $video_id = $featured_video['video_id'];
+                        }
+                        if (empty($video_url) && isset($featured_video['video_url'])) {
+                            $video_url = $featured_video['video_url'];
+                        }
+                        if (empty($video_thumbnail) && isset($featured_video['video_thumbnail'])) {
+                            $video_thumbnail = $featured_video['video_thumbnail'];
+                        }
+                    }
+                    
+                    // Get all fields for debugging
+                    $all_fields = get_fields();
+                    
+                    // Initialize thumbnail URL
+                    $thumbnail_url = '';
+
+                    // Function to extract YouTube video ID from various URL formats
+                    function get_youtube_video_id_location($youtube_url) {
+                        $video_id = '';
+                        if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                            $video_id = $matches[1];
+                        } elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                            $video_id = $matches[1];
+                        } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                            $video_id = $matches[1];
+                        } elseif (preg_match('/youtube\.com\/v\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                            $video_id = $matches[1];
+                        } elseif (preg_match('/youtube\.com\/user\/\w+\/\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
+                            $video_id = $matches[1];
+                        }
+                        return $video_id;
+                    }
+
+                    $embed_url = '';
+                    if ($video_url) {
+                        $video_id = get_youtube_video_id_location($video_url);
+                        $embed_url = $video_id ? 'https://www.youtube.com/embed/' . $video_id : $video_url;
+                    }
+
+                    // Handle the video_thumbnail which returns an array with all image data
+                    if ($video_thumbnail && is_array($video_thumbnail)) {
+                        // The URL is directly accessible in the array
+                        $thumbnail_url = $video_thumbnail['url'];
+                    }
                     ?>
-                        <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
-                            <iframe
-                                src="<?php echo esc_url($youtube_embed_url); ?>"
-                                title="Location Video"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                            ></iframe>
+
+                    <!-- Video container - only show if we have both URL and thumbnail -->
+                    <?php if (!empty($video_url) && !empty($thumbnail_url)): ?>
+                    <div class="sidebar-section" style="border-radius: 0;">
+                        <div class="video-container">
+                            <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
+                                <img 
+                                    src="<?php echo esc_url($thumbnail_url); ?>" 
+                                    alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
+                                    class="img-fluid"
+                                    loading="lazy"
+                                    width="640"
+                                    height="360"
+                                />
+                                <div class="video-play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
                         </div>
+                    </div>
                     <?php endif; ?>
                 </div>
             </div>

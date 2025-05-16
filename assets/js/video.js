@@ -1,0 +1,60 @@
+/**
+ * JavaScript for handling video thumbnail functionality
+ */
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Set up video thumbnail click handling for lazy loading
+  setupVideoThumbnails();
+});
+
+/**
+ * Sets up click handlers for video thumbnails to enable lazy loading
+ */
+function setupVideoThumbnails() {
+  // Find all video thumbnails on the page
+  const videoThumbnails = document.querySelectorAll(".video-thumbnail");
+
+  // Helper to detect mobile devices
+  function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  videoThumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener("click", function () {
+      // Get the embed URL from the data attribute
+      let embedUrl = this.getAttribute("data-embed-url");
+
+      if (!embedUrl) return;
+
+      // Add autoplay and mute parameters to YouTube URL
+      if (embedUrl.includes("youtube.com/embed/")) {
+        // On mobile, force mute=1 for autoplay to work
+        const isMobile = isMobileDevice();
+        const muteParam = isMobile ? "mute=1" : "mute=0";
+        embedUrl += (embedUrl.includes("?") ? "&" : "?") + "autoplay=1&" + muteParam + "&controls=1&rel=0";
+      }
+
+      // Create an iframe element
+      const iframe = document.createElement("iframe");
+      iframe.src = embedUrl;
+      iframe.title = "YouTube Video";
+      iframe.frameBorder = "0";
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.setAttribute(
+        "allow",
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      );
+
+      // Replace the thumbnail with the iframe
+      this.parentNode.replaceChild(iframe, this);
+
+      // Track video play event if analytics is available
+      if (typeof gtag === "function") {
+        gtag("event", "play_video", {
+          event_category: "Video",
+          event_label: embedUrl,
+        });
+      }
+    });
+  });
+}
