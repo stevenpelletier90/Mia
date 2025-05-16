@@ -41,13 +41,35 @@ function mia_aesthetics_enqueue_scripts() {
     );
 
     // Unified CSS loading: base, header, footer, and one page-specific CSS
-    $css_files = array(
-        'mia-base'   => '/_base.css',
-        'mia-header' => '/_header.css',
-        'mia-footer' => '/_footer.css'
-    );
+    // 1. Enqueue base first (no dependencies)
+    if (file_exists($css_path . '/_base.css')) {
+        wp_enqueue_style(
+            'mia-base',
+            $css_uri . '/_base.css',
+            array(),
+            filemtime($css_path . '/_base.css')
+        );
+    }
 
-    // Determine the single page-specific CSS to load
+    // 2. Enqueue header/footer (depend on base)
+    if (file_exists($css_path . '/_header.css')) {
+        wp_enqueue_style(
+            'mia-header',
+            $css_uri . '/_header.css',
+            array('mia-base'),
+            filemtime($css_path . '/_header.css')
+        );
+    }
+    if (file_exists($css_path . '/_footer.css')) {
+        wp_enqueue_style(
+            'mia-footer',
+            $css_uri . '/_footer.css',
+            array('mia-base'),
+            filemtime($css_path . '/_footer.css')
+        );
+    }
+
+    // 3. Determine and enqueue the single page-specific CSS (depend on base)
     $page_css = null;
     $page_handle = null;
 
@@ -89,21 +111,13 @@ function mia_aesthetics_enqueue_scripts() {
         }
     }
 
-    // Add the page-specific CSS to the array if found
-    if ($page_css && $page_handle) {
-        $css_files[$page_handle] = $page_css;
-    }
-
-    // Enqueue all CSS files in the array if they exist
-    foreach ($css_files as $handle => $file) {
-        if (file_exists($css_path . $file)) {
-            wp_enqueue_style(
-                $handle,
-                $css_uri . $file,
-                array('mia-base'),
-                filemtime($css_path . $file)
-            );
-        }
+    if ($page_css && $page_handle && file_exists($css_path . $page_css)) {
+        wp_enqueue_style(
+            $page_handle,
+            $css_uri . $page_css,
+            array('mia-base'),
+            filemtime($css_path . $page_css)
+        );
     }
 
     // JS loading (unchanged)
@@ -143,30 +157,7 @@ function mia_aesthetics_enqueue_scripts() {
         }
     }
 }
-// Add a final direct load method for location.css if you're on a location page
-function mia_force_location_css() {
-    if (is_singular('location')) {
-        $theme_path = get_template_directory();
-        $theme_uri = get_template_directory_uri();
-        $css_path = $theme_path . '/assets/css';
-        $css_uri = $theme_uri . '/assets/css';
-        $location_css = '/_location.css';
-        
-        if (file_exists($css_path . $location_css)) {
-            wp_enqueue_style(
-                'mia-location-force',
-                $css_uri . $location_css,
-                array('mia-base'),
-                filemtime($css_path . $location_css)
-            );
-            error_log('Mia Theme: Force-loading location CSS directly');
-        } else {
-            error_log('Mia Theme ERROR: Could not find _location.css at: ' . $css_path . $location_css);
-        }
-    }
-}
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
-add_action('wp_enqueue_scripts', 'mia_force_location_css', 999); // Run very late to make sure it overrides anything else
 
 
 /**
