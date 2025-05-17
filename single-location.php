@@ -31,7 +31,7 @@ get_header();
                         $zip_code = get_field('zip_code');
                         if ($street_address || $city || $state || $zip_code):
                     ?>
-                            <div class="location-detail mb-2">
+                            <div class="location-detail mb-4">
                                 <div class="d-flex flex-column">
                                     <?php if ($street_address): ?>
                                         <span><?php echo esc_html($street_address); ?></span>
@@ -246,7 +246,7 @@ get_header();
                             </div>
 
                             <div class="col-md-5">
-                                <div class="card consultation-card shadow-sm h-100">
+                                <div class="card consultation-card h-100">
                                     <div class="card-body p-4">
                                         <h2 class="h5 mb-3 text-center">Schedule a Consultation</h2>
                                         <div class="location-form-container">

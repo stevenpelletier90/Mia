@@ -302,19 +302,7 @@ ol {
   margin-left: 0.5rem;
   font-size: 0.85em;
 }
-.consultation-card {
-  background-color: var(--color-primary);
-  color: #fff;
-  border-radius: 8px;
-}
-.consultation-card h3 {
-  color: #fff;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-.consultation-card .card-body {
-  padding: 15px;
-}
+/* Consultation card styles moved to _location.css */
 .faq-container {
   background-color: #f8f8f8;
   border-radius: 8px;
