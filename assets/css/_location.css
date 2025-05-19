@@ -482,15 +482,6 @@ a.consent-trigger:hover:after {
   display: none !important;
 }
 
-/* Form styling */
-.single-location .gform_wrapper {
-}
-
-/* Form container adjustments - removed extra padding */
-.single-location .gform_wrapper {
-  /* No padding needed as card already has padding */
-}
-
 /* Remove all default margins/padding and apply a consistent gap */
 .single-location .gform_wrapper .gform_fields {
   display: grid !important;
