@@ -122,69 +122,47 @@ get_header(); ?>
   </div>
 </section>
 
+<!-- About Section with Video Carousel -->
 <section class="about-section py-5">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-lg-6 about-content mb-4 mb-lg-0">
-        <h1 class="section-heading mb-3">About Us</h1>
-        <h2 class="section-subheading mb-4">Professional Care You Can Trust</h2>
-        <p class="about-text">
-          Our mission at Mia Aesthetics is to deliver the highest quality of plastic surgery at affordable prices, demonstrating that beauty and cost-effectiveness can coexist harmoniously.
-        </p>
-        <div class="mt-4">
-          <a href="/about-us/" class="mia-button mia-button-white" aria-label="Learn more about Mia Aesthetics">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+      <!-- Left Column: About Content -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="about-content">
+          <p class="tagline mb-2">Professional Care You Can Trust</p>
+          <h1 class="mb-4">About Mia Aesthetics</h1>
+          <p class="mb-4">Our mission at Mia Aesthetics is to deliver the highest quality of plastic surgery at affordable prices, demonstrating that beauty and cost-effectiveness can coexist harmoniously.</p>
+          <div>
+            <a href="/about/" class="mia-button mia-button-white">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
-      <div class="col-lg-6 about-video">
-        <div class="video-gallery">
-          <!-- Main featured video container -->
+      
+      <!-- Right Column: Video Carousel -->
+      <div class="col-lg-6">
+        <div class="video-carousel-container">
+          <!-- Featured Video -->
           <div class="featured-video mb-3">
-            <div class="ratio ratio-16x9 rounded shadow overflow-hidden">
-              <iframe id="featured-video-player" src="https://www.youtube.com/embed/OxigXlYTqH8" title="Featured Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="ratio ratio-16x9">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Featured Video" allowfullscreen></iframe>
             </div>
           </div>
           
-          <!-- Video thumbnails -->
-          <div class="video-thumbnails">
-            <div class="row g-2">
-              <!-- Video 1 -->
-              <div class="col-3 col-sm-3 col-xs-3">
-                <div class="video-thumb active" data-video-id="OxigXlYTqH8">
-                  <img src="https://img.youtube.com/vi/OxigXlYTqH8/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
-                  <div class="overlay d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-play"></i>
-                  </div>
-                </div>
+          <!-- Thumbnail Carousel -->
+          <div class="row g-3">
+            <div class="col-4">
+              <div class="video-thumbnail ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Video Thumbnail 1" allowfullscreen></iframe>
               </div>
-              
-              <!-- Video 2 -->
-              <div class="col-3 col-sm-3 col-xs-3">
-                <div class="video-thumb" data-video-id="sb8Kapy8mzU">
-                  <img src="https://img.youtube.com/vi/sb8Kapy8mzU/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
-                  <div class="overlay d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-play"></i>
-                  </div>
-                </div>
+            </div>
+            <div class="col-4">
+              <div class="video-thumbnail ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Video Thumbnail 2" allowfullscreen></iframe>
               </div>
-              
-              <!-- Video 3 -->
-              <div class="col-3 col-sm-3 col-xs-3">
-                <div class="video-thumb" data-video-id="4-B_ISCne28">
-                  <img src="https://img.youtube.com/vi/4-B_ISCne28/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
-                  <div class="overlay d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-play"></i>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Video 4 -->
-              <div class="col-3 col-sm-3 col-xs-3">
-                <div class="video-thumb" data-video-id="ykz9Z8Kh3Yo">
-                  <img src="https://img.youtube.com/vi/ykz9Z8Kh3Yo/mqdefault.jpg" alt="Video Thumbnail" class="img-fluid rounded">
-                  <div class="overlay d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-play"></i>
-                  </div>
-                </div>
+            </div>
+            <div class="col-4">
+              <div class="video-thumbnail ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="Video Thumbnail 3" allowfullscreen></iframe>
               </div>
             </div>
           </div>
@@ -194,56 +172,67 @@ get_header(); ?>
   </div>
 </section>
 
-<!-- Stats Section with New Layout and Bootstrap 5 -->
-<section class="stats-section new-layout-section py-5">
+<!-- Stats Section -->
+<section class="stats-section py-5">
   <div class="container">
-    <div class="row align-items-center mb-4 gy-4">
-      <div class="col-lg-6">
-        <div class="stats-tagline mb-2">Our Commitment</div>
-        <h2 class="stats-main-heading mb-0">Trusted Surgical Excellence</h2>
+    <!-- Top Content -->
+    <div class="row mb-5">
+      <!-- Left Column: Tagline and Heading -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="stats-heading">
+          <p class="tagline mb-2">Our Commitment</p>
+          <h2>Trusted Surgical Excellence</h2>
+        </div>
       </div>
+      
+      <!-- Right Column: Paragraph and Buttons -->
       <div class="col-lg-6">
-        <p class="stats-description mb-3 mb-lg-4">
-          Delivering life-changing results with expert care at every step. Our team of board-certified specialists, years of experience, and thousands of satisfied patients set us apart in the industry.
-        </p>
-        <div class="stats-buttons d-flex flex-wrap gap-2">
-          <a href="#get-started" class="stats-btn stats-btn-primary">Get started</a>
-          <a href="#learn-more" class="stats-btn stats-btn-link">Learn more <span aria-hidden="true">&rarr;</span></a>
+        <div class="stats-content">
+          <p class="mb-4"> Delivering life-changing results with expert care at every step. Our team of board-certified specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
+          <div class="d-flex">
+            <a href="/locations/" class="mia-button mia-button-black me-3">Our Locations <i class="fa-solid fa-map-marker-alt"></i></a>
+            <a href="/surgeons/" class="mia-button mia-button-black">Our Surgeons <i class="fa-solid fa-user-md"></i></a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row g-0 stats-numbers-row rounded-0 overflow-hidden">
-      <!-- Year Founded -->
-      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
-        <div class="stats-number" data-count="2018">
-          <span class="display-4 fw-bold">2018</span>
+    
+    <!-- Stats Row -->
+    <div class="row stats-row">
+      <!-- Stat Item 1 -->
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-line"></div>
+          <h3 class="stat-number">30%</h3>
+          <p class="stat-text mb-0">Highlight core benefits</p>
         </div>
-        <div class="stats-label">Year Founded</div>
-        <div class="stats-desc">Serving our community with excellence since day one</div>
       </div>
-      <!-- Board Certified Specialists -->
-      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
-        <div class="stats-number" data-count="27">
-          <span class="display-4 fw-bold">27</span>
+      
+      <!-- Stat Item 2 -->
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-line"></div>
+          <h3 class="stat-number">30%</h3>
+          <p class="stat-text mb-0">Highlight core benefits</p>
         </div>
-        <div class="stats-label">Board Certified Specialists</div>
-        <div class="stats-desc">Expert professionals dedicated to your care</div>
       </div>
-      <!-- Locations -->
-      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
-        <div class="stats-number" data-count="13">
-          <span class="display-4 fw-bold">13</span>
+      
+      <!-- Stat Item 3 -->
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-line"></div>
+          <h3 class="stat-number">30%</h3>
+          <p class="stat-text mb-0">Highlight core benefits</p>
         </div>
-        <div class="stats-label">Locations</div>
-        <div class="stats-desc">Conveniently serving patients across the region</div>
       </div>
-      <!-- Satisfied Patients -->
-      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
-        <div class="stats-number" data-count="150000">
-          <span class="display-4 fw-bold">150,000+</span>
+      
+      <!-- Stat Item 4 -->
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-line"></div>
+          <h3 class="stat-number">30%</h3>
+          <p class="stat-text mb-0">Highlight core benefits</p>
         </div>
-        <div class="stats-label">Satisfied Patients</div>
-        <div class="stats-desc">Happy clients who trust our expertise and care</div>
       </div>
     </div>
   </div>
@@ -265,83 +254,56 @@ get_header(); ?>
   </div>
 </section>
 
-<!-- Overlapping Card Section -->
-<section class="overlap-section">
+<!-- Payments Section -->
+<section class="payments-overlap-section">
   <div class="container">
-    <div class="row">
-      <div class="col-12 d-flex align-items-center">
-        <div class="overlap-card position-relative w-100">
-          <div class="row">
-            <div class="col-12 text-center mb-4">
-              <h2 class="section-heading mb-2">How Payments Work</h2>
-              <h3 class="section-subheading mb-4">at Mia Aesthetics</h3>
-            </div>
+    <div class="payments-card">
+      <div class="row">
+        <div class="col-12 text-center mb-4">
+          <h2 class="section-heading text-white mb-2">How Payments Work</h2>
+          <h3 class="section-subheading text-gold mb-0">at Mia Aesthetics</h3>
+        </div>
+      </div>
+      <div class="row g-4">
+        <!-- Desktop: 4 columns, Tablet: 2 columns, Mobile: 1 column -->
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="payment-step h-100">
+            <h4 class="payment-step-title mb-3">1. Research Surgeons</h4>
+            <ul class="list-unstyled mb-0">
+              <li class="text-white mb-2">Choose from over 25 experienced surgeons</li>
+              <li class="text-white mb-2">Review surgeon bios on our website</li>
+              <li class="text-white">Browse our before and after photos</li>
+            </ul>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div class="payment-card border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                  <div class="payment-step-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <h5 class="mb-0">1</h5>
-                  </div>
-                  <h4 class="card-title">Research Surgeons</h4>
-                  <ul class="list-unstyled text-start small">
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Choose from over 25 experienced surgeons</li>
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Review surgeon bios on our website</li>
-                    <li><i class="fa-solid fa-check me-2"></i>Browse our before and after photos</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div class="payment-card border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                  <div class="payment-step-icon">
-                    <i class="fa-solid fa-tag"></i>
-                    <h5 class="mb-0">2</h5>
-                  </div>
-                  <h4 class="card-title">Check Specials</h4>
-                  <ul class="list-unstyled text-start small">
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Contact a sales coordinator for specials</li>
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>New surgeons often offer reduced rates</li>
-                    <li><i class="fa-solid fa-check me-2"></i>Keep an eye on seasonal specials</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-              <div class="payment-card border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                  <div class="payment-step-icon">
-                    <i class="fa-solid fa-lock"></i>
-                    <h5 class="mb-0">3</h5>
-                  </div>
-                  <h4 class="card-title">Lock in Your Price</h4>
-                  <ul class="list-unstyled text-start small">
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Call us to secure a special price</li>
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Booking fee required to lock in price</li>
-                    <li><i class="fa-solid fa-check me-2"></i>Price valid for 12 months</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="payment-card border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                  <div class="payment-step-icon">
-                    <i class="fa-solid fa-credit-card"></i>
-                    <h5 class="mb-0">4</h5>
-                  </div>
-                  <h4 class="card-title">Complete Payments</h4>
-                  <ul class="list-unstyled text-start small">
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Pay at your own pace</li>
-                    <li class="mb-2"><i class="fa-solid fa-check me-2"></i>Contact your patient concierge</li>
-                    <li><i class="fa-solid fa-check me-2"></i>Ask for contract extensions if needed</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="payment-step h-100">
+            <h4 class="payment-step-title mb-3">2. Check Specials</h4>
+            <ul class="list-unstyled mb-0">
+              <li class="text-white mb-2">Contact a sales coordinator for specials</li>
+              <li class="text-white mb-2">New surgeons often offer reduced rates</li>
+              <li class="text-white">Keep an eye on seasonal specials</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="payment-step h-100">
+            <h4 class="payment-step-title mb-3">3. Lock in Your Price</h4>
+            <ul class="list-unstyled mb-0">
+              <li class="text-white mb-2">Call us to secure a special price</li>
+              <li class="text-white mb-2">Booking fee required to lock in price</li>
+              <li class="text-white">Price valid for 12 months</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="payment-step h-100">
+            <h4 class="payment-step-title mb-3">4. Complete Payments</h4>
+            <ul class="list-unstyled mb-0">
+              <li class="text-white mb-2">Pay at your own pace</li>
+              <li class="text-white mb-2">Contact your patient concierge</li>
+              <li class="text-white">Ask for contract extensions if needed</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -689,15 +651,22 @@ get_header(); ?>
 </section>
 
 
-<!-- Foundation Section with Fixed Background -->
+<!-- Foundation Section with Fixed Background (Desktop) / Regular Image (Mobile) -->
 <section class="foundation-section">
-  <div class="foundation-bg" style="background-image: url('/wp-content/uploads/2025/04/miaf6.jpg');"></div>
+  <!-- Background image for desktop -->
+  <div class="foundation-bg d-none d-md-block" style="background-image: url('/wp-content/uploads/2025/04/miaf6.jpg');"></div>
+  
+  <!-- Regular image for mobile -->
+  <div class="foundation-mobile-img d-md-none">
+    <img src="/wp-content/uploads/2025/04/miaf6.jpg" alt="Mia Aesthetics Foundation" class="img-fluid w-100">
+  </div>
+  
   <div class="container position-relative">
     <div class="row">
       <div class="col-12">
         <div class="foundation-content text-center">
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
-              <h3 class="section-subheading mb-4">Gives Back</h3>
+          <h3 class="section-subheading mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
           <a href="/mia-foundation/" class="mia-button mia-button-black" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
         </div>
@@ -928,63 +897,69 @@ window.addEventListener('load', function() {
 });
 </script>
 
-<!-- Video Gallery Script -->
+<!-- Procedure Dropdown for Mobile Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Get all video thumbnails
-  const videoThumbs = document.querySelectorAll('.video-thumb');
-  const featuredVideoPlayer = document.getElementById('featured-video-player');
-  
-  // Add click event to each thumbnail
-  videoThumbs.forEach(thumb => {
-    thumb.addEventListener('click', function() {
-      // Get video ID from data attribute
-      const videoId = this.getAttribute('data-video-id');
-      
-      // Update the featured video src
-      featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
-      
-      // Remove active class from all thumbnails
-      videoThumbs.forEach(t => t.classList.remove('active'));
-      
-      // Add active class to clicked thumbnail
-      this.classList.add('active');
-    });
-  });
-  
   // Procedure Dropdown for Mobile
   const procedureDropdown = document.getElementById('procedureDropdown');
-  if (procedureDropdown) {
-    procedureDropdown.addEventListener('change', function() {
-      // Get the selected tab content ID
-      const selectedTabId = this.value;
+  
+  // Function to show the selected tab content
+  function showSelectedTabContent(selectedTabId) {
+    // Hide all tab panes
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    tabPanes.forEach(pane => {
+      pane.classList.remove('show', 'active');
+    });
+    
+    // Show the selected tab pane
+    const selectedPane = document.getElementById(selectedTabId);
+    if (selectedPane) {
+      selectedPane.classList.add('show', 'active');
+    }
+    
+    // Update the desktop tabs to match (for when switching back to desktop view)
+    const tabLinks = document.querySelectorAll('.procedure-tabs .nav-link');
+    tabLinks.forEach(link => {
+      link.classList.remove('active');
+      link.setAttribute('aria-selected', 'false');
       
-      // Hide all tab panes
-      const tabPanes = document.querySelectorAll('.tab-pane');
-      tabPanes.forEach(pane => {
-        pane.classList.remove('show', 'active');
-      });
-      
-      // Show the selected tab pane
-      const selectedPane = document.getElementById(selectedTabId);
-      if (selectedPane) {
-        selectedPane.classList.add('show', 'active');
+      // If this tab corresponds to the selected dropdown option
+      if (link.getAttribute('data-bs-target') === '#' + selectedTabId) {
+        link.classList.add('active');
+        link.setAttribute('aria-selected', 'true');
       }
-      
-      // Update the desktop tabs to match (for when switching back to desktop view)
-      const tabLinks = document.querySelectorAll('.procedure-tabs .nav-link');
-      tabLinks.forEach(link => {
-        link.classList.remove('active');
-        link.setAttribute('aria-selected', 'false');
-        
-        // If this tab corresponds to the selected dropdown option
-        if (link.getAttribute('data-bs-target') === '#' + selectedTabId) {
-          link.classList.add('active');
-          link.setAttribute('aria-selected', 'true');
-        }
-      });
     });
   }
+  
+  // Initialize the dropdown change event
+  if (procedureDropdown) {
+    // Set initial state - ensure the first tab content is visible
+    const initialTabId = procedureDropdown.value;
+    showSelectedTabContent(initialTabId);
+    
+    // Handle dropdown change event
+    procedureDropdown.addEventListener('change', function() {
+      const selectedTabId = this.value;
+      showSelectedTabContent(selectedTabId);
+    });
+    
+    // Force a change event on page load to ensure content is visible
+    const event = new Event('change');
+    procedureDropdown.dispatchEvent(event);
+  }
+  
+  // Also handle tab clicks for desktop view
+  const tabLinks = document.querySelectorAll('.procedure-tabs .nav-link');
+  tabLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-bs-target').substring(1); // Remove the # character
+      
+      // Update the dropdown value to match (for when switching to mobile view)
+      if (procedureDropdown) {
+        procedureDropdown.value = targetId;
+      }
+    });
+  });
 });
 </script>
 
