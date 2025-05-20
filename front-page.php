@@ -129,10 +129,10 @@ get_header(); ?>
         <h1 class="section-heading mb-3">About Us</h1>
         <h2 class="section-subheading mb-4">Professional Care You Can Trust</h2>
         <p class="about-text">
-          Test Text
+          Our mission at Mia Aesthetics is to deliver the highest quality of plastic surgery at affordable prices, demonstrating that beauty and cost-effectiveness can coexist harmoniously.
         </p>
         <div class="mt-4">
-          <a href="#learn-more" class="mia-button mia-button-white" aria-label="Learn more about Mia Aesthetics">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/about-us/" class="mia-button mia-button-white" aria-label="Learn more about Mia Aesthetics">Learn More <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
       <div class="col-lg-6 about-video">
@@ -194,47 +194,56 @@ get_header(); ?>
   </div>
 </section>
 
-<!-- Stats Section with Counting Numbers -->
-<section class="stats-section py-5 bg-light">
+<!-- Stats Section with New Layout and Bootstrap 5 -->
+<section class="stats-section new-layout-section py-5">
   <div class="container">
-    <div class="row text-center mb-4">
-      <div class="col-12">
-        <h2 class="section-heading">Board Certified Excellence</h2>
-        <p class="lead">Our commitment to quality and professional standards</p>
+    <div class="row align-items-center mb-4 gy-4">
+      <div class="col-lg-6">
+        <div class="stats-tagline mb-2">Our Commitment</div>
+        <h2 class="stats-main-heading mb-0">Trusted Surgical Excellence</h2>
+      </div>
+      <div class="col-lg-6">
+        <p class="stats-description mb-3 mb-lg-4">
+          Delivering life-changing results with expert care at every step. Our team of board-certified specialists, years of experience, and thousands of satisfied patients set us apart in the industry.
+        </p>
+        <div class="stats-buttons d-flex flex-wrap gap-2">
+          <a href="#get-started" class="stats-btn stats-btn-primary">Get started</a>
+          <a href="#learn-more" class="stats-btn stats-btn-link">Learn more <span aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </div>
-    <div class="row text-center">
+    <div class="row g-0 stats-numbers-row rounded-0 overflow-hidden">
       <!-- Year Founded -->
-      <div class="col-md-4 mb-3 mb-md-0">
-        <div class="stats-item">
-          <div class="stats-number" data-count="2018">
-            <span class="display-4 fw-bold text-primary">2018</span>
-          </div>
-          <h3 class="stats-title mt-2 mt-md-3">Year Founded</h3>
-          <p class="mb-2 mb-md-3">Serving our community with excellence since day one</p>
+      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
+        <div class="stats-number" data-count="2018">
+          <span class="display-4 fw-bold">2018</span>
         </div>
+        <div class="stats-label">Year Founded</div>
+        <div class="stats-desc">Serving our community with excellence since day one</div>
       </div>
-      
-      <!-- Number 26 -->
-      <div class="col-md-4 mb-3 mb-md-0">
-        <div class="stats-item">
-          <div class="stats-number" data-count="26">
-            <span class="display-4 fw-bold text-primary">26</span>
-          </div>
-          <h3 class="stats-title mt-2 mt-md-3">Board Certified Specialists</h3>
-          <p class="mb-2 mb-md-3">Expert professionals dedicated to your care</p>
+      <!-- Board Certified Specialists -->
+      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
+        <div class="stats-number" data-count="27">
+          <span class="display-4 fw-bold">27</span>
         </div>
+        <div class="stats-label">Board Certified Specialists</div>
+        <div class="stats-desc">Expert professionals dedicated to your care</div>
       </div>
-      
       <!-- Locations -->
-      <div class="col-md-4">
-        <div class="stats-item">
-          <div class="stats-number" data-count="12">
-            <span class="display-4 fw-bold text-primary">12</span>
-          </div>
-          <h3 class="stats-title mt-2 mt-md-3">Locations</h3>
-          <p class="mb-2 mb-md-3">Conveniently serving patients across the region</p>
+      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
+        <div class="stats-number" data-count="13">
+          <span class="display-4 fw-bold">13</span>
         </div>
+        <div class="stats-label">Locations</div>
+        <div class="stats-desc">Conveniently serving patients across the region</div>
+      </div>
+      <!-- Satisfied Patients -->
+      <div class="col-12 col-md-6 col-lg-3 stats-col d-flex flex-column align-items-start">
+        <div class="stats-number" data-count="150000">
+          <span class="display-4 fw-bold">150,000+</span>
+        </div>
+        <div class="stats-label">Satisfied Patients</div>
+        <div class="stats-desc">Happy clients who trust our expertise and care</div>
       </div>
     </div>
   </div>
@@ -679,64 +688,6 @@ get_header(); ?>
   </div>
 </section>
 
-<!-- Two Column CTA Section -->
-<section class="cta-section py-5">
-  <div class="container">
-    <div class="row g-4">
-      <!-- Locations CTA -->
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="info-card">
-          <div class="card-image">
-            <?php 
-            $locations_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/locations-home.jpg');
-            if ($locations_img_id) {
-              echo wp_get_attachment_image($locations_img_id, 'large', false, array(
-                'class' => 'img-fluid',
-                'alt' => 'Our Locations',
-                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
-              ));
-            } else {
-              // Fallback if image ID can't be found
-              echo '<img src="/wp-content/uploads/2025/04/locations-home.jpg" alt="Our Locations" class="img-fluid">';
-            }
-            ?>
-          </div>
-          <div class="card-content text-center">
-            <h3 class="card-title">Find a Location</h3>
-            <p class="card-text">With 12 convenient locations across the region, quality care is never far away. Find the MIA Aesthetics clinic nearest to you.</p>
-            <a href="#locations" class="mia-button mia-button-white">View All Locations <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Surgeons CTA -->
-      <div class="col-lg-6">
-        <div class="info-card">
-          <div class="card-image">
-            <?php 
-            $surgeons_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/surgeons-home.jpg');
-            if ($surgeons_img_id) {
-              echo wp_get_attachment_image($surgeons_img_id, 'large', false, array(
-                'class' => 'img-fluid',
-                'alt' => 'Our Surgeons',
-                'sizes' => '(max-width: 767px) 100vw, (max-width: 991px) 50vw, 600px'
-              ));
-            } else {
-              // Fallback if image ID can't be found
-              echo '<img src="/wp-content/uploads/2025/04/surgeons-home.jpg" alt="Our Surgeons" class="img-fluid">';
-            }
-            ?>
-          </div>
-          <div class="card-content text-center">
-            <h3 class="card-title">Meet Our Surgeons</h3>
-            <p class="card-text">Our team of 26 board-certified specialists brings expertise and artistry to every procedure. Learn about their qualifications and specialties.</p>
-            <a href="#surgeons" class="mia-button mia-button-white">Meet The Team <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Foundation Section with Fixed Background -->
 <section class="foundation-section">

@@ -209,37 +209,239 @@
   font-size: 1.25rem;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
 }
+/* --- New Stats Section Layout --- */
 .stats-section {
-  background: linear-gradient(to right, #000, var(--color-primary));
-  padding: 4rem 0;
+  background: linear-gradient(to bottom, #1b1b1b, #000);
   color: #fff;
+  padding: 3rem 0;
+  width: 100%;
 }
-.stats-section .section-heading {
-  color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+/* Let the container use Bootstrap's default container behavior */
+.new-layout-section .container {
+  /* Let Bootstrap handle the container width */
+  max-width: var(--bs-container-max-width, 1320px);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  margin-left: auto;
+  margin-right: auto;
 }
-.stats-section .lead {
-  color: #fff;
-  opacity: 0.9;
+
+.stats-header-row,
+.stats-header-row .row {
+  margin-bottom: 2rem !important;
+  gap: 0;
 }
-.stats-item {
-  padding: 1.5rem;
-  transition: transform 0.2s ease;
-}
-.stats-number .display-4 {
-  color: var(--color-gold) !important;
+
+.stats-tagline {
   font-weight: 700;
-}
-.stats-title,
-h3.stats-title {
-  color: #fff;
-  font-weight: 600;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
-  font-size: inherit;
+  color: var(--color-gold, #c8b273);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-family: var(--font-heading, inherit);
 }
-.stats-item p {
+
+.stats-main-heading {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
   color: #fff;
-  opacity: 0.8;
+  margin-bottom: 0;
+  line-height: 1.1;
+  font-family: var(--font-heading, inherit);
+  letter-spacing: -1px;
+}
+
+.stats-description {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.stats-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.stats-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.5rem 1.25rem;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+  border: 2px solid var(--color-gold, #c8b273);
+  background: #1b1b1b;
+  color: var(--color-gold, #c8b273);
+  box-shadow: none;
+  cursor: pointer;
+  font-family: var(--font-heading, inherit);
+}
+
+.stats-btn-primary {
+  background: var(--color-gold, #c8b273);
+  color: #1b1b1b;
+  border: 2px solid var(--color-gold, #c8b273);
+}
+
+.stats-btn-primary:hover,
+.stats-btn-primary:focus {
+  background: #fff;
+  color: #1b1b1b;
+  border-color: var(--color-gold, #c8b273);
+}
+
+.stats-btn-link {
+  background: transparent;
+  color: var(--color-gold, #c8b273);
+  border: none;
+  padding-left: 0;
+  padding-right: 0.5rem;
+  font-weight: 600;
+}
+
+.stats-btn-link span {
+  font-size: 1.1em;
+  margin-left: 0.25em;
+  transition: margin-left 0.15s;
+}
+
+.stats-btn-link:hover span {
+  margin-left: 0.5em;
+}
+
+.stats-numbers-row {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  margin: 0;
+  margin-top: 2.5rem;
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  padding-right: var(--bs-gutter-x, 0.75rem);
+}
+
+.stats-col {
+  border-left: 1px solid rgba(200, 178, 115, 0.3);
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.stats-col:first-child {
+  border-left: none;
+}
+
+.stats-number {
+  margin-bottom: 0.5rem;
+}
+
+.stats-number .display-4 {
+  color: var(--color-gold, #c8b273) !important;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  font-family: var(--font-heading, inherit);
+  text-align: left;
+  display: block;
+}
+
+.stats-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-heading, inherit);
+}
+
+.stats-desc {
+  font-size: 1rem;
+  color: #e0e0e0;
+  opacity: 0.95;
+  margin-bottom: 0;
+}
+
+@media (max-width: 991.98px) {
+  .stats-header-row {
+    margin-bottom: 1.5rem !important;
+  }
+  .stats-numbers-row {
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 0;
+  }
+  .stats-col {
+    border-left: 2px solid var(--color-gold, #c8b273);
+    border-top: none;
+    padding: 1.5rem 0.75rem 1rem 0.75rem;
+    align-items: flex-start;
+    background: #1b1b1b;
+    margin: 0;
+  }
+  .stats-col:first-child {
+    border-left: 2px solid var(--color-gold, #c8b273);
+    border-top: none;
+  }
+  .stats-number .display-4 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .new-layout-section .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .stats-header-row {
+    margin-bottom: 1rem !important;
+  }
+  .stats-numbers-row {
+    margin-top: 0.5rem;
+  }
+  .stats-col {
+    padding: 1.1rem 0.5rem 0.7rem 0.5rem;
+    border-left: 2px solid var(--color-gold, #c8b273);
+    border-top: none;
+  }
+  .stats-number .display-4 {
+    font-size: 1.1rem;
+  }
+  .stats-label {
+    font-size: 1rem;
+  }
+  .stats-desc {
+    font-size: 0.95rem;
+  }
+}
+
+/* Remove old stats styles */
+.stats-section .section-heading,
+.stats-section .lead,
+.stats-item,
+.stats-title,
+.stats-item p {
+  all: unset;
+}
+
+/* Remove old stats styles */
+.stats-section .section-heading,
+.stats-section .lead,
+.stats-item,
+.stats-title,
+.stats-item p {
+  all: unset;
 }
 .parallax-section {
   position: relative;
@@ -501,59 +703,6 @@ h3.stats-title {
 .tab-content img {
   transition: none;
 }
-.cta-section {
-  padding: 5rem 0;
-  background-color: white;
-}
-.info-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  height: 100%;
-  background-color: #fff;
-}
-.card-image {
-  width: 100%;
-  background-color: #000;
-  overflow: hidden;
-}
-.card-image img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-.card-content {
-  padding: 2.5rem;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-}
-.card-content .card-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
-}
-.card-content .card-text {
-  color: var(--color-secondary);
-  margin-bottom: 1.5rem;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.card-content .mia-button-gold {
-  padding: 0.75rem 2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 .foundation-section {
   position: relative;
   padding: 0;
@@ -631,6 +780,36 @@ h3.section-subheading {
   line-height: 1.4;
 }
 
+/* Remove col-lg-6 padding for about and procedures sections for perfect alignment */
+.about-section .col-lg-6,
+.procedures-section .col-lg-6 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Add gap between columns using flex gap on the row, but ensure row stays horizontal */
+.about-section .row.align-items-center,
+.procedures-section .row.align-items-center {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 2rem;
+}
+
+/* Ensure about-section columns do not stack and retain widths */
+.about-section .col-lg-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  min-width: 0;
+}
+
+/* Stats numbers: ensure width matches other content and is centered */
+.stats-number {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 1400px) {
   .responsive-heading {
     font-size: 2.75rem;
@@ -699,15 +878,7 @@ h3.section-subheading {
   .procedures-section {
     padding: 4rem 0;
   }
-  .cta-section {
-    padding: 4rem 0;
-  }
-  .card-content .card-title {
-    font-size: 1.5rem;
-  }
-  .card-content .mia-button-gold {
-    padding: 0.6rem 1.75rem;
-  }
+  /* .cta-section, .info-card, .card-image, .card-content, .card-title, .card-text, .mia-button-gold removed */
   .foundation-section {
     height: 550px;
   }
@@ -825,20 +996,7 @@ h3.section-subheading {
   .procedure-dropdown {
     display: block;
   }
-  .cta-section {
-    padding: 3rem 0;
-  }
-  .card-content {
-    padding: 1.75rem;
-  }
-  .card-content .card-title {
-    font-size: 1.35rem;
-    margin-bottom: 0.75rem;
-  }
-  .card-content .mia-button-gold {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.9rem;
-  }
+  /* .cta-section, .info-card, .card-image, .card-content, .card-title, .card-text, .mia-button-gold removed */
   .foundation-section {
     height: 500px;
   }

@@ -120,7 +120,7 @@ function mia_aesthetics_enqueue_scripts() {
         );
     }
 
-    // JS loading (unchanged)
+    // JS loading
     if (is_singular('condition')) {
         $js_file = $theme_path . '/assets/js/condition.js';
         $handle = 'mia-condition-script';
@@ -129,6 +129,10 @@ function mia_aesthetics_enqueue_scripts() {
         $js_file = $theme_path . '/assets/js/surgeon.js';
         $handle = 'mia-surgeon-script';
     } 
+    elseif (is_front_page()) {
+        $js_file = $theme_path . '/assets/js/home.js';
+        $handle = 'mia-home-script';
+    }
     else {
         $js_file = $theme_path . '/assets/js/main.js';
         $handle = 'mia-aesthetics-script';
