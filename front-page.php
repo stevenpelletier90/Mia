@@ -200,18 +200,26 @@ get_header(); ?>
           // Show all thumbnail wrappers first
           thumbnailWrappers.forEach(wrapper => {
             wrapper.classList.remove('d-none');
-            wrapper.classList.add('col-4'); // Make them larger when there are fewer
+            wrapper.classList.remove('selected-video');
           });
           
-          // Hide the thumbnail that matches the current featured video
+          // Mark the selected video with a class instead of hiding it
           thumbnailWrappers.forEach(wrapper => {
             if (wrapper.getAttribute('data-video-id') === videoId) {
-              wrapper.classList.add('d-none');
+              wrapper.classList.add('selected-video');
+            }
+          });
+          
+          // Update active state for thumbnails
+          videoThumbnails.forEach(thumb => {
+            thumb.classList.remove('active');
+            if (thumb.getAttribute('data-video-id') === videoId) {
+              thumb.classList.add('active');
             }
           });
         }
         
-        // Set initial state - hide the default featured video from thumbnails
+        // Set initial state - mark the default featured video
         updateFeaturedVideo('OxigXlYTqH8');
         
         // Add click event to each thumbnail
@@ -222,10 +230,6 @@ get_header(); ?>
             
             // Update the featured video and manage thumbnails
             updateFeaturedVideo(videoId);
-            
-            // Update active state (optional visual feedback)
-            videoThumbnails.forEach(thumb => thumb.classList.remove('active'));
-            this.classList.add('active');
           });
           
           // Add keyboard accessibility
@@ -251,86 +255,86 @@ get_header(); ?>
       <div class="col-lg-6 mb-3 mb-lg-0">
         <div class="stats-heading">
           <p class="tagline mb-1 mb-md-2">Our Commitment</p>
-          <h2 class="fs-3 fs-md-2">Trusted Surgical Excellence</h2>
+          <h2 class="stats-heading-title">Trusted Surgical Excellence</h2>
         </div>
       </div>
       
       <!-- Right Column: Paragraph and Buttons -->
       <div class="col-lg-6">
         <div class="stats-content">
-          <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of board-certified specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
+          <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of highly skilled specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
           <div class="d-flex">
-            <a href="/locations/" class="mia-button mia-button-black me-3">Our Locations <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/locations/" class="mia-button mia-button-black me-3">Our Locations</a>
             <a href="/surgeons/" class="mia-button mia-button-black">Our Surgeons</a>
           </div>
         </div>
       </div>
     </div>
     
-    <!-- Stats Row -->
-    <div class="row stats-row">
-      <!-- Stat Item 1: Founded Year -->
-      <div class="col-6 col-md-3">
-        <div class="stat-item">
-          <div class="stat-line"></div>
-          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="2018">0</h3>
-          <p class="stat-text mb-0 fs-6 fs-md-5">Year Founded</p>
-        </div>
-      </div>
-      
-      <!-- Stat Item 2: Number of Surgeons (Dynamic) -->
-      <div class="col-6 col-md-3">
-        <div class="stat-item">
-          <div class="stat-line"></div>
-          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="<?php
-            // Count top-level surgeon posts
-            $surgeon_count = new WP_Query(array(
-              'post_type' => 'surgeon',
-              'post_parent' => 0,
-              'posts_per_page' => -1,
-              'fields' => 'ids'
-            ));
-            echo $surgeon_count->post_count ? $surgeon_count->post_count : '27';
-            ?>">0</h3>
-          <p class="stat-text mb-0 fs-6 fs-md-5">Expert Surgeons</p>
-        </div>
-      </div>
-      
-      <!-- Stat Item 3: Number of Locations (Dynamic) -->
-      <div class="col-6 col-md-3">
-        <div class="stat-item">
-          <div class="stat-line"></div>
-          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="<?php
-            // Count top-level location posts
-            $location_count = new WP_Query(array(
-              'post_type' => 'location',
-              'post_parent' => 0,
-              'posts_per_page' => -1,
-              'fields' => 'ids'
-            ));
-            echo $location_count->post_count ? $location_count->post_count : '13';
-            ?>">0</h3>
-          <p class="stat-text mb-0 fs-6 fs-md-5">Clinic Locations</p>
-        </div>
-      </div>
-      
-      <!-- Stat Item 4: Total Patients -->
-      <div class="col-6 col-md-3">
-        <div class="stat-item">
-          <div class="stat-line"></div>
-          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="150000" data-suffix=" +">0</h3>
-          <p class="stat-text mb-0 fs-6 fs-md-5">Satisfied Patients</p>
-        </div>
-      </div>
+<!-- Stats Row -->
+<div class="row row-cols-2 row-cols-md-4 g-4 mt-4 mt-md-5">
+  <!-- Stat Item 1: Founded Year -->
+  <div class="col">
+    <div class="position-relative ps-3 ps-md-4 mb-4">
+      <div class="position-absolute start-0 top-0 stat-line-gold"></div>
+      <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="2018">0</h3>
+      <p class="text-white-75 mb-0 fs-6">Year Founded</p>
     </div>
+  </div>
+  
+  <!-- Stat Item 2: Number of Surgeons (Dynamic) -->
+  <div class="col">
+    <div class="position-relative ps-3 ps-md-4 mb-4">
+      <div class="position-absolute start-0 top-0 stat-line-gold"></div>
+      <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="<?php
+        // Count top-level surgeon posts
+        $surgeon_count = new WP_Query(array(
+          'post_type' => 'surgeon',
+          'post_parent' => 0,
+          'posts_per_page' => -1,
+          'fields' => 'ids'
+        ));
+        echo $surgeon_count->post_count ? $surgeon_count->post_count : '27';
+        ?>">0</h3>
+      <p class="text-white-75 mb-0 fs-6">Expert Surgeons</p>
+    </div>
+  </div>
+  
+  <!-- Stat Item 3: Number of Locations (Dynamic) -->
+  <div class="col">
+    <div class="position-relative ps-3 ps-md-4 mb-4">
+      <div class="position-absolute start-0 top-0 stat-line-gold"></div>
+      <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="<?php
+        // Count top-level location posts
+        $location_count = new WP_Query(array(
+          'post_type' => 'location',
+          'post_parent' => 0,
+          'posts_per_page' => -1,
+          'fields' => 'ids'
+        ));
+        echo $location_count->post_count ? $location_count->post_count : '13';
+        ?>">0</h3>
+      <p class="text-white-75 mb-0 fs-6">Clinic Locations</p>
+    </div>
+  </div>
+  
+  <!-- Stat Item 4: Total Patients -->
+  <div class="col">
+    <div class="position-relative ps-3 ps-md-4 mb-4">
+      <div class="position-absolute start-0 top-0 stat-line-gold"></div>
+      <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="150" data-suffix=",000 +">0</h3>
+      <p class="text-white-75 mb-0 fs-6">Satisfied Patients</p>
+    </div>
+  </div>
+</div>
   </div>
 </section>
 
 <!-- Stats Count-Up Animation Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Get all stat number elements
-  const statNumbers = document.querySelectorAll('.stat-number');
+  // Get all stat number elements - updated selector for Bootstrap structure
+  const statNumbers = document.querySelectorAll('.display-5[data-count]');
   
   // Function to animate counting up
   function animateCountUp(element, target, duration, steps, suffix = '') {
@@ -338,8 +342,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let start = 0;
     let currentStep = 0;
     
+    // Get the element's parent to identify the patients counter and year
+    const parentText = element.closest('.position-relative').querySelector('p').textContent;
+    const isPatients = parentText.includes('Patient');
+    const isYear = parentText.includes('Year');
+    
     // Calculate the value increment per step
     const valueIncrement = target / steps;
+    
+    // Set initial text to prevent wrapping on two lines
+    if (isPatients) {
+      element.textContent = "0";
+      element.style.minWidth = "8ch"; // Reserve more space for "150,000+"
+    }
     
     const timer = setInterval(() => {
       currentStep++;
@@ -347,11 +362,35 @@ document.addEventListener('DOMContentLoaded', function() {
       // If we've reached the final step, set the final value and clear the interval
       if (currentStep >= steps) {
         clearInterval(timer);
-        element.textContent = target + suffix;
+        
+        // Format as "150,000+" for patients counter
+        if (isPatients) {
+          element.textContent = "150,000+";
+          // Keep the min-width to prevent layout shifts
+        } else if (isYear) {
+          // Don't add commas to years
+          element.textContent = target + suffix;
+        } else {
+          element.textContent = target.toLocaleString('en-US') + suffix;
+        }
       } else {
         // Otherwise, update with the current count based on step
         start = valueIncrement * currentStep;
-        element.textContent = Math.floor(start) + suffix;
+        const currentValue = Math.floor(start);
+        
+        // Format differently based on the type of counter
+        if (isPatients) {
+          if (currentValue >= target) {
+            element.textContent = "150,000+";
+          } else {
+            element.textContent = currentValue.toLocaleString('en-US') + suffix;
+          }
+        } else if (isYear) {
+          // Don't add commas to years
+          element.textContent = currentValue + suffix;
+        } else {
+          element.textContent = currentValue.toLocaleString('en-US') + suffix;
+        }
       }
     }, duration / steps);
   }
