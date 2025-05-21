@@ -132,9 +132,6 @@ get_header(); ?>
           <p class="tagline mb-2">Professional Care You Can Trust</p>
           <h1 class="mb-4">About Mia Aesthetics</h1>
           <p class="mb-4">Our mission at Mia Aesthetics is to deliver the highest quality of plastic surgery at affordable prices, demonstrating that beauty and cost-effectiveness can coexist harmoniously.</p>
-          <div>
-            <a href="/about/" class="mia-button mia-button-white">Learn more <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
         </div>
       </div>
       
@@ -143,55 +140,128 @@ get_header(); ?>
         <div class="video-carousel-container">
           <!-- Featured Video -->
           <div class="featured-video mb-3">
-            <div class="ratio ratio-16x9">
-              <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Featured Video" allowfullscreen></iframe>
+            <div class="ratio ratio-16x9" id="featured-video-container">
+              <iframe id="featured-video-iframe" src="https://www.youtube.com/embed/OxigXlYTqH8" title="Featured Video" allowfullscreen></iframe>
             </div>
           </div>
           
-          <!-- Thumbnail Carousel -->
-          <div class="row g-3">
-            <div class="col-4">
-              <div class="video-thumbnail ratio ratio-16x9">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Video Thumbnail 1" allowfullscreen></iframe>
+          <!-- Thumbnail Carousel - All in one row -->
+          <div class="row g-3" id="video-thumbnails-container">
+            <div class="col-3 video-thumbnail-wrapper" data-video-id="OxigXlYTqH8">
+              <div class="video-thumbnail ratio ratio-16x9" data-video-id="OxigXlYTqH8" role="button" tabindex="0" aria-label="Play featured video">
+                <img src="https://img.youtube.com/vi/OxigXlYTqH8/mqdefault.jpg" alt="Video thumbnail" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="video-play-overlay">
+                  <i class="fa-solid fa-play"></i>
+                </div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="video-thumbnail ratio ratio-16x9">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Video Thumbnail 2" allowfullscreen></iframe>
+            <div class="col-3 video-thumbnail-wrapper" data-video-id="sb8Kapy8mzU">
+              <div class="video-thumbnail ratio ratio-16x9" data-video-id="sb8Kapy8mzU" role="button" tabindex="0" aria-label="Play video 2">
+                <img src="https://img.youtube.com/vi/sb8Kapy8mzU/mqdefault.jpg" alt="Video thumbnail" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="video-play-overlay">
+                  <i class="fa-solid fa-play"></i>
+                </div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="video-thumbnail ratio ratio-16x9">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="Video Thumbnail 3" allowfullscreen></iframe>
+            <div class="col-3 video-thumbnail-wrapper" data-video-id="4-B_ISCne28">
+              <div class="video-thumbnail ratio ratio-16x9" data-video-id="4-B_ISCne28" role="button" tabindex="0" aria-label="Play video 3">
+                <img src="https://img.youtube.com/vi/4-B_ISCne28/mqdefault.jpg" alt="Video thumbnail" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="video-play-overlay">
+                  <i class="fa-solid fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 video-thumbnail-wrapper" data-video-id="ykz9Z8Kh3Yo">
+              <div class="video-thumbnail ratio ratio-16x9" data-video-id="ykz9Z8Kh3Yo" role="button" tabindex="0" aria-label="Play video 4">
+                <img src="https://img.youtube.com/vi/ykz9Z8Kh3Yo/mqdefault.jpg" alt="Video thumbnail" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="video-play-overlay">
+                  <i class="fa-solid fa-play"></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <!-- Video Interaction Script -->
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get all video thumbnails and their wrappers
+        const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+        const thumbnailWrappers = document.querySelectorAll('.video-thumbnail-wrapper');
+        const featuredVideoIframe = document.getElementById('featured-video-iframe');
+        const thumbnailsContainer = document.getElementById('video-thumbnails-container');
+        
+        // Function to update the featured video and manage thumbnails
+        function updateFeaturedVideo(videoId) {
+          // Update the featured video iframe src
+          featuredVideoIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+          
+          // Show all thumbnail wrappers first
+          thumbnailWrappers.forEach(wrapper => {
+            wrapper.classList.remove('d-none');
+            wrapper.classList.add('col-4'); // Make them larger when there are fewer
+          });
+          
+          // Hide the thumbnail that matches the current featured video
+          thumbnailWrappers.forEach(wrapper => {
+            if (wrapper.getAttribute('data-video-id') === videoId) {
+              wrapper.classList.add('d-none');
+            }
+          });
+        }
+        
+        // Set initial state - hide the default featured video from thumbnails
+        updateFeaturedVideo('OxigXlYTqH8');
+        
+        // Add click event to each thumbnail
+        videoThumbnails.forEach(thumbnail => {
+          thumbnail.addEventListener('click', function() {
+            // Get the video ID from the thumbnail
+            const videoId = this.getAttribute('data-video-id');
+            
+            // Update the featured video and manage thumbnails
+            updateFeaturedVideo(videoId);
+            
+            // Update active state (optional visual feedback)
+            videoThumbnails.forEach(thumb => thumb.classList.remove('active'));
+            this.classList.add('active');
+          });
+          
+          // Add keyboard accessibility
+          thumbnail.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.click();
+            }
+          });
+        });
+      });
+      </script>
     </div>
   </div>
 </section>
 
 <!-- Stats Section -->
-<section class="stats-section py-5">
+<section class="stats-section py-4 py-md-5">
   <div class="container">
     <!-- Top Content -->
-    <div class="row mb-5">
+    <div class="row mb-4 mb-md-5">
       <!-- Left Column: Tagline and Heading -->
-      <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="col-lg-6 mb-3 mb-lg-0">
         <div class="stats-heading">
-          <p class="tagline mb-2">Our Commitment</p>
-          <h2>Trusted Surgical Excellence</h2>
+          <p class="tagline mb-1 mb-md-2">Our Commitment</p>
+          <h2 class="fs-3 fs-md-2">Trusted Surgical Excellence</h2>
         </div>
       </div>
       
       <!-- Right Column: Paragraph and Buttons -->
       <div class="col-lg-6">
         <div class="stats-content">
-          <p class="mb-4"> Delivering life-changing results with expert care at every step. Our team of board-certified specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
+          <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of board-certified specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
           <div class="d-flex">
-            <a href="/locations/" class="mia-button mia-button-black me-3">Our Locations <i class="fa-solid fa-map-marker-alt"></i></a>
-            <a href="/surgeons/" class="mia-button mia-button-black">Our Surgeons <i class="fa-solid fa-user-md"></i></a>
+            <a href="/locations/" class="mia-button mia-button-black me-3">Our Locations <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/surgeons/" class="mia-button mia-button-black">Our Surgeons</a>
           </div>
         </div>
       </div>
@@ -199,44 +269,121 @@ get_header(); ?>
     
     <!-- Stats Row -->
     <div class="row stats-row">
-      <!-- Stat Item 1 -->
-      <div class="col-md-3">
+      <!-- Stat Item 1: Founded Year -->
+      <div class="col-6 col-md-3">
         <div class="stat-item">
           <div class="stat-line"></div>
-          <h3 class="stat-number">30%</h3>
-          <p class="stat-text mb-0">Highlight core benefits</p>
+          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="2018">0</h3>
+          <p class="stat-text mb-0 fs-6 fs-md-5">Year Founded</p>
         </div>
       </div>
       
-      <!-- Stat Item 2 -->
-      <div class="col-md-3">
+      <!-- Stat Item 2: Number of Surgeons (Dynamic) -->
+      <div class="col-6 col-md-3">
         <div class="stat-item">
           <div class="stat-line"></div>
-          <h3 class="stat-number">30%</h3>
-          <p class="stat-text mb-0">Highlight core benefits</p>
+          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="<?php
+            // Count top-level surgeon posts
+            $surgeon_count = new WP_Query(array(
+              'post_type' => 'surgeon',
+              'post_parent' => 0,
+              'posts_per_page' => -1,
+              'fields' => 'ids'
+            ));
+            echo $surgeon_count->post_count ? $surgeon_count->post_count : '27';
+            ?>">0</h3>
+          <p class="stat-text mb-0 fs-6 fs-md-5">Expert Surgeons</p>
         </div>
       </div>
       
-      <!-- Stat Item 3 -->
-      <div class="col-md-3">
+      <!-- Stat Item 3: Number of Locations (Dynamic) -->
+      <div class="col-6 col-md-3">
         <div class="stat-item">
           <div class="stat-line"></div>
-          <h3 class="stat-number">30%</h3>
-          <p class="stat-text mb-0">Highlight core benefits</p>
+          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="<?php
+            // Count top-level location posts
+            $location_count = new WP_Query(array(
+              'post_type' => 'location',
+              'post_parent' => 0,
+              'posts_per_page' => -1,
+              'fields' => 'ids'
+            ));
+            echo $location_count->post_count ? $location_count->post_count : '13';
+            ?>">0</h3>
+          <p class="stat-text mb-0 fs-6 fs-md-5">Clinic Locations</p>
         </div>
       </div>
       
-      <!-- Stat Item 4 -->
-      <div class="col-md-3">
+      <!-- Stat Item 4: Total Patients -->
+      <div class="col-6 col-md-3">
         <div class="stat-item">
           <div class="stat-line"></div>
-          <h3 class="stat-number">30%</h3>
-          <p class="stat-text mb-0">Highlight core benefits</p>
+          <h3 class="stat-number fs-1 fs-md-2 fs-lg-3" data-count="150000" data-suffix=" +">0</h3>
+          <p class="stat-text mb-0 fs-6 fs-md-5">Satisfied Patients</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Stats Count-Up Animation Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all stat number elements
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  // Function to animate counting up
+  function animateCountUp(element, target, duration, steps, suffix = '') {
+    // Start from 0
+    let start = 0;
+    let currentStep = 0;
+    
+    // Calculate the value increment per step
+    const valueIncrement = target / steps;
+    
+    const timer = setInterval(() => {
+      currentStep++;
+      
+      // If we've reached the final step, set the final value and clear the interval
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        element.textContent = target + suffix;
+      } else {
+        // Otherwise, update with the current count based on step
+        start = valueIncrement * currentStep;
+        element.textContent = Math.floor(start) + suffix;
+      }
+    }, duration / steps);
+  }
+  
+  // Create an Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    // If any stat number is in the viewport, animate all of them
+    if (entries.some(entry => entry.isIntersecting)) {
+      // Fixed duration for all animations
+      const duration = 2000; // 2 seconds for all numbers
+      const steps = 50; // Number of steps in the animation
+      
+      // Start animation for all stat numbers
+      statNumbers.forEach(statNumber => {
+        const target = parseInt(statNumber.getAttribute('data-count'), 10);
+        const suffix = statNumber.getAttribute('data-suffix') || '';
+        
+        // Start the animation
+        animateCountUp(statNumber, target, duration, steps, suffix);
+        
+        // Unobserve all elements so the animation only happens once
+        observer.unobserve(statNumber);
+      });
+    }
+  }, { threshold: 0.5 }); // Trigger when at least 50% of the element is visible
+  
+  // Observe each stat number element
+  statNumbers.forEach(statNumber => {
+    observer.observe(statNumber);
+  });
+});
+</script>
 
 <!-- Parallax Section with Video Background -->
 <section class="parallax-section">
@@ -269,9 +416,9 @@ get_header(); ?>
         <div class="col-lg-3 col-md-6 col-12">
           <div class="payment-step h-100">
             <h4 class="payment-step-title mb-3">1. Research Surgeons</h4>
-            <ul class="list-unstyled mb-0">
-              <li class="text-white mb-2">Choose from over 25 experienced surgeons</li>
-              <li class="text-white mb-2">Review surgeon bios on our website</li>
+            <ul class="mb-0">
+              <li class="text-white">Choose from over 25 experienced surgeons</li>
+              <li class="text-white">Review surgeon bios on our website</li>
               <li class="text-white">Browse our before and after photos</li>
             </ul>
           </div>
@@ -279,9 +426,9 @@ get_header(); ?>
         <div class="col-lg-3 col-md-6 col-12">
           <div class="payment-step h-100">
             <h4 class="payment-step-title mb-3">2. Check Specials</h4>
-            <ul class="list-unstyled mb-0">
-              <li class="text-white mb-2">Contact a sales coordinator for specials</li>
-              <li class="text-white mb-2">New surgeons often offer reduced rates</li>
+            <ul class="mb-0">
+              <li class="text-white">Contact a sales coordinator for specials</li>
+              <li class="text-white">New surgeons often offer reduced rates</li>
               <li class="text-white">Keep an eye on seasonal specials</li>
             </ul>
           </div>
@@ -289,9 +436,9 @@ get_header(); ?>
         <div class="col-lg-3 col-md-6 col-12">
           <div class="payment-step h-100">
             <h4 class="payment-step-title mb-3">3. Lock in Your Price</h4>
-            <ul class="list-unstyled mb-0">
-              <li class="text-white mb-2">Call us to secure a special price</li>
-              <li class="text-white mb-2">Booking fee required to lock in price</li>
+            <ul class="mb-0">
+              <li class="text-white">Call us to secure a special price</li>
+              <li class="text-white">Booking fee required to lock in price</li>
               <li class="text-white">Price valid for 12 months</li>
             </ul>
           </div>
@@ -299,9 +446,9 @@ get_header(); ?>
         <div class="col-lg-3 col-md-6 col-12">
           <div class="payment-step h-100">
             <h4 class="payment-step-title mb-3">4. Complete Payments</h4>
-            <ul class="list-unstyled mb-0">
-              <li class="text-white mb-2">Pay at your own pace</li>
-              <li class="text-white mb-2">Contact your patient concierge</li>
+            <ul class="mb-0">
+              <li class="text-white">Pay at your own pace</li>
+              <li class="text-white">Contact your patient concierge</li>
               <li class="text-white">Ask for contract extensions if needed</li>
             </ul>
           </div>
@@ -429,9 +576,10 @@ get_header(); ?>
                   </a>
                 </div>
               </div>
+              <a href="#body-procedures" class="procedure-link">
+                <i class="fa-solid fa-arrow-right"></i> View All Body Procedures
+              </a>
             </div>
-            
-            <a href="#body-procedures" class="mia-button mia-button-white">View All Body Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -484,9 +632,10 @@ get_header(); ?>
                   </a>
                 </div>
               </div>
+              <a href="#breast-procedures" class="procedure-link">
+                <i class="fa-solid fa-arrow-right"></i> View All Breast Procedures
+              </a>
             </div>
-            
-            <a href="#breast-procedures" class="mia-button mia-button-white">View All Breast Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -539,9 +688,10 @@ get_header(); ?>
                   </a>
                 </div>
               </div>
+              <a href="#facial-procedures" class="procedure-link">
+                <i class="fa-solid fa-arrow-right"></i> View All Facial Procedures
+              </a>
             </div>
-            
-            <a href="#facial-procedures" class="mia-button mia-button-white">View All Facial Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -589,9 +739,10 @@ get_header(); ?>
                   </a>
                 </div>
               </div>
+              <a href="#non-surgical" class="procedure-link">
+                <i class="fa-solid fa-arrow-right"></i> View All Non-Surgical Treatments
+              </a>
             </div>
-            
-            <a href="#non-surgical" class="mia-button mia-button-white">View All Non-Surgical Treatments <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -640,9 +791,10 @@ get_header(); ?>
                
                 </div>
               </div>
+              <a href="#men-procedures" class="procedure-link">
+                <i class="fa-solid fa-arrow-right"></i> View All Men's Procedures
+              </a>
             </div>
-            
-            <a href="#men-procedures" class="mia-button mia-button-white">View All Men's Procedures <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>

@@ -28,8 +28,8 @@
           <img 
             src="/wp-content/uploads/2024/11/miaaesthetics-logo.svg" 
             alt="Mia Aesthetics Logo" 
-            height="40" 
-            width="160" 
+            height="50" 
+            width="200" 
             class="d-inline-block" 
             fetchpriority="high" 
           />

@@ -39,23 +39,7 @@ get_header();
                                     <?php if ($city || $state || $zip_code): ?>
                                         <span>
                                             <?php
-                                            $city_state_zip = '';
-                                            if ($city) {
-                                                $city_state_zip .= esc_html($city);
-                                            }
-                                            if ($state) {
-                                                if ($city_state_zip !== '') {
-                                                    $city_state_zip .= ', ';
-                                                }
-                                                $city_state_zip .= esc_html($state);
-                                            }
-                                            if ($zip_code) {
-                                                if ($city_state_zip !== '') {
-                                                    $city_state_zip .= ' ';
-                                                }
-                                                $city_state_zip .= esc_html($zip_code);
-                                            }
-                                            echo $city_state_zip;
+                                            echo esc_html( mia_format_city_state_zip( $city, $state, $zip_code ) );
                                             ?>
                                         </span>
                                     <?php endif; ?>
@@ -122,7 +106,7 @@ get_header();
 
                         <?php $location_maps_link = get_field('location_maps_link'); ?>
                         <?php if ($location_maps_link): ?>
-                            <div class="location-directions mt-3">
+                            <div class="location-directions">
                                 <a href="<?php echo esc_url($location_maps_link); ?>" class="location-map-link" target="_blank">
                                     <i class="fas fa-map-marker-alt location-icon"></i> Get Directions
                                 </a>
@@ -133,68 +117,19 @@ get_header();
 
                 <div class="col-lg-6 ps-lg-5">
                     <?php
-                    // Looking at different methods to get the fields
-                    
-                    // Try method 1: direct field access
-                    $video_id = get_field('video_id');
-                    $video_url = get_field('video_url');
-                    $video_thumbnail = get_field('video_thumbnail');
-                    
-                    // Try method 2: accessing through the group
-                    $video_details = get_field('video_details');
-                    if (!empty($video_details)) {
-                        if (empty($video_id) && isset($video_details['video_id'])) {
-                            $video_id = $video_details['video_id'];
-                        }
-                        if (empty($video_url) && isset($video_details['video_url'])) {
-                            $video_url = $video_details['video_url'];
-                        }
-                        if (empty($video_thumbnail) && isset($video_details['video_thumbnail'])) {
-                            $video_thumbnail = $video_details['video_thumbnail'];
-                        }
-                    }
-                    
-                    // Try method 3: try the field group name
-                    $featured_video = get_field('featured_video');
-                    if (!empty($featured_video)) {
-                        if (empty($video_id) && isset($featured_video['video_id'])) {
-                            $video_id = $featured_video['video_id'];
-                        }
-                        if (empty($video_url) && isset($featured_video['video_url'])) {
-                            $video_url = $featured_video['video_url'];
-                        }
-                        if (empty($video_thumbnail) && isset($featured_video['video_thumbnail'])) {
-                            $video_thumbnail = $featured_video['video_thumbnail'];
-                        }
-                    }
-                    
-                    // Get all fields for debugging
-                    $all_fields = get_fields();
+                    // Unified helper fetch
+                    $video_info = mia_get_video_field();
+                    $video_url = $video_info['url']         ?? '';
+                    $video_thumbnail = $video_info['thumbnail'] ?? '';
                     
                     // Initialize thumbnail URL
                     $thumbnail_url = '';
 
-                    // Function to extract YouTube video ID from various URL formats
-                    function get_youtube_video_id_location($youtube_url) {
-                        $video_id = '';
-                        if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                            $video_id = $matches[1];
-                        } elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                            $video_id = $matches[1];
-                        } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                            $video_id = $matches[1];
-                        } elseif (preg_match('/youtube\.com\/v\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                            $video_id = $matches[1];
-                        } elseif (preg_match('/youtube\.com\/user\/\w+\/\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                            $video_id = $matches[1];
-                        }
-                        return $video_id;
-                    }
-
+                    // Get video details via helper to build embed URL
                     $embed_url = '';
                     if ($video_url) {
-                        $video_id = get_youtube_video_id_location($video_url);
-                        $embed_url = $video_id ? 'https://www.youtube.com/embed/' . $video_id : $video_url;
+                        $details  = get_video_details($video_url);
+                        $embed_url = $details ? $details['embed_url'] : $video_url;
                     }
 
                     // Handle the video_thumbnail which returns an array with all image data

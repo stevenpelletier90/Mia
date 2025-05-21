@@ -42,81 +42,89 @@ function mia_aesthetics_enqueue_scripts() {
 
     // Unified CSS loading: base, header, footer, and one page-specific CSS
     // 1. Enqueue base first (no dependencies)
-    if (file_exists($css_path . '/_base.css')) {
+    if ( $mtime = @filemtime( $css_path . '/_base.css' ) ) {
         wp_enqueue_style(
             'mia-base',
             $css_uri . '/_base.css',
             array(),
-            filemtime($css_path . '/_base.css')
+            $mtime
         );
     }
 
     // 2. Enqueue header/footer (depend on base)
-    if (file_exists($css_path . '/_header.css')) {
+    if ( $mtime = @filemtime( $css_path . '/_header.css' ) ) {
         wp_enqueue_style(
             'mia-header',
             $css_uri . '/_header.css',
             array('mia-base'),
-            filemtime($css_path . '/_header.css')
+            $mtime
         );
     }
-    if (file_exists($css_path . '/_footer.css')) {
+    if ( $mtime = @filemtime( $css_path . '/_footer.css' ) ) {
         wp_enqueue_style(
             'mia-footer',
             $css_uri . '/_footer.css',
             array('mia-base'),
-            filemtime($css_path . '/_footer.css')
+            $mtime
         );
     }
 
-    // 3. Determine and enqueue the single page-specific CSS (depend on base)
-    $page_css = null;
+    // 3. Determine and enqueue page-specific CSS (depends on base)
+    $page_css    = null;
     $page_handle = null;
 
-    if (is_front_page()) {
-        $page_css = '/_home.css';
-        $page_handle = 'mia-home';
-    } elseif (is_404()) {
-        $page_css = '/_404.css';
-        $page_handle = 'mia-404';
-    } elseif (is_search()) {
-        $page_css = '/_search.css';
-        $page_handle = 'mia-search';
-    } elseif (is_tax()) {
-        $page_css = '/_taxonomies.css';
-        $page_handle = 'mia-taxonomies';
-    } elseif (is_home() || (is_archive() && get_post_type() == 'post')) {
-        $page_css = '/_archive.css';
-        $page_handle = 'mia-post-archive';
-    } elseif (is_singular('post')) {
-        $page_css = '/_single.css';
-        $page_handle = 'mia-post-single';
-    } elseif (is_page()) {
-        $page_css = '/_page.css';
-        $page_handle = 'mia-page';
-    } elseif (is_post_type_archive()) {
-        $post_type = get_post_type();
-        if (!$post_type) {
-            $post_type = get_query_var('post_type');
-        }
-        if ($post_type) {
-            $page_css = '/_' . $post_type . '-archive.css';
-            $page_handle = 'mia-' . $post_type . '-archive';
-        }
-    } elseif (is_singular()) {
-        $post_type = get_post_type();
-        if ($post_type && $post_type !== 'post' && $post_type !== 'page') {
-            $page_css = '/_' . $post_type . '.css';
-            $page_handle = 'mia-' . $post_type . '-single';
-        }
-    }
+    switch ( true ) {
+        case is_front_page():
+            [$page_css, $page_handle] = ['/_home.css', 'mia-home'];
+            break;
 
-    if ($page_css && $page_handle && file_exists($css_path . $page_css)) {
+        case is_404():
+            [$page_css, $page_handle] = ['/_404.css', 'mia-404'];
+            break;
+
+        case is_search():
+            [$page_css, $page_handle] = ['/_search.css', 'mia-search'];
+            break;
+
+        case is_tax():
+            [$page_css, $page_handle] = ['/_taxonomies.css', 'mia-taxonomies'];
+            break;
+
+        case is_home():
+        case ( is_archive() && get_post_type() === 'post' ):
+            [$page_css, $page_handle] = ['/_archive.css', 'mia-post-archive'];
+            break;
+
+        case is_singular( 'post' ):
+            [$page_css, $page_handle] = ['/_single.css', 'mia-post-single'];
+            break;
+
+        case is_page():
+            [$page_css, $page_handle] = ['/_page.css', 'mia-page'];
+            break;
+
+        case is_post_type_archive():
+            $pt = get_post_type() ?: get_query_var( 'post_type' );
+            if ( $pt ) {
+                $page_css    = '/_' . $pt . '-archive.css';
+                $page_handle = 'mia-' . $pt . '-archive';
+            }
+            break;
+
+        case is_singular():
+            $pt = get_post_type();
+            if ( $pt && ! in_array( $pt, [ 'post', 'page' ], true ) ) {
+                $page_css    = '/_' . $pt . '.css';
+                $page_handle = 'mia-' . $pt . '-single';
+            }
+            break;
+    }
+    if ( $page_css && $page_handle && ( $mtime = @filemtime( $css_path . $page_css ) ) ) {
         wp_enqueue_style(
             $page_handle,
             $css_uri . $page_css,
-            array('mia-base'),
-            filemtime($css_path . $page_css)
+            array( 'mia-base' ),
+            $mtime
         );
     }
 
@@ -138,24 +146,24 @@ function mia_aesthetics_enqueue_scripts() {
         $handle = 'mia-aesthetics-script';
     }
     
-    if (isset($js_file) && file_exists($js_file)) {
+    if ( isset( $js_file ) && ( $mtime = @filemtime( $js_file ) ) ) {
         wp_enqueue_script(
             $handle,
-            $theme_uri . '/assets/js/' . basename($js_file),
-            array('bootstrap-js'),
-            filemtime($js_file),
+            $theme_uri . '/assets/js/' . basename( $js_file ),
+            array( 'bootstrap-js' ),
+            $mtime,
             true
         );
     }
     
     if (is_singular('surgeon') || is_singular('location')) {
         $video_js_file = $theme_path . '/assets/js/video.js';
-        if (file_exists($video_js_file)) {
+        if ( $mtime = @filemtime( $video_js_file ) ) {
             wp_enqueue_script(
                 'mia-video-script',
                 $theme_uri . '/assets/js/video.js',
-                array('bootstrap-js'),
-                filemtime($video_js_file),
+                array( 'bootstrap-js' ),
+                $mtime,
                 true
             );
         }
@@ -187,6 +195,39 @@ function mia_get_state_abbr($state) {
         'District of Columbia' => 'DC'
     );
     return isset($abbr[$state]) ? $abbr[$state] : $state;
+}
+
+/**
+ * Format “City, ST ZIP” using state-abbreviation helper.
+ *
+ * Any empty parts are skipped and separators added only when needed.
+ *
+ * @param string $city
+ * @param string $state Full state name or abbreviation
+ * @param string $zip
+ * @return string
+ */
+function mia_format_city_state_zip( $city = '', $state = '', $zip = '' ) {
+    $parts = [];
+
+    if ( $city ) {
+        $parts[] = trim( $city );
+    }
+
+    if ( $state ) {
+        $parts[] = mia_get_state_abbr( trim( $state ) );
+    }
+
+    $line = '';
+    if ( ! empty( $parts ) ) {
+        $line = implode( ', ', $parts );
+    }
+
+    if ( $zip ) {
+        $line = $line ? $line . ' ' . trim( $zip ) : trim( $zip );
+    }
+
+    return $line;
 }
 
 
@@ -248,6 +289,63 @@ function get_video_details($video_url) {
 
     // Return false if not a valid or recognized video URL
     return false;
+}
+
+ /**
+  * Locate and normalise video data stored in various ACF fields.
+  *
+  * Looks for 'video_details', 'featured_video' or 'video' field groups/fields
+  * and returns a unified array:
+  *   ['url','title','description','thumbnail']  – empty array if none found.
+  *
+  * @param int|null $post_id Post ID or current post if null.
+  * @return array|null
+  */
+function mia_get_video_field( $post_id = null ) {
+    if ( $post_id === null ) {
+        $post_id = get_the_ID();
+    }
+
+    $candidates = [ 'video_details', 'featured_video', 'video' ];
+    foreach ( $candidates as $field ) {
+        $val = get_field( $field, $post_id );
+        if ( empty( $val ) ) {
+            continue;
+        }
+
+        // Case 1: ACF repeater/group with explicit keys (video_url etc.)
+        if ( is_array( $val ) ) {
+            if ( ! empty( $val['video_url'] ) ) {
+                return [
+                    'url'         => is_array( $val['video_url'] ) ? $val['video_url']['url'] : $val['video_url'],
+                    'title'       => $val['video_title']       ?? '',
+                    'description' => $val['video_description'] ?? '',
+                    'thumbnail'   => $val['video_thumbnail']   ?? '',
+                ];
+            }
+            // Generic link array { url, title, description, thumbnail }
+            if ( ! empty( $val['url'] ) ) {
+                return [
+                    'url'         => $val['url'],
+                    'title'       => $val['title']       ?? '',
+                    'description' => $val['description'] ?? '',
+                    'thumbnail'   => $val['thumbnail']   ?? '',
+                ];
+            }
+        }
+
+        // Case 2: Simple URL string
+        if ( is_string( $val ) && filter_var( $val, FILTER_VALIDATE_URL ) ) {
+            return [
+                'url'         => $val,
+                'title'       => '',
+                'description' => '',
+                'thumbnail'   => '',
+            ];
+        }
+    }
+
+    return null;
 }
 
 

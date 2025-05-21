@@ -5,6 +5,7 @@
   padding-bottom: 5rem;
   position: relative;
   font-family: var(--font-body);
+  border-top: 1px solid var(--color-gold);
 }
 .wide-container {
   max-width: 1800px;

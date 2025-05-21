@@ -77,23 +77,7 @@ get_header();
                             <?php if ($city || $state || $zip_code) : ?>
                                 <br>
                                 <?php
-                                $city_state_zip = '';
-                                if ($city) {
-                                    $city_state_zip .= esc_html($city);
-                                }
-                                if ($state) {
-                                    if ($city_state_zip !== '') {
-                                        $city_state_zip .= ', ';
-                                    }
-                                    $city_state_zip .= esc_html($state);
-                                }
-                                if ($zip_code) {
-                                    if ($city_state_zip !== '') {
-                                        $city_state_zip .= ' ';
-                                    }
-                                    $city_state_zip .= esc_html($zip_code);
-                                }
-                                echo $city_state_zip;
+                                echo esc_html( mia_format_city_state_zip( $city, $state, $zip_code ) );
                                 ?>
                             <?php endif; ?>
                         </span>
