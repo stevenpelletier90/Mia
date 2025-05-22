@@ -6,17 +6,17 @@ get_header(); ?>
 <main id="primary" class="site-main">
 <section class="hero-section">
   <div class="hero-wrapper">
-<div class="row no-gutters">
+<div class="row g-0">
   <!-- Left Column: Carousel -->
   <div class="col-md-8">
-    <div class="content-box box-carousel position-relative">
-      <div id="specialsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="ratio ratio-16x9 box-carousel position-relative">
+      <div id="specialsCarousel" class="carousel slide w-100 h-100" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#specialsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#specialsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
         </div>
         <div class="carousel-inner">
-<div class="carousel-item active">
+<div class="carousel-item active w-100 h-100">
   <?php 
   // Use ACF image field with WordPress responsive image functionality
   $banner1_id = get_field('banner_1'); // Get image ID from ACF field
@@ -34,7 +34,7 @@ get_header(); ?>
   }
   ?>
 </div>
-<div class="carousel-item">
+<div class="carousel-item w-100 h-100">
   <?php 
   // Use ACF image field with WordPress responsive image functionality
   $banner2_id = get_field('banner_2'); // Get image ID from ACF field
@@ -68,8 +68,8 @@ get_header(); ?>
   <!-- Right Column: Stacked Boxes (on desktop) / Side by Side (on mobile) -->
   <div class="col-md-4 d-flex flex-column flex-sm-column flex-xs-row">
     <!-- Top Box: Before & After -->
-    <div class="content-box box-top position-relative">
-      <div class="img-container">
+    <div class="box-top position-relative">
+      <div class="ratio ratio-16x9">
         <?php 
         $before_after_img_id = get_field('ba_image'); // Get image ID from ACF field
         if ($before_after_img_id) {
@@ -87,14 +87,14 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Before & After</h4>
         <div class="button-wrapper">
-          <a href="/before-after/" class="mia-button mia-button-hero">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/before-after/" class="mia-button mia-button-hero" role="button">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
 
     <!-- Bottom Box: Financing -->
-    <div class="content-box box-bottom position-relative">
-      <div class="img-container">
+    <div class="box-bottom position-relative">
+      <div class="ratio ratio-16x9">
         <?php 
         $financing_img_id = get_field('financing_image'); // Get image ID from ACF field
         if ($financing_img_id) {
@@ -112,7 +112,7 @@ get_header(); ?>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
         <h4 class="responsive-heading">Financing</h4>
         <div class="button-wrapper">
-          <a href="/financing/" class="mia-button mia-button-hero" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/financing/" class="mia-button mia-button-hero" role="button" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -264,8 +264,8 @@ get_header(); ?>
         <div class="stats-content">
           <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of highly skilled specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
           <div class="d-flex">
-            <a href="/locations/" class="mia-button mia-button-black me-3">Our Locations</a>
-            <a href="/surgeons/" class="mia-button mia-button-black">Our Surgeons</a>
+            <a href="/locations/" class="mia-button mia-button-black me-3" role="button">Our Locations</a>
+            <a href="/surgeons/" class="mia-button mia-button-black" role="button">Our Surgeons</a>
           </div>
         </div>
       </div>
@@ -278,7 +278,7 @@ get_header(); ?>
     <div class="position-relative ps-3 ps-md-4 mb-4">
       <div class="position-absolute start-0 top-0 stat-line-gold"></div>
       <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="2018">0</h3>
-      <p class="text-white-75 mb-0 fs-6">Year Founded</p>
+      <p class="text-white opacity-75 mb-0 fs-6">Year Founded</p>
     </div>
   </div>
   
@@ -296,7 +296,7 @@ get_header(); ?>
         ));
         echo $surgeon_count->post_count ? $surgeon_count->post_count : '27';
         ?>">0</h3>
-      <p class="text-white-75 mb-0 fs-6">Expert Surgeons</p>
+      <p class="text-white opacity-75 mb-0 fs-6">Expert Surgeons</p>
     </div>
   </div>
   
@@ -314,7 +314,7 @@ get_header(); ?>
         ));
         echo $location_count->post_count ? $location_count->post_count : '13';
         ?>">0</h3>
-      <p class="text-white-75 mb-0 fs-6">Clinic Locations</p>
+      <p class="text-white opacity-75 mb-0 fs-6">Clinic Locations</p>
     </div>
   </div>
   
@@ -323,7 +323,7 @@ get_header(); ?>
     <div class="position-relative ps-3 ps-md-4 mb-4">
       <div class="position-absolute start-0 top-0 stat-line-gold"></div>
       <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="150" data-suffix=",000 +">0</h3>
-      <p class="text-white-75 mb-0 fs-6">Satisfied Patients</p>
+      <p class="text-white opacity-75 mb-0 fs-6">Satisfied Patients</p>
     </div>
   </div>
 </div>
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="row">
         <div class="col-12 text-center mb-4">
           <h2 class="section-heading text-white mb-2">How Payments Work</h2>
-          <h3 class="section-subheading text-gold mb-0">at Mia Aesthetics</h3>
+          <h3 class="section-subheading mb-0">at Mia Aesthetics</h3>
         </div>
       </div>
       <div class="row g-4">
@@ -587,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Body Contouring</h3>
-            <h4 class="section-subheading mb-4">Sculpt Your Ideal Figure</h4>
+            <p class="section-subheading mb-4">Sculpt Your Ideal Figure</p>
             <p class="mb-4">Our body contouring procedures help you achieve the silhouette you desire. Whether you're looking to remove excess fat, tighten loose skin, or enhance your curves, our specialists can help you reach your aesthetic goals.</p>
             
             <div class="procedure-links mb-4">
@@ -643,7 +643,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Breast Enhancement</h3>
-            <h4 class="section-subheading mb-4">Achieve Your Desired Look</h4>
+            <p class="section-subheading mb-4">Achieve Your Desired Look</p>
             <p class="mb-4">Our breast procedures are designed to enhance, reduce, or lift your breasts to achieve your desired appearance. Our board-certified surgeons use the latest techniques to deliver natural-looking results with minimal scarring.</p>
             
             <div class="procedure-links mb-4">
@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Facial Rejuvenation</h3>
-            <h4 class="section-subheading mb-4">Enhance Your Natural Beauty</h4>
+            <p class="section-subheading mb-4">Enhance Your Natural Beauty</p>
             <p class="mb-4">Our facial procedures are designed to enhance your natural features and restore youthful appearance. From facelifts to rhinoplasty, our board-certified surgeons use the latest techniques to deliver exceptional results.</p>
             
             <div class="procedure-links mb-4">
@@ -755,7 +755,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Non-Surgical Treatments</h3>
-            <h4 class="section-subheading mb-4">Rejuvenate Without Surgery</h4>
+            <p class="section-subheading mb-4">Rejuvenate Without Surgery</p>
             <p class="mb-4">Our non-surgical treatments offer remarkable results with minimal downtime. From injectables to laser therapies, we provide a range of options to address your concerns without the need for surgery.</p>
             
             <div class="procedure-links mb-4">
@@ -806,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="col-lg-6 order-lg-1">
             <h3 class="procedure-title mb-3">Men's Procedures</h3>
-            <h4 class="section-subheading mb-4">Tailored Solutions for Men</h4>
+            <p class="section-subheading mb-4">Tailored Solutions for Men</p>
             <p class="mb-4">Our men's procedures are specifically designed to address the unique concerns and aesthetic goals of our male patients. From body contouring to facial rejuvenation, we offer a range of treatments to help you look and feel your best.</p>
             
             <div class="procedure-links mb-4">
@@ -859,7 +859,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
           <h3 class="section-subheading mb-4">Gives Back</h3>
           <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
-          <a href="/mia-foundation/" class="mia-button mia-button-black" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/mia-foundation/" class="mia-button mia-button-black" role="button" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -879,201 +879,37 @@ window.addEventListener('load', function() {
     const tabLinks = document.querySelectorAll('.procedure-tabs .nav-link');
     
     // Only run if all necessary elements exist
-    if (tabsList && prevArrow && nextArrow && tabLinks.length) {
-      
-      // Force the arrows to be visible and clickable
-      prevArrow.style.display = 'flex';
-      nextArrow.style.display = 'flex';
-      prevArrow.style.zIndex = '9999';
-      nextArrow.style.zIndex = '9999';
-      prevArrow.style.pointerEvents = 'auto';
-      nextArrow.style.pointerEvents = 'auto';
-      
-      // Flag to prevent multiple clicks
-      let isNavigating = false;
-      
-      // --- Direct click handlers for arrows ---
-      function handlePrevArrowClick(e) {
-        // Prevent multiple rapid clicks
-        if (isNavigating) {
-          return;
-        }
-        
-        e.preventDefault(); // Prevent any default behavior
-        e.stopPropagation(); // Stop event bubbling
-        
-        if (prevArrow.classList.contains('disabled')) {
-          return;
-        }
-        
-        const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
-        if (!activeTab) {
-          return;
-        }
-        
-        const activeTabItem = activeTab.parentElement;
-        const prevTabItem = activeTabItem.previousElementSibling;
-        
-        if (prevTabItem) {
-          const prevTabLink = prevTabItem.querySelector('.nav-link');
-          
-          // Set flag to prevent multiple clicks
-          isNavigating = true;
-          
-          // Use Bootstrap's Tab API directly
-          try {
-            const tab = new bootstrap.Tab(prevTabLink);
-            tab.show();
-            
-            // Reset flag after a short delay
-            setTimeout(function() {
-              isNavigating = false;
-            }, 300);
-          } catch (error) {
-            // Fallback to direct click
-            prevTabLink.click();
-            
-            // Reset flag after a short delay
-            setTimeout(function() {
-              isNavigating = false;
-            }, 300);
-          }
-        }
-      }
-      
-      function handleNextArrowClick(e) {
-        // Prevent multiple rapid clicks
-        if (isNavigating) {
-          return;
-        }
-        
-        e.preventDefault(); // Prevent any default behavior
-        e.stopPropagation(); // Stop event bubbling
-        
-        if (nextArrow.classList.contains('disabled')) {
-          return;
-        }
-        
-        const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
-        if (!activeTab) {
-          return;
-        }
-        
-        const activeTabItem = activeTab.parentElement;
-        const nextTabItem = activeTabItem.nextElementSibling;
-        
-        if (nextTabItem) {
-          const nextTabLink = nextTabItem.querySelector('.nav-link');
-          
-          // Set flag to prevent multiple clicks
-          isNavigating = true;
-          
-          // Use Bootstrap's Tab API directly
-          try {
-            const tab = new bootstrap.Tab(nextTabLink);
-            tab.show();
-            
-            // Reset flag after a short delay
-            setTimeout(function() {
-              isNavigating = false;
-            }, 300);
-          } catch (error) {
-            // Fallback to direct click
-            nextTabLink.click();
-            
-            // Reset flag after a short delay
-            setTimeout(function() {
-              isNavigating = false;
-            }, 300);
-          }
-        }
-      }
-      
-      // Remove all existing event listeners
-      prevArrow.replaceWith(prevArrow.cloneNode(true));
-      nextArrow.replaceWith(nextArrow.cloneNode(true));
-      
-      // Get the new arrow elements after cloning
-      const newPrevArrow = document.querySelector('.prev-arrow');
-      const newNextArrow = document.querySelector('.next-arrow');
-      
-      // Add single click event listeners to the new elements
-      newPrevArrow.addEventListener('click', handlePrevArrowClick);
-      newNextArrow.addEventListener('click', handleNextArrowClick);
-      
-      // --- Arrow State Update Logic ---
-      function updateArrowStates() {
-        // First, enable both arrows by default
-        prevArrow.classList.remove('disabled');
-        nextArrow.classList.remove('disabled');
-        
-        // Then only disable based on active tab position
-        const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
-        if (activeTab) {
-          const activeTabItem = activeTab.parentElement;
-          const allTabs = Array.from(tabsList.querySelectorAll('.nav-item'));
-          const activeIndex = allTabs.indexOf(activeTabItem);
-          
-          // Only disable prev arrow if we're on the first tab
-          if (activeIndex === 0) {
-            prevArrow.classList.add('disabled');
-          }
-          
-          // Only disable next arrow if we're on the last tab
-          if (activeIndex === allTabs.length - 1) {
-            nextArrow.classList.add('disabled');
-          }
-        }
-      }
-      
-      // --- Ensure Active Tab is Visible ---
-      function scrollActiveTabIntoView() {
-        const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
-        if (!activeTab) {
-          return;
-        }
-        
-        const activeTabItem = activeTab.parentElement;
-        const tabsRect = tabsList.getBoundingClientRect();
-        const activeTabRect = activeTabItem.getBoundingClientRect();
-        
-        // Check if tab is out of view on the left
-        if (activeTabRect.left < tabsRect.left) {
-          tabsList.scrollLeft = tabsList.scrollLeft + (activeTabRect.left - tabsRect.left) - 10;
-        }
-        // Check if tab is out of view on the right
-        else if (activeTabRect.right > tabsRect.right) {
-          tabsList.scrollLeft = tabsList.scrollLeft + (activeTabRect.right - tabsRect.right) + 10;
-        }
-      }
-      
-      // --- Event Listeners ---
-      
-      // Update arrows when scrolled
-      tabsList.addEventListener('scroll', function() {
-        updateArrowStates();
-      });
-      
-      // Handle tab changes
+    if (tabsList && tabLinks.length) {
+      // Handle tab changes to ensure active tab is visible
       tabLinks.forEach(function(tabLink) {
         tabLink.addEventListener('shown.bs.tab', function() {
-          // Wait a tiny bit for the DOM to update
-          setTimeout(function() {
-            scrollActiveTabIntoView();
-            updateArrowStates();
-          }, 10);
+          // Scroll the active tab into view using the native scroll-snap
+          const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
+          if (activeTab) {
+            const activeTabItem = activeTab.parentElement;
+            activeTabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
         });
       });
       
-      // Initialize arrow states and scroll position
-      updateArrowStates();
-      scrollActiveTabIntoView();
+      // Initialize - make sure active tab is visible
+      const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
+      if (activeTab) {
+        const activeTabItem = activeTab.parentElement;
+        activeTabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
       
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        updateArrowStates();
-        scrollActiveTabIntoView();
-      });
+      // Optional: Add arrow navigation for accessibility
+      if (prevArrow && nextArrow) {
+        // Simple arrow navigation that works with the native scroll behavior
+        prevArrow.addEventListener('click', function() {
+          tabsList.scrollBy({ left: -100, behavior: 'smooth' });
+        });
+        
+        nextArrow.addEventListener('click', function() {
+          tabsList.scrollBy({ left: 100, behavior: 'smooth' });
+        });
+      }
     }
   }
   
@@ -1082,9 +918,6 @@ window.addEventListener('load', function() {
   
   // Also initialize after a short delay to ensure everything is loaded
   setTimeout(initTabNavigation, 500);
-  
-  // And again after a longer delay just to be sure
-  setTimeout(initTabNavigation, 2000);
 });
 </script>
 

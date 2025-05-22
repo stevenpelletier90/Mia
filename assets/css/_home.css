@@ -8,28 +8,6 @@
   overflow: hidden;
 }
 
-.hero-wrapper .row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  align-items: flex-start;
-}
-
-.hero-wrapper .col-md-8,
-.hero-wrapper .col-md-4 {
-  padding: 0;
-}
-
-.content-box {
-  position: relative;
-  overflow: hidden;
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-color: #000;
-  box-sizing: border-box;
-}
-
 .box-carousel {
   border: 1px solid #fff;
   border-right: none;
@@ -47,15 +25,6 @@
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
-}
-
-.img-container {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
 }
 
 .content-image {
@@ -114,15 +83,10 @@
 }
 
 .carousel {
-  width: 100%;
-  height: 100%;
   border-radius: 0;
 }
 
-.carousel-item {
-  width: 100%;
-  height: 100%;
-}
+/* Using Bootstrap's w-100 h-100 utility classes instead of custom CSS */
 
 .carousel-item img {
   width: 100%;
@@ -201,7 +165,6 @@
   object-fit: cover;
 }
 
-/* Payments Section */
 .payments-overlap-section {
   position: relative;
   margin-top: -150px;
@@ -215,10 +178,6 @@
   padding: 4rem 3rem;
   border-radius: 8px;
   box-shadow: 0 -15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.text-gold {
-  color: var(--color-gold) !important;
 }
 
 .payment-step {
@@ -270,10 +229,17 @@
   max-width: 100%;
   position: relative;
   z-index: 1;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 5px;
 }
 
 .procedure-tabs::-webkit-scrollbar {
   display: none;
+}
+
+.procedure-tabs .nav-item {
+  scroll-snap-align: center;
 }
 
 .procedure-tabs .nav-item {
@@ -418,47 +384,6 @@
   overflow: hidden;
 }
 
-/* Desktop styles */
-@media (min-width: 768px) {
-  .foundation-section {
-    height: 600px;
-  }
-
-  .foundation-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: 1;
-  }
-
-  .foundation-bg::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 2;
-  }
-
-  .foundation-section .container {
-    position: relative;
-    z-index: 3;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 3rem;
-  }
-}
-
-/* Mobile styles */
 .foundation-mobile-img {
   display: block;
   width: 100%;
@@ -522,10 +447,171 @@ h3.section-subheading {
   gap: 2rem;
 }
 
-/* Ensure tab content is visible on mobile */
-.tab-pane.show.active {
-  display: block !important;
-  opacity: 1 !important;
+.about-section {
+  padding: 5rem 0;
+  background-color: #fff;
+}
+
+.about-content h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.about-content p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+.video-carousel-container {
+  overflow: hidden;
+}
+
+#video-thumbnails-container {
+  background-color: transparent;
+  padding: 10px 5px;
+}
+
+.featured-video {
+  overflow: hidden;
+}
+
+.video-thumbnail {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.video-thumbnail:hover {
+  transform: translateY(-5px);
+}
+
+.video-thumbnail.active {
+  transform: scale(1.05);
+}
+
+.selected-video .video-thumbnail {
+  transform: scale(1.05);
+  border: 2px solid #000;
+}
+
+.video-thumbnail img {
+  transition: all 0.3s ease;
+}
+
+.video-thumbnail:hover img {
+  filter: brightness(0.8);
+}
+
+.video-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-thumbnail:hover .video-play-overlay {
+  opacity: 1;
+}
+
+.video-play-overlay i {
+  color: #fff;
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.stats-section {
+  padding: 5rem 0;
+  background-color: #1b1b1b;
+  color: #fff;
+}
+
+.stats-section .tagline {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stats-heading h2,
+.stats-heading-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+
+.stats-content p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.stat-line-gold {
+  width: 3px;
+  height: 100%;
+  min-height: 80px;
+  background-color: var(--color-gold);
+}
+
+@media (min-width: 768px) {
+  .foundation-section {
+    height: 600px;
+  }
+
+  .foundation-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+
+  .foundation-bg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+
+  .foundation-section .container {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 3rem;
+  }
 }
 
 @media (min-width: 1400px) {
@@ -549,7 +635,6 @@ h3.section-subheading {
 }
 
 @media (max-width: 991px) {
-  /* Payments Section Responsive */
   .payments-overlap-section {
     margin-top: -100px;
   }
@@ -580,22 +665,11 @@ h3.section-subheading {
     height: 400px;
   }
 
-  /* Payments Section Responsive */
-  .payments-overlap-section {
-    margin-top: -100px;
-  }
-
-  .payments-card {
-    padding: 3rem 2rem;
-  }
-
   .procedures-section {
     padding: 4rem 0;
   }
 
-  /* Foundation section tablet styles */
   .foundation-section {
-    /* Height is handled by min-height in the desktop media query */
   }
 
   .foundation-content {
@@ -671,7 +745,6 @@ h3.section-subheading {
     height: 350px;
   }
 
-  /* Payments Section Mobile */
   .payments-overlap-section {
     margin-top: -70px;
   }
@@ -697,7 +770,6 @@ h3.section-subheading {
     display: block;
   }
 
-  /* Fix procedure content layout on mobile */
   .procedures-section .row.align-items-center {
     flex-direction: column;
     flex-wrap: wrap;
@@ -711,17 +783,8 @@ h3.section-subheading {
   .procedures-section .row.align-items-center .col-lg-6.order-lg-2 {
     order: -1;
   }
-
-  /* Foundation section styles are now defined in a separate media query below */
 }
 
-/* About Section with Video Carousel */
-.about-section {
-  padding: 5rem 0;
-  background-color: #fff;
-}
-
-/* Add space between columns on desktop */
 @media (min-width: 992px) {
   .about-section .row.align-items-center {
     margin-left: -20px;
@@ -734,94 +797,6 @@ h3.section-subheading {
   }
 }
 
-.about-content h1 {
-  font-size: clamp(2rem, 5vw, 2.75rem);
-  font-weight: 700;
-  color: var(--color-primary);
-  line-height: 1.2;
-}
-
-.about-content p {
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  color: var(--color-primary);
-  margin-bottom: 2rem;
-}
-
-.video-carousel-container {
-  overflow: hidden;
-}
-
-#video-thumbnails-container {
-  background-color: transparent;
-  padding: 10px 5px;
-}
-
-.featured-video {
-  overflow: hidden;
-}
-
-.video-thumbnail {
-  position: relative;
-  border-radius: 4px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.video-thumbnail:hover {
-  transform: translateY(-5px);
-}
-
-.video-thumbnail.active {
-  transform: scale(1.05);
-}
-
-/* Selected video styling with black outline */
-.selected-video .video-thumbnail {
-  transform: scale(1.05);
-  border: 2px solid #000;
-}
-
-.video-thumbnail img {
-  transition: all 0.3s ease;
-}
-
-.video-thumbnail:hover img {
-  filter: brightness(0.8);
-}
-
-.video-play-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.video-thumbnail:hover .video-play-overlay {
-  opacity: 1;
-}
-
-.video-play-overlay i {
-  color: #fff;
-  font-size: 2rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Mobile adjustments for video thumbnails */
 @media (max-width: 767px) {
   .video-thumbnail-wrapper {
     display: flex;
@@ -854,56 +829,6 @@ h3.section-subheading {
   }
 }
 
-/* Ensure object-fit-cover class works properly */
-.object-fit-cover {
-  object-fit: cover;
-}
-
-/* Stats Section */
-.stats-section {
-  padding: 5rem 0;
-  background-color: #1b1b1b;
-  color: #fff;
-}
-
-.stats-section .tagline {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-gold);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.stats-heading h2,
-.stats-heading-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.1;
-  margin-bottom: 0;
-}
-
-.stats-content p {
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-/* Bootstrap text utility for slightly transparent white text */
-.text-white-75 {
-  color: rgba(255, 255, 255, 0.75) !important;
-}
-
-/* Stat line gold styling */
-.stat-line-gold {
-  width: 3px;
-  height: 100%;
-  min-height: 80px;
-  background-color: var(--color-gold);
-}
-
-/* Fix for stats numbers at medium breakpoints */
 @media (min-width: 768px) and (max-width: 991px) {
   .display-5[data-count] {
     font-size: 2.5rem !important;
@@ -912,12 +837,11 @@ h3.section-subheading {
     white-space: nowrap;
   }
 
-  .display-5[data-suffix=",000 +"] {
+  .display-5[data-suffix=", 000 +"] {
     font-size: 2.25rem !important;
   }
 }
 
-/* Fix for procedure content stacking at 776px */
 @media (min-width: 768px) and (max-width: 830px) {
   .procedures-section .row.align-items-center {
     flex-direction: column !important;
@@ -933,7 +857,6 @@ h3.section-subheading {
   }
 }
 
-/* Media Queries for About and Stats Sections */
 @media (max-width: 991px) {
   .about-section,
   .stats-section {
@@ -984,7 +907,6 @@ h3.section-subheading {
     text-shadow: none;
   }
 
-  /* Stats content mobile styles */
   .stats-content {
     text-align: left;
     margin-bottom: 1.5rem;
@@ -1026,7 +948,6 @@ h3.section-subheading {
     font-size: 0.8rem;
   }
 
-  /* Foundation section styles for smallest screens */
   .foundation-content {
     padding: 1.25rem;
   }

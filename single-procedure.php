@@ -26,7 +26,7 @@ get_header(); ?>
         $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
     ?>
         <!-- Page Header with Two-Column Layout -->
-        <header class="procedure-header py-5" <?php if($featured_img_url): ?> style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)), url('<?php echo esc_url($featured_img_url); ?>')" <?php endif; ?>>
+        <header class="procedure-header py-5" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)), url('<?php echo esc_url($featured_img_url); ?>')">
             <div class="container">
                 <div class="row min-vh-50 d-flex align-items-center">
                     <!-- Left Column: Title and Price -->
@@ -57,16 +57,6 @@ get_header(); ?>
 
         <!-- Content -->
         <article class="py-5">
-            <?php if (has_post_thumbnail()) : ?>
-            <div class="container mb-4">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <?php the_post_thumbnail('large', ['class' => 'img-fluid rounded']); ?>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
-            
             <!-- Main content without container constraints -->
             <div class="main-content">
                 <?php the_content(); ?>
@@ -199,10 +189,8 @@ get_header(); ?>
                 $faq_section = get_field('faq_section');
                 if ($faq_section && !empty($faq_section['faqs'])): ?>
                 <section class="py-5">
-                    <div class="container">
-                        <div class="faq-container">
-                            <?php echo display_page_faqs(); ?>
-                        </div>
+                    <div class="container">                        
+                            <?php echo display_page_faqs(); ?>                      
                     </div>
                 </section>
                 <?php endif; ?>

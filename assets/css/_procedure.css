@@ -1,6 +1,5 @@
 .procedure-header {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)),
-    url("/wp-content/uploads/2025/02/bbl-large.jpg");
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5));
   background-size: cover;
   background-position: center;
   position: relative;
@@ -20,7 +19,7 @@
   font-weight: 600;
 }
 .pricing-info p {
-  /* font-size removed: use base or utility class */
+  color: var(--color-gold);
 }
 .pricing-info small {
   /* font-size removed: use base or utility class */
@@ -266,4 +265,456 @@
     /* font-size removed: use base or utility class */
     padding: 3px 8px;
   }
+
+  /* Hide consultation form on mobile only */
+  .procedure-header .row .col-lg-5 {
+    display: none;
+  }
+
+  /* Increase minimum height of hero section on mobile */
+  .procedure-header .row.min-vh-50 {
+    min-height: 300px !important;
+  }
+
+  /* Center text on mobile when form disappears */
+  .procedure-header .col-lg-7 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center the section title line on mobile */
+  .procedure-header .section-title:after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Mobile-specific form styles */
+  .single-procedure .gform_wrapper {
+    padding: 0 !important; /* Remove padding on mobile */
+  }
+
+  .single-procedure .gform_wrapper input[type="text"],
+  .single-procedure .gform_wrapper input[type="email"],
+  .single-procedure .gform_wrapper input[type="tel"],
+  .single-procedure .gform_wrapper input[type="number"],
+  .single-procedure .gform_wrapper input[type="url"],
+  .single-procedure .gform_wrapper select,
+  .single-procedure .gform_wrapper textarea {
+    font-size: 15px; /* Slightly smaller font for mobile */
+  }
+
+  .single-procedure .gform_wrapper .gfield_checkbox .gchoice {
+    margin-bottom: 0; /* Consistent with desktop */
+  }
+
+  .single-procedure .gform_wrapper .gform_footer .gform_button {
+    width: 100%; /* Full-width button on mobile */
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+  }
+
+  /* Maintain grid layout on mobile */
+  .single-procedure .gform_wrapper .gform_fields {
+    grid-gap: 0.5rem !important; /* Slightly tighter spacing on mobile */
+  }
+}
+
+/* Fix for specific mobile browsers */
+@media (max-width: 480px) {
+  /* Target Android */
+  .single-procedure .gform_wrapper input,
+  .single-procedure .gform_wrapper select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Additional spacing for tap targets */
+  .single-procedure .gform_wrapper .gfield_checkbox .gchoice {
+    padding: 0.25rem 0;
+  }
+
+  .single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Add gradient background to the consultation card and form container */
+.single-procedure .consultation-card,
+.consultation-card,
+.single-procedure .gform_wrapper.gravity-theme {
+  background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
+  color: #fff;
+}
+
+.consultation-card h3,
+.consultation-card strong,
+.consultation-card p,
+.consultation-card h2 {
+  color: #fff;
+}
+
+.consultation-card .btn-primary {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.consultation-card .btn-primary:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+}
+
+/* Gravity Forms Overrides: hide labels and normalize field widths */
+
+fieldset#field_1_55 {
+  margin-bottom: 0px !important;
+}
+
+fieldset#field_1_57 {
+  margin-bottom: 0px !important;
+}
+
+fieldset#field_1_58 {
+  margin-bottom: 0px !important;
+}
+
+div#field_1_54 {
+  margin-bottom: 0px !important;
+}
+
+.single-procedure .gform_wrapper .gfield_label {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gform-footer.gform_footer.top_label {
+  padding-bottom: 0 !important;
+}
+
+/* Consent link styling */
+a.consent-trigger {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.5rem;
+  position: relative;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+a.consent-trigger:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+a.consent-trigger:hover {
+  color: #ffffff;
+}
+
+a.consent-trigger:hover:after {
+  width: 100%;
+}
+
+.single-procedure .gform_wrapper .ginput_container input[type="text"],
+.single-procedure .gform_wrapper .ginput_container input[type="email"],
+.single-procedure .gform_wrapper .ginput_container input[type="tel"],
+.single-procedure .gform_wrapper .ginput_container input[type="number"],
+.single-procedure .gform_wrapper .ginput_container input[type="url"],
+.single-procedure .gform_wrapper .ginput_container textarea,
+.single-procedure .gform_wrapper .gfield select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hide "* indicates required fields" legend */
+.single-procedure .gform_wrapper .gform_required_legend {
+  display: none !important;
+}
+
+/* Remove all default margins/padding and apply a consistent gap */
+.single-procedure .gform_wrapper .gform_fields {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-gap: 0.75rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Reset all fields - zero margins/padding */
+.single-procedure .gform_wrapper .gfield {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Name field full width but keep inputs side-by-side */
+#field_1_13 {
+  grid-column: span 2 !important;
+}
+
+.single-procedure .gform_wrapper .ginput_complex.ginput_container_name {
+  display: flex !important;
+  gap: 0.75rem !important;
+  margin: 0 !important;
+}
+
+.single-procedure .gform_wrapper .ginput_complex.ginput_container_name span {
+  flex: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Email and phone - always side by side */
+#field_1_2,
+#field_1_3 {
+  grid-column: span 1 !important;
+}
+
+/* Country and zip code - always side by side */
+#field_1_36,
+#field_1_42 {
+  grid-column: span 1 !important;
+}
+
+/* Language and procedure - always side by side */
+#field_1_33,
+#field_1_38 {
+  grid-column: span 1 !important;
+}
+
+/* Checkbox fields full width */
+#field_1_55,
+#field_1_57,
+#field_1_58,
+#field_1_54 {
+  grid-column: span 2 !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Checkbox container spacing */
+.single-procedure .gform_wrapper .gfield_checkbox {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Submit button container */
+.single-procedure .gform_wrapper .gform_footer {
+  margin-top: 1rem !important;
+  padding: 0 !important;
+}
+
+/* Consistent styling for all form inputs across all devices */
+.single-procedure .gform_wrapper input[type="text"],
+.single-procedure .gform_wrapper input[type="email"],
+.single-procedure .gform_wrapper input[type="tel"],
+.single-procedure .gform_wrapper input[type="number"],
+.single-procedure .gform_wrapper input[type="url"],
+.single-procedure .gform_wrapper select {
+  height: 48px;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.5;
+  font-size: 16px; /* Prevents iOS zoom on focus */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+/* Dropdown styling - dark field with white dropdown menu */
+.single-procedure .gform_wrapper select {
+  padding: 0.625rem 0.75rem;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  /* Custom arrow styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 10px 10px;
+  padding-right: 2.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Style the dropdown options to have white background and black text */
+.single-procedure .gform_wrapper select option {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 8px 10px;
+}
+
+/* Focus state */
+.single-procedure .gform_wrapper select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
+  outline: none;
+}
+
+/* Textareas: visual harmony with min-height */
+.single-procedure .gform_wrapper textarea {
+  min-height: 120px;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.5;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+/* Focus states for inputs and textareas */
+.single-procedure .gform_wrapper input:focus,
+.single-procedure .gform_wrapper select:focus,
+.single-procedure .gform_wrapper textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Placeholder styling */
+.single-procedure .gform_wrapper input::placeholder,
+.single-procedure .gform_wrapper textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+/* Checkbox styling for dark background */
+.single-procedure .gform_wrapper .gfield_checkbox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox .gchoice {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Remove margin as requested */
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #000000;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox label {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Checkbox hover states */
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"]:hover {
+  border-color: var(--color-gold);
+}
+
+/* Submit button styling (matches white Mia button on dark background with arrow) */
+.single-procedure .gform_wrapper .gform_footer .gform_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0.625rem 1.5rem;
+  font-size: 15px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100% !important;
+}
+
+.single-procedure .gform_wrapper .gform_footer .gform_button::after {
+  content: "\f061"; /* Font Awesome arrow-right */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+  transition: transform 0.3s ease;
+}
+
+.single-procedure .gform_wrapper .gform_footer .gform_button:hover,
+.single-procedure .gform_wrapper .gform_footer .gform_button:focus {
+  color: var(--color-primary);
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.single-procedure .gform_wrapper .gform_footer .gform_button:hover::after,
+.single-procedure .gform_wrapper .gform_footer .gform_button:focus::after {
+  transform: translateX(5px);
+}
+
+/* Form submit button container */
+.single-procedure .gform_wrapper .gform_footer {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  text-align: center;
 }
