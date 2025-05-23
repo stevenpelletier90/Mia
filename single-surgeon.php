@@ -134,12 +134,12 @@ get_header(); ?>
             <div class="row d-lg-none">
                 <div class="col-12">
                     <div class="sidebar-section" style="border-radius: 0;">
-                        <div class="video-container">
+                        <div class="ratio ratio-16x9">
                             <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
                                 <img 
                                     src="<?php echo esc_url($thumbnail_url); ?>" 
                                     alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
-                                    class="img-fluid"
+                                    class="img-fluid object-fit-cover"
                                     loading="lazy"
                                     width="640"
                                     height="360"
@@ -208,12 +208,12 @@ get_header(); ?>
                         <?php if($video_url && $thumbnail_url): ?>
                         <!-- Video Section (visible only on desktop) -->
                         <div class="sidebar-section d-none d-lg-block" style="border-radius: 0;">
-                            <div class="video-container">
+                            <div class="ratio ratio-16x9">
                                 <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
                                     <img 
                                         src="<?php echo esc_url($thumbnail_url); ?>" 
                                         alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
-                                        class="img-fluid"
+                                        class="img-fluid object-fit-cover"
                                         loading="lazy"
                                         width="640"
                                         height="360"

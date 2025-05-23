@@ -142,12 +142,12 @@ get_header();
                     <!-- Video container - only show if we have both URL and thumbnail -->
                     <?php if (!empty($video_url) && !empty($thumbnail_url)): ?>
                     <div class="sidebar-section" style="border-radius: 0;">
-                        <div class="video-container">
+                        <div class="ratio ratio-16x9">
                             <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
                                 <img 
                                     src="<?php echo esc_url($thumbnail_url); ?>" 
                                     alt="<?php echo esc_attr(get_the_title()); ?> Video Thumbnail" 
-                                    class="img-fluid"
+                                    class="img-fluid object-fit-cover"
                                     loading="lazy"
                                     width="640"
                                     height="360"

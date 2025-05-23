@@ -147,9 +147,6 @@ body.single-surgeon {
   position: relative;
   z-index: 1;
 }
-.video-container {
-  scroll-margin-top: 120px;
-}
 .surgeon-sidebar {
   position: relative;
 }
@@ -190,7 +187,6 @@ body.single-surgeon {
   color: var(--color-primary);
 }
 .card {
-  border: none;
   border-radius: 8px;
 }
 .card-body {
@@ -393,23 +389,6 @@ body.single-surgeon {
   #surgeon-before-after {
     scroll-margin-top: 150px;
     padding-top: 20px;
-  }
-  .video-container {
-    scroll-margin-top: 150px;
-  }
-  .surgeon-hero-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem 0;
-    height: auto;
-    min-height: 320px;
-    transform: none;
-    -webkit-transform: none;
-  }
-
-  .surgeon-hero-section .row {
-    gap: 1.5rem;
   }
   .surgeon-hero-content {
     text-align: center;
