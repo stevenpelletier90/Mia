@@ -550,8 +550,18 @@ $menu_label = $state ? $display_city . ', ' . $abbr : $display_city;
   </nav>
 </header>
 <!-- Mobile Floating CTA Button - Only visible on mobile -->
-<div class="mobile-cta-container">
+<div id="mobileCta" class="mobile-cta-container">
   <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="mobile-consultation-btn">
     Free Virtual Consultation <i class="fa-solid fa-arrow-right"></i>
   </a>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cta = document.getElementById('mobileCta');
+    const oc = document.getElementById('navbarOffcanvas');
+
+    oc.addEventListener('show.bs.offcanvas', () => cta.classList.add('d-none'));   // hide when menu opens
+    oc.addEventListener('hidden.bs.offcanvas', () => cta.classList.remove('d-none')); // show again when menu closes
+  });
+</script>

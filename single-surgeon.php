@@ -64,7 +64,7 @@ get_header(); ?>
     </div>
 
     <!-- Mobile Surgeon Navigation - Only visible on mobile -->
-    <div id="surgeon-mobile-nav" class="surgeon-mobile-nav d-md-none sticky-top" style="top: var(--navbar-height);">
+    <div id="surgeon-tabs" class="surgeon-mobile-nav d-md-none sticky-top">
         <div class="surgeon-nav-buttons">
             <a href="#surgeon-about" class="surgeon-nav-btn">About</a>
             <a href="#surgeon-specialities" class="surgeon-nav-btn">Specialities</a>

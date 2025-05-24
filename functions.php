@@ -42,30 +42,36 @@ function mia_aesthetics_enqueue_scripts() {
 
     // Unified CSS loading: base, header, footer, and one page-specific CSS
     // 1. Enqueue base first (no dependencies)
-    if ( $mtime = @filemtime( $css_path . '/_base.css' ) ) {
+    $base_css_file = $css_path . '/_base.css';
+    if ( file_exists( $base_css_file ) ) {
+        $ver = filemtime( $base_css_file );
         wp_enqueue_style(
             'mia-base',
             $css_uri . '/_base.css',
             array(),
-            $mtime
+            $ver
         );
     }
 
     // 2. Enqueue header/footer (depend on base)
-    if ( $mtime = @filemtime( $css_path . '/_header.css' ) ) {
+    $header_css_file = $css_path . '/_header.css';
+    if ( file_exists( $header_css_file ) ) {
+        $ver = filemtime( $header_css_file );
         wp_enqueue_style(
             'mia-header',
             $css_uri . '/_header.css',
             array('mia-base'),
-            $mtime
+            $ver
         );
     }
-    if ( $mtime = @filemtime( $css_path . '/_footer.css' ) ) {
+    $footer_css_file = $css_path . '/_footer.css';
+    if ( file_exists( $footer_css_file ) ) {
+        $ver = filemtime( $footer_css_file );
         wp_enqueue_style(
             'mia-footer',
             $css_uri . '/_footer.css',
             array('mia-base'),
-            $mtime
+            $ver
         );
     }
 
@@ -114,18 +120,38 @@ function mia_aesthetics_enqueue_scripts() {
         case is_singular():
             $pt = get_post_type();
             if ( $pt && ! in_array( $pt, [ 'post', 'page' ], true ) ) {
-                $page_css    = '/_' . $pt . '.css';
-                $page_handle = 'mia-' . $pt . '-single';
+                // Special handling for 2nd-level procedure pages (grandchildren)
+                if ($pt === 'procedure') {
+                    $post = get_queried_object();
+                    $ancestors = get_post_ancestors($post);
+                    
+                    if (count($ancestors) === 2) {
+                        // Use condition CSS for 2nd-level procedure pages
+                        $page_css    = '/_condition.css';
+                        $page_handle = 'mia-condition-single';
+                    } else {
+                        // Use procedure CSS for other procedure pages
+                        $page_css    = '/_procedure.css';
+                        $page_handle = 'mia-procedure-single';
+                    }
+                } else {
+                    $page_css    = '/_' . $pt . '.css';
+                    $page_handle = 'mia-' . $pt . '-single';
+                }
             }
             break;
     }
-    if ( $page_css && $page_handle && ( $mtime = @filemtime( $css_path . $page_css ) ) ) {
-        wp_enqueue_style(
-            $page_handle,
-            $css_uri . $page_css,
-            array( 'mia-base' ),
-            $mtime
-        );
+    if ( $page_css && $page_handle ) {
+        $page_css_file = $css_path . $page_css;
+        if ( file_exists( $page_css_file ) ) {
+            $ver = filemtime( $page_css_file );
+            wp_enqueue_style(
+                $page_handle,
+                $css_uri . $page_css,
+                array( 'mia-base' ),
+                $ver
+            );
+        }
     }
 
     // JS loading
@@ -133,6 +159,21 @@ function mia_aesthetics_enqueue_scripts() {
         $js_file = $theme_path . '/assets/js/condition.js';
         $handle = 'mia-condition-script';
     } 
+    // Check for 2nd-level procedure pages (grandchildren)
+    elseif (is_singular('procedure')) {
+        $post = get_queried_object();
+        $ancestors = get_post_ancestors($post);
+        
+        if (count($ancestors) === 2) {
+            // Use condition.js for 2nd-level procedure pages
+            $js_file = $theme_path . '/assets/js/condition.js';
+            $handle = 'mia-condition-script';
+        } else {
+            // Use main.js for other procedure pages
+            $js_file = $theme_path . '/assets/js/main.js';
+            $handle = 'mia-aesthetics-script';
+        }
+    }
     elseif (is_singular('surgeon')) {
         $js_file = $theme_path . '/assets/js/surgeon.js';
         $handle = 'mia-surgeon-script';
@@ -146,24 +187,26 @@ function mia_aesthetics_enqueue_scripts() {
         $handle = 'mia-aesthetics-script';
     }
     
-    if ( isset( $js_file ) && ( $mtime = @filemtime( $js_file ) ) ) {
+    if ( isset( $js_file ) && file_exists( $js_file ) ) {
+        $ver = filemtime( $js_file );
         wp_enqueue_script(
             $handle,
             $theme_uri . '/assets/js/' . basename( $js_file ),
             array( 'bootstrap-js' ),
-            $mtime,
+            $ver,
             true
         );
     }
     
     if (is_singular('surgeon') || is_singular('location')) {
         $video_js_file = $theme_path . '/assets/js/video.js';
-        if ( $mtime = @filemtime( $video_js_file ) ) {
+        if ( file_exists( $video_js_file ) ) {
+            $ver = filemtime( $video_js_file );
             wp_enqueue_script(
                 'mia-video-script',
                 $theme_uri . '/assets/js/video.js',
                 array( 'bootstrap-js' ),
-                $mtime,
+                $ver,
                 true
             );
         }
@@ -181,6 +224,11 @@ add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
  * @return string State abbreviation or original string if not found
  */
 function mia_get_state_abbr($state) {
+    if ( function_exists( 'WP_State::abbr' ) ) {
+        $abbr = WP_State::abbr( $state );
+        return $abbr ? $abbr : $state;
+    }
+    // Fallback: manual array for legacy support
     $abbr = array(
         'Alabama' => 'AL', 'Alaska' => 'AK', 'Arizona' => 'AZ', 'Arkansas' => 'AR', 'California' => 'CA',
         'Colorado' => 'CO', 'Connecticut' => 'CT', 'Delaware' => 'DE', 'Florida' => 'FL', 'Georgia' => 'GA',
@@ -252,7 +300,16 @@ function get_video_details($video_url) {
     // Trim whitespace
     $video_url = trim($video_url);
 
-    // Check if YouTube URL
+    // Try oEmbed first (handles YouTube, Shorts, playlists, Vimeo, etc.)
+    $oembed_html = wp_oembed_get($video_url);
+    if ($oembed_html) {
+        $video_data['url'] = $video_url;
+        $video_data['embed_url'] = $video_url;
+        $video_data['type'] = 'oembed';
+        return $video_data;
+    }
+
+    // Fallback: Check if YouTube URL
     if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $video_url, $matches) ||
         preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
         $video_id = $matches[1];
@@ -262,7 +319,7 @@ function get_video_details($video_url) {
         return $video_data;
     }
 
-    // Check if Vimeo URL
+    // Fallback: Check if Vimeo URL
     if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/', $video_url, $matches)) {
         $video_id = $matches[1];
         $video_data['url'] = 'https://vimeo.com/' . $video_id;
@@ -271,7 +328,7 @@ function get_video_details($video_url) {
         return $video_data;
     }
 
-    // Check if direct file URL (mp4) - simple check
+    // Fallback: Check if direct file URL (mp4) - simple check
     if (filter_var($video_url, FILTER_VALIDATE_URL) && pathinfo(parse_url($video_url, PHP_URL_PATH), PATHINFO_EXTENSION) === 'mp4') {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url; // Direct link for embed
@@ -279,7 +336,7 @@ function get_video_details($video_url) {
         return $video_data;
     }
 
-    // If it's a valid URL but type is unknown, return it
+    // Fallback: If it's a valid URL but type is unknown, return it
     if (filter_var($video_url, FILTER_VALIDATE_URL)) {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url; // Use direct URL as fallback embed
@@ -622,7 +679,7 @@ case 'location':
         $schema_filtered = array_filter( $schema, function( $value ) {
             return $value !== '' && $value !== null && (!is_array($value) || !empty(array_filter($value)));
         });
-        echo json_encode($schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT);
+        echo esc_html( wp_json_encode( $schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT ) );
         echo '</script>';
     }
 
@@ -674,7 +731,7 @@ case 'location':
              if (!empty($video_schema['name']) && !empty($video_schema['contentUrl'])) {
                  echo '<script type="application/ld+json" class="mia-video-schema">';
                  $video_schema_filtered = array_filter($video_schema, function($value) { return $value !== ''; });
-                 echo json_encode($video_schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT);
+                 echo esc_html( wp_json_encode( $video_schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT ) );
                  echo '</script>';
              }
         }
@@ -704,7 +761,7 @@ case 'location':
 
         if (!empty($faq_schema['mainEntity'])) {
             echo '<script type="application/ld+json" class="mia-faq-schema">';
-            echo json_encode($faq_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT);
+            echo esc_html( wp_json_encode( $faq_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT ) );
             echo '</script>';
         }
     }
@@ -818,7 +875,7 @@ function mia_add_organization_address_schema() {
     });
     
     echo '<script type="application/ld+json" class="yoast-schema-graph-address">';
-    echo json_encode($org_schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    echo esc_html( wp_json_encode( $org_schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
     echo '</script>';
 }
 add_action('wp_head', 'mia_add_organization_address_schema', 11); // Run right after Yoast
@@ -862,6 +919,8 @@ function display_page_faqs($show_heading = true) {
             <?php foreach ($faqs as $index => $faq):
                 if (empty($faq['question']) || empty($faq['answer'])) continue;
 
+                $q = $faq['question'];
+                $a = $faq['answer'];
                 $item_id = 'faq-' . get_the_ID() . '-' . $index;
                 $heading_id = 'heading-' . $item_id;
                 $collapse_id = 'collapse-' . $item_id;
@@ -877,7 +936,7 @@ function display_page_faqs($show_heading = true) {
                             aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
                             aria-controls="<?php echo esc_attr($collapse_id); ?>"
                         >
-                            <?php echo esc_html($faq['question']); ?>
+                            <?php echo esc_html($q); ?>
                         </button>
                     </h3>
                     <div
@@ -886,7 +945,7 @@ function display_page_faqs($show_heading = true) {
                         aria-labelledby="<?php echo esc_attr($heading_id); ?>"
                     >
                         <div class="accordion-body">
-                            <?php echo wp_kses_post($faq['answer']); ?>
+                            <?php echo wp_kses_post($a); ?>
                         </div>
                     </div>
                 </div>
@@ -1032,5 +1091,24 @@ function mia_trim_excerpt($excerpt) {
     return $excerpt;
 }
 add_filter('get_the_excerpt', 'mia_trim_excerpt');
+
+/**
+ * Use single-condition.php for 2nd-level children of "procedure"
+ */
+add_filter('single_template', function($template) {
+    if (is_singular('procedure')) {
+        $post = get_queried_object();
+        $ancestors = get_post_ancestors($post);
+        
+        if (count($ancestors) === 2) {
+            $alt = locate_template('single-condition.php');
+            if ($alt) {
+                return $alt;
+            }
+        }
+    }
+    
+    return $template;
+});
 
 ?>

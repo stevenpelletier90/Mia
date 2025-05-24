@@ -53,14 +53,7 @@ get_header(); ?>
   ?>
 </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#specialsCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#specialsCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        <!-- Navigation is handled by the carousel indicators above -->
       </div>
     </div>
   </div>
@@ -424,78 +417,88 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- Parallax Section with Video Background -->
-<section class="parallax-section">
-  <div class="parallax-video-bg">
-    <!-- Fallback background image in case video fails to load -->
-    <div class="parallax-fallback-bg" style="background-image: url('/wp-content/uploads/2025/04/beach-fallback.jpg'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center;"></div>
-    
-    <video autoplay muted loop playsinline class="parallax-video" poster="/wp-content/uploads/2025/04/beach-fallback.jpg" onerror="this.style.display='none';">
-      <!-- Use full URL to avoid connection issues -->
-      <source src="https://mia-aesthetics.com/wp-content/uploads/2025/04/beach-movie.mp4" type="video/mp4">
-      <!-- Fallback to relative URL if the full URL fails -->
-      <source src="/wp-content/uploads/2025/04/beach-movie.mp4" type="video/mp4">
-      <!-- Browser will hide video and show fallback background if video fails to load -->
-    </video>
-  </div>
-</section>
 
-<!-- Payments Section -->
-<section class="payments-overlap-section">
-  <div class="container">
-    <div class="payments-card">
-      <div class="row">
-        <div class="col-12 text-center mb-4">
-          <h2 class="section-heading text-white mb-2">How Payments Work</h2>
-          <h3 class="section-subheading mb-0">at Mia Aesthetics</h3>
+<!-- How Payments Work Section -->
+<section class="how-payments-work-section py-5">
+  <div class="container-fluid">
+    <div class="row align-items-stretch">
+      <!-- Left Column: Carousel -->
+      <div class="col-xl-6 d-flex">
+        <div id="paymentsCarousel" class="carousel slide carousel-fade flex-fill" data-bs-ride="carousel">
+          <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100">
+              <img src="/wp-content/uploads/2025/05/or-view.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Operating Room View">
+            </div>
+            <div class="carousel-item h-100">
+              <img src="/wp-content/uploads/2025/05/mia-clinic.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Mia Clinic">
+            </div>
+            <div class="carousel-item h-100">
+              <img src="/wp-content/uploads/2025/05/surgery-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Surgery Room">
+            </div>
+            <div class="carousel-item h-100">
+              <img src="/wp-content/uploads/2025/05/mia-staff-miami.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Mia Staff Miami">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row g-4">
-        <!-- Desktop: 4 columns, Tablet: 2 columns, Mobile: 1 column -->
-        <div class="col-lg-3 col-md-6 col-12">
-          <div class="payment-step h-100">
-            <h4 class="payment-step-title mb-3">1. Research Surgeons</h4>
-            <ul class="mb-0">
-              <li class="text-white">Choose from over 25 experienced surgeons</li>
-              <li class="text-white">Review surgeon bios on our website</li>
-              <li class="text-white">Browse our before and after photos</li>
-            </ul>
+      
+      <!-- Right Column: Content -->
+      <div class="col-xl-6 d-flex align-items-center">
+        <div class="payments-content w-100 ps-lg-5">
+          <div class="mb-5">
+            <h2 class="section-heading mb-2 fs-1">How Payments Work</h2>
+            <h3 class="section-subheading mb-4 fs-4">at Mia Aesthetics</h3>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-12">
-          <div class="payment-step h-100">
-            <h4 class="payment-step-title mb-3">2. Check Specials</h4>
-            <ul class="mb-0">
-              <li class="text-white">Contact a sales coordinator for specials</li>
-              <li class="text-white">New surgeons often offer reduced rates</li>
-              <li class="text-white">Keep an eye on seasonal specials</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-12">
-          <div class="payment-step h-100">
-            <h4 class="payment-step-title mb-3">3. Lock in Your Price</h4>
-            <ul class="mb-0">
-              <li class="text-white">Call us to secure a special price</li>
-              <li class="text-white">Booking fee required to lock in price</li>
-              <li class="text-white">Price valid for 12 months</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-12">
-          <div class="payment-step h-100">
-            <h4 class="payment-step-title mb-3">4. Complete Payments</h4>
-            <ul class="mb-0">
-              <li class="text-white">Pay at your own pace</li>
-              <li class="text-white">Contact your patient concierge</li>
-              <li class="text-white">Ask for contract extensions if needed</li>
-            </ul>
+          <div class="row row-cols-1 row-cols-sm-2 g-4">
+            <div class="col">
+              <div class="payment-step-card h-100">
+                <h4 class="mb-3">1. Research Surgeons</h4>
+                <ul class="mb-0">
+                  <li>Choose from over 25 experienced surgeons</li>
+                  <li>Review surgeon bios on our website</li>
+                  <li>Browse our before and after photos</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="payment-step-card h-100">
+                <h4 class="mb-3">2. Check Specials</h4>
+                <ul class="mb-0">
+                  <li>Contact a sales coordinator for specials</li>
+                  <li>New surgeons often offer reduced rates</li>
+                  <li>Keep an eye on seasonal specials</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="payment-step-card h-100">
+                <h4 class="mb-3">3. Lock in Your Price</h4>
+                <ul class="mb-0">
+                  <li>Call us to secure a special price</li>
+                  <li>Booking fee required to lock in price</li>
+                  <li>Price valid for 12 months</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="payment-step-card h-100">
+                <h4 class="mb-3">4. Complete Payments</h4>
+                <ul class="mb-0">
+                  <li>Pay at your own pace</li>
+                  <li>Contact your patient concierge</li>
+                  <li>Ask for contract extensions if needed</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Section Divider -->
+<div class="section-divider my-5"></div>
 
 <!-- Procedures Tabbed Section -->
 <section class="procedures-section py-5">
@@ -570,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Body Content -->
       <div class="tab-pane fade show active" id="body-content" role="tabpanel" aria-labelledby="body-tab">
         <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <div class="col-12 col-xl-6 order-xl-2 mb-4 mb-xl-0">
             <?php 
             $body_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/body-home.jpg');
             if ($body_img_id) {
@@ -585,7 +588,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             ?>
           </div>
-          <div class="col-lg-6 order-lg-1">
+          <div class="col-12 col-xl-6 order-xl-1">
             <h3 class="procedure-title mb-3">Body Contouring</h3>
             <p class="section-subheading mb-4">Sculpt Your Ideal Figure</p>
             <p class="mb-4">Our body contouring procedures help you achieve the silhouette you desire. Whether you're looking to remove excess fat, tighten loose skin, or enhance your curves, our specialists can help you reach your aesthetic goals.</p>
@@ -626,7 +629,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Breast Content -->
       <div class="tab-pane fade" id="breast-content" role="tabpanel" aria-labelledby="breast-tab">
         <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <div class="col-12 col-xl-6 order-xl-2 mb-4 mb-xl-0">
             <?php 
             $breast_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/breast-home.jpg');
             if ($breast_img_id) {
@@ -641,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             ?>
           </div>
-          <div class="col-lg-6 order-lg-1">
+          <div class="col-12 col-xl-6 order-xl-1">
             <h3 class="procedure-title mb-3">Breast Enhancement</h3>
             <p class="section-subheading mb-4">Achieve Your Desired Look</p>
             <p class="mb-4">Our breast procedures are designed to enhance, reduce, or lift your breasts to achieve your desired appearance. Our board-certified surgeons use the latest techniques to deliver natural-looking results with minimal scarring.</p>
@@ -682,7 +685,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Face Content -->
       <div class="tab-pane fade" id="face-content" role="tabpanel" aria-labelledby="face-tab">
         <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <div class="col-12 col-xl-6 order-xl-2 mb-4 mb-xl-0">
             <?php 
             $face_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/face-2-home.jpg');
             if ($face_img_id) {
@@ -697,7 +700,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             ?>
           </div>
-          <div class="col-lg-6 order-lg-1">
+          <div class="col-12 col-xl-6 order-xl-1">
             <h3 class="procedure-title mb-3">Facial Rejuvenation</h3>
             <p class="section-subheading mb-4">Enhance Your Natural Beauty</p>
             <p class="mb-4">Our facial procedures are designed to enhance your natural features and restore youthful appearance. From facelifts to rhinoplasty, our board-certified surgeons use the latest techniques to deliver exceptional results.</p>
@@ -738,7 +741,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Non-Surgical Content -->
       <div class="tab-pane fade" id="nonsurgical-content" role="tabpanel" aria-labelledby="nonsurgical-tab">
         <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <div class="col-12 col-xl-6 order-xl-2 mb-4 mb-xl-0">
             <?php 
             $nonsurg_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/face-home.jpg');
             if ($nonsurg_img_id) {
@@ -753,7 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             ?>
           </div>
-          <div class="col-lg-6 order-lg-1">
+          <div class="col-12 col-xl-6 order-xl-1">
             <h3 class="procedure-title mb-3">Non-Surgical Treatments</h3>
             <p class="section-subheading mb-4">Rejuvenate Without Surgery</p>
             <p class="mb-4">Our non-surgical treatments offer remarkable results with minimal downtime. From injectables to laser therapies, we provide a range of options to address your concerns without the need for surgery.</p>
@@ -789,7 +792,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Men Content -->
       <div class="tab-pane fade" id="men-content" role="tabpanel" aria-labelledby="men-tab">
         <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <div class="col-12 col-xl-6 order-xl-2 mb-4 mb-xl-0">
             <?php 
             $men_img_id = attachment_url_to_postid('/wp-content/uploads/2025/04/men-home.jpg');
             if ($men_img_id) {
@@ -804,7 +807,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             ?>
           </div>
-          <div class="col-lg-6 order-lg-1">
+          <div class="col-12 col-xl-6 order-xl-1">
             <h3 class="procedure-title mb-3">Men's Procedures</h3>
             <p class="section-subheading mb-4">Tailored Solutions for Men</p>
             <p class="mb-4">Our men's procedures are specifically designed to address the unique concerns and aesthetic goals of our male patients. From body contouring to facial rejuvenation, we offer a range of treatments to help you look and feel your best.</p>
@@ -887,7 +890,15 @@ window.addEventListener('load', function() {
           const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
           if (activeTab) {
             const activeTabItem = activeTab.parentElement;
-            activeTabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            // Prevent unwanted vertical scroll by only scrolling horizontally
+            if (tabsList && typeof tabsList.scrollLeft !== 'undefined') {
+              const tabRect = activeTabItem.getBoundingClientRect();
+              const listRect = tabsList.getBoundingClientRect();
+              // Only scroll if tab is out of horizontal view
+              if (tabRect.left < listRect.left || tabRect.right > listRect.right) {
+                activeTabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center', scrollMode: 'if-needed' });
+              }
+            }
           }
         });
       });
@@ -896,7 +907,15 @@ window.addEventListener('load', function() {
       const activeTab = document.querySelector('.procedure-tabs .nav-link.active');
       if (activeTab) {
         const activeTabItem = activeTab.parentElement;
-        activeTabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Prevent unwanted vertical scroll by only scrolling horizontally
+        if (tabsList && typeof tabsList.scrollLeft !== 'undefined') {
+          const tabRect = activeTabItem.getBoundingClientRect();
+          const listRect = tabsList.getBoundingClientRect();
+          // Only scroll if tab is out of horizontal view
+          if (tabRect.left < listRect.left || tabRect.right > listRect.right) {
+            activeTabItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center', scrollMode: 'if-needed' });
+          }
+        }
       }
       
       // Optional: Add arrow navigation for accessibility

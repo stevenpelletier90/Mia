@@ -137,65 +137,99 @@
   opacity: 1;
 }
 
-.parallax-section {
+/* How Payments Work Section */
+.how-payments-work-section {
   position: relative;
-  height: 600px;
-  overflow: hidden;
+  z-index: 10;
 }
 
-.parallax-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Carousel with 4:3 ratio */
+.how-payments-work-section .ratio-4x3 {
+  position: relative;
+  width: 100%;
+}
+
+.how-payments-work-section .carousel-item img {
+  object-fit: cover;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  overflow: hidden;
 }
 
-.parallax-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
+/* Make carousel match content height */
+.how-payments-work-section .carousel {
   min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translateX(-50%) translateY(-50%);
-  object-fit: cover;
 }
 
-.payments-overlap-section {
-  position: relative;
-  margin-top: -150px;
-  z-index: 10;
-  padding-bottom: 3rem;
+/* Adjust spacing for stacked view */
+@media (max-width: 1199px) {
+  .how-payments-work-section .payments-content {
+    padding: 2rem 0;
+  }
+
+  .how-payments-work-section .section-heading {
+    margin-top: 1rem;
+  }
 }
 
-.payments-card {
-  background: linear-gradient(to right, #1b1b1b, #000000, #1b1b1b);
-  color: #fff;
-  padding: 4rem 3rem;
-  border-radius: 8px;
-  box-shadow: 0 -15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.payment-step {
-  height: 100%;
-  padding: 1rem;
+/* Payment Step Cards */
+.payment-step-card {
+  background-color: #fff;
   border-radius: 4px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 1.5rem;
+  border: 1px solid #e5e5e5;
+  border-left: 3px solid var(--color-gold);
+  height: 100%;
 }
 
-.payment-step:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.payment-step-title {
-  font-size: 1.25rem;
+.payment-step-card h4 {
+  color: var(--color-primary);
   font-weight: 600;
-  color: var(--color-gold);
+  font-size: 1.25rem;
+}
+
+.payment-step-card ul {
+  padding-left: 1.25rem;
+}
+
+.payment-step-card li {
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.payment-step-card li:last-child {
+  margin-bottom: 0;
+}
+
+/* Section Divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(200, 178, 115, 0), rgba(200, 178, 115, 0.7), rgba(200, 178, 115, 0));
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1200px;
+  position: relative;
+}
+
+.section-divider::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-gold);
+  border-radius: 50%;
+}
+
+@media (max-width: 991px) {
+  .payment-step-card {
+    padding: 1.25rem;
+  }
+
+  .payment-step-card h4 {
+    font-size: 1.1rem;
+  }
 }
 
 .procedures-section {
@@ -441,12 +475,6 @@ h3.section-subheading {
   line-height: 1.4;
 }
 
-.procedures-section .row.align-items-center {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 2rem;
-}
-
 .about-section {
   padding: 5rem 0;
   background-color: #fff;
@@ -635,18 +663,6 @@ h3.section-subheading {
 }
 
 @media (max-width: 991px) {
-  .payments-overlap-section {
-    margin-top: -100px;
-  }
-
-  .payments-card {
-    padding: 3rem 2rem;
-  }
-
-  .payment-step {
-    padding: 0.75rem;
-  }
-
   .content-overlay .mia-button-hero {
     font-size: 0.95rem;
     padding: 0.4rem 1.25rem;
@@ -661,15 +677,8 @@ h3.section-subheading {
     font-size: 1.1rem;
   }
 
-  .parallax-section {
-    height: 400px;
-  }
-
   .procedures-section {
     padding: 4rem 0;
-  }
-
-  .foundation-section {
   }
 
   .foundation-content {
@@ -678,19 +687,6 @@ h3.section-subheading {
 }
 
 @media (max-width: 767px) {
-  .hero-wrapper .row {
-    flex-direction: column;
-  }
-
-  .hero-wrapper .col-md-8,
-  .hero-wrapper .col-md-4 {
-    width: 100%;
-  }
-
-  .box-carousel {
-    border: 1px solid #fff;
-  }
-
   .hero-wrapper .col-md-4 {
     flex-direction: row !important;
   }
@@ -701,6 +697,7 @@ h3.section-subheading {
     border: 1px solid #fff;
     border-top: none;
   }
+  /* If using Bootstrap grid, these can be replaced with col-6 and border utilities */
 
   .box-top {
     border-right: none;
@@ -741,10 +738,6 @@ h3.section-subheading {
     font-size: 1rem;
   }
 
-  .parallax-section {
-    height: 350px;
-  }
-
   .payments-overlap-section {
     margin-top: -70px;
   }
@@ -770,19 +763,7 @@ h3.section-subheading {
     display: block;
   }
 
-  .procedures-section .row.align-items-center {
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .procedures-section .row.align-items-center .col-lg-6 {
-    width: 100%;
-  }
-
-  .procedures-section .row.align-items-center .col-lg-6.order-lg-2 {
-    order: -1;
-  }
+  /* Removed redundant stacking overrides for procedures-section; Bootstrap grid handles stacking */
 }
 
 @media (min-width: 992px) {
@@ -844,7 +825,14 @@ h3.section-subheading {
 
 @media (min-width: 768px) and (max-width: 830px) {
   .procedures-section .row.align-items-center {
-    flex-direction: column !important;
+    flex-direction: row;
+  }
+
+  /* Force stacking below xl (1200px) to match col-xl-6 grid */
+  @media (max-width: 1199.98px) {
+    .procedures-section .row.align-items-center {
+      flex-direction: column !important;
+    }
   }
 
   .procedures-section .row.align-items-center .col-lg-6 {

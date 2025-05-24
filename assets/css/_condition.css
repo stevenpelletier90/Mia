@@ -21,7 +21,6 @@
 .overview-section h2 {
   margin-top: 0;
   margin-bottom: 1.25rem;
-  /* font-size removed: use base or utility class */
   border-bottom: none;
   padding-bottom: 0;
   color: var(--color-gold);
@@ -34,7 +33,6 @@
 }
 
 .overview-content {
-  /* font-size removed: use base or utility class */
   line-height: 1.6;
 }
 
@@ -48,7 +46,6 @@
 .overview-check {
   color: var(--color-gold);
   margin-right: 0.5em;
-  /* font-size removed: use base or utility class */
   flex-shrink: 0;
 }
 
@@ -63,7 +60,7 @@
 .single-condition .faqs-section h2 {
   padding-top: 20px;
   margin-top: 15px;
-  scroll-margin-top: calc(var(--navbar-height) + 10px);
+  /* scroll-margin-top no longer needed - using scroll-padding-top on html element instead */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 10px;
   margin-bottom: 15px;
@@ -78,18 +75,67 @@
   display: none;
 }
 
+.accordion-item {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 1rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.accordion-button::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  background-image: none;
+  content: "\f078";
+  font-size: 1rem;
+  color: var(--color-gold);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+  margin-right: 8px;
+  transition: all 0.3s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  color: var(--color-gold);
+  filter: drop-shadow(0 -2px 3px rgba(0, 0, 0, 0.3));
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: #fff;
+}
+
 .overview-item {
   margin-bottom: 15px;
   display: flex;
   align-items: center;
   gap: 0.75em;
-}
-
-.overview-check {
-  color: var(--color-gold);
-  margin-right: 0.5em;
-  /* font-size removed: use base or utility class */
-  flex-shrink: 0;
 }
 
 .toc-container {
@@ -100,15 +146,18 @@
   margin-bottom: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
-  /* Add extra space (20px) to avoid the fixed header overlap */
-  top: calc(var(--navbar-height) + 20px);
+  top: 76px; /* header is 76px tall */
   z-index: 2;
+}
+
+/* For logged-in WordPress users with admin bar */
+body.admin-bar .toc-container {
+  top: 108px; /* 76px header + 32px admin bar */
 }
 
 .toc-container h3 {
   margin-top: 0;
   margin-bottom: 15px;
-  /* font-size removed: use base or utility class */
   border-bottom: 2px solid var(--color-gold);
   padding-bottom: 10px;
   color: var(--color-primary);
@@ -137,7 +186,6 @@
   padding: 6px 10px;
   border-left: 3px solid transparent;
   font-family: var(--font-body);
-  /* font-size removed: use base or utility class */
 }
 
 .toc-list .nav-link:hover {
@@ -159,18 +207,16 @@ html {
 .content h2 {
   padding-top: 20px;
   margin-top: 15px;
-  /* Match the scroll offset from JavaScript (navbar height + 10px) */
-  scroll-margin-top: calc(var(--navbar-height) + 10px);
+  /* scroll-margin-top no longer needed - using scroll-padding-top on html element instead */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 10px;
 }
 
 @media (max-width: 991.98px) {
   .toc-container {
-    display: none; /* Hide TOC on mobile */
+    display: none;
   }
 
-  /* Adjust spacing for condition template elements */
   .single-condition .overview-section {
     margin-bottom: 1.5rem;
   }
