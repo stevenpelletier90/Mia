@@ -5,11 +5,196 @@
 
 add_theme_support( 'post-thumbnails' );
 
+// Add custom image sizes for responsive hero images
+add_image_size( 'hero-mobile', 640, 400, true );    // Mobile hero images
+add_image_size( 'hero-tablet', 1024, 600, true );   // Tablet hero images  
+add_image_size( 'hero-desktop', 1920, 800, true );  // Desktop hero images
+
+/**
+ * Exclude hero images from lazy loading to optimize LCP
+ */
+function mia_exclude_hero_from_lazy_loading($attr, $attachment, $size) {
+    // Check if this is a hero image size
+    if (in_array($size, ['hero-mobile', 'hero-tablet', 'hero-desktop'])) {
+        // Add loading="eager" to prevent lazy loading
+        $attr['loading'] = 'eager';
+        // Remove any lazy loading classes that might be added by plugins
+        if (isset($attr['class'])) {
+            $attr['class'] = str_replace(['lazy', 'lazyload'], '', $attr['class']);
+            $attr['class'] = trim(preg_replace('/\s+/', ' ', $attr['class']));
+        }
+    }
+    return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'mia_exclude_hero_from_lazy_loading', 10, 3);
+
+/**
+ * Disable lazy loading for hero images in procedure templates
+ */
+function mia_disable_lazy_loading_for_hero($value, $image, $context) {
+    // Check if we're on a procedure page and this might be the hero image
+    if (is_singular('procedure') && $context === 'the_content') {
+        // Check if the image has hero-related classes or is positioned absolutely
+        if (strpos($image, 'position-absolute') !== false || 
+            strpos($image, 'hero-') !== false ||
+            strpos($image, 'procedure background') !== false) {
+            // Remove lazy loading attributes
+            $image = str_replace(['loading="lazy"', 'data-lazy-src', 'data-lazy-srcset', 'data-lazy-sizes'], 
+                               ['loading="eager"', 'src', 'srcset', 'sizes'], $image);
+            // Add fetchpriority if not present
+            if (strpos($image, 'fetchpriority') === false) {
+                $image = str_replace('<img ', '<img fetchpriority="high" ', $image);
+            }
+        }
+    }
+    return $value;
+}
+add_filter('wp_lazy_loading_enabled', 'mia_disable_lazy_loading_for_hero', 10, 3);
+
+/**
+ * Completely disable lazy loading for hero images with specific class
+ */
+function mia_disable_lazy_loading_for_hero_class($attr, $attachment, $size) {
+    // If this is a hero image or has the mia-hero-image class, disable lazy loading
+    if (isset($attr['class']) && strpos($attr['class'], 'mia-hero-image') !== false) {
+        $attr['loading'] = 'eager';
+        // Remove lazy loading classes
+        $attr['class'] = str_replace(['lazy', 'lazyload'], '', $attr['class']);
+        $attr['class'] = trim(preg_replace('/\s+/', ' ', $attr['class']));
+    }
+    return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'mia_disable_lazy_loading_for_hero_class', 20, 3);
+
+/**
+ * Prevent lazy loading plugins from affecting hero images
+ */
+function mia_prevent_hero_lazy_loading() {
+    if (is_singular('procedure')) {
+        // Add CSS to prevent lazy loading plugins from hiding hero images
+        echo '<style>
+        .mia-hero-image {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        .mia-hero-image[data-lazy-src] {
+            opacity: 1 !important;
+        }
+        </style>';
+        
+        // Add JavaScript to force load hero images immediately
+        echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var heroImages = document.querySelectorAll(".mia-hero-image");
+            heroImages.forEach(function(img) {
+                // Force immediate loading
+                if (img.dataset.lazySrc) {
+                    img.src = img.dataset.lazySrc;
+                    img.removeAttribute("data-lazy-src");
+                }
+                if (img.dataset.lazySrcset) {
+                    img.srcset = img.dataset.lazySrcset;
+                    img.removeAttribute("data-lazy-srcset");
+                }
+                if (img.dataset.lazySizes) {
+                    img.sizes = img.dataset.lazySizes;
+                    img.removeAttribute("data-lazy-sizes");
+                }
+                // Remove lazy loading classes
+                img.classList.remove("lazy", "lazyload", "lazyloading");
+                img.classList.add("lazyloaded");
+            });
+        });
+        </script>';
+    }
+}
+add_action('wp_head', 'mia_prevent_hero_lazy_loading', 999);
+
+/**
+ * US state → abbreviation lookup table (static).
+ * Keeping as a constant avoids recreating the array on every call.
+ */
+if ( ! defined( 'MIA_STATE_ABBREVIATIONS' ) ) {
+    define(
+        'MIA_STATE_ABBREVIATIONS',
+        [
+            'Alabama' => 'AL',  'Alaska' => 'AK', 'Arizona' => 'AZ', 'Arkansas' => 'AR', 'California' => 'CA',
+            'Colorado' => 'CO', 'Connecticut' => 'CT', 'Delaware' => 'DE', 'Florida' => 'FL', 'Georgia' => 'GA',
+            'Hawaii' => 'HI',  'Idaho' => 'ID', 'Illinois' => 'IL', 'Indiana' => 'IN', 'Iowa' => 'IA',
+            'Kansas' => 'KS',  'Kentucky' => 'KY', 'Louisiana' => 'LA', 'Maine' => 'ME', 'Maryland' => 'MD',
+            'Massachusetts' => 'MA', 'Michigan' => 'MI', 'Minnesota' => 'MN', 'Mississippi' => 'MS', 'Missouri' => 'MO',
+            'Montana' => 'MT', 'Nebraska' => 'NE', 'Nevada' => 'NV', 'New Hampshire' => 'NH', 'New Jersey' => 'NJ',
+            'New Mexico' => 'NM', 'New York' => 'NY', 'North Carolina' => 'NC', 'North Dakota' => 'ND', 'Ohio' => 'OH',
+            'Oklahoma' => 'OK', 'Oregon' => 'OR', 'Pennsylvania' => 'PA', 'Rhode Island' => 'RI', 'South Carolina' => 'SC',
+            'South Dakota' => 'SD', 'Tennessee' => 'TN', 'Texas' => 'TX', 'Utah' => 'UT', 'Vermont' => 'VT',
+            'Virginia' => 'VA', 'Washington' => 'WA', 'West Virginia' => 'WV', 'Wisconsin' => 'WI', 'Wyoming' => 'WY',
+            'District of Columbia' => 'DC'
+        ]
+    );
+}
+
+/**
+ * Helper: enqueue a local stylesheet with automatic cache-busting version.
+ *
+ * @param string $handle      WP style handle.
+ * @param string $relative    Path relative to the theme root (must start with '/').
+ * @param array  $deps        Optional dependencies.
+ *
+ * @return bool True if style was enqueued, false otherwise.
+ */
+function mia_enqueue_local_style( $handle, $relative, $deps = [] ) {
+    $theme_path = get_template_directory();
+    $theme_uri  = get_template_directory_uri();
+    $file_path  = $theme_path . $relative;
+
+    if ( file_exists( $file_path ) ) {
+        wp_enqueue_style(
+            $handle,
+            $theme_uri . $relative,
+            $deps,
+            filemtime( $file_path )
+        );
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Helper: enqueue a local script with automatic cache-busting version.
+ *
+ * @param string  $handle      WP script handle.
+ * @param string  $relative    Path relative to the theme root (must start with '/').
+ * @param array   $deps        Optional dependencies.
+ * @param boolean $in_footer   Load script in footer. Default true.
+ *
+ * @return bool True if script was enqueued, false otherwise.
+ */
+function mia_enqueue_local_script( $handle, $relative, $deps = [], $in_footer = true ) {
+    $theme_path = get_template_directory();
+    $theme_uri  = get_template_directory_uri();
+    $file_path  = $theme_path . $relative;
+
+    if ( file_exists( $file_path ) ) {
+        wp_enqueue_script(
+            $handle,
+            $theme_uri . $relative,
+            $deps,
+            filemtime( $file_path ),
+            $in_footer
+        );
+        return true;
+    }
+    return false;
+}
+
 function mia_aesthetics_enqueue_scripts() {
     $theme_path = get_template_directory();
     $theme_uri = get_template_directory_uri();
     $css_path = $theme_path . '/assets/css';
     $css_uri = $theme_uri . '/assets/css';
+
+    // Enqueue local fonts first (before other styles)
+    mia_enqueue_local_style( 'mia-fonts', '/assets/css/fonts.css' );
 
     wp_enqueue_style(
         'font-awesome',
@@ -42,38 +227,11 @@ function mia_aesthetics_enqueue_scripts() {
 
     // Unified CSS loading: base, header, footer, and one page-specific CSS
     // 1. Enqueue base first (no dependencies)
-    $base_css_file = $css_path . '/_base.css';
-    if ( file_exists( $base_css_file ) ) {
-        $ver = filemtime( $base_css_file );
-        wp_enqueue_style(
-            'mia-base',
-            $css_uri . '/_base.css',
-            array(),
-            $ver
-        );
-    }
+    mia_enqueue_local_style( 'mia-base', '/assets/css/_base.css' );
 
     // 2. Enqueue header/footer (depend on base)
-    $header_css_file = $css_path . '/_header.css';
-    if ( file_exists( $header_css_file ) ) {
-        $ver = filemtime( $header_css_file );
-        wp_enqueue_style(
-            'mia-header',
-            $css_uri . '/_header.css',
-            array('mia-base'),
-            $ver
-        );
-    }
-    $footer_css_file = $css_path . '/_footer.css';
-    if ( file_exists( $footer_css_file ) ) {
-        $ver = filemtime( $footer_css_file );
-        wp_enqueue_style(
-            'mia-footer',
-            $css_uri . '/_footer.css',
-            array('mia-base'),
-            $ver
-        );
-    }
+    mia_enqueue_local_style( 'mia-header', '/assets/css/_header.css', array( 'mia-base' ) );
+    mia_enqueue_local_style( 'mia-footer', '/assets/css/_footer.css', array( 'mia-base' ) );
 
     // 3. Determine and enqueue page-specific CSS (depends on base)
     $page_css    = null;
@@ -142,16 +300,7 @@ function mia_aesthetics_enqueue_scripts() {
             break;
     }
     if ( $page_css && $page_handle ) {
-        $page_css_file = $css_path . $page_css;
-        if ( file_exists( $page_css_file ) ) {
-            $ver = filemtime( $page_css_file );
-            wp_enqueue_style(
-                $page_handle,
-                $css_uri . $page_css,
-                array( 'mia-base' ),
-                $ver
-            );
-        }
+        mia_enqueue_local_style( $page_handle, '/assets/css' . $page_css, array( 'mia-base' ) );
     }
 
     // JS loading
@@ -187,29 +336,13 @@ function mia_aesthetics_enqueue_scripts() {
         $handle = 'mia-aesthetics-script';
     }
     
-    if ( isset( $js_file ) && file_exists( $js_file ) ) {
-        $ver = filemtime( $js_file );
-        wp_enqueue_script(
-            $handle,
-            $theme_uri . '/assets/js/' . basename( $js_file ),
-            array( 'bootstrap-js' ),
-            $ver,
-            true
-        );
+    if ( isset( $js_file ) ) {
+        mia_enqueue_local_script( $handle, '/assets/js/' . basename( $js_file ), array( 'bootstrap-js' ), true );
     }
     
     if (is_singular('surgeon') || is_singular('location')) {
         $video_js_file = $theme_path . '/assets/js/video.js';
-        if ( file_exists( $video_js_file ) ) {
-            $ver = filemtime( $video_js_file );
-            wp_enqueue_script(
-                'mia-video-script',
-                $theme_uri . '/assets/js/video.js',
-                array( 'bootstrap-js' ),
-                $ver,
-                true
-            );
-        }
+        mia_enqueue_local_script( 'mia-video-script', '/assets/js/video.js', array( 'bootstrap-js' ), true );
     }
 }
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
@@ -228,21 +361,11 @@ function mia_get_state_abbr($state) {
         $abbr = WP_State::abbr( $state );
         return $abbr ? $abbr : $state;
     }
-    // Fallback: manual array for legacy support
-    $abbr = array(
-        'Alabama' => 'AL', 'Alaska' => 'AK', 'Arizona' => 'AZ', 'Arkansas' => 'AR', 'California' => 'CA',
-        'Colorado' => 'CO', 'Connecticut' => 'CT', 'Delaware' => 'DE', 'Florida' => 'FL', 'Georgia' => 'GA',
-        'Hawaii' => 'HI', 'Idaho' => 'ID', 'Illinois' => 'IL', 'Indiana' => 'IN', 'Iowa' => 'IA',
-        'Kansas' => 'KS', 'Kentucky' => 'KY', 'Louisiana' => 'LA', 'Maine' => 'ME', 'Maryland' => 'MD',
-        'Massachusetts' => 'MA', 'Michigan' => 'MI', 'Minnesota' => 'MN', 'Mississippi' => 'MS', 'Missouri' => 'MO',
-        'Montana' => 'MT', 'Nebraska' => 'NE', 'Nevada' => 'NV', 'New Hampshire' => 'NH', 'New Jersey' => 'NJ',
-        'New Mexico' => 'NM', 'New York' => 'NY', 'North Carolina' => 'NC', 'North Dakota' => 'ND', 'Ohio' => 'OH',
-        'Oklahoma' => 'OK', 'Oregon' => 'OR', 'Pennsylvania' => 'PA', 'Rhode Island' => 'RI', 'South Carolina' => 'SC',
-        'South Dakota' => 'SD', 'Tennessee' => 'TN', 'Texas' => 'TX', 'Utah' => 'UT', 'Vermont' => 'VT',
-        'Virginia' => 'VA', 'Washington' => 'WA', 'West Virginia' => 'WV', 'Wisconsin' => 'WI', 'Wyoming' => 'WY',
-        'District of Columbia' => 'DC'
-    );
-    return isset($abbr[$state]) ? $abbr[$state] : $state;
+    // Fallback: constant map for legacy support
+    if ( defined( 'MIA_STATE_ABBREVIATIONS' ) && isset( MIA_STATE_ABBREVIATIONS[ $state ] ) ) {
+        return MIA_STATE_ABBREVIATIONS[ $state ];
+    }
+    return $state;
 }
 
 /**
@@ -290,6 +413,14 @@ function get_video_details($video_url) {
         return false;
     }
 
+    // --- simple object-cache layer --------------------------------------------------
+    // Avoid re-processing the same video URL on every page load.
+    $cache_key = 'video_details_' . md5($video_url);
+    $cached    = wp_cache_get($cache_key);
+    if ($cached !== false) {
+        return $cached; // short-circuit if we already have the parsed data
+    }
+
     $video_data = array(
         'url' => '',
         'embed_url' => '',
@@ -306,6 +437,7 @@ function get_video_details($video_url) {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url;
         $video_data['type'] = 'oembed';
+        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -316,6 +448,7 @@ function get_video_details($video_url) {
         $video_data['url'] = 'https://www.youtube.com/watch?v=' . $video_id;
         $video_data['embed_url'] = 'https://www.youtube.com/embed/' . $video_id;
         $video_data['type'] = 'youtube';
+        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -325,6 +458,7 @@ function get_video_details($video_url) {
         $video_data['url'] = 'https://vimeo.com/' . $video_id;
         $video_data['embed_url'] = 'https://player.vimeo.com/video/' . $video_id;
         $video_data['type'] = 'vimeo';
+        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -333,6 +467,7 @@ function get_video_details($video_url) {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url; // Direct link for embed
         $video_data['type'] = 'mp4';
+        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -341,6 +476,7 @@ function get_video_details($video_url) {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url; // Use direct URL as fallback embed
         // $video_data['type'] remains 'unknown'
+        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
 

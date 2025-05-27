@@ -14,8 +14,6 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preload" href="https://use.typekit.net/iej5pyg.css" as="style">
-  <link rel="stylesheet" href="https://use.typekit.net/iej5pyg.css">
   <?php wp_head(); ?>
   <!-- Bootstrap JS is already enqueued in functions.php -->
 </head>

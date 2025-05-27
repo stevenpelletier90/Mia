@@ -11,7 +11,16 @@
  * @package Mia_Aesthetics
  */
 
-get_header(); ?>
+get_header(); 
+
+// Get featured image
+$featured_img_id = '';
+if (have_posts()) {
+    the_post();
+    $featured_img_id = get_post_thumbnail_id(get_the_ID());
+    rewind_posts();
+}
+?>
 <main>
     <div class="container">
         <?php
@@ -21,12 +30,18 @@ get_header(); ?>
         ?>
     </div>
 
-    <?php while (have_posts()) : the_post(); 
-        // Get featured image URL for header background
-        $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-    ?>
+    <?php while (have_posts()) : the_post(); ?>
         <!-- Page Header with Two-Column Layout -->
-        <header class="procedure-header py-5" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)), url('<?php echo esc_url($featured_img_url); ?>')">
+        <header class="procedure-header py-5 position-relative overflow-hidden">
+            <!-- Hero Image -->
+            <?php if ($featured_img_id): ?>
+                <img src="<?php echo wp_get_attachment_image_url($featured_img_id, 'full'); ?>"
+                     alt="<?php echo esc_attr(get_the_title()); ?> procedure background"
+                     class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover mia-hero-image"
+                     style="z-index: -2;">
+            <!-- Gradient Overlay -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)); z-index: -1;"></div>
+            <?php endif; ?>
             <div class="container">
                 <div class="row min-vh-50 d-flex align-items-center">
                     <!-- Left Column: Title and Price -->
@@ -56,144 +71,164 @@ get_header(); ?>
         </header>
 
         <!-- Content -->
-        <article class="py-5">
+        <article>
             <!-- Main content without container constraints -->
             <div class="main-content">
                 <?php the_content(); ?>
             </div>
             
-            <!-- Before & After Results Section with Related Resources -->
-            <section class="results-resources-section py-5 mt-5 bg-light">
-                <div class="container">
-                    <div class="row">
-                        <!-- Left Column: Before & After Gallery -->
-                        <div class="col-lg-7 mb-5 mb-lg-0">
-                            <h2 class="section-title mb-4">Before & After Results</h2>
-                            <div class="before-after-gallery">
-                                <?php
-                                // Get before/after images from ACF or similar
-                                $before_after_gallery = get_field('before_after_gallery');
-                                if ($before_after_gallery): ?>
-                                    <div class="row g-4">
-                                        <?php 
-                                        // Limit to 2 image pairs (removed one row)
-                                        $count = 0;
-                                        foreach ($before_after_gallery as $image_pair): 
-                                            if($count >= 2) break; // Only show 2 images
-                                        ?>
-                                            <div class="col-md-6">
-                                                <div class="before-after-card">
-                                                    <div class="before-after-images">
-                                                        <img src="<?php echo esc_url($image_pair['before_image']); ?>" alt="Before" class="img-fluid">
-                                                        <img src="<?php echo esc_url($image_pair['after_image']); ?>" alt="After" class="img-fluid">
-                                                    </div>
-                                                    <?php if(!empty($image_pair['caption'])): ?>
-                                                        <p class="caption mt-2"><?php echo esc_html($image_pair['caption']); ?></p>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                        <?php 
-                                            $count++;
-                                        endforeach; 
-                                        ?>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="placeholder-gallery">
-                                        <div class="row g-4">
-                                            <?php for($i = 0; $i < 2; $i++): // Reduced from 4 to 2 images ?>
-                                                <div class="col-md-6">
-                                                    <div class="before-after-card">
-                                                        <div class="before-after-images">
-                                                            <img src="https://placehold.co/400x300" alt="Before" class="img-fluid">
-                                                            <img src="https://placehold.co/400x300" alt="After" class="img-fluid">
-                                                        </div>
-                                                        <p class="caption mt-2">Actual patient results may vary</p>
-                                                    </div>
-                                                </div>
-                                            <?php endfor; ?>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>                                <div class="text-center mt-4">
-                                    <a href="/before-after/" class="mia-button" data-variant="gold">View More Results</a>
-                                </div>
-                            </div>
+            <section class="results-resources-section" aria-label="Before and after results with helpful resources">
+              <div class="container">
+                <div class="row g-4 g-lg-5 align-items-start">
+                  <div class="col-lg-7 mb-4 mb-lg-0">
+                    <h2 class="h3 fw-bold mb-4 text-white">Before &amp; After Results</h2>
+
+                    <div class="row g-4">
+                      <?php
+                      // Get before/after images from ACF or similar
+                      $before_after_gallery = get_field('before_after_gallery');
+                      if ($before_after_gallery): 
+                        $count = 0;
+                        foreach ($before_after_gallery as $image_pair): 
+                          if($count >= 2) break; // Only show 2 images
+                      ?>
+                        <!-- Single result card -->
+                        <div class="col-6">
+                          <figure class="before-after-card h-100 overflow-hidden position-relative">
+                            <span class="badge bg-dark position-absolute top-0 start-0 m-2">Before</span>
+
+                            <?php if ($image_pair['before_image']): ?>
+                                <img src="<?php echo esc_url($image_pair['before_image']); ?>"
+                                     class="img-fluid w-100 object-fit-cover"
+                                     alt="Patient before surgery">
+                            <?php endif; ?>
+
+                            <figcaption class="small text-muted text-center py-2">
+                              <?php echo !empty($image_pair['caption']) ? esc_html($image_pair['caption']) : 'Actual patient results may vary'; ?>
+                            </figcaption>
+                          </figure>
                         </div>
-                        
-                        <!-- Right Column: Related Resources -->
-                        <div class="col-lg-5">
-                            <h2 class="section-title mb-4">Helpful Resources</h2>
-                            <div class="resource-links">
-                                <!-- Related Procedures -->
-                                <?php
-                                $related_procedures = get_field('related_procedures');
-                                if ($related_procedures): 
-                                    foreach ($related_procedures as $post): 
-                                        setup_postdata($post); ?>
-                                        <a href="<?php the_permalink(); ?>" class="resource-card card mb-4 shadow-sm text-decoration-none">
-                                            <div class="card-body p-4">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="resource-icon me-3">
-                                                        <i class="fa-solid fa-scalpel-line-dashed fs-3"></i>
-                                                    </div>
-                                                    <div>
-                                                        <h4 class="h5 mb-2">Related: <?php the_title(); ?></h4>
-                                                        <p class="mb-0">Learn about this complementary procedure</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    <?php 
-                                    endforeach; 
-                                    wp_reset_postdata(); 
-                                endif; ?>
-                                
-                                <!-- Out of Town Patients -->
-                                <a href="https://miaaesthetics.com/out-of-town-patients/" class="resource-card card mb-4 shadow-sm text-decoration-none">
-                                    <div class="card-body p-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="resource-icon me-3">
-                                                <i class="fa-solid fa-plane-departure fs-3"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="h5 mb-2">Out of Town Patients</h4>
-                                                <p class="mb-0">Travel information and accommodation details</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                
-                                <!-- BMI Calculator -->
-                                <a href="https://miaaesthetics.com/what-is-a-bmi-and-how-do-you-calculate-it/" class="resource-card card shadow-sm text-decoration-none">
-                                    <div class="card-body p-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="resource-icon me-3">
-                                                <i class="fa-solid fa-calculator fs-3"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="h5 mb-2">BMI Calculator</h4>
-                                                <p class="mb-0">Learn about BMI and calculate yours</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+
+                        <div class="col-6">
+                          <figure class="before-after-card h-100 overflow-hidden position-relative">
+                            <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after">After</span>
+
+                            <?php if ($image_pair['after_image']): ?>
+                                <img src="<?php echo esc_url($image_pair['after_image']); ?>"
+                                     class="img-fluid w-100 object-fit-cover"
+                                     alt="Patient after surgery">
+                            <?php endif; ?>
+
+                            <figcaption class="small text-muted text-center py-2">
+                              <?php echo !empty($image_pair['caption']) ? esc_html($image_pair['caption']) : 'Actual patient results may vary'; ?>
+                            </figcaption>
+                          </figure>
                         </div>
+                        <!-- /card -->
+                      <?php 
+                        $count++;
+                        endforeach; 
+                      else: ?>
+                        <!-- Placeholder cards when no images are available -->
+                        <div class="col-6">
+                          <figure class="before-after-card h-100 overflow-hidden position-relative">
+                            <span class="badge bg-dark position-absolute top-0 start-0 m-2">Before</span>
+
+                            <img src="https://placehold.co/600x450"
+                                 class="img-fluid w-100 object-fit-cover"
+                                 alt="Patient before surgery">
+
+                            <figcaption class="small text-muted text-center py-2">
+                              Actual patient results may vary
+                            </figcaption>
+                          </figure>
+                        </div>
+
+                        <div class="col-6">
+                          <figure class="before-after-card h-100 overflow-hidden position-relative">
+                            <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after">After</span>
+
+                            <img src="https://placehold.co/600x450"
+                                 class="img-fluid w-100 object-fit-cover"
+                                 alt="Patient after surgery">
+
+                            <figcaption class="small text-muted text-center py-2">
+                              Actual patient results may vary
+                            </figcaption>
+                          </figure>
+                        </div>
+                      <?php endif; ?>
                     </div>
+
+                    <div class="text-center mt-4">
+                      <a href="#gallery" class="mia-button" data-variant="gold">
+                        View More Results <i class="fa-solid fa-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- /Before & After -->
+
+                  <!-- ===== Additional Resources ======================================== -->
+                  <aside class="col-lg-5">
+                    <h2 class="h3 fw-bold mb-4 text-white">Additional Resources</h2>
+
+                    <!-- List group keeps DOM light & accessible -->
+                    <nav class="list-group list-group-flush rounded-3">
+                      <?php
+                      // Related Procedures
+                      $related_procedures = get_field('related_procedures');
+                      if ($related_procedures): 
+                        foreach ($related_procedures as $post): 
+                          setup_postdata($post); ?>
+                          <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                             href="<?php the_permalink(); ?>">
+                            <i class="fa-solid fa-stethoscope fs-4 flex-shrink-0" aria-hidden="true"></i>
+                            <span>
+                              <strong>Related: <?php the_title(); ?></strong><br>
+                              <small class="text-muted">Learn about this complementary procedure</small>
+                            </span>
+                          </a>
+                        <?php 
+                        endforeach; 
+                        wp_reset_postdata(); 
+                      endif; ?>
+
+                      <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                         href="/out-of-town">
+                        <i class="fa-solid fa-plane fs-4 flex-shrink-0" aria-hidden="true"></i>
+                        <span>
+                          <strong>Out‑of‑Town Patients</strong><br>
+                          <small class="text-muted">Travel info &amp; accommodation details</small>
+                        </span>
+                      </a>
+
+                      <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                         href="/bmi-calculator">
+                        <i class="fa-solid fa-calculator fs-4 flex-shrink-0" aria-hidden="true"></i>
+                        <span>
+                          <strong>BMI Calculator</strong><br>
+                          <small class="text-muted">Calculate your BMI before booking</small>
+                        </span>
+                      </a>
+                    </nav>
+                  </aside>
+                  <!-- /Helpful Resources -->
+
+                </div><!-- /.row -->
+              </div><!-- /.container‑xxl -->
+            </section>
+
+            
+            <?php 
+            // FAQ Section
+            $faq_section = get_field('faq_section');
+            if ($faq_section && !empty($faq_section['faqs'])): ?>
+            <section class="py-4 py-lg-5">
+                <div class="container">                        
+                    <?php echo display_page_faqs(); ?>                      
                 </div>
             </section>
-            
-            <div class="container">
-                <?php 
-                // FAQ Section
-                $faq_section = get_field('faq_section');
-                if ($faq_section && !empty($faq_section['faqs'])): ?>
-                <section class="py-5">
-                    <div class="container">                        
-                            <?php echo display_page_faqs(); ?>                      
-                    </div>
-                </section>
-                <?php endif; ?>
-            </div>
+            <?php endif; ?>
         </article>
     <?php endwhile; ?>
 </main>
