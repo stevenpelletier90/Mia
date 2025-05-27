@@ -75,21 +75,15 @@
             <h2 class="footer-heading mb-3">Locations & Surgeons</h2>
             <div class="accordion" id="locationsAccordion">
                 <?php
-                // Get only parent locations (no child pages)
-                $locations_args = array(
-                    'post_type' => 'location',
-                    'posts_per_page' => -1,
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                    'post_parent' => 0 // Only get parent pages (no children)
-                );
-                $locations_query = new WP_Query($locations_args);
+                // Use cached locations instead of running a new query
+                $cached_locations = get_cached_locations();
                 
-                if ($locations_query->have_posts()) :
+                if (!empty($cached_locations)) :
                     $location_index = 0;
-                    while ($locations_query->have_posts()) : $locations_query->the_post();
-                        $location_id = get_the_ID();
-                        $location_title = get_the_title();
+                    foreach ($cached_locations as $location_data) :
+                        $location_id = $location_data['id'];
+                        $location_title = $location_data['title'];
+                        $location_url = $location_data['url'];
                         $location_index++;
                 ?>
                 <div class="accordion-item">
@@ -102,7 +96,7 @@
                         <div class="accordion-body">
                             <!-- Location Link -->
                             <div class="location-link mb-3">
-                                <a href="<?php the_permalink(); ?>" class="surgeon-link">
+                                <a href="<?php echo esc_url($location_url); ?>" class="surgeon-link">
                                     <span>View <?php echo esc_html($location_title); ?> Location</span>
                                     <i class="fas fa-arrow-right surgeon-arrow"></i>
                                 </a>
@@ -147,8 +141,7 @@
                     </div>
                 </div>
                 <?php
-                    endwhile;
-                    wp_reset_postdata();
+                    endforeach;
                 else :
                 ?>
                     <p>No locations found.</p>

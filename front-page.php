@@ -77,12 +77,13 @@ get_header(); ?>
         }
         ?>
       </div>
-      <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">        <h4 class="responsive-heading">Before & After</h4>
-        <div class="button-wrapper">
-          <a href="/before-after/" class="mia-button" data-variant="hero" role="button">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+  <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
+    <h4 class="responsive-heading">Before & After</h4>
+      <div class="button-wrapper">
+        <a href="/before-after/" class="mia-button" data-variant="hero" role="button">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
+  </div>
 
     <!-- Bottom Box: Financing -->
     <div class="box-bottom position-relative">
@@ -102,12 +103,13 @@ get_header(); ?>
         ?>
       </div>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
-        <h4 class="responsive-heading">Financing</h4>        <div class="button-wrapper">
-          <a href="/financing/" class="mia-button" data-variant="hero" role="button" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
+        <h4 class="responsive-heading">Financing</h4>        
+          <div class="button-wrapper">
+            <a href="/financing/" class="mia-button" data-variant="hero" role="button" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
 
   </div>

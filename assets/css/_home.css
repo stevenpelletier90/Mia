@@ -8,24 +8,32 @@
   overflow: hidden;
 }
 
+/* --- Front-page hero borders ------------------------------------------- */
+/* Give every card the full 2 px border first */
+.box-carousel,
+.box-top,
+.box-bottom {
+  border: 2px solid #fff;
+  box-sizing: border-box;
+}
+
+/* Then remove whichever edges would be duplicated */
 .box-carousel {
-  border: 1px solid #fff;
+  /* sits top-left; loses the centre divider */
   border-right: none;
 }
 
 .box-top {
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-bottom: none;
+  /* sits top-right; becomes the internal divider */
+  border-bottom: none; /* we'll draw that divider instead */
 }
 
 .box-bottom {
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  /* sits bottom-right; keeps the outer frame only */
+  border-top: none; /* divider already supplied by .box-top */
 }
+
+/* ----------------------------------------------------------------------- */
 
 .content-image {
   width: 100%;
@@ -691,17 +699,25 @@ h3.section-subheading {
     flex-direction: row !important;
   }
 
+  /* Mobile border overrides for side-by-side layout */
+  .box-carousel {
+    border: 2px solid #fff;
+    border-bottom: none; /* No bottom border to avoid doubling with boxes below */
+  }
+
   .box-top,
   .box-bottom {
     width: 50%;
-    border: 1px solid #fff;
-    border-top: none;
+    border-top: 2px solid #fff; /* Shared with carousel above */
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
   }
-  /* If using Bootstrap grid, these can be replaced with col-6 and border utilities */
 
   .box-top {
-    border-right: none;
+    border-right: none; /* No right border to avoid doubling with box-bottom */
   }
+  /* If using Bootstrap grid, these can be replaced with col-6 and border utilities */
 
   .content-overlay {
     padding: 1rem;
