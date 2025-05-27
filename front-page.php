@@ -77,10 +77,9 @@ get_header(); ?>
         }
         ?>
       </div>
-      <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
-        <h4 class="responsive-heading">Before & After</h4>
+      <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">        <h4 class="responsive-heading">Before & After</h4>
         <div class="button-wrapper">
-          <a href="/before-after/" class="mia-button mia-button-hero" role="button">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="/before-after/" class="mia-button" data-variant="hero" role="button">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -103,9 +102,8 @@ get_header(); ?>
         ?>
       </div>
       <div class="content-overlay p-2 p-md-4 d-flex flex-column justify-content-end align-items-center text-center">
-        <h4 class="responsive-heading">Financing</h4>
-        <div class="button-wrapper">
-          <a href="/financing/" class="mia-button mia-button-hero" role="button" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
+        <h4 class="responsive-heading">Financing</h4>        <div class="button-wrapper">
+          <a href="/financing/" class="mia-button" data-variant="hero" role="button" aria-label="Explore Financing Options">View Options <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -254,11 +252,10 @@ get_header(); ?>
       
       <!-- Right Column: Paragraph and Buttons -->
       <div class="col-lg-6">
-        <div class="stats-content">
-          <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of highly skilled specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
+        <div class="stats-content">          <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of highly skilled specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
           <div class="d-flex">
-            <a href="/locations/" class="mia-button mia-button-black me-3" role="button">Our Locations</a>
-            <a href="/surgeons/" class="mia-button mia-button-black" role="button">Our Surgeons</a>
+            <a href="/locations/" class="mia-button me-3" data-variant="black" role="button">Our Locations</a>
+            <a href="/surgeons/" class="mia-button" data-variant="black" role="button">Our Surgeons</a>
           </div>
         </div>
       </div>
@@ -860,9 +857,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="col-12">
         <div class="foundation-content text-center">
           <h2 class="section-heading text-white mb-2">The Mia Aesthetics Foundation</h2>
-          <h3 class="section-subheading mb-4">Gives Back</h3>
-          <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
-          <a href="/mia-foundation/" class="mia-button mia-button-black" role="button" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
+          <h3 class="section-subheading mb-4">Gives Back</h3>          <p class="text-white mb-4">We're committed to making a positive impact in our communities through charitable initiatives, education, and outreach programs that help those in need.</p>
+          <a href="/mia-foundation/" class="mia-button" data-variant="black" role="button" aria-label="Discover Mia Aesthetics Foundation charitable work"> See Our Impact <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>

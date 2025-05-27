@@ -239,9 +239,8 @@ get_header(); ?>
                                 >
                                 <div class="card-body">
                                     <h3 class="h5 card-title text-center">Before & After Gallery</h3>
-                                    <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>
-                                    <div class="text-center card-action">
-                                        <a href="#" class="mia-button mia-button-gold">View Gallery</a>
+                                    <p class="card-text text-center small">See the amazing results of procedures performed by <?php echo get_the_title(); ?>.</p>                                    <div class="text-center card-action">
+                                        <a href="#" class="mia-button" data-variant="gold">View Gallery</a>
                                     </div>
                                 </div>
                             </div>

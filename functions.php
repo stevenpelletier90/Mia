@@ -1111,4 +1111,204 @@ add_filter('single_template', function($template) {
     return $template;
 });
 
+/**
+ * Menu data structure to eliminate duplication
+ */
+function get_mia_menu_structure() {
+    return [
+        'procedures' => [
+            'title' => 'Procedures',
+            'url' => home_url('/cosmetic-plastic-surgery/'),
+            'sections' => [
+                'body' => [
+                    'title' => 'Body',
+                    'url' => home_url('/cosmetic-plastic-surgery/body/'),
+                    'items' => [
+                        ['title' => 'Mia Waist Corset™', 'slug' => 'mia-corset'],
+                        ['title' => 'Awake Lipo', 'slug' => 'awake-liposuction'],
+                        ['title' => 'Body Lift', 'slug' => 'circumferential-body-lift'],
+                        ['title' => 'Brazilian Butt Lift (BBL)', 'slug' => 'brazilian-butt-lift-bbl'],
+                        ['title' => 'Lipo 360', 'slug' => 'lipo-360'],
+                        ['title' => 'Liposuction', 'slug' => 'liposuction'],
+                        ['title' => 'Tummy Tuck', 'slug' => 'tummy-tuck'],
+                        ['title' => 'Mommy Makeover', 'slug' => 'mommy-makeover'],
+                        ['title' => 'Arm Lift', 'slug' => 'arm-lift'],
+                        ['title' => 'Thigh Lift', 'slug' => 'thigh-lift'],
+                        ['title' => 'Vaginal Rejuvenation', 'slug' => 'labiaplasty-labia-reduction-vaginal-rejuvenation'],
+                    ]
+                ],
+                'breast' => [
+                    'title' => 'Breast',
+                    'url' => home_url('/cosmetic-plastic-surgery/breast/'),
+                    'items' => [
+                        ['title' => 'Breast Augmentation', 'slug' => 'augmentation-implants'],
+                        ['title' => 'Breast Reduction', 'slug' => 'reduction'],
+                        ['title' => 'Breast Lift', 'slug' => 'lift'],
+                        ['title' => 'Breast Implant Revision', 'slug' => 'implant-revision-surgery'],
+                    ]
+                ],
+                'face' => [
+                    'title' => 'Face',
+                    'url' => home_url('/cosmetic-plastic-surgery/face/'),
+                    'items' => [
+                        ['title' => 'Brow Lift', 'slug' => 'brow-lift'],
+                        ['title' => 'Buccal Fat Removal', 'slug' => 'buccal-cheek-fat-removal'],
+                        ['title' => 'Blepharoplasty', 'slug' => 'eyelid-lift-blepharoplasty'],
+                        ['title' => 'Chin Lipo', 'slug' => 'chin-lipo'],
+                        ['title' => 'Facelift', 'slug' => 'facelift'],
+                        ['title' => 'Mini Facelift', 'slug' => 'mini-facelift'],
+                        ['title' => 'Neck Lift', 'slug' => 'neck-lift'],
+                        ['title' => 'Otoplasty', 'slug' => 'ear-pinning-otoplasty'],
+                        ['title' => 'Rhinoplasty', 'slug' => 'nose-job-rhinoplasty'],
+                    ]
+                ],
+                'men' => [
+                    'title' => 'Men',
+                    'url' => home_url('#'),
+                    'items' => [
+                        ['title' => 'Male BBL', 'slug' => 'male-bbl', 'parent' => 'body'],
+                        ['title' => 'Male Breast Procedures', 'slug' => 'male-breast-procedures', 'parent' => 'breast'],
+                        ['title' => 'Male Liposuction', 'slug' => 'male-liposuction', 'parent' => 'body'],
+                        ['title' => 'Male Tummy Tuck', 'slug' => 'male-tummy-tuck', 'parent' => 'body'],
+                    ]
+                ]
+            ]
+        ]
+    ];
+}
+
+/**
+ * Render menu for both desktop and mobile
+ */
+function render_mia_menu($type = 'desktop') {
+    $menu = get_mia_menu_structure();
+    $is_mobile = $type === 'mobile';
+    
+    foreach ($menu as $key => $section) {
+        if ($key === 'procedures') {
+            render_procedures_menu($section, $is_mobile);
+        }
+        // Add other menu sections here
+    }
+}
+
+/**
+ * Render procedures dropdown
+ */
+function render_procedures_menu($procedures, $is_mobile = false) {
+    $dropdown_class = $is_mobile ? 'd-xl-none' : 'position-static d-none d-xl-block';
+    ?>
+    <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
+        <a class="nav-link dropdown-toggle" href="<?php echo esc_url($procedures['url']); ?>" 
+           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php echo esc_html($procedures['title']); ?>
+        </a>
+        <?php if ($is_mobile): ?>
+            <?php render_mobile_procedures_menu($procedures); ?>
+        <?php else: ?>
+            <?php render_desktop_procedures_menu($procedures); ?>
+        <?php endif; ?>
+    </li>
+    <?php
+}
+
+/**
+ * Render desktop procedures mega menu
+ */
+function render_desktop_procedures_menu($procedures) {
+    ?>
+    <div class="dropdown-menu mega-menu w-100 p-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <a class="mega-menu-title" href="<?php echo esc_url($procedures['url']); ?>">View All Procedures <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <?php foreach ($procedures['sections'] as $section_key => $section): ?>
+                    <div class="col-md-3 mb-3">
+                        <h6 class="dropdown-header">
+                            <a href="<?php echo esc_url($section['url']); ?>" class="text-dark fw-bold text-decoration-none"><?php echo esc_html($section['title']); ?></a>
+                        </h6>
+                        <ul class="list-unstyled">
+                            <?php foreach ($section['items'] as $item): ?>
+                                <?php 
+                                $parent_path = isset($item['parent']) ? $procedures['sections'][$item['parent']]['url'] : $section['url'];
+                                $item_url = rtrim($parent_path, '/') . '/' . $item['slug'] . '/';
+                                ?>
+                                <li><a class="dropdown-item py-1" href="<?php echo esc_url($item_url); ?>"><?php echo esc_html($item['title']); ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Render mobile procedures dropdown menu
+ */
+function render_mobile_procedures_menu($procedures) {
+    ?>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="<?php echo esc_url($procedures['url']); ?>">View All Procedures</a></li>
+        <?php foreach ($procedures['sections'] as $section_key => $section): ?>
+            <!-- Section Header -->
+            <li><a class="dropdown-item fw-bold" href="<?php echo esc_url($section['url']); ?>"><?php echo esc_html($section['title']); ?></a></li>
+            <!-- Section Items -->
+            <?php foreach ($section['items'] as $item): ?>
+                <?php 
+                $parent_path = isset($item['parent']) ? $procedures['sections'][$item['parent']]['url'] : $section['url'];
+                $item_url = rtrim($parent_path, '/') . '/' . $item['slug'] . '/';
+                ?>
+                <li><a class="dropdown-item" href="<?php echo esc_url($item_url); ?>"><?php echo esc_html($item['title']); ?></a></li>
+            <?php endforeach; ?>
+            <?php if ($section_key !== array_key_last($procedures['sections'])): ?>
+                <li><hr class="dropdown-divider"></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+    <?php
+}
+
+/**
+ * Cache location queries
+ */
+function get_cached_locations() {
+    $cache_key = 'mia_header_locations';
+    $locations = wp_cache_get($cache_key);
+    
+    if (false === $locations) {
+        $args = [
+            'post_type' => 'location',
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'post_parent' => 0
+        ];
+        
+        $query = new WP_Query($args);
+        $locations = [];
+        
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $locations[] = [
+                    'id' => get_the_ID(),
+                    'title' => get_the_title(),
+                    'url' => get_permalink(),
+                    'state' => get_field('state')
+                ];
+            }
+            wp_reset_postdata();
+        }
+        
+        wp_cache_set($cache_key, $locations, '', 3600); // Cache for 1 hour
+    }
+    
+    return $locations;
+}
+
 ?>

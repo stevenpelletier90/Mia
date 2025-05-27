@@ -94,10 +94,8 @@ get_header();
                         </div>
                     </div>
                 <?php endif; ?>
-            </div>
-
-            <div class="location-cta-buttons">
-                <a href="<?php the_permalink(); ?>" class="btn mia-button-gold" role="button">
+            </div>            <div class="location-cta-buttons">
+                <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="gold" role="button">
                     View Location <i class="fas fa-arrow-right"></i>
                 </a>
             </div>

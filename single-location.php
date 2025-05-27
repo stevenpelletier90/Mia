@@ -229,10 +229,9 @@ get_header();
                                             <img src="<?php the_post_thumbnail_url(); ?>" class="surgeon-headshot-circular" alt="<?php the_title(); ?>" />
                                         <?php endif; ?>
                                     </div>
-                                    <div class="card-body">
-                                        <h3 class="h4"><?php the_title(); ?></h3>
+                                    <div class="card-body">                                        <h3 class="h4"><?php the_title(); ?></h3>
                                         <p class="surgeon-title">Plastic Surgeon</p>
-                                        <a href="<?php the_permalink(); ?>" class="mia-button mia-button-white">View Profile <i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="white">View Profile <i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

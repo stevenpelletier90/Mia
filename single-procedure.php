@@ -113,9 +113,8 @@ get_header(); ?>
                                             <?php endfor; ?>
                                         </div>
                                     </div>
-                                <?php endif; ?>
-                                <div class="text-center mt-4">
-                                    <a href="/before-after/" class="mia-button mia-button-gold">View More Results</a>
+                                <?php endif; ?>                                <div class="text-center mt-4">
+                                    <a href="/before-after/" class="mia-button" data-variant="gold">View More Results</a>
                                 </div>
                             </div>
                         </div>
