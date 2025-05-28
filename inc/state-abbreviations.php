@@ -21,4 +21,24 @@ if ( ! defined( 'MIA_STATE_ABBREVIATIONS' ) ) {
         ]
     );
 }
+
+/**
+ * Helper: Get US state abbreviation from full name
+ * 
+ * Used in navigation menus to display location state abbreviations
+ * 
+ * @param string $state Full state name
+ * @return string State abbreviation or original string if not found
+ */
+function mia_get_state_abbr($state) {
+    if ( function_exists( 'WP_State::abbr' ) ) {
+        $abbr = WP_State::abbr( $state );
+        return $abbr ? $abbr : $state;
+    }
+    // Fallback: constant map for legacy support
+    if ( defined( 'MIA_STATE_ABBREVIATIONS' ) && isset( MIA_STATE_ABBREVIATIONS[ $state ] ) ) {
+        return MIA_STATE_ABBREVIATIONS[ $state ];
+    }
+    return $state;
+}
 ?>
