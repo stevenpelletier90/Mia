@@ -101,17 +101,6 @@ get_header(); ?>
                                 
                                 echo '</div>';
                                 
-                                // Add some custom CSS for the pagination
-                                echo '<style>
-                                    .pagination-container {
-                                        max-width: 100%;
-                                        overflow: hidden;
-                                    }
-                                    .page-indicator {
-                                        font-weight: 500;
-                                        color: #495057;
-                                    }
-                                </style>';
                             endif;
                             ?>
                         </nav>

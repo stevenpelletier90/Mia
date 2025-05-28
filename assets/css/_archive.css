@@ -1,1 +1,10 @@
 /* Archive CSS */
+
+.pagination-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+.page-indicator {
+  font-weight: 500;
+  color: #495057;
+}
