@@ -48,35 +48,24 @@ function mia_aesthetics_enqueue_scripts() {
     $css_uri = $theme_uri . '/assets/css';
 
     // Enqueue local fonts first (before other styles)
-    mia_enqueue_local_style( 'mia-fonts', '/assets/css/fonts.css' );
+    mia_enqueue_local_style( 'mia-fonts', '/assets/css/_fonts.css' );
 
-    wp_enqueue_style(
-        'font-awesome',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
-        array(),
-        '6.7.2'
-    );
+    mia_enqueue_local_style( 'font-awesome', '/assets/fontawesome/css/all.min.css' );
 
-    wp_enqueue_style(
+    mia_enqueue_local_style(
         'normalize',
-        'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
-        array(),
-        '8.0.1'
+        '/assets/normalize/normalize.css'
     );
 
-    wp_enqueue_style(
+    mia_enqueue_local_style(
         'bootstrap-css',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css',
-        array(),
-        '5.3.6'
+        '/assets/bootstrap/css/bootstrap.min.css'
     );
 
-    wp_enqueue_script(
+    mia_enqueue_local_script(
         'bootstrap-js',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js',
-        array(),
-        '5.3.6',
-        true
+        '/assets/bootstrap/js/bootstrap.bundle.min.js',
+        array('jquery')
     );
 
     // Unified CSS loading: base, header, footer, and one page-specific CSS

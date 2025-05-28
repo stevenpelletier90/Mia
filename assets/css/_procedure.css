@@ -46,7 +46,7 @@
   font-weight: 600;
 }
 
-.pricing-info p {
+.pricing-info h2 {
   color: var(--color-gold);
 }
 
