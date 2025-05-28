@@ -22,11 +22,15 @@ if (!function_exists('clear_mia_caches')) {
         if ($post_type === 'location') {
             wp_cache_delete('mia_header_locations');
             wp_cache_delete('mia_footer_locations');
+            delete_transient('mia_header_locations');
+            delete_transient('mia_footer_locations');
         }
         
         if ($post_type === 'surgeon') {
             wp_cache_delete('mia_header_surgeons');
             wp_cache_delete('mia_footer_surgeons');
+            delete_transient('mia_header_surgeons');
+            delete_transient('mia_footer_surgeons');
         }
     }
     add_action('save_post', 'clear_mia_caches');

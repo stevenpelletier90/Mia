@@ -1,9 +1,16 @@
 <?php
 /**
  * Menu structure and rendering for Mia Aesthetics theme.
+ *
+ * Defines the main navigation menu data structure and rendering entry point.
+ * All menu sections and items are defined here for consistency and maintainability.
  */
-
-// Menu data structure to eliminate duplication
+/**
+ * Returns the main menu data structure for all procedures and sections.
+ * Centralizes menu definitions to avoid duplication and simplify updates.
+ *
+ * @return array Main menu structure
+ */
 function get_mia_menu_structure() {
     return [
         'procedures' => [
@@ -67,19 +74,23 @@ function get_mia_menu_structure() {
     ];
 }
 
-// Render menu for both desktop and mobile
+/**
+ * Renders the main navigation menu for desktop or mobile.
+ * Delegates to section-specific renderers as needed.
+ *
+ * @param string $type 'desktop' or 'mobile'
+ */
 function render_mia_menu($type = 'desktop') {
     $menu = get_mia_menu_structure();
     $is_mobile = $type === 'mobile';
-    
+
     foreach ($menu as $key => $section) {
         if ($key === 'procedures') {
             render_procedures_menu($section, $is_mobile);
         }
-        // Add other menu sections here
+        // Add other menu sections here as needed.
     }
 }
 
-// ... (other menu rendering functions: render_procedures_menu, render_desktop_procedures_menu, render_mobile_procedures_menu, etc.)
-// For brevity, copy all related menu rendering functions from functions.php here.
+// (Other menu rendering functions are defined in inc/menu-helpers.php)
 ?>

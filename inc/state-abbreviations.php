@@ -1,6 +1,9 @@
 <?php
 /**
- * US state → abbreviation lookup table (static).
+ * US state → abbreviation lookup table and helper.
+ *
+ * Provides a static map and a function to convert full state names to abbreviations.
+ * Used in navigation menus and location displays.
  * Keeping as a constant avoids recreating the array on every call.
  */
 if ( ! defined( 'MIA_STATE_ABBREVIATIONS' ) ) {

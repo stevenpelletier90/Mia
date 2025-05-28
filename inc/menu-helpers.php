@@ -1,13 +1,14 @@
 <?php
 /**
- * Menu Helper Functions
- * 
- * Handles navigation menu rendering, caching, and menu-related utilities
- * 
+ * Menu Helper Functions for Mia Aesthetics theme.
+ *
+ * Provides rendering logic and caching for navigation menus (procedures, locations, surgeons, before/after).
+ * All menu display logic is centralized here for maintainability.
+ *
  * @package Mia_Aesthetics
  */
 
-// Prevent direct access
+// Prevent direct access to this file.
 if (!defined('ABSPATH')) {
     exit;
 }

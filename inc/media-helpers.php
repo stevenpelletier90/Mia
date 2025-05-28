@@ -129,7 +129,7 @@ function get_video_details($video_url) {
     // --- simple object-cache layer --------------------------------------------------
     // Avoid re-processing the same video URL on every page load.
     $cache_key = 'video_details_' . md5($video_url);
-    $cached    = wp_cache_get($cache_key);
+    $cached    = get_transient($cache_key);
     if ($cached !== false) {
         return $cached; // short-circuit if we already have the parsed data
     }
@@ -150,7 +150,7 @@ function get_video_details($video_url) {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url;
         $video_data['type'] = 'oembed';
-        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
+        set_transient($cache_key, $video_data, DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -161,7 +161,7 @@ function get_video_details($video_url) {
         $video_data['url'] = 'https://www.youtube.com/watch?v=' . $video_id;
         $video_data['embed_url'] = 'https://www.youtube.com/embed/' . $video_id;
         $video_data['type'] = 'youtube';
-        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
+        set_transient($cache_key, $video_data, DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -171,7 +171,7 @@ function get_video_details($video_url) {
         $video_data['url'] = 'https://vimeo.com/' . $video_id;
         $video_data['embed_url'] = 'https://player.vimeo.com/video/' . $video_id;
         $video_data['type'] = 'vimeo';
-        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
+        set_transient($cache_key, $video_data, DAY_IN_SECONDS);
         return $video_data;
     }
 
@@ -180,7 +180,7 @@ function get_video_details($video_url) {
         $video_data['url'] = $video_url;
         $video_data['embed_url'] = $video_url; // Direct link for embed
         $video_data['type'] = 'mp4';
-        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
+        set_transient($cache_key, $video_data, DAY_IN_SECONDS);
         return $video_data;
     }
 
