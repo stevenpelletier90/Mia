@@ -13,7 +13,89 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Cache location queries
+ */
+function get_cached_locations() {
+    $cache_key = 'mia_header_locations';
+    $locations = wp_cache_get($cache_key);
+    
+    if (false === $locations) {
+        $args = [
+            'post_type' => 'location',
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'post_parent' => 0
+        ];
+        
+        $query = new WP_Query($args);
+        $locations = [];
+        
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $locations[] = [
+                    'id' => get_the_ID(),
+                    'title' => get_the_title(),
+                    'url' => get_permalink(),
+                    'state' => get_field('state')
+                ];
+            }
+            wp_reset_postdata();
+        }
+        
+        wp_cache_set($cache_key, $locations, '', 3600); // Cache for 1 hour
+    }
+    
+    return $locations;
+}
 
+/**
+ * Cache surgeon queries
+ */
+function get_cached_surgeons() {
+    $cache_key = 'mia_header_surgeons';
+    $surgeons = wp_cache_get($cache_key);
+    
+    if (false === $surgeons) {
+        $args = [
+            'post_type' => 'surgeon',
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order' => 'ASC'
+        ];
+        
+        $query = new WP_Query($args);
+        $surgeons = [];
+        
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $surgeon_name = get_the_title();
+                $name_parts = explode(' ', $surgeon_name);
+                $last_name = isset($name_parts[1]) ? $name_parts[1] : $surgeon_name;
+                
+                $surgeons[] = [
+                    'id' => get_the_ID(),
+                    'name' => $surgeon_name,
+                    'url' => get_permalink(),
+                    'last_name' => $last_name
+                ];
+            }
+            wp_reset_postdata();
+            
+            // Sort surgeons by last name
+            usort($surgeons, function($a, $b) {
+                return strcasecmp($a['last_name'], $b['last_name']);
+            });
+        }
+        
+        wp_cache_set($cache_key, $surgeons, '', 3600); // Cache for 1 hour
+    }
+    
+    return $surgeons;
+}
 
 /**
  * Render procedures dropdown

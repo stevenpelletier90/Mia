@@ -20,8 +20,8 @@ get_header(); ?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h1><?php post_type_archive_title(); ?></h1>
-                    <p class="lead">Explore our range of aesthetic procedures to help you look and feel your best.</p>
+                    <h1>Our Procedures</h1>
+                    <p class="lead">Our highly skilled surgical team is actualizing dreams, facilitating one transformation at a time.</p>
                 </div>
             </div>
         </div>

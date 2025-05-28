@@ -26,6 +26,94 @@ add_image_size( 'gallery-small', 300, 225, true );   // Small gallery images (mo
 add_image_size( 'gallery-medium', 450, 338, true );  // Medium gallery images (tablet)
 add_image_size( 'gallery-large', 600, 450, true );   // Large gallery images (desktop)
 
+/**
+ * Exclude hero images from lazy loading to optimize LCP
+ */
+function mia_exclude_hero_from_lazy_loading($attr, $attachment, $size) {
+    // Check if this is a hero image size
+    if (in_array($size, ['hero-mobile', 'hero-tablet', 'hero-desktop'])) {
+        // Add loading="eager" to prevent lazy loading
+        $attr['loading'] = 'eager';
+        // Remove any lazy loading classes that might be added by plugins
+        if (isset($attr['class'])) {
+            $attr['class'] = str_replace(['lazy', 'lazyload'], '', $attr['class']);
+            $attr['class'] = trim(preg_replace('/\s+/', ' ', $attr['class']));
+        }
+    }
+    return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'mia_exclude_hero_from_lazy_loading', 10, 3);
+
+/**
+ * Disable lazy loading for hero images in procedure templates
+ */
+function mia_disable_lazy_loading_for_hero($value, $image, $context) {
+    // Check if we're on a procedure page and this might be the hero image
+    if (is_singular('procedure') && $context === 'the_content') {
+        // Check if the image has hero-related classes or is positioned absolutely
+        if (strpos($image, 'position-absolute') !== false || 
+            strpos($image, 'hero-') !== false ||
+            strpos($image, 'procedure background') !== false) {
+            // Remove lazy loading attributes
+            $image = str_replace(['loading="lazy"', 'data-lazy-src', 'data-lazy-srcset', 'data-lazy-sizes'], 
+                               ['loading="eager"', 'src', 'srcset', 'sizes'], $image);
+            // Add fetchpriority if not present
+            if (strpos($image, 'fetchpriority') === false) {
+                $image = str_replace('<img ', '<img fetchpriority="high" ', $image);
+            }
+        }
+    }
+    return $value;
+}
+add_filter('wp_lazy_loading_enabled', 'mia_disable_lazy_loading_for_hero', 10, 3);
+
+/**
+ * Completely disable lazy loading for hero images with specific class
+ */
+function mia_disable_lazy_loading_for_hero_class($attr, $attachment, $size) {
+    // If this is a hero image or has the mia-hero-image class, disable lazy loading
+    if (isset($attr['class']) && strpos($attr['class'], 'mia-hero-image') !== false) {
+        $attr['loading'] = 'eager';
+        // Remove lazy loading classes
+        $attr['class'] = str_replace(['lazy', 'lazyload'], '', $attr['class']);
+        $attr['class'] = trim(preg_replace('/\s+/', ' ', $attr['class']));
+    }
+    return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'mia_disable_lazy_loading_for_hero_class', 20, 3);
+
+/**
+ * Prevent lazy loading plugins from affecting hero images
+ */
+function mia_prevent_hero_lazy_loading() {
+    if (is_singular('procedure')) {
+        // Add JavaScript to force load hero images immediately
+        echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var heroImages = document.querySelectorAll(".mia-hero-image");
+            heroImages.forEach(function(img) {
+                // Force immediate loading
+                if (img.dataset.lazySrc) {
+                    img.src = img.dataset.lazySrc;
+                    img.removeAttribute("data-lazy-src");
+                }
+                if (img.dataset.lazySrcset) {
+                    img.srcset = img.dataset.lazySrcset;
+                    img.removeAttribute("data-lazy-srcset");
+                }
+                if (img.dataset.lazySizes) {
+                    img.sizes = img.dataset.lazySizes;
+                    img.removeAttribute("data-lazy-sizes");
+                }
+                // Remove lazy loading classes
+                img.classList.remove("lazy", "lazyload", "lazyloading");
+                img.classList.add("lazyloaded");
+            });
+        });
+        </script>';
+    }
+}
+add_action('wp_head', 'mia_prevent_hero_lazy_loading', 999);
 
 /**
  * Extract video details from URL (YouTube, Vimeo, MP4, fallback)
