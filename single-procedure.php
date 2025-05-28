@@ -14,12 +14,8 @@
 get_header(); 
 
 // Get featured image
-$featured_img_id = '';
-if (have_posts()) {
-    the_post();
-    $featured_img_id = get_post_thumbnail_id(get_the_ID());
-    rewind_posts();
-}
+$post = get_queried_object();
+$hero_id = get_post_thumbnail_id( $post );
 ?>
 <main>
     <div class="container">
@@ -34,13 +30,23 @@ if (have_posts()) {
         <!-- Page Header with Two-Column Layout -->
         <header class="procedure-header py-5 position-relative overflow-hidden">
             <!-- Hero Image -->
-            <?php if ($featured_img_id): ?>
-                <img src="<?php echo wp_get_attachment_image_url($featured_img_id, 'full'); ?>"
-                     alt="<?php echo esc_attr(get_the_title()); ?> procedure background"
-                     class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover mia-hero-image"
-                     style="z-index: -2;">
-            <!-- Gradient Overlay -->
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5)); z-index: -1;"></div>
+            <?php if ($hero_id): ?>
+                <?php
+                // Use <picture> for explicit responsive hero image handling
+                ?>
+                <picture class="hero-picture">
+                    <source media="(max-width: 640px)" 
+                        srcset="<?php echo esc_url(wp_get_attachment_image_url($hero_id, 'hero-mobile')); ?>">
+                    <source media="(max-width: 1024px)" 
+                        srcset="<?php echo esc_url(wp_get_attachment_image_url($hero_id, 'hero-tablet')); ?>">
+                    <img src="<?php echo esc_url(wp_get_attachment_image_url($hero_id, 'hero-desktop')); ?>" 
+                        alt="<?php echo esc_attr(get_the_title()); ?> procedure background"
+                        class="hero-bg"
+                        loading="eager"
+                        fetchpriority="high">
+                </picture>
+                <?php
+                ?>
             <?php endif; ?>
             <div class="container">
                 <div class="row min-vh-50 d-flex align-items-center">
@@ -51,7 +57,7 @@ if (have_posts()) {
                         $procedure_price = get_field('procedure_price');
                         if ($procedure_price): ?>
                             <div class="pricing-info mt-3">
-                                <p class="h4 mb-1">Starting Price: <?php echo $procedure_price; ?>*</p>
+                                <h2 class="h4 mb-1">Starting Price: <?php echo $procedure_price; ?>*</h2>
                                 <small>* Pricing varies by surgeon</small>
                             </div>
                         <?php endif; ?>
@@ -71,73 +77,53 @@ if (have_posts()) {
         </header>
 
         <!-- Content -->
-        <article>
+        <article class="single-procedure">
             <!-- Main content without container constraints -->
-            <div class="main-content">
+            <section class="main-content">
                 <?php the_content(); ?>
-            </div>
+            </section>
             
-            <section class="results-resources-section" aria-label="Before and after results with helpful resources">
+            <section class="results-resources-section" aria-labelledby="results-heading" aria-describedby="results-description">
               <div class="container">
                 <div class="row g-4 g-lg-5 align-items-start">
                   <div class="col-lg-7 mb-4 mb-lg-0">
-                    <h2 class="h3 fw-bold mb-4 text-white">Before &amp; After Results</h2>
+                    <h2 id="results-heading" class="h3 fw-bold mb-4 text-white">Before &amp; After Results</h2>
+                    <div id="results-description" class="sr-only">Patient before and after surgery results gallery</div>
 
                     <div class="row g-4">
                       <?php
-                      // Get before/after images from ACF or similar
+                      // Get before/after images from ACF
                       $before_after_gallery = get_field('before_after_gallery');
                       if ($before_after_gallery): 
-                        $count = 0;
-                        foreach ($before_after_gallery as $image_pair): 
-                          if($count >= 2) break; // Only show 2 images
-                      ?>
-                        <!-- Single result card -->
-                        <div class="col-6">
-                          <figure class="before-after-card h-100 overflow-hidden position-relative">
-                            <span class="badge bg-dark position-absolute top-0 start-0 m-2">Before</span>
+                        foreach (array_slice($before_after_gallery, 0, 2) as $pair): ?>
+                          <!-- Before image -->
+                          <div class="col-6">
+                            <figure class="before-after-card h-100 overflow-hidden position-relative">
+                              <span class="badge bg-dark position-absolute top-0 start-0 m-2"><?php echo esc_html(__('Before', 'mia')); ?></span>
+                              <?php echo mia_before_after_img($pair['before_image'], 'Before'); ?>
+                              <figcaption class="small text-muted text-center py-2">
+                                <?php echo !empty($pair['caption']) ? esc_html($pair['caption']) : 'Actual patient results may vary'; ?>
+                              </figcaption>
+                            </figure>
+                          </div>
 
-                            <?php if ($image_pair['before_image']): ?>
-                                <img src="<?php echo esc_url($image_pair['before_image']); ?>"
-                                     class="img-fluid w-100 object-fit-cover"
-                                     alt="Patient before surgery">
-                            <?php endif; ?>
-
-                            <figcaption class="small text-muted text-center py-2">
-                              <?php echo !empty($image_pair['caption']) ? esc_html($image_pair['caption']) : 'Actual patient results may vary'; ?>
-                            </figcaption>
-                          </figure>
-                        </div>
-
-                        <div class="col-6">
-                          <figure class="before-after-card h-100 overflow-hidden position-relative">
-                            <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after">After</span>
-
-                            <?php if ($image_pair['after_image']): ?>
-                                <img src="<?php echo esc_url($image_pair['after_image']); ?>"
-                                     class="img-fluid w-100 object-fit-cover"
-                                     alt="Patient after surgery">
-                            <?php endif; ?>
-
-                            <figcaption class="small text-muted text-center py-2">
-                              <?php echo !empty($image_pair['caption']) ? esc_html($image_pair['caption']) : 'Actual patient results may vary'; ?>
-                            </figcaption>
-                          </figure>
-                        </div>
-                        <!-- /card -->
-                      <?php 
-                        $count++;
-                        endforeach; 
+                          <!-- After image -->
+                          <div class="col-6">
+                            <figure class="before-after-card h-100 overflow-hidden position-relative">
+                              <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after"><?php echo esc_html(__('After', 'mia')); ?></span>
+                              <?php echo mia_before_after_img($pair['after_image'], 'After'); ?>
+                              <figcaption class="small text-muted text-center py-2">
+                                <?php echo !empty($pair['caption']) ? esc_html($pair['caption']) : 'Actual patient results may vary'; ?>
+                              </figcaption>
+                            </figure>
+                          </div>
+                        <?php endforeach; 
                       else: ?>
                         <!-- Placeholder cards when no images are available -->
                         <div class="col-6">
                           <figure class="before-after-card h-100 overflow-hidden position-relative">
-                            <span class="badge bg-dark position-absolute top-0 start-0 m-2">Before</span>
-
-                            <img src="https://placehold.co/600x450"
-                                 class="img-fluid w-100 object-fit-cover"
-                                 alt="Patient before surgery">
-
+                            <span class="badge bg-dark position-absolute top-0 start-0 m-2"><?php echo esc_html(__('Before', 'mia')); ?></span>
+                            <?php echo mia_before_after_img(null, 'Before'); ?>
                             <figcaption class="small text-muted text-center py-2">
                               Actual patient results may vary
                             </figcaption>
@@ -146,12 +132,8 @@ if (have_posts()) {
 
                         <div class="col-6">
                           <figure class="before-after-card h-100 overflow-hidden position-relative">
-                            <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after">After</span>
-
-                            <img src="https://placehold.co/600x450"
-                                 class="img-fluid w-100 object-fit-cover"
-                                 alt="Patient after surgery">
-
+                            <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after"><?php echo esc_html(__('After', 'mia')); ?></span>
+                            <?php echo mia_before_after_img(null, 'After'); ?>
                             <figcaption class="small text-muted text-center py-2">
                               Actual patient results may vary
                             </figcaption>
@@ -169,28 +151,35 @@ if (have_posts()) {
                   <!-- /Before & After -->
 
                   <!-- ===== Additional Resources ======================================== -->
-                  <aside class="col-lg-5">
-                    <h2 class="h3 fw-bold mb-4 text-white">Additional Resources</h2>
+                  <aside class="col-lg-5" aria-labelledby="resources-heading">
+                    <h2 id="resources-heading" class="h3 fw-bold mb-4 text-white">Additional Resources</h2>
 
                     <!-- List group keeps DOM light & accessible -->
-                    <nav class="list-group list-group-flush rounded-3">
+                    <nav class="list-group list-group-flush rounded-3" aria-label="Related resources">
                       <?php
                       // Related Procedures
                       $related_procedures = get_field('related_procedures');
-                      if ($related_procedures): 
-                        foreach ($related_procedures as $post): 
-                          setup_postdata($post); ?>
-                          <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
-                             href="<?php the_permalink(); ?>">
-                            <i class="fa-solid fa-stethoscope fs-4 flex-shrink-0" aria-hidden="true"></i>
-                            <span>
-                              <strong>Related: <?php the_title(); ?></strong><br>
-                              <small class="text-muted">Learn about this complementary procedure</small>
-                            </span>
-                          </a>
-                        <?php 
-                        endforeach; 
-                        wp_reset_postdata(); 
+                      if ($related_procedures):
+                        $related_ids = array_map(function($p) { return is_object($p) ? $p->ID : (int)$p; }, $related_procedures);
+                        $related_query = new WP_Query([
+                          'post_type' => 'procedure',
+                          'post__in' => $related_ids,
+                          'orderby' => 'post__in',
+                          'posts_per_page' => count($related_ids)
+                        ]);
+                        if ($related_query->have_posts()):
+                          while ($related_query->have_posts()): $related_query->the_post(); ?>
+                            <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                               href="<?php the_permalink(); ?>">
+                              <i class="fa-solid fa-stethoscope fs-4 flex-shrink-0" aria-hidden="true"></i>
+                              <span>
+                                <strong>Related: <?php the_title(); ?></strong><br>
+                                <small class="text-muted">Learn about this complementary procedure</small>
+                              </span>
+                            </a>
+                          <?php endwhile;
+                          wp_reset_postdata();
+                        endif;
                       endif; ?>
 
                       <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
@@ -198,7 +187,7 @@ if (have_posts()) {
                         <i class="fa-solid fa-plane fs-4 flex-shrink-0" aria-hidden="true"></i>
                         <span>
                           <strong>Out‑of‑Town Patients</strong><br>
-                          <small class="text-muted">Travel info &amp; accommodation details</small>
+                          <small class="text-muted">Travel info & accommodation details</small>
                         </span>
                       </a>
 
@@ -223,7 +212,7 @@ if (have_posts()) {
             // FAQ Section
             $faq_section = get_field('faq_section');
             if ($faq_section && !empty($faq_section['faqs'])): ?>
-            <section class="py-4 py-lg-5">
+            <section class="py-4 py-lg-5" aria-labelledby="faq-heading-<?php echo get_the_ID(); ?>">
                 <div class="container">                        
                     <?php echo display_page_faqs(); ?>                      
                 </div>
