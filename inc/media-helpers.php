@@ -258,7 +258,7 @@ function mia_get_video_field( $post_id = null ) {
  * Helper function for before/after gallery images
  * Handles both image IDs and URLs, with fallback to placeholder
  */
-function mia_before_after_img( $img, string $label ) : string {
+function mia_before_after_img( $img, $label ) {
     if ( ! $img ) {
         $src = 'https://placehold.co/600x450';
         return "<img src='{$src}' class='img-fluid w-100 object-fit-cover' alt='{$label} placeholder' loading='lazy'>";

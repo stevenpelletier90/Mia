@@ -97,6 +97,87 @@ function get_cached_surgeons() {
 }
 
 /**
+ * Render procedures dropdown
+ */
+function render_procedures_menu($procedures, $is_mobile = false) {
+    $dropdown_class = $is_mobile ? 'd-xl-none' : 'position-static d-none d-xl-block';
+    ?>
+    <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
+        <a class="nav-link dropdown-toggle" href="<?php echo esc_url($procedures['url']); ?>" 
+           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php echo esc_html($procedures['title']); ?>
+        </a>
+        <?php if ($is_mobile): ?>
+            <?php render_mobile_procedures_menu($procedures); ?>
+        <?php else: ?>
+            <?php render_desktop_procedures_menu($procedures); ?>
+        <?php endif; ?>
+    </li>
+    <?php
+}
+
+/**
+ * Render desktop procedures mega menu
+ */
+function render_desktop_procedures_menu($procedures) {
+    ?>
+    <div class="dropdown-menu mega-menu w-100 p-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <a class="mega-menu-title" href="<?php echo esc_url($procedures['url']); ?>">View All Procedures <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <?php foreach ($procedures['sections'] as $section_key => $section): ?>
+                    <div class="col-md-3 mb-3">
+                        <h6 class="dropdown-header">
+                            <a href="<?php echo esc_url($section['url']); ?>" class="text-dark fw-bold text-decoration-none"><?php echo esc_html($section['title']); ?></a>
+                        </h6>
+                        <ul class="list-unstyled">
+                            <?php foreach ($section['items'] as $item): ?>
+                                <?php 
+                                $parent_path = isset($item['parent']) ? $procedures['sections'][$item['parent']]['url'] : $section['url'];
+                                $item_url = rtrim($parent_path, '/') . '/' . $item['slug'] . '/';
+                                ?>
+                                <li><a class="dropdown-item py-1" href="<?php echo esc_url($item_url); ?>"><?php echo esc_html($item['title']); ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Render mobile procedures dropdown menu
+ */
+function render_mobile_procedures_menu($procedures) {
+    ?>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="<?php echo esc_url($procedures['url']); ?>">View All Procedures</a></li>
+        <?php foreach ($procedures['sections'] as $section_key => $section): ?>
+            <!-- Section Header -->
+            <li><a class="dropdown-item fw-bold" href="<?php echo esc_url($section['url']); ?>"><?php echo esc_html($section['title']); ?></a></li>
+            <!-- Section Items -->
+            <?php foreach ($section['items'] as $item): ?>
+                <?php 
+                $parent_path = isset($item['parent']) ? $procedures['sections'][$item['parent']]['url'] : $section['url'];
+                $item_url = rtrim($parent_path, '/') . '/' . $item['slug'] . '/';
+                ?>
+                <li><a class="dropdown-item" href="<?php echo esc_url($item_url); ?>"><?php echo esc_html($item['title']); ?></a></li>
+            <?php endforeach; ?>
+            <?php if ($section_key !== array_key_last($procedures['sections'])): ?>
+                <li><hr class="dropdown-divider"></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+    <?php
+}
+
+/**
  * Render locations menu for both desktop and mobile
  */
 function render_locations_menu($is_mobile = false) {
@@ -368,4 +449,5 @@ function render_mobile_before_after_menu() {
     </ul>
     <?php
 }
+
 ?>
