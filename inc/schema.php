@@ -393,3 +393,4 @@ function mia_add_organization_address_schema() {
     echo '</script>';
 }
 add_action('wp_head', 'mia_add_organization_address_schema', 11);
+?>

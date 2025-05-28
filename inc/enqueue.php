@@ -200,3 +200,4 @@ function mia_aesthetics_enqueue_scripts() {
     }
 }
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
+?>

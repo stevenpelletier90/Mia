@@ -82,3 +82,4 @@ function render_mia_menu($type = 'desktop') {
 
 // ... (other menu rendering functions: render_procedures_menu, render_desktop_procedures_menu, render_mobile_procedures_menu, etc.)
 // For brevity, copy all related menu rendering functions from functions.php here.
+?>

@@ -83,3 +83,4 @@ add_filter('single_template', function($template) {
     }
     return $template;
 });
+?>

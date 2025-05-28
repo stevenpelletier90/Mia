@@ -30,3 +30,4 @@ function clear_mia_caches($post_id) {
 }
 add_action('save_post', 'clear_mia_caches');
 add_action('delete_post', 'clear_mia_caches');
+?>
