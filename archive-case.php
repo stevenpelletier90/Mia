@@ -1,78 +1,129 @@
 <?php
 /**
- * Basic Archive Template
- * Can be used as: archive-procedures.php, archive-surgeons.php, etc.
+ * Case Archive Template
+ * Organizes case studies into categories with procedure archive styling
  */
 
 get_header(); ?>
 
 <main>
     <div class="container">
-        <?php if (function_exists("yoast_breadcrumb")) {
-            yoast_breadcrumb('<p id="breadcrumbs">', "</p>");
-        } ?>
+        <?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+        }
+        ?>
     </div>
     
     <!-- Archive Header -->
-    <header class="bg-light py-5">
+    <section class="post-header py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h1><?php post_type_archive_title(); ?></h1>
+                    <h1 class="mb-2">Case Studies</h1>
+                    <p class="lead mb-0">Explore real patient transformations and see the exceptional results achieved by our skilled surgical team.</p>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Archive Content -->
-    <section class="py-5">
+    <!-- Case Categories -->
+    <section class="case-categories py-5">
         <div class="container">
-            <?php if (have_posts()): ?>
-                <div class="row g-4">
-                    <?php while (have_posts()):
-                        the_post(); ?>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <?php if (has_post_thumbnail()): ?>
-                                    <?php the_post_thumbnail("medium", [
-                                        "class" => "card-img-top",
-                                    ]); ?>
-                                <?php endif; ?>
-                                
-                                <div class="card-body">
-                                    <h2 class="h5">
-                                        <a href="<?php the_permalink(); ?>">
-                                            <?php the_title(); ?>
-                                        </a>
-                                    </h2>
-                                    <?php the_excerpt(); ?>
+            <div class="row g-4 justify-content-center">
+                <!-- Body Cases -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                    <div class="card h-100 case-category-card">
+                        <div class="category-image-container position-relative overflow-hidden">
+                            <picture>
+                                <source media="(max-width: 576px)" 
+                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=400&h=300&crop=1" 
+                                        width="400" height="300">
+                                <source media="(max-width: 768px)" 
+                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=600&h=400&crop=1" 
+                                        width="600" height="400">
+                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=800&h=600&crop=1" 
+                                     alt="Body Case Studies - Real patient transformations for body procedures" 
+                                     class="card-img-top w-100 h-100 object-fit-cover"
+                                     width="800" height="600"
+                                     loading="lazy">
+                            </picture>
+                            <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
+                                <div class="overlay-content p-3 text-white w-100">
+                                    <span class="category-badge px-2 py-1 rounded-pill small">25 Cases</span>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    endwhile; ?>
-                </div>
-
-                <!-- Pagination -->
-                <div class="row mt-5">
-                    <div class="col">
-                        <?php the_posts_pagination([
-                            "prev_text" => "&laquo;",
-                            "next_text" => "&raquo;",
-                            "class" => "pagination justify-content-center",
-                        ]); ?>
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-3">Body Cases</h2>
+                            <p class="card-text text-muted mb-3">See real transformations from our body contouring and sculpting procedures.</p>
+                            <ul class="list-unstyled case-links">
+                                <li><a href="#" class="text-decoration-none">Brazilian Butt Lift (BBL) Cases</a></li>
+                                <li><a href="#" class="text-decoration-none">Tummy Tuck Transformations</a></li>
+                                <li><a href="#" class="text-decoration-none">Liposuction Results</a></li>
+                                <li><a href="#" class="text-decoration-none">Mommy Makeover Cases</a></li>
+                                <li><a href="#" class="text-decoration-none">Mia Waist Corset&trade; Results</a></li>
+                                <li><a href="#" class="text-decoration-none"><strong>View All Body Cases</strong></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-            <?php else: ?>
-                <div class="row">
-                    <div class="col">
-                        <p>No posts found.</p>
+                
+                <!-- Breast Cases -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                    <div class="card h-100 case-category-card">
+                        <div class="category-image-container position-relative overflow-hidden">
+                            <picture>
+                                <source media="(max-width: 576px)" 
+                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=400&h=300&crop=1" 
+                                        width="400" height="300">
+                                <source media="(max-width: 768px)" 
+                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=600&h=400&crop=1" 
+                                        width="600" height="400">
+                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=800&h=600&crop=1" 
+                                     alt="Breast Case Studies - Real patient transformations for breast procedures" 
+                                     class="card-img-top w-100 h-100 object-fit-cover"
+                                     width="800" height="600"
+                                     loading="lazy">
+                            </picture>
+                            <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
+                                <div class="overlay-content p-3 text-white w-100">
+                                    <span class="category-badge px-2 py-1 rounded-pill small">18 Cases</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-3">Breast Cases</h2>
+                            <p class="card-text text-muted mb-3">Explore real results from our comprehensive breast surgery procedures.</p>
+                            <ul class="list-unstyled case-links">
+                                <li><a href="#" class="text-decoration-none">Breast Augmentation Cases</a></li>
+                                <li><a href="#" class="text-decoration-none">Breast Reduction Results</a></li>
+                                <li><a href="#" class="text-decoration-none">Breast Lift Transformations</a></li>
+                                <li><a href="#" class="text-decoration-none">Breast Implant Revision Cases</a></li>
+                                <li><a href="#" class="text-decoration-none"><strong>View All Breast Cases</strong></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            <?php endif; ?>
+            </div>
         </div>
     </section>
+
+    <!-- Browse by Surgeon CTA -->
+    <section class="browse-by-surgeon py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="h3 mb-3">Browse Results by Surgeon</h2>
+                    <p class="lead text-muted mb-4">Explore transformations organized by our expert surgical team members to see their specialized work and artistic approach.</p>
+                    <a href="https://miaprod.wpenginepowered.com/before-after/before-after-by-doctor/" class="btn btn-primary btn-lg">
+                        View Results by Surgeon <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 
 <?php get_footer(); ?>

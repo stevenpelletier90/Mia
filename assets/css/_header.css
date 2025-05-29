@@ -149,7 +149,7 @@ body.admin-bar html {
     width: 100%;
   }
   .mega-menu-title {
-    color: var(--color-gold);
+    color: var(--color-primary);
     font-weight: 600;
     font-size: 1.1rem;
     display: inline-block;
@@ -163,6 +163,7 @@ body.admin-bar html {
   .mega-menu-title .fa-arrow-right {
     font-size: 0.85rem;
     margin-left: 0.5rem;
+    color: var(--color-gold);
   }
   .mega-menu .dropdown-header {
     padding: 0.5rem 0;

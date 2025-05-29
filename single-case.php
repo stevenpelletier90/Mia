@@ -16,70 +16,64 @@ get_header(); ?>
         ?>
     </div>
 
-    <!-- Hero Section -->
-    <header class="bg-light py-4">
+    <!-- Page Header -->
+    <section class="post-header py-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
+            <div class="row">
+                <div class="col-12">
                     <h1><?php the_title(); ?></h1>
-                    
-                    <!-- Main Before & After Images - side by side on all devices -->
-                    <div class="row g-3">
-                        <?php 
-                        $before_photo = get_field('before_photo');
-                        $after_photo = get_field('after_photo');
-                        
-                        if ($before_photo) : ?>
-                        <div class="col-6">
-                            <div class="position-relative case-image-container">
-                                <img src="<?php echo esc_url($before_photo['sizes']['medium_large']); ?>" 
-                                     class="img-fluid rounded cursor-pointer" 
-                                     alt="Before Treatment - <?php the_title(); ?>"
-                                     data-bs-toggle="modal" 
-                                     data-bs-target="#imageModal" 
-                                     data-bs-image="<?php echo esc_url($before_photo['url']); ?>"
-                                     data-bs-title="Before Treatment">
-                                <span class="before-label">Before</span>
-                            </div>
-                        </div>
-                        <?php endif; 
-                        
-                        if ($after_photo) : ?>
-                        <div class="col-6">
-                            <div class="position-relative case-image-container">
-                                <img src="<?php echo esc_url($after_photo['sizes']['medium_large']); ?>" 
-                                     class="img-fluid rounded cursor-pointer" 
-                                     alt="After Treatment - <?php the_title(); ?>"
-                                     data-bs-toggle="modal" 
-                                     data-bs-target="#imageModal" 
-                                     data-bs-image="<?php echo esc_url($after_photo['url']); ?>"
-                                     data-bs-title="After Treatment">
-                                <span class="after-label">After</span>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                    </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
+
+    <!-- Before & After Images Section -->
+    <section class="case-images py-4 bg-light">
+        <div class="container">
+            <div class="row g-3 justify-content-center">
+                <?php 
+                $before_photo = get_field('before_photo');
+                $after_photo = get_field('after_photo');
+                
+                if ($before_photo) : ?>
+                <div class="col-6 col-md-5 col-lg-4">
+                    <div class="position-relative case-image-container">
+                        <img src="<?php echo esc_url($before_photo['sizes']['medium_large']); ?>" 
+                             class="img-fluid rounded cursor-pointer" 
+                             alt="Before Treatment - <?php the_title(); ?>"
+                             data-bs-toggle="modal" 
+                             data-bs-target="#imageModal" 
+                             data-bs-image="<?php echo esc_url($before_photo['url']); ?>"
+                             data-bs-title="Before Treatment">
+                        <span class="before-label">Before</span>
+                    </div>
+                </div>
+                <?php endif; 
+                
+                if ($after_photo) : ?>
+                <div class="col-6 col-md-5 col-lg-4">
+                    <div class="position-relative case-image-container">
+                        <img src="<?php echo esc_url($after_photo['sizes']['medium_large']); ?>" 
+                             class="img-fluid rounded cursor-pointer" 
+                             alt="After Treatment - <?php the_title(); ?>"
+                             data-bs-toggle="modal" 
+                             data-bs-target="#imageModal" 
+                             data-bs-image="<?php echo esc_url($after_photo['url']); ?>"
+                             data-bs-title="After Treatment">
+                        <span class="after-label">After</span>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <article class="py-5">
         <div class="container">
             <div class="row">
                 <!-- Main Content Column -->
-                <div class="col-xl-8 col-lg-12">
-                    <?php if (get_field('case_background')) : ?>
-                    <!-- Patient Background -->
-                    <section class="mb-5">
-                        <h2 class="h4 mb-3">Patient Background</h2>
-                        <div class="case-background">
-                            <?php echo get_field('case_background'); ?>
-                        </div>
-                    </section>
-                    <?php endif; ?>
-
+                <div class="col-xl-7 col-lg-12">
                     <?php 
                     // Get case information
                     $case_info = get_field('case_information');
@@ -128,8 +122,7 @@ get_header(); ?>
                             ?>
                             <div class="col-6">
                                 <h2 class="h4 mb-3">Performed by</h2>
-                                <a href="<?php echo get_permalink($surgeon); ?>" class="case-surgeon-link">
-                                    <span>
+                                <a href="<?php echo get_permalink($surgeon); ?>" class="case-surgeon-arrow-link">
                                     <?php 
                                     // Check if there's a specific ACF field for last name
                                     $last_name = get_field('last_name', $surgeon);
@@ -163,8 +156,6 @@ get_header(); ?>
                                     $last_name = trim(str_replace(',', '', $last_name));
                                     echo 'Dr. ' . $last_name;
                                     ?>
-                                    </span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
                             <?php endif; ?>
@@ -176,9 +167,8 @@ get_header(); ?>
                             ?>
                             <div class="col-6">
                                 <h2 class="h4 mb-3">Location</h2>
-                                <a href="<?php echo get_permalink($location); ?>" class="case-location-link">
-                                    <span><?php echo get_the_title($location); ?></span>
-                                    <i class="fas fa-arrow-right"></i>
+                                <a href="<?php echo get_permalink($location); ?>" class="case-location-arrow-link">
+                                    <?php echo get_the_title($location); ?>
                                 </a>
                             </div>
                             <?php endif; ?>
@@ -186,6 +176,15 @@ get_header(); ?>
                     </section>
                     <?php endif; ?>
 
+                    <?php if (get_field('case_background')) : ?>
+                    <!-- Patient Background -->
+                    <section class="mb-5">
+                        <h2 class="h4 mb-3">Patient Background</h2>
+                        <div class="case-background">
+                            <?php echo get_field('case_background'); ?>
+                        </div>
+                    </section>
+                    <?php endif; ?>
 
                     <!-- Main Content -->
                     <div class="content">
@@ -218,7 +217,7 @@ get_header(); ?>
                 </div>
 
                 <!-- Sidebar -->
-                <div class="col-xl-4 col-lg-12">
+                <div class="col-xl-5 col-lg-12">
                     <!-- Contact Card with Gravity Form -->
                     <div class="card consultation-card mb-4 shadow-sm">
                         <div class="card-body p-3">
