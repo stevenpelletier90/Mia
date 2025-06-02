@@ -78,36 +78,47 @@ get_header(); ?>
                     // Get case information
                     $case_info = get_field('case_information');
                     if ($case_info) : 
+                        $height = !empty($case_info['height']);
+                        $weight = !empty($case_info['weight']);
+                        $bmi = !empty($case_info['bmi']);
                     ?>
                     <!-- Patient Information -->
                     <section class="mb-5">
                         <h2 class="h4 mb-3">Patient Information</h2>
                         <div class="row g-3">
-                            <?php if (!empty($case_info['height'])) : ?>
-                            <div class="col-4 col-md-4">
-                                <div class="patient-info-card">
-                                    <h5 class="h6">Height</h5>
-                                    <p class="mb-0"><?php echo esc_html($case_info['height']); ?></p>
+                            <?php if (!$height && !$weight && !$bmi) : ?>
+                                <div class="col-12">
+                                    <div class="alert alert-info text-center" role="status" aria-live="polite">
+                                        Protected for Patient Privacy
+                                    </div>
                                 </div>
-                            </div>
-                            <?php endif; ?>
-                            
-                            <?php if (!empty($case_info['weight'])) : ?>
-                            <div class="col-4 col-md-4">
-                                <div class="patient-info-card">
-                                    <h5 class="h6">Weight</h5>
-                                    <p class="mb-0"><?php echo esc_html($case_info['weight']); ?> lbs</p>
+                            <?php else: ?>
+                                <?php if ($height) : ?>
+                                <div class="col-4 col-md-4">
+                                    <div class="patient-info-card">
+                                        <h5 class="h6">Height</h5>
+                                        <p class="mb-0"><?php echo esc_html($case_info['height']); ?></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <?php endif; ?>
-                            
-                            <?php if (!empty($case_info['bmi'])) : ?>
-                            <div class="col-4 col-md-4">
-                                <div class="patient-info-card">
-                                    <h5 class="h6">BMI</h5>
-                                    <p class="mb-0"><?php echo esc_html($case_info['bmi']); ?></p>
+                                <?php endif; ?>
+                                
+                                <?php if ($weight) : ?>
+                                <div class="col-4 col-md-4">
+                                    <div class="patient-info-card">
+                                        <h5 class="h6">Weight</h5>
+                                        <p class="mb-0"><?php echo esc_html($case_info['weight']); ?> lbs</p>
+                                    </div>
                                 </div>
-                            </div>
+                                <?php endif; ?>
+                                
+                                <?php if ($bmi) : ?>
+                                <div class="col-4 col-md-4">
+                                    <div class="patient-info-card">
+                                        <h5 class="h6">BMI</h5>
+                                        <p class="mb-0"><?php echo esc_html($case_info['bmi']); ?></p>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                     </section>

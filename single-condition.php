@@ -34,15 +34,14 @@ get_header(); ?>
                         <?php 
                         // Check if overview_details has actual content to display
                         $has_overview_content = false;
-                        if (have_rows('overview_details')):
-                            // First pass: check if any overview items have content
-                            while (have_rows('overview_details')): the_row();
-                                $overview_item = get_sub_field('overview_item');
-                                if (!empty(trim($overview_item))):
+                        $overview_items = get_field('overview_details');
+                        if ($overview_items):
+                            foreach ($overview_items as $item):
+                                if (!empty(trim($item['overview_item']))):
                                     $has_overview_content = true;
                                     break;
                                 endif;
-                            endwhile;
+                            endforeach;
                         endif;
                         
                         // Only display overview section if there's actual content
@@ -51,7 +50,7 @@ get_header(); ?>
                                 <h2 id="overview">Overview</h2>
 <div class="overview-content">
     <?php 
-    // Second pass: display the content
+    // Loop through the repeater field rows
     while (have_rows('overview_details')): the_row(); 
         // Get the overview_item text area value
         $overview_item = get_sub_field('overview_item');

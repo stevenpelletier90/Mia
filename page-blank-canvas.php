@@ -1,7 +1,7 @@
 <?php
 /*
  * Template Name: Blank Canvas
- * Template Post Type: post, page, procedure, condition   // add others here
+ * Template Post Type: post, page, procedure, condition, case   // add others here
  */
 
 get_header(); ?>
