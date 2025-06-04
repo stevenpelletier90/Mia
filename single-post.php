@@ -1,17 +1,7 @@
 <?php
 /**
- * The template for displaying single blog posts
- *
- * This is an enhanced template that includes features like:
- * - Reading time calculation
- * - Author information and avatar
- * - Category and tag display
- * - Breadcrumb navigation
- * - Related posts
- * - Schema.org structured data for SEO
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
+ * Single blog post template
+ * 
  * @package Mia_Aesthetics
  */
 get_header(); ?>
@@ -26,18 +16,15 @@ get_header(); ?>
     </div>
     
     <?php while (have_posts()) : the_post(); 
-        // Calculate reading time
         $content = get_the_content();
         $word_count = str_word_count(strip_tags($content));
-        $reading_time = ceil($word_count / 200); // Assume 200 words per minute
+        $reading_time = ceil($word_count / 200);
     ?>
 
-        <!-- Article Header -->
         <header class="post-header py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        
                         <h1 class="mb-3"><?php the_title(); ?></h1>
                         
                         <div class="post-meta text-muted small mb-3">
@@ -58,7 +45,6 @@ get_header(); ?>
             </div>
         </header>
 
-        <!-- Main Content -->
         <article class="py-5">
             <div class="container">
                 <div class="row">
@@ -79,7 +65,6 @@ get_header(); ?>
                             <?php the_content(); ?>
                         </div>
 
-                        <!-- Tags -->
                         <?php
                         $tags = get_the_tags();
                         if ($tags) : ?>
@@ -90,15 +75,9 @@ get_header(); ?>
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
-
-
                     </div>
                     
                     <div class="col-lg-4 sidebar">
-
-
-
-                        <!-- Patient Resources -->
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h2 class="h5 mb-3">Patient Resources</h2>
@@ -125,7 +104,6 @@ get_header(); ?>
                             </div>
                         </div>
 
-                        <!-- Related Posts -->
                         <?php
                         $categories = get_the_category();
                         if ($categories) {
@@ -167,7 +145,6 @@ get_header(); ?>
         </article>
 
         <?php
-        // Schema.org structured data for SEO
         $schema = [
             '@context' => 'https://schema.org',
             '@type' => 'BlogPosting',

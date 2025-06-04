@@ -47,8 +47,25 @@ function mia_aesthetics_enqueue_scripts() {
     $css_path = $theme_path . '/assets/css';
     $css_uri = $theme_uri . '/assets/css';
 
-    // Enqueue local fonts first (before other styles)
-    mia_enqueue_local_style( 'mia-fonts', '/assets/css/_fonts.css' );
+// Enqueue local fonts first (before other styles)
+mia_enqueue_local_style( 'mia-fonts', '/assets/css/_fonts.css' );
+
+// Enqueue gallery assets only for the before-after-by-doctor template
+if (is_page_template('page-before-after-by-doctor.php')) {
+    wp_enqueue_style(
+        'mia-gallery-css',
+        get_template_directory_uri() . '/assets/css/gallery.css',
+        array('bootstrap-css'), // depends on Bootstrap CSS
+        filemtime(get_template_directory() . '/assets/css/gallery.css')
+    );
+    wp_enqueue_script(
+        'mia-gallery-js',
+        get_template_directory_uri() . '/assets/js/gallery.js',
+        array('bootstrap-js', 'jquery'), // depends on Bootstrap and jQuery
+        filemtime(get_template_directory() . '/assets/js/gallery.js'),
+        true
+    );
+}
 
     mia_enqueue_local_style( 'font-awesome', '/assets/fontawesome/css/all.min.css' );
 
@@ -189,4 +206,48 @@ function mia_aesthetics_enqueue_scripts() {
     }
 }
 add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
+
+// Debug function to track asset loading and template issues
+function mia_debug_asset_loading() {
+    // Only run on the before-after-by-doctor page
+    if (is_page_template('page-before-after-by-doctor.php')) {
+        error_log('=== MIA Aesthetics Debug Info ===');
+        error_log('Template Detection: Before & After by Doctor template is active');
+        
+        // Check template file existence
+        $template_path = get_template_directory() . '/page-before-after-by-doctor.php';
+        error_log('Template file exists: ' . (file_exists($template_path) ? 'Yes' : 'No'));
+        
+        // Check JSON data file
+        $json_path = get_template_directory() . '/assets/data/before-after-gallery.json';
+        error_log('Gallery JSON path: ' . $json_path);
+        error_log('JSON file exists: ' . (file_exists($json_path) ? 'Yes' : 'No'));
+        if (file_exists($json_path)) {
+            $json_content = file_get_contents($json_path);
+            error_log('JSON content length: ' . strlen($json_content));
+            error_log('JSON is valid: ' . (json_decode($json_content) !== null ? 'Yes' : 'No'));
+        }
+        
+        // Check asset loading
+        error_log('=== Asset Loading Status ===');
+        error_log('Bootstrap CSS: ' . (wp_style_is('bootstrap-css', 'enqueued') ? 'Loaded' : 'Not loaded'));
+        error_log('Bootstrap JS: ' . (wp_script_is('bootstrap-js', 'enqueued') ? 'Loaded' : 'Not loaded'));
+        error_log('jQuery: ' . (wp_script_is('jquery', 'enqueued') ? 'Loaded' : 'Not loaded'));
+        error_log('Gallery CSS: ' . (wp_style_is('mia-gallery-css', 'enqueued') ? 'Loaded' : 'Not loaded'));
+        error_log('Gallery JS: ' . (wp_script_is('mia-gallery-js', 'enqueued') ? 'Loaded' : 'Not loaded'));
+        
+        // Check asset URLs
+        error_log('=== Asset URLs ===');
+        error_log('Gallery CSS URL: ' . get_template_directory_uri() . '/assets/css/gallery.css');
+        error_log('Gallery JS URL: ' . get_template_directory_uri() . '/assets/js/gallery.js');
+        
+        // Check if files exist
+        error_log('=== File Existence ===');
+        error_log('Gallery CSS exists: ' . (file_exists(get_template_directory() . '/assets/css/gallery.css') ? 'Yes' : 'No'));
+        error_log('Gallery JS exists: ' . (file_exists(get_template_directory() . '/assets/js/gallery.js') ? 'Yes' : 'No'));
+        
+        error_log('=== End Debug Info ===');
+    }
+}
+add_action('wp_enqueue_scripts', 'mia_debug_asset_loading', 999);
 ?>

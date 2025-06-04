@@ -254,16 +254,44 @@ get_header(); ?>
     <?php endif; ?>
 </main>
 
-<!-- Image Modal -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+<!-- Image Modal with Carousel -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"></h5>
+                <h5 class="modal-title" id="imageModalLabel"><?php the_title(); ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-0">
-                <img src="" class="img-fluid" alt="">
+            <div class="modal-body">
+                <div id="caseCarousel" class="carousel slide carousel-fade" data-bs-ride="false">
+                    <div class="carousel-inner">
+                        <?php 
+                        $carousel_index = 0;
+                        if ($before_photo) : ?>
+                        <div class="carousel-item<?php echo $carousel_index === 0 ? ' active' : ''; ?>">
+                            <img src="<?php echo esc_url($before_photo['url']); ?>" class="d-block w-100" alt="Before Treatment">
+                        </div>
+                        <?php 
+                        $carousel_index++;
+                        endif; 
+                        
+                        if ($after_photo) : ?>
+                        <div class="carousel-item<?php echo $carousel_index === 0 ? ' active' : ''; ?>">
+                            <img src="<?php echo esc_url($after_photo['url']); ?>" class="d-block w-100" alt="After Treatment">
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ($before_photo && $after_photo) : ?>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#caseCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#caseCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
@@ -276,32 +304,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageModal = document.getElementById('imageModal');
     
     if (imageModal) {
-        // Create a Bootstrap modal instance
-        const modal = new bootstrap.Modal(imageModal);
-        
         // Handle modal show event
         imageModal.addEventListener('show.bs.modal', function(event) {
             // Get the button that triggered the modal
             const button = event.relatedTarget;
             
-            // Extract data attributes
-            const image = button.getAttribute('data-bs-image');
-            const title = button.getAttribute('data-bs-title');
+            // Determine which image was clicked (before or after)
+            const clickedTitle = button.getAttribute('data-bs-title');
+            const carousel = bootstrap.Carousel.getInstance(document.getElementById('caseCarousel'));
             
-            // Update modal content
-            const modalTitle = this.querySelector('.modal-title');
-            const modalImage = this.querySelector('.modal-body img');
-            
-            modalTitle.textContent = title;
-            modalImage.src = image;
-            modalImage.alt = title;
-        });
-        
-        // Handle image loading
-        const modalImage = imageModal.querySelector('.modal-body img');
-        modalImage.addEventListener('load', function() {
-            // Ensure modal position is updated after image loads
-            modal._adjustDialog();
+            if (carousel) {
+                if (clickedTitle === 'Before Treatment') {
+                    carousel.to(0);
+                } else if (clickedTitle === 'After Treatment') {
+                    carousel.to(1);
+                }
+            }
         });
     }
     

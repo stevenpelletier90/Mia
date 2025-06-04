@@ -187,55 +187,64 @@ header h1 {
   margin-top: 2rem;
 }
 
+/* Modal styling - simplified to match gallery */
 #imageModal .modal-dialog {
-  max-width: 800px;
+  max-width: 900px; /* Slightly wider */
+  margin: 1.75rem auto;
 }
 
 #imageModal .modal-content {
+  background-color: #fff;
   border: none;
-  border-radius: 0.375rem;
-  overflow: hidden;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-#imageModal .modal-header {
-  background-color: var(--color-primary);
-  color: #fff;
-  border-bottom: none;
-  padding: 1rem;
-}
-
-#imageModal .modal-title {
-  font-weight: 600;
 }
 
 #imageModal .modal-body {
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 0;
-  text-align: center;
+  padding: 40px; /* Reduced padding - arrows closer to image */
+  position: relative;
+  background-color: #fff;
 }
 
-#imageModal .modal-body img {
-  max-height: 80vh;
-  max-width: 100%;
+/* Carousel image styling */
+#caseCarousel img {
+  max-height: 70vh; /* Reduced to prevent scrolling */
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
   margin: 0 auto;
 }
 
-#imageModal .btn-close {
-  background-color: transparent;
-  color: #fff;
+/* Carousel control arrows - dark background for visibility */
+#caseCarousel .carousel-control-prev,
+#caseCarousel .carousel-control-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
   opacity: 0.8;
-  filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-#imageModal .btn-close:hover {
+#caseCarousel .carousel-control-prev:hover,
+#caseCarousel .carousel-control-next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
   opacity: 1;
 }
 
-.modal-backdrop {
-  opacity: 0.5;
+#caseCarousel .carousel-control-prev {
+  left: 10px;
+}
+
+#caseCarousel .carousel-control-next {
+  right: 10px;
+}
+
+/* Center the arrow icons */
+#caseCarousel .carousel-control-prev-icon,
+#caseCarousel .carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
 }
 
 /* Consultation card - remove old background, let gravity form handle styling */

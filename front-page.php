@@ -198,7 +198,7 @@ get_header(); ?>
         <div class="stats-content">          <p class="mb-3 mb-md-4 fs-6"> Delivering life-changing results with expert care at every step. Our team of highly skilled specialists, years of experience, and thousands of satisfied patients set us apart in the industry.</p>
           <div class="d-flex">
             <a href="/locations/" class="mia-button me-3" data-variant="black" role="button">Our Locations</a>
-            <a href="/surgeons/" class="mia-button" data-variant="black" role="button">Our Surgeons</a>
+            <a href="/plastic-surgeons/" class="mia-button" data-variant="black" role="button">Our Surgeons</a>
           </div>
         </div>
       </div>
