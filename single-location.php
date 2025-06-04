@@ -166,29 +166,21 @@ get_header();
 
     <article class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
+            <div class="row gx-5">
+                <div class="col-md-7">
                     <?php while (have_posts()) : the_post(); ?>
                         <div class="location-content">
                             <?php the_content(); ?>
                         </div>
                     <?php endwhile; ?>
+                </div>
 
-                    <div class="location-details py-4">
-                        <div class="row gx-5">
-                            <div class="col-md-7">
-                                
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="card consultation-card h-100">
-                                    <div class="card-body p-4">
-                                        <h2 class="h5 mb-3 text-center">Schedule a Consultation</h2>
-                                        <div class="location-form-container">
-                                            <?php gravity_form(1, false, false, false, '', true); ?>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-md-5">
+                    <div class="card consultation-card">
+                        <div class="card-body p-4">
+                            <h2 class="h5 mb-3 text-center">Schedule a Consultation</h2>
+                            <div class="location-form-container">
+                                <?php gravity_form(1, false, false, false, '', true); ?>
                             </div>
                         </div>
                     </div>
@@ -217,7 +209,7 @@ get_header();
                 if ($surgeons->have_posts()) :
                     while ($surgeons->have_posts()) : $surgeons->the_post(); ?>
                         <div class="col mb-4">
-                            <div class="surgeon-card card border-0 shadow-sm h-100">
+                            <div class="surgeon-card card h-100">
                                 <div class="text-center">
                                     <div class="surgeon-image-container">
                                         <?php
@@ -229,9 +221,10 @@ get_header();
                                             <img src="<?php the_post_thumbnail_url(); ?>" class="surgeon-headshot-circular" alt="<?php the_title(); ?>" />
                                         <?php endif; ?>
                                     </div>
-                                    <div class="card-body">                                        <h3 class="h4"><?php the_title(); ?></h3>
+                                    <div class="card-body">
+                                        <h3 class="h4"><?php the_title(); ?></h3>
                                         <p class="surgeon-title">Plastic Surgeon</p>
-                                        <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="white">View Profile <i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="gold-outline">View Profile <i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

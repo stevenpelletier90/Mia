@@ -229,7 +229,8 @@
 
 .surgeon-title {
   font-style: italic;
-  color: var(--color-gold);
+  color: var(--color-primary);
+  opacity: 0.7;
   margin-bottom: 1rem;
 }
 
@@ -264,63 +265,6 @@
   background-color: var(--color-primary);
   color: var(--color-gold);
   border-color: var(--color-gold);
-}
-
-/* FAQ Accordion Styles */
-.accordion-item {
-  margin-bottom: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.accordion-item:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-  margin: 0;
-}
-
-.accordion-button {
-  background-color: var(--color-primary);
-  color: #fff;
-  padding: 1rem;
-  font-weight: 600;
-  font-family: var(--font-heading);
-}
-
-.accordion-button:not(.collapsed) {
-  background-color: var(--color-primary);
-  color: var(--color-gold);
-}
-
-.accordion-button:focus {
-  box-shadow: none;
-  border-color: rgba(0, 0, 0, 0.125);
-}
-
-.accordion-button::after {
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  background-image: none;
-  content: "\f078";
-  font-size: 1rem;
-  color: var(--color-gold);
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
-  margin-right: 8px;
-  transition: all 0.3s ease;
-}
-
-.accordion-button:not(.collapsed)::after {
-  transform: rotate(180deg);
-  color: var(--color-gold);
-  filter: drop-shadow(0 -2px 3px rgba(0, 0, 0, 0.3));
-}
-
-.accordion-body {
-  padding: 1.5rem;
-  background-color: #fff;
 }
 
 @media (max-width: 767px) {
