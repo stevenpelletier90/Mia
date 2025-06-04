@@ -4,6 +4,45 @@
    - Minimal custom styles to let Bootstrap handle the modal display.
 */
 
+/* ================= Dropdown & Doctor Name Spacing ================= */
+
+/* Increase spacing between heading and dropdown */
+#doctors-gallery h1 {
+  margin-bottom: 2.5rem;
+}
+
+/* Style the dropdown to be larger and more prominent */
+#doctorSelect {
+  min-width: 250px;
+}
+
+/* Enhance dropdown focus state */
+#doctorSelect:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 0.2rem rgba(200, 178, 115, 0.25);
+}
+
+/* Add more spacing between dropdown and doctor name */
+.gallery h2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 768px) {
+  #doctorSelect {
+    min-width: 250px;
+    padding: 0.875rem 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  /* Extra spacing for doctor name on desktop */
+  .gallery h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
 /* Gallery image hover effect */
 #doctors-gallery .gallery img {
   transition: transform 0.25s ease;
@@ -15,16 +54,6 @@
 /* Gallery button styling - ensure clickable */
 #doctors-gallery .gallery button {
   cursor: pointer;
-}
-
-/* VWO headings - hidden by default */
-.vwo-heading {
-  text-transform: capitalize !important;
-  text-align: center;
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0 auto 50px;
-  display: none;
 }
 
 /* Modal styling */

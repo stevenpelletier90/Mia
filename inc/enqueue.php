@@ -54,9 +54,9 @@ mia_enqueue_local_style( 'mia-fonts', '/assets/css/_fonts.css' );
 if (is_page_template('page-before-after-by-doctor.php')) {
     wp_enqueue_style(
         'mia-gallery-css',
-        get_template_directory_uri() . '/assets/css/gallery.css',
+        get_template_directory_uri() . '/assets/css/_gallery.css',
         array('bootstrap-css'), // depends on Bootstrap CSS
-        filemtime(get_template_directory() . '/assets/css/gallery.css')
+        filemtime(get_template_directory() . '/assets/css/_gallery.css')
     );
     wp_enqueue_script(
         'mia-gallery-js',

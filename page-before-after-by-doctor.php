@@ -25,19 +25,14 @@ get_header();
     - For accessibility, all images have descriptive alt text and controls are keyboard accessible.
   -->
   <section id="doctors-gallery">
-    <h1 class="display-4 text-center mb-2">
+    <h1 class="text-center mb-5">
       Before&nbsp;&&nbsp;After
       <small class="d-block fs-4">Results by Surgeon</small>
     </h1>
 
-    <!-- VWO Test Headings -->
-    <h2 class="vwo-heading vwo-heading1">Your Transformation Awaits</h2>
-    <h2 class="vwo-heading vwo-heading2">Real Results, Real People, Just Like You</h2>
-    <h2 class="vwo-heading vwo-heading3">Over 100,000 Successful Transformations and Counting</h2>
-
     <!-- Surgeon selector -->
     <label for="doctorSelect" class="visually-hidden">Choose a surgeon</label>
-    <select id="doctorSelect" class="form-select w-auto mx-auto mb-4" aria-controls="galleries">
+    <select id="doctorSelect" class="form-select mx-auto mb-5 fs-5 px-4 py-3" aria-controls="galleries">
       <option value="">All surgeons</option>
       <option value="dr-bronstein">Dr. Bronstein</option>
       <option value="dr-charepoo">Dr. Charepoo</option>
@@ -99,7 +94,7 @@ if (!empty($gallery_data)) :
     foreach ($gallery_data as $doctor_slug => $doctor) :
 ?>
       <article class="gallery" data-doctor="<?php echo esc_attr($doctor_slug); ?>">
-        <h2 class="h2 text-center mb-4"><?php echo esc_html($doctor['name']); ?></h2>
+        <h2 class="h2 text-center mt-5 mb-5"><?php echo esc_html($doctor['name']); ?></h2>
         <?php foreach ($doctor['procedures'] as $procedure => $images) : ?>
           <h3 class="h4 border-bottom pb-2 mb-4<?php echo $procedure !== array_key_first($doctor['procedures']) ? ' mt-5' : ''; ?>">
             <?php echo esc_html($procedure); ?>
