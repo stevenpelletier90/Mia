@@ -14,6 +14,7 @@
 /* Style the dropdown to be larger and more prominent */
 #doctorSelect {
   min-width: 250px;
+  max-width: 300px;
 }
 
 /* Enhance dropdown focus state */
@@ -114,4 +115,32 @@
 #galleryCarousel .carousel-control-next-icon {
   width: 20px;
   height: 20px;
+}
+
+/* Mobile-specific arrow positioning - closer to image edges */
+@media (max-width: 767px) {
+  #lightboxModal .modal-body {
+    padding: 20px; /* Reduced padding on mobile */
+  }
+
+  #galleryCarousel .carousel-control-prev {
+    left: -5px; /* Move closer to left edge */
+  }
+
+  #galleryCarousel .carousel-control-next {
+    right: -5px; /* Move closer to right edge */
+  }
+
+  /* Smaller arrows on mobile for better touch targets */
+  #galleryCarousel .carousel-control-prev,
+  #galleryCarousel .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  #galleryCarousel .carousel-control-prev-icon,
+  #galleryCarousel .carousel-control-next-icon {
+    width: 16px;
+    height: 16px;
+  }
 }

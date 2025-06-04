@@ -31,34 +31,38 @@ get_header();
     </h1>
 
     <!-- Surgeon selector -->
-    <label for="doctorSelect" class="visually-hidden">Choose a surgeon</label>
-    <select id="doctorSelect" class="form-select mx-auto mb-5 fs-5 px-4 py-3" aria-controls="galleries">
-      <option value="">All surgeons</option>
-      <option value="dr-bronstein">Dr. Bronstein</option>
-      <option value="dr-charepoo">Dr. Charepoo</option>
-      <option value="dr-cooper">Dr. Cooper</option>
-      <option value="dr-elbayer">Dr. Elbayer</option>
-      <option value="dr-fasusi">Dr. Fasusi</option>
-      <option value="dr-giorgis">Dr. Giorgis</option>
-      <option value="dr-gray">Dr. Gray</option>
-      <option value="dr-gross">Dr. Gross</option>
-      <option value="dr-horowitz">Dr. Horowitz</option>
-      <option value="dr-kramer">Dr. Kramer</option>
-      <option value="dr-kumar">Dr. Kumar</option>
-      <option value="dr-mehio">Dr. Mehio</option>
-      <option value="dr-morse">Dr. Morse</option>
-      <option value="dr-orlando">Dr. Orlando</option>
-      <option value="dr-patino">Dr. Patino</option>
-      <option value="dr-rozentsvit">Dr. Rozentsvit</option>
-      <option value="dr-sarcia">Dr. Sarcia</option>
-      <option value="dr-scroggins">Dr. Scroggins</option>
-      <option value="dr-shaikh">Dr. Shaikh</option>
-      <option value="dr-towle">Dr. Towle</option>
-      <option value="dr-valauri">Dr. Valauri</option>
-      <option value="dr-wright">Dr. Wright</option>
-      <option value="dr-xu">Dr. Xu</option>
-      <option value="dr-ziakas">Dr. Ziakas</option>
-    </select>
+    <div class="d-flex justify-content-center mb-5">
+      <div>
+        <label for="doctorSelect" class="visually-hidden">Choose a surgeon</label>
+        <select id="doctorSelect" class="form-select fs-5 px-4 py-3" aria-controls="galleries">
+          <option value="">Choose a Surgeon</option>
+          <option value="dr-bronstein">Dr. Bronstein</option>
+          <option value="dr-charepoo">Dr. Charepoo</option>
+          <option value="dr-cooper">Dr. Cooper</option>
+          <option value="dr-elbayer">Dr. Elbayer</option>
+          <option value="dr-fasusi">Dr. Fasusi</option>
+          <option value="dr-giorgis">Dr. Giorgis</option>
+          <option value="dr-gray">Dr. Gray</option>
+          <option value="dr-gross">Dr. Gross</option>
+          <option value="dr-horowitz">Dr. Horowitz</option>
+          <option value="dr-kramer">Dr. Kramer</option>
+          <option value="dr-kumar">Dr. Kumar</option>
+          <option value="dr-mehio">Dr. Mehio</option>
+          <option value="dr-morse">Dr. Morse</option>
+          <option value="dr-orlando">Dr. Orlando</option>
+          <option value="dr-patino">Dr. Patino</option>
+          <option value="dr-rozentsvit">Dr. Rozentsvit</option>
+          <option value="dr-sarcia">Dr. Sarcia</option>
+          <option value="dr-scroggins">Dr. Scroggins</option>
+          <option value="dr-shaikh">Dr. Shaikh</option>
+          <option value="dr-towle">Dr. Towle</option>
+          <option value="dr-valauri">Dr. Valauri</option>
+          <option value="dr-wright">Dr. Wright</option>
+          <option value="dr-xu">Dr. Xu</option>
+          <option value="dr-ziakas">Dr. Ziakas</option>
+        </select>
+      </div>
+    </div>
 
     <!-- ================= Galleries ================= -->
     <div id="galleries">
@@ -93,7 +97,7 @@ error_log('=== End Gallery Data Debug ===');
 if (!empty($gallery_data)) :
     foreach ($gallery_data as $doctor_slug => $doctor) :
 ?>
-      <article class="gallery" data-doctor="<?php echo esc_attr($doctor_slug); ?>">
+      <article class="gallery d-none" data-doctor="<?php echo esc_attr($doctor_slug); ?>">
         <h2 class="h2 text-center mt-5 mb-5"><?php echo esc_html($doctor['name']); ?></h2>
         <?php foreach ($doctor['procedures'] as $procedure => $images) : ?>
           <h3 class="h4 border-bottom pb-2 mb-4<?php echo $procedure !== array_key_first($doctor['procedures']) ? ' mt-5' : ''; ?>">

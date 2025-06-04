@@ -11,11 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const show = (val) => {
     if (!val || val === "") {
-      // Show all galleries when "All surgeons" is selected
-      galleries.forEach((g) => (g.hidden = false));
+      // Hide all galleries when no surgeon is selected
+      galleries.forEach((g) => g.classList.add("d-none"));
     } else {
       // Show only the selected doctor's gallery
-      galleries.forEach((g) => (g.hidden = g.dataset.doctor !== val));
+      galleries.forEach((g) => {
+        if (g.dataset.doctor === val) {
+          g.classList.remove("d-none");
+        } else {
+          g.classList.add("d-none");
+        }
+      });
     }
     if (history && history.replaceState) {
       history.replaceState({}, "", val ? `?doctor=${val}` : location.pathname);
