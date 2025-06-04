@@ -163,23 +163,10 @@ include 'hero-section.php';
 <section class="how-payments-work-section py-5">
   <div class="container-fluid">
     <div class="row align-items-stretch">
-      <!-- Left Column: Carousel -->
+      <!-- Left Column: Single Image -->
       <div class="col-xl-6 d-flex">
-        <div id="paymentsCarousel" class="carousel slide carousel-fade flex-fill" data-bs-ride="carousel">
-          <div class="carousel-inner h-100">
-            <div class="carousel-item active h-100">
-              <img src="/wp-content/uploads/2025/05/or-view.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Operating Room View">
-            </div>
-            <div class="carousel-item h-100">
-              <img src="/wp-content/uploads/2025/05/mia-clinic.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Mia Clinic">
-            </div>
-            <div class="carousel-item h-100">
-              <img src="/wp-content/uploads/2025/05/surgery-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Surgery Room">
-            </div>
-            <div class="carousel-item h-100">
-              <img src="/wp-content/uploads/2025/05/mia-staff-miami.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Mia Staff Miami">
-            </div>
-          </div>
+        <div class="payments-image-container flex-fill">
+          <img src="/wp-content/uploads/2025/05/mia-staff-miami.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Mia Staff Miami">
         </div>
       </div>
       

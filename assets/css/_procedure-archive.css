@@ -18,11 +18,18 @@
 
 /* Category Cards */
 .procedure-category-card {
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   border-radius: 0.25rem;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  background: #1b1b1b;
+  color: #ffffff;
+}
+
+.procedure-category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
 }
 
 /* Category Image Container */
@@ -54,26 +61,35 @@
   text-transform: uppercase;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  background-color: var(--color-primary, #b48c5e);
-  color: #fff;
+  background-color: var(--color-gold);
+  color: #000;
   border: none;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
 }
 .category-badge:focus,
 .category-badge:hover,
 .category-badge:active {
-  background-color: var(--color-primary, #b48c5e);
-  color: #fff;
+  background-color: rgba(200, 178, 115, 0.9);
+  color: #000;
+  transform: scale(1.05);
 }
 
 /* Card Body */
 .procedure-category-card .card-body {
   padding: 1.5rem;
+  background: #1b1b1b;
 }
 
 .procedure-category-card .card-text {
   font-size: 0.95rem;
   line-height: 1.5;
+  color: #ffffff;
+}
+
+.procedure-category-card h2 {
+  color: var(--color-gold);
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 /* Procedure Links */
@@ -88,7 +104,7 @@
 }
 
 .procedure-links a {
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.9rem;
   transition: all 0.2s ease;
   display: inline-block;
@@ -102,12 +118,12 @@
   left: 0;
   color: var(--color-gold);
   font-weight: 600;
-  opacity: 0.6;
+  opacity: 0.8;
   transition: all 0.2s ease;
 }
 
 .procedure-links a:hover {
-  color: var(--color-primary);
+  color: #ffffff;
   padding-left: 20px;
   text-decoration: none;
 }
@@ -115,6 +131,12 @@
 .procedure-links a:hover::before {
   opacity: 1;
   transform: translateX(3px);
+  color: var(--color-gold);
+}
+
+.procedure-links a strong {
+  color: var(--color-gold);
+  font-weight: 600;
 }
 
 .section-heading {

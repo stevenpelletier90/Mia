@@ -37,12 +37,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=400&h=300&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/body-home.jpg?w=400&h=300&crop=1" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=600&h=400&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/body-home.jpg?w=600&h=400&crop=1" 
                                         width="600" height="400">
-                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=800&h=600&crop=1" 
+                                <img src="/wp-content/uploads/2025/04/body-home.jpg?w=800&h=600&crop=1" 
                                      alt="Body Procedures - Transform your body with our comprehensive surgical options" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -56,7 +56,7 @@ get_header(); ?>
                         </div>
                         <div class="card-body p-4">
                             <h2 class="h4 mb-3">Body Procedures</h2>
-                            <p class="card-text text-muted mb-3">Sculpt and contour your body with our advanced surgical techniques.</p>
+                            <p class="card-text mb-3">Sculpt and contour your body with our advanced surgical techniques.</p>
                             <ul class="list-unstyled procedure-links">
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/mia-corset/')); ?>" class="text-decoration-none">Mia Waist Corset&trade;</a></li>
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/awake-liposuction/')); ?>" class="text-decoration-none">Awake Lipo</a></li>
@@ -81,12 +81,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=400&h=300&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/breast-home.jpg?w=400&h=300&crop=1" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=600&h=400&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/breast-home.jpg?w=600&h=400&crop=1" 
                                         width="600" height="400">
-                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=800&h=600&crop=1" 
+                                <img src="/wp-content/uploads/2025/04/breast-home.jpg?w=800&h=600&crop=1" 
                                      alt="Breast Procedures - Enhance and reshape with our expert breast surgery options" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -100,7 +100,7 @@ get_header(); ?>
                         </div>
                         <div class="card-body p-4">
                             <h2 class="h4 mb-3">Breast Procedures</h2>
-                            <p class="card-text text-muted mb-3">Enhance, reduce, or lift with our comprehensive breast surgery options.</p>
+                            <p class="card-text mb-3">Enhance, reduce, or lift with our comprehensive breast surgery options.</p>
                             <ul class="list-unstyled procedure-links">
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/augmentation-implants/')); ?>" class="text-decoration-none">Breast Augmentation</a></li>
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/reduction/')); ?>" class="text-decoration-none">Breast Reduction</a></li>
@@ -118,12 +118,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/face-procedures.jpg?w=400&h=300&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/face-2-home.jpg?w=400&h=300&crop=1" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/face-procedures.jpg?w=600&h=400&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/face-2-home.jpg?w=600&h=400&crop=1" 
                                         width="600" height="400">
-                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/face-procedures.jpg?w=800&h=600&crop=1" 
+                                <img src="/wp-content/uploads/2025/04/face-2-home.jpg?w=800&h=600&crop=1" 
                                      alt="Face Procedures - Rejuvenate and refine your facial features with precision surgery" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -137,7 +137,7 @@ get_header(); ?>
                         </div>
                         <div class="card-body p-4">
                             <h2 class="h4 mb-3">Face Procedures</h2>
-                            <p class="card-text text-muted mb-3">Rejuvenate and refine your facial features with precision techniques.</p>
+                            <p class="card-text mb-3">Rejuvenate and refine your facial features with precision techniques.</p>
                             <ul class="list-unstyled procedure-links">
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/brow-lift/')); ?>" class="text-decoration-none">Brow Lift</a></li>
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/face/buccal-cheek-fat-removal/')); ?>" class="text-decoration-none">Buccal Fat Removal</a></li>
@@ -160,12 +160,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/male-procedures.jpg?w=400&h=300&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/men-home.jpg?w=400&h=300&crop=1" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/male-procedures.jpg?w=600&h=400&crop=1" 
+                                        srcset="/wp-content/uploads/2025/04/men-home.jpg?w=600&h=400&crop=1" 
                                         width="600" height="400">
-                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/male-procedures.jpg?w=800&h=600&crop=1" 
+                                <img src="/wp-content/uploads/2025/04/men-home.jpg?w=800&h=600&crop=1" 
                                      alt="Male Procedures - Specialized cosmetic surgery options designed for men" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -179,7 +179,7 @@ get_header(); ?>
                         </div>
                         <div class="card-body p-4">
                             <h2 class="h4 mb-3">Men's Procedures</h2>
-                            <p class="card-text text-muted mb-3">Specialized cosmetic surgery options designed specifically for men.</p>
+                            <p class="card-text mb-3">Specialized cosmetic surgery options designed specifically for men.</p>
                             <ul class="list-unstyled procedure-links">
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/body/male-bbl/')); ?>" class="text-decoration-none">Male BBL</a></li>
                                 <li><a href="<?php echo esc_url(home_url('/cosmetic-plastic-surgery/breast/male-breast-procedures/')); ?>" class="text-decoration-none">Male Breast Procedures</a></li>
