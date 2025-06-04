@@ -100,6 +100,8 @@ if (is_page_template('page-before-after-by-doctor.php')) {
     switch ( true ) {
         case is_front_page():
             [$page_css, $page_handle] = ['/_home.css', 'mia-home'];
+            // Also enqueue hero CSS for front page
+            mia_enqueue_local_style( 'mia-hero', '/assets/css/_hero.css', array( 'mia-base' ) );
             break;
 
         case is_404():

@@ -1,157 +1,11 @@
-.hero-section {
-  background-color: #fff;
-  box-sizing: border-box;
-}
+/* ===== HERO SECTION ===== */
+/* Hero section styles have been moved to assets/css/_hero.css */
 
-.hero-wrapper {
-  background-color: #fff;
-  overflow: hidden;
-}
-
-/* --- Front-page hero borders ------------------------------------------- */
-/* Give every card the full 2 px border first */
-.box-carousel,
-.box-top,
-.box-bottom {
-  border: 2px solid #fff;
-  box-sizing: border-box;
-}
-
-/* Then remove whichever edges would be duplicated */
-.box-carousel {
-  /* sits top-left; loses the centre divider */
-  border-right: none;
-}
-
-.box-top {
-  /* sits top-right; becomes the internal divider */
-  border-bottom: none; /* we'll draw that divider instead */
-}
-
-.box-bottom {
-  /* sits bottom-right; keeps the outer frame only */
-  border-top: none; /* divider already supplied by .box-top */
-}
-
-/* ----------------------------------------------------------------------- */
-
-.content-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  background-color: #000;
-}
-
-.content-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.7) 15%,
-    rgba(0, 0, 0, 0.3) 25%,
-    transparent 35%
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  padding-bottom: 3.5rem;
-  z-index: 2;
-}
-
-.responsive-heading {
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-heading);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-}
-
-.button-wrapper {
-  margin-top: 0.5rem;
-}
-
-.content-overlay .mia-button-hero {
-  font-size: clamp(0.875rem, 3vw, 1.125rem);
-}
-
-.content-overlay .mia-button-hero .fa-arrow-right {
-  margin-left: 0.5rem;
-  font-size: 0.85em;
-}
-
-.carousel {
-  border-radius: 0;
-}
-
-/* Using Bootstrap's w-100 h-100 utility classes instead of custom CSS */
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
-.carousel-indicators {
-  margin-bottom: 0.5rem;
-  z-index: 10;
-}
-
-.carousel-indicators [data-bs-target] {
-  background-color: #fff;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin: 0 8px;
-  opacity: 0.9;
-  border: 2px solid #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-.carousel-indicators .active {
-  opacity: 1;
-  transform: scale(1.2);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 10%;
-  opacity: 0.8;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: transparent;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-  opacity: 1;
-}
-
-/* How Payments Work Section */
 .how-payments-work-section {
   position: relative;
   z-index: 10;
 }
 
-/* Carousel with 4:3 ratio */
 .how-payments-work-section .ratio-4x3 {
   position: relative;
   width: 100%;
@@ -163,12 +17,10 @@
   height: 100%;
 }
 
-/* Make carousel match content height */
 .how-payments-work-section .carousel {
   min-height: 100%;
 }
 
-/* Adjust spacing for stacked view */
 @media (max-width: 1199px) {
   .how-payments-work-section .payments-content {
     padding: 2rem 0;
@@ -179,7 +31,6 @@
   }
 }
 
-/* Payment Step Cards */
 .payment-step-card {
   background-color: #fff;
   border-radius: 4px;
@@ -208,7 +59,6 @@
   margin-bottom: 0;
 }
 
-/* Section Divider */
 .section-divider {
   height: 1px;
   background: linear-gradient(to right, rgba(200, 178, 115, 0), rgba(200, 178, 115, 0.7), rgba(200, 178, 115, 0));
@@ -315,26 +165,15 @@
   margin-bottom: 2rem;
 }
 
-.procedure-dropdown select {
-  width: 100%;
-  padding: 0.75rem 1rem;
+.procedure-dropdown .form-select {
   font-family: var(--font-heading);
   font-weight: 600;
   color: var(--color-primary);
-  background-color: #fff;
-  border: 1px solid var(--color-gold);
-  border-radius: 4px;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23c8b273' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 16px 12px;
-  cursor: pointer;
+  border-color: var(--color-gold);
 }
 
-.procedure-dropdown select:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.25);
+.procedure-dropdown .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(200, 178, 115, 0.25);
   border-color: var(--color-gold);
 }
 
@@ -354,7 +193,7 @@
   z-index: 999;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: auto !important;
+  pointer-events: auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -650,32 +489,7 @@ h3.section-subheading {
   }
 }
 
-@media (min-width: 1400px) {
-  .responsive-heading {
-    font-size: 2.75rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .content-overlay {
-    padding-bottom: 4rem;
-  }
-
-  .button-wrapper {
-    margin-top: 0.6rem;
-  }
-
-  .content-overlay .mia-button-hero {
-    padding: 0.6rem 1.75rem;
-    font-size: 1.2rem;
-  }
-}
-
 @media (max-width: 991px) {
-  .content-overlay .mia-button-hero {
-    font-size: 0.95rem;
-    padding: 0.4rem 1.25rem;
-  }
-
   .section-heading {
     font-size: 2rem;
   }
@@ -695,56 +509,6 @@ h3.section-subheading {
 }
 
 @media (max-width: 767px) {
-  .hero-wrapper .col-md-4 {
-    flex-direction: row !important;
-  }
-
-  /* Mobile border overrides for side-by-side layout */
-  .box-carousel {
-    border: 2px solid #fff;
-    border-bottom: none; /* No bottom border to avoid doubling with boxes below */
-  }
-
-  .box-top,
-  .box-bottom {
-    width: 50%;
-    border-top: 2px solid #fff; /* Shared with carousel above */
-    border-bottom: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #fff;
-  }
-
-  .box-top {
-    border-right: none; /* No right border to avoid doubling with box-bottom */
-  }
-  /* If using Bootstrap grid, these can be replaced with col-6 and border utilities */
-
-  .content-overlay {
-    padding: 1rem;
-    padding-bottom: 1.75rem;
-  }
-
-  .button-wrapper {
-    margin-top: 0.3rem;
-  }
-
-  .responsive-heading {
-    font-size: 1.45rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .content-overlay .mia-button-hero {
-    padding: 0.4rem 1.25rem;
-    font-size: 0.95rem;
-  }
-
-  .carousel-indicators [data-bs-target] {
-    width: 20px;
-    height: 20px;
-    margin: 0 12px;
-    border: 3px solid #fff;
-  }
-
   .section-heading {
     font-size: 1.75rem;
   }
@@ -778,8 +542,6 @@ h3.section-subheading {
   .procedure-dropdown {
     display: block;
   }
-
-  /* Removed redundant stacking overrides for procedures-section; Bootstrap grid handles stacking */
 }
 
 @media (min-width: 992px) {
@@ -827,37 +589,30 @@ h3.section-subheading {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .display-5[data-count] {
-    font-size: 2.5rem !important;
+  .stats-section .display-5[data-count] {
+    font-size: 2.5rem;
     min-width: 100%;
     word-break: keep-all;
     white-space: nowrap;
   }
 
-  .display-5[data-suffix=", 000 +"] {
-    font-size: 2.25rem !important;
+  .stats-section .display-5[data-suffix=", 000 +"] {
+    font-size: 2.25rem;
   }
 }
 
-@media (min-width: 768px) and (max-width: 830px) {
+@media (max-width: 1199.98px) {
   .procedures-section .row.align-items-center {
-    flex-direction: row;
-  }
-
-  /* Force stacking below xl (1200px) to match col-xl-6 grid */
-  @media (max-width: 1199.98px) {
-    .procedures-section .row.align-items-center {
-      flex-direction: column !important;
-    }
+    flex-direction: column;
   }
 
   .procedures-section .row.align-items-center .col-lg-6 {
-    width: 100% !important;
+    width: 100%;
   }
 
   .procedures-section .row.align-items-center .col-lg-6.order-lg-2 {
-    order: -1 !important;
-    margin-bottom: 2rem !important;
+    order: -1;
+    margin-bottom: 2rem;
   }
 }
 
@@ -933,25 +688,6 @@ h3.section-subheading {
 }
 
 @media (max-width: 480px) {
-  .content-overlay {
-    padding: 0.75rem;
-    padding-bottom: 1rem;
-  }
-
-  .button-wrapper {
-    margin-top: 0.2rem;
-  }
-
-  .responsive-heading {
-    font-size: 1.15rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .content-overlay .mia-button-hero {
-    padding: 0.3rem 0.9rem;
-    font-size: 0.8rem;
-  }
-
   .foundation-content {
     padding: 1.25rem;
   }
