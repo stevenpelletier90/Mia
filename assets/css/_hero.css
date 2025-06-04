@@ -1,50 +1,72 @@
-/* ===== HERO SECTION STYLES ===== */
+/* ===== HERO SECTION - CLEAN IMPLEMENTATION ===== */
 
 .hero-section {
   background-color: #fff;
-  box-sizing: border-box;
+  border: 2px solid #fff;
 }
 
 .hero-container {
-  background-color: #fff;
-  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  min-height: 400px;
+  flex-direction: row;
+  align-items: stretch;
 }
 
-/* Hero Carousel */
+/* ===== CAROUSEL SECTION (1920x1080 - 16:9) ===== */
 .hero-carousel {
+  flex: 2;
+  border-right: 2px solid #fff;
   position: relative;
-  flex: 1;
 }
 
-.hero-carousel .content-image {
+/* Force 16:9 aspect ratio for carousel */
+.hero-carousel::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* 16:9 aspect ratio (1080/1920 = 0.5625) */
+}
+
+.hero-carousel .carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-carousel .carousel-inner,
+.hero-carousel .carousel-item {
+  height: 100%;
+}
+
+.hero-carousel img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  background-color: #000;
 }
 
-/* Hero Sidebar */
+/* ===== SIDEBAR SECTION (Two 1600x900 boxes) ===== */
 .hero-sidebar {
+  flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .hero-box {
-  position: relative;
   flex: 1;
-  min-height: 200px;
+  position: relative;
+  border-bottom: 2px solid #fff;
 }
 
-.hero-box-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
+.hero-box:last-child {
+  border-bottom: none;
+}
+
+/* Force 16:9 aspect ratio for each box */
+.hero-box::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* 16:9 aspect ratio (900/1600 = 0.5625) */
 }
 
 .hero-box-image {
@@ -53,15 +75,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.hero-box-image .content-image {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  background-color: #000;
 }
 
 .hero-box-overlay {
@@ -70,252 +85,97 @@
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 1rem;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.7) 15%,
-    rgba(0, 0, 0, 0.3) 25%,
-    transparent 35%
-  );
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  padding: 2rem;
   text-align: center;
-  z-index: 2;
 }
 
 .hero-box-title {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  font-weight: 700;
   color: #fff;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  letter-spacing: 0.5px;
-  line-height: 1.2;
 }
 
-.hero-box-button {
-  margin-top: 0.5rem;
-}
-
-.hero-box-overlay .mia-button-hero {
-  font-size: clamp(0.8rem, 2.5vw, 1rem);
-}
-
-.hero-box-overlay .mia-button-hero .fa-arrow-right {
-  margin-left: 0.5rem;
-  font-size: 0.85em;
-}
-
-/* Carousel Styling */
-.carousel {
-  border-radius: 0;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
+/* ===== CAROUSEL INDICATORS ===== */
 .carousel-indicators {
-  margin-bottom: 0.5rem;
-  z-index: 10;
+  margin-bottom: 1rem;
 }
 
 .carousel-indicators [data-bs-target] {
   background-color: #fff;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  margin: 0 8px;
-  opacity: 0.9;
+  margin: 0 6px;
+  opacity: 0.7;
   border: 2px solid #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .carousel-indicators .active {
   opacity: 1;
   transform: scale(1.2);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-  width: 10%;
-  opacity: 0.8;
-}
+/* ===== RESPONSIVE BEHAVIOR ===== */
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: transparent;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-  opacity: 1;
-}
-
-/* ===== RESPONSIVE BREAKPOINTS ===== */
-
-/* Mobile Layout (< 768px) */
+/* Mobile: Stack boxes below carousel */
 @media (max-width: 767px) {
   .hero-container {
-    border: 2px solid #fff;
+    flex-direction: column;
   }
 
   .hero-carousel {
+    border-right: none;
     border-bottom: 2px solid #fff;
   }
 
   .hero-sidebar {
     flex-direction: row;
-  }
-
-  .hero-box-top {
-    border-right: 1px solid #fff;
-  }
-
-  .hero-box-bottom {
-    border-left: 1px solid #fff;
-  }
-
-  .hero-box-overlay {
-    padding: 0.75rem;
-  }
-
-  .hero-box-title {
-    font-size: 1.15rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .hero-box-button {
-    margin-top: 0.3rem;
-  }
-
-  .hero-box-overlay .mia-button-hero {
-    padding: 0.4rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .carousel-indicators [data-bs-target] {
-    width: 20px;
-    height: 20px;
-    margin: 0 12px;
-    border: 3px solid #fff;
-  }
-}
-
-/* Desktop/Tablet Layout (≥ 768px) */
-@media (min-width: 768px) {
-  .hero-container {
-    flex-direction: row;
-    border: 2px solid #fff;
-    min-height: 500px;
-    align-items: stretch;
-  }
-
-  .hero-carousel {
-    flex: 2;
-    border-right: 2px solid #fff;
-    display: flex;
-    align-items: stretch;
-  }
-
-  .hero-carousel .ratio {
-    flex: 1;
-  }
-
-  .hero-sidebar {
-    flex: 1;
-    flex-direction: column;
-    display: flex;
   }
 
   .hero-box {
-    flex: 1;
-    min-height: 250px;
-    display: flex;
+    border-bottom: none;
+    border-right: 2px solid #fff;
   }
 
-  .hero-box-top {
-    border-bottom: 2px solid #fff;
+  .hero-box:last-child {
+    border-right: none;
   }
 
   .hero-box-overlay {
-    padding: 2rem;
+    padding: 1rem;
   }
 
   .hero-box-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
   }
+}
 
-  .hero-box-button {
-    margin-top: 0.5rem;
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 991px) {
+  .hero-box-overlay {
+    padding: 1.5rem;
   }
 
-  .hero-box-overlay .mia-button-hero {
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
+  .hero-box-title {
+    font-size: 1.3rem;
   }
 }
 
-/* Large Desktop (≥ 1200px) */
+/* Large desktop adjustments */
 @media (min-width: 1200px) {
-  .hero-container {
-    min-height: 600px;
-  }
-
-  .hero-box {
-    min-height: 300px;
-    display: flex;
-  }
-
   .hero-box-overlay {
     padding: 2.5rem;
   }
 
   .hero-box-title {
     font-size: 1.75rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .hero-box-button {
-    margin-top: 0.6rem;
-  }
-
-  .hero-box-overlay .mia-button-hero {
-    padding: 0.6rem 1.75rem;
-    font-size: 1.1rem;
-  }
-}
-
-/* Extra Small Mobile (≤ 480px) */
-@media (max-width: 480px) {
-  .hero-box-overlay {
-    padding: 0.5rem;
-  }
-
-  .hero-box-title {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .hero-box-button {
-    margin-top: 0.25rem;
-  }
-
-  .hero-box-overlay .mia-button-hero {
-    padding: 0.3rem 0.8rem;
-    font-size: 0.75rem;
   }
 }
