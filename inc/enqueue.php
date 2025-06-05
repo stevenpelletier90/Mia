@@ -141,8 +141,14 @@ if (is_page_template('page-before-after-by-doctor.php')) {
             case is_post_type_archive():
                 $pt = get_post_type() ?: get_query_var( 'post_type' );
                 if ( $pt ) {
-                    $page_css    = '/_' . $pt . '-archive.css';
-                    $page_handle = 'mia-' . $pt . '-archive';
+                    if ($pt === 'non-surgical') {
+                        // Use non-surgical archive CSS for non-surgical procedures
+                        $page_css    = '/_non-surgical-archive.css';
+                        $page_handle = 'mia-non-surgical-archive';
+                    } else {
+                        $page_css    = '/_' . $pt . '-archive.css';
+                        $page_handle = 'mia-' . $pt . '-archive';
+                    }
                 }
                 break;
 
@@ -163,6 +169,10 @@ if (is_page_template('page-before-after-by-doctor.php')) {
                             $page_css    = '/_procedure.css';
                             $page_handle = 'mia-procedure-single';
                         }
+                    } elseif ($pt === 'non-surgical') {
+                        // Use non-surgical CSS for non-surgical procedures
+                        $page_css    = '/_non-surgical.css';
+                        $page_handle = 'mia-non-surgical-single';
                     } else {
                         $page_css    = '/_' . $pt . '.css';
                         $page_handle = 'mia-' . $pt . '-single';

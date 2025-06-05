@@ -1,0 +1,562 @@
+/* Non-Surgical Procedure Styles - Adapted from procedure.css */
+
+.non-surgical-header {
+  position: relative;
+  min-height: 400px;
+}
+
+.non-surgical-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5));
+  z-index: 1;
+}
+
+.non-surgical-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+}
+
+.non-surgical-header h1,
+.non-surgical-header .pricing-info {
+  color: #fff;
+  font-family: var(--font-heading);
+}
+
+.non-surgical-header h1 {
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 2px 2px 4px black;
+}
+
+.non-surgical-header .pricing-info {
+  font-weight: 600;
+}
+
+.pricing-info h2 {
+  color: var(--color-gold);
+}
+
+.main-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 4rem 0;
+}
+
+.main-content > .container-fluid,
+.main-content > .container,
+.main-content > section,
+.main-content > div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-content > * + * {
+  margin-top: 4rem;
+}
+
+.main-content .container .row [class^="col-"] .container {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.results-resources-section {
+  background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.results-resources-section .badge-after {
+  background-color: var(--color-gold);
+}
+
+.section-title {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+.before-after-card {
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: border-color 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.before-after-card:hover {
+  border-color: rgba(200, 178, 115, 0.3);
+}
+
+.before-after-images {
+  display: flex;
+  position: relative;
+}
+
+.before-after-images img {
+  width: 50%;
+  object-fit: cover;
+  height: 200px;
+}
+
+.before-after-images:before {
+  content: "Before";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.before-after-images:after {
+  content: "After";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--color-gold);
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.before-after-card .caption {
+  padding: 10px 15px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.resource-card {
+  transition: border-color 0.2s ease;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
+.resource-card:hover {
+  border-color: rgba(200, 178, 115, 0.3);
+}
+
+.resource-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(200, 178, 115, 0.1);
+  border-radius: 50%;
+  color: var(--color-gold);
+}
+
+.resource-card h4 {
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+.resource-card:hover h4 {
+  color: var(--color-gold);
+}
+
+.resource-card p {
+  color: #555;
+  margin-bottom: 0;
+}
+
+.faq-container {
+  padding: 1.5rem;
+}
+
+.before-after-images:before,
+.before-after-images:after {
+  padding: 5px 10px;
+}
+
+.single-non-surgical .gform_wrapper {
+  padding: 0 !important;
+}
+
+.single-non-surgical .gform_wrapper input[type="text"],
+.single-non-surgical .gform_wrapper input[type="email"],
+.single-non-surgical .gform_wrapper input[type="tel"],
+.single-non-surgical .gform_wrapper input[type="number"],
+.single-non-surgical .gform_wrapper input[type="url"],
+.single-non-surgical .gform_wrapper select,
+.single-non-surgical .gform_wrapper textarea {
+  font-size: 16px;
+}
+
+.single-non-surgical .gform_wrapper .gfield_checkbox .gchoice {
+  margin-bottom: 0;
+}
+
+.single-non-surgical .gform_wrapper .gform_footer .gform_button {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  font-size: 15px;
+}
+
+.single-non-surgical .gform_wrapper .gform_fields {
+  grid-gap: 0.75rem !important;
+}
+
+.single-non-surgical .gform_wrapper input,
+.single-non-surgical .gform_wrapper select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.single-non-surgical .consultation-card,
+.consultation-card,
+.single-non-surgical .gform_wrapper.gravity-theme {
+  background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
+  color: #fff;
+}
+
+.consultation-card h3,
+.consultation-card strong,
+.consultation-card p,
+.consultation-card h2 {
+  color: #fff;
+}
+
+.consultation-card .btn-primary {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.consultation-card .btn-primary:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+}
+
+/* All the form styling from procedure.css for consistency */
+.single-non-surgical .gform_wrapper .gfield_label {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.single-non-surgical .gform_wrapper .gform_required_legend {
+  display: none !important;
+}
+
+.single-non-surgical .gform_wrapper .gform_fields {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-gap: 0.75rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.single-non-surgical .gform_wrapper .gfield {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.single-non-surgical .gform_wrapper input[type="text"],
+.single-non-surgical .gform_wrapper input[type="email"],
+.single-non-surgical .gform_wrapper input[type="tel"],
+.single-non-surgical .gform_wrapper input[type="number"],
+.single-non-surgical .gform_wrapper input[type="url"],
+.single-non-surgical .gform_wrapper select {
+  height: 48px;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.5;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+.single-non-surgical .gform_wrapper select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 10px 10px;
+  padding-right: 2.5rem;
+}
+
+.single-non-surgical .gform_wrapper textarea {
+  min-height: 120px;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.5;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.single-non-surgical .gform_wrapper input:focus,
+.single-non-surgical .gform_wrapper select:focus,
+.single-non-surgical .gform_wrapper textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.single-non-surgical .gform_wrapper .gform_footer .gform_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0.625rem 1.5rem;
+  font-size: 15px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100% !important;
+}
+
+.single-non-surgical .gform_wrapper .gform_footer .gform_button:hover,
+.single-non-surgical .gform_wrapper .gform_footer .gform_button:focus {
+  color: var(--color-primary);
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.results-resources-section .list-group-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.results-resources-section .list-group-item:hover,
+.results-resources-section .list-group-item:focus {
+  background-color: rgba(200, 178, 115, 0.2);
+  border-color: rgba(200, 178, 115, 0.4);
+  color: #fff;
+  text-decoration: none;
+}
+
+.results-resources-section .list-group-item strong {
+  color: #fff;
+}
+
+.results-resources-section .list-group-item .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.results-resources-section .list-group-item i {
+  color: var(--color-gold);
+}
+
+/* Media Queries */
+@media (max-width: 991px) {
+  .resource-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .main-content {
+    padding: 3rem 0;
+  }
+
+  .main-content > * + * {
+    margin-top: 3rem;
+  }
+
+  .non-surgical-subsection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .resource-card .resource-icon {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .non-surgical-header {
+    min-height: 240px;
+  }
+  
+  .faq-container {
+    padding: 1.5rem;
+  }
+
+  .accordion-button {
+    padding: 1rem;
+  }
+
+  .accordion-body {
+    padding: 1.25rem;
+  }
+
+  .before-after-images img {
+    height: 160px;
+  }
+
+  .before-after-images:before,
+  .before-after-images:after {
+    padding: 3px 8px;
+  }
+
+  .non-surgical-header .row .col-lg-5 {
+    display: none;
+  }
+
+  .non-surgical-header .row.min-vh-50 {
+    min-height: 300px !important;
+  }
+
+  .non-surgical-header .col-lg-7 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .non-surgical-header .section-title:after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .main-content {
+    padding: 2rem 0;
+  }
+
+  .main-content > * + * {
+    margin-top: 2.5rem;
+  }
+
+  .non-surgical-subsection {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .section-title:after {
+    width: 40px;
+    height: 2px;
+  }
+
+  .resource-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Additional non-surgical specific styles */
+.non-surgical-subsection {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.non-surgical-subsection h3 {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Enhanced resource card improvements */
+.resource-card {
+  transition: all 0.3s ease;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.resource-card:hover {
+  border-color: rgba(200, 178, 115, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.resource-card .resource-icon {
+  font-size: 1.5rem;
+}
+
+.resource-card h4 {
+  font-weight: 600;
+}
+
+.resource-card p {
+  flex-grow: 1;
+}
+
+.resource-card .mia-button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Ensure proper header styling inheritance for both procedure and non-surgical templates */
+.procedure-header,
+.non-surgical-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.procedure-header .hero-bg,
+.non-surgical-header .hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}

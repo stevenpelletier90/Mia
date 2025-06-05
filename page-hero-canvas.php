@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Hero Canvas
- * Template Post Type: post, page, procedure, condition, case, location
+ * Template Post Type: post, page, procedure, condition, case, location, non-surgical
  * Description: Full-width canvas template with breadcrumbs and hero section.
  * Provides maximum flexibility for custom layouts using Bootstrap containers.
  * Similar to Blank Canvas but includes structured breadcrumbs and hero.
