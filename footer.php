@@ -103,40 +103,26 @@
                             </div>
                             
                             <?php
-                            // Get surgeons for this location
-                            $surgeons_args = array(
-                                'post_type' => 'surgeon',
-                                'posts_per_page' => -1,
-                                'meta_query' => array(
-                                    array(
-                                        'key' => 'surgeon_location',
-                                        'value' => $location_id,
-                                        'compare' => '='
-                                    )
-                                )
-                            );
-                            $surgeons_query = new WP_Query($surgeons_args);
+                            // Get cached surgeons for this location
+                            $location_surgeons = get_cached_surgeons_by_location($location_id);
                             
-                            if ($surgeons_query->have_posts()) :
+                            if (!empty($location_surgeons)) :
                             ?>
                                 <div class="surgeons-list">
                                     <ul class="list-unstyled">
-                                        <?php while ($surgeons_query->have_posts()) : $surgeons_query->the_post(); ?>
+                                        <?php foreach ($location_surgeons as $surgeon) : ?>
                                             <li class="mb-2">
-                                                <a href="<?php the_permalink(); ?>" class="surgeon-link">
-                                                    <span><?php the_title(); ?></span>
+                                                <a href="<?php echo esc_url($surgeon['url']); ?>" class="surgeon-link">
+                                                    <span><?php echo esc_html($surgeon['title']); ?></span>
                                                     <i class="fas fa-arrow-right surgeon-arrow"></i>
                                                 </a>
                                             </li>
-                                        <?php endwhile; ?>
+                                        <?php endforeach; ?>
                                     </ul>
                                 </div>
                             <?php else : ?>
                                 <p class="mb-0">No surgeons currently listed for this location.</p>
-                            <?php 
-                            endif;
-                            wp_reset_postdata();
-                            ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

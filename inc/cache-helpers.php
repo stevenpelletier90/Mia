@@ -31,6 +31,16 @@ if (!function_exists('clear_mia_caches')) {
             wp_cache_delete('mia_footer_surgeons');
             delete_transient('mia_header_surgeons');
             delete_transient('mia_footer_surgeons');
+            
+            // Clear surgeon by location caches
+            $locations = get_posts([
+                'post_type' => 'location',
+                'posts_per_page' => -1,
+                'fields' => 'ids'
+            ]);
+            foreach ($locations as $location_id) {
+                wp_cache_delete('mia_footer_surgeons_location_' . $location_id);
+            }
         }
     }
     add_action('save_post', 'clear_mia_caches');

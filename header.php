@@ -25,14 +25,7 @@
       <div class="d-flex flex-wrap align-items-center w-100">
         <!-- Logo -->
         <a class="navbar-brand me-xl-3" href="<?php echo esc_url(home_url('/')); ?>">
-          <img 
-            src="/wp-content/uploads/2024/11/miaaesthetics-logo.svg" 
-            alt="Mia Aesthetics Logo" 
-            height="50" 
-            width="200" 
-            class="d-inline-block" 
-            fetchpriority="high" 
-          />
+          <?php mia_the_logo(['fetchpriority' => true]); ?>
         </a>
         <!-- Medium Mobile CTA - Only visible on medium mobile devices -->
         <div class="d-none d-sm-block d-xl-none mx-auto">
@@ -48,13 +41,7 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
           <div class="offcanvas-header border-bottom border-secondary">
             <h5 class="offcanvas-title" id="navbarOffcanvasLabel">
-              <img 
-                src="/wp-content/uploads/2024/11/miaaesthetics-logo.svg" 
-                alt="Mia Aesthetics Logo" 
-                height="30" 
-                width="120" 
-                loading="lazy"
-              />
+              <?php mia_the_logo(['height' => '30', 'width' => '120', 'loading' => 'lazy']); ?>
             </h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>

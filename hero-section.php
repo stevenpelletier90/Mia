@@ -22,32 +22,40 @@
         <!-- Slides -->
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="/wp-content/uploads/2025/04/image-homepage16-9.jpg" 
-                 srcset="/wp-content/uploads/2025/04/image-homepage16-9-300x169.jpg 300w,
-                         /wp-content/uploads/2025/04/image-homepage16-9-768x432.jpg 768w,
-                         /wp-content/uploads/2025/04/image-homepage16-9-1024x576.jpg 1024w,
-                         /wp-content/uploads/2025/04/image-homepage16-9-1536x864.jpg 1536w,
-                         /wp-content/uploads/2025/04/image-homepage16-9.jpg 1920w"
+            <?php 
+            $slide1_data = mia_get_responsive_image_data('image-homepage16-9.jpg', '2025/04');
+            if ($slide1_data): ?>
+            <img src="<?php echo esc_url($slide1_data['src']); ?>" 
+                 srcset="<?php echo esc_attr($slide1_data['srcset']); ?>"
                  sizes="(max-width: 480px) 100vw, (max-width: 767px) 100vw, 66vw"
                  width="1920"
                  height="1080"
                  class="d-block w-100" 
                  alt="Slide 1" 
                  fetchpriority="high">
+            <?php else: ?>
+            <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 1080px;">
+              <span class="text-white">Slide 1 Image Not Found</span>
+            </div>
+            <?php endif; ?>
           </div>
           <div class="carousel-item">
-            <img src="/wp-content/uploads/2025/04/non-surgical-home-banner.jpg"
-                 srcset="/wp-content/uploads/2025/04/non-surgical-home-banner-300x169.jpg 300w,
-                         /wp-content/uploads/2025/04/non-surgical-home-banner-768x432.jpg 768w,
-                         /wp-content/uploads/2025/04/non-surgical-home-banner-1024x576.jpg 1024w,
-                         /wp-content/uploads/2025/04/non-surgical-home-banner-1536x864.jpg 1536w,
-                         /wp-content/uploads/2025/04/non-surgical-home-banner.jpg 1920w"
+            <?php 
+            $slide2_data = mia_get_responsive_image_data('non-surgical-home-banner.jpg', '2025/04');
+            if ($slide2_data): ?>
+            <img src="<?php echo esc_url($slide2_data['src']); ?>"
+                 srcset="<?php echo esc_attr($slide2_data['srcset']); ?>"
                  sizes="(max-width: 480px) 100vw, (max-width: 767px) 100vw, 66vw"
                  width="1920"
                  height="1080"
                  class="d-block w-100" 
                  alt="Slide 2"
                  loading="lazy">
+            <?php else: ?>
+            <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 1080px;">
+              <span class="text-white">Slide 2 Image Not Found</span>
+            </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -57,21 +65,25 @@
     <div class="hero-sidebar">
       <!-- Before & After Box -->
       <div class="hero-box hero-box-top">
-        <img src="/wp-content/uploads/2025/04/before-after-banner.jpg"
-             srcset="/wp-content/uploads/2025/04/before-after-banner-300x169.jpg 300w,
-                     /wp-content/uploads/2025/04/before-after-banner-768x432.jpg 768w,
-                     /wp-content/uploads/2025/04/before-after-banner-1024x576.jpg 1024w,
-                     /wp-content/uploads/2025/04/before-after-banner-1536x864.jpg 1536w,
-                     /wp-content/uploads/2025/04/before-after-banner.jpg 1600w"
+        <?php 
+        $before_after_data = mia_get_responsive_image_data('before-after-banner.jpg', '2025/04');
+        if ($before_after_data): ?>
+        <img src="<?php echo esc_url($before_after_data['src']); ?>"
+             srcset="<?php echo esc_attr($before_after_data['srcset']); ?>"
              sizes="(max-width: 480px) 50vw, (max-width: 767px) 50vw, 33vw"
              width="1600"
              height="900"
              class="hero-box-image" 
              alt="Before & After"
              loading="lazy">
+        <?php else: ?>
+        <div class="hero-box-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 900px;">
+          <span class="text-white">Before & After Image Not Found</span>
+        </div>
+        <?php endif; ?>
         <div class="hero-box-overlay">
           <h4 class="hero-box-title">Before & After</h4>
-          <a href="/before-after/" class="mia-button" data-variant="hero">
+          <a href="<?php echo esc_url(home_url('/before-after/')); ?>" class="mia-button" data-variant="hero">
             View Gallery <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
@@ -79,21 +91,25 @@
 
       <!-- Financing Box -->
       <div class="hero-box hero-box-bottom">
-        <img src="/wp-content/uploads/2025/04/financing-home-banner.jpg"
-             srcset="/wp-content/uploads/2025/04/financing-home-banner-300x169.jpg 300w,
-                     /wp-content/uploads/2025/04/financing-home-banner-768x432.jpg 768w,
-                     /wp-content/uploads/2025/04/financing-home-banner-1024x576.jpg 1024w,
-                     /wp-content/uploads/2025/04/financing-home-banner-1536x864.jpg 1536w,
-                     /wp-content/uploads/2025/04/financing-home-banner.jpg 1600w"
+        <?php 
+        $financing_data = mia_get_responsive_image_data('financing-home-banner.jpg', '2025/04');
+        if ($financing_data): ?>
+        <img src="<?php echo esc_url($financing_data['src']); ?>"
+             srcset="<?php echo esc_attr($financing_data['srcset']); ?>"
              sizes="(max-width: 480px) 50vw, (max-width: 767px) 50vw, 33vw"
              width="1600"
              height="900"
              class="hero-box-image" 
              alt="Financing"
              loading="lazy">
+        <?php else: ?>
+        <div class="hero-box-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 900px;">
+          <span class="text-white">Financing Image Not Found</span>
+        </div>
+        <?php endif; ?>
         <div class="hero-box-overlay">
           <h4 class="hero-box-title">Financing</h4>
-          <a href="/financing/" class="mia-button" data-variant="hero">
+          <a href="<?php echo esc_url(home_url('/financing/')); ?>" class="mia-button" data-variant="hero">
             View Options <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>

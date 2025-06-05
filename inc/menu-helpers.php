@@ -98,6 +98,47 @@ function get_cached_surgeons() {
 }
 
 /**
+ * Cache surgeons by location queries
+ */
+function get_cached_surgeons_by_location($location_id) {
+    $cache_key = 'mia_footer_surgeons_location_' . $location_id;
+    $surgeons = wp_cache_get($cache_key);
+    
+    if (false === $surgeons) {
+        $args = [
+            'post_type' => 'surgeon',
+            'posts_per_page' => -1,
+            'meta_query' => [
+                [
+                    'key' => 'surgeon_location',
+                    'value' => $location_id,
+                    'compare' => '='
+                ]
+            ]
+        ];
+        
+        $query = new WP_Query($args);
+        $surgeons = [];
+        
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $surgeons[] = [
+                    'id' => get_the_ID(),
+                    'title' => get_the_title(),
+                    'url' => get_permalink()
+                ];
+            }
+            wp_reset_postdata();
+        }
+        
+        wp_cache_set($cache_key, $surgeons, '', 3600); // Cache for 1 hour
+    }
+    
+    return $surgeons;
+}
+
+/**
  * Render procedures dropdown
  */
 function render_procedures_menu($procedures, $is_mobile = false) {
