@@ -19,9 +19,6 @@
 </head>
 <body <?php body_class(); ?><?php if (!is_singular('surgeon')): ?> data-bs-spy="scroll" data-bs-target="#surgeon-tabs" data-bs-offset="120"<?php endif; ?>>
 <?php wp_body_open(); ?>
-<!-- Skip links for keyboard navigation -->
-<a class="screen-reader-text skip-link" href="#primary">Skip to main content</a>
-<a class="screen-reader-text skip-link" href="#primary-navigation">Skip to navigation</a>
 
 <header class="position-sticky top-0 z-1030">
   <nav class="navbar navbar-expand-xl navbar-dark" id="primary-navigation" aria-label="Main navigation">

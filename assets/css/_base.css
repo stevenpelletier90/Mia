@@ -23,38 +23,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Accessibility: Skip links for keyboard navigation */
-.screen-reader-text,
-.skip-link {
-  position: absolute !important;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.skip-link:focus {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  width: auto;
-  height: auto;
-  padding: 8px 16px;
-  background: var(--color-primary);
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  z-index: 100000;
-  clip: auto;
-  clip-path: none;
-  font-size: 14px;
-  font-weight: 600;
-}
 h1,
 h2,
 h3,
