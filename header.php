@@ -19,8 +19,12 @@
 </head>
 <body <?php body_class(); ?><?php if (!is_singular('surgeon')): ?> data-bs-spy="scroll" data-bs-target="#surgeon-tabs" data-bs-offset="120"<?php endif; ?>>
 <?php wp_body_open(); ?>
+<!-- Skip links for keyboard navigation -->
+<a class="screen-reader-text skip-link" href="#primary">Skip to main content</a>
+<a class="screen-reader-text skip-link" href="#primary-navigation">Skip to navigation</a>
+
 <header class="position-sticky top-0 z-1030">
-  <nav class="navbar navbar-expand-xl navbar-dark">
+  <nav class="navbar navbar-expand-xl navbar-dark" id="primary-navigation" aria-label="Main navigation">
     <div class="container-fluid">
       <div class="d-flex flex-wrap align-items-center w-100">
         <!-- Logo -->
@@ -60,7 +64,7 @@
                 <!-- Procedures Menu - Mobile (using refactored functions) -->
                 <?php render_procedures_menu($menu_structure['procedures'], true); ?>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                     Non-Surgical
                   </a>
                   <ul class="dropdown-menu">
@@ -82,7 +86,7 @@
                 </li>
                 <!-- Patient Portal Dropdown -->
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                     Patient Portal
                   </a>
                   <ul class="dropdown-menu">
@@ -118,12 +122,3 @@
   </a>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const cta = document.getElementById('mobileCta');
-    const oc = document.getElementById('navbarOffcanvas');
-
-    oc.addEventListener('show.bs.offcanvas', () => cta.classList.add('d-none'));   // hide when menu opens
-    oc.addEventListener('hidden.bs.offcanvas', () => cta.classList.remove('d-none')); // show again when menu closes
-  });
-</script>

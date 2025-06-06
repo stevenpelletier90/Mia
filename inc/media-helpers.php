@@ -83,37 +83,20 @@ function mia_disable_lazy_loading_for_hero_class($attr, $attachment, $size) {
 add_filter('wp_get_attachment_image_attributes', 'mia_disable_lazy_loading_for_hero_class', 20, 3);
 
 /**
- * Prevent lazy loading plugins from affecting hero images
+ * Enqueue hero images script for procedure pages
  */
-function mia_prevent_hero_lazy_loading() {
+function mia_enqueue_hero_images_script() {
     if (is_singular('procedure')) {
-        // Add JavaScript to force load hero images immediately
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var heroImages = document.querySelectorAll(".mia-hero-image");
-            heroImages.forEach(function(img) {
-                // Force immediate loading
-                if (img.dataset.lazySrc) {
-                    img.src = img.dataset.lazySrc;
-                    img.removeAttribute("data-lazy-src");
-                }
-                if (img.dataset.lazySrcset) {
-                    img.srcset = img.dataset.lazySrcset;
-                    img.removeAttribute("data-lazy-srcset");
-                }
-                if (img.dataset.lazySizes) {
-                    img.sizes = img.dataset.lazySizes;
-                    img.removeAttribute("data-lazy-sizes");
-                }
-                // Remove lazy loading classes
-                img.classList.remove("lazy", "lazyload", "lazyloading");
-                img.classList.add("lazyloaded");
-            });
-        });
-        </script>';
+        wp_enqueue_script(
+            'mia-hero-images',
+            get_template_directory_uri() . '/assets/js/hero-images.js',
+            [],
+            wp_get_theme()->get('Version'),
+            true
+        );
     }
 }
-add_action('wp_head', 'mia_prevent_hero_lazy_loading', 999);
+add_action('wp_enqueue_scripts', 'mia_enqueue_hero_images_script');
 
 /**
  * Extract video details from URL (YouTube, Vimeo, MP4, fallback)
@@ -259,9 +242,12 @@ function mia_get_video_field( $post_id = null ) {
  * Handles both image IDs and URLs, with fallback to placeholder
  */
 function mia_before_after_img( $img, $label ) {
+    // Sanitize the label parameter to prevent XSS
+    $safe_label = esc_attr( $label );
+    
     if ( ! $img ) {
         $src = 'https://placehold.co/600x450';
-        return "<img src='{$src}' class='img-fluid w-100 object-fit-cover' alt='{$label} placeholder' loading='lazy'>";
+        return "<img src='" . esc_url( $src ) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " placeholder' loading='lazy'>";
     }
 
     $id  = is_numeric( $img ) ? $img : attachment_url_to_postid( $img );
@@ -273,7 +259,7 @@ function mia_before_after_img( $img, $label ) {
             false,
             [
                 'class'   => 'img-fluid w-100 object-fit-cover',
-                'alt'     => "{$label} surgery image",
+                'alt'     => $safe_label . ' surgery image',
                 'loading' => 'lazy'
             ]
         );
@@ -281,6 +267,6 @@ function mia_before_after_img( $img, $label ) {
     
     // Fallback for direct URLs that couldn't be converted to attachment ID
     $src = is_array( $img ) ? $img['url'] : $img;
-    return "<img src='" . esc_url( $src ) . "' class='img-fluid w-100 object-fit-cover' alt='{$label} surgery image' loading='lazy'>";
+    return "<img src='" . esc_url( $src ) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " surgery image' loading='lazy'>";
 }
 ?>

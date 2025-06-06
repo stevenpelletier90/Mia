@@ -146,7 +146,7 @@ function render_procedures_menu($procedures, $is_mobile = false) {
     ?>
     <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
         <a class="nav-link dropdown-toggle" href="<?php echo esc_url($procedures['url']); ?>" 
-           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
             <?php echo esc_html($procedures['title']); ?>
         </a>
         <?php if ($is_mobile): ?>
@@ -228,7 +228,7 @@ function render_locations_menu($is_mobile = false) {
     ?>
     <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
         <a class="nav-link dropdown-toggle" href="<?php echo esc_url(home_url('/locations/')); ?>" 
-           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
             Locations
         </a>
         <?php if ($is_mobile): ?>
@@ -326,7 +326,7 @@ function render_surgeons_menu($is_mobile = false) {
     ?>
     <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
         <a class="nav-link dropdown-toggle" href="<?php echo esc_url(home_url('/plastic-surgeons/')); ?>" 
-           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
             Surgeons
         </a>
         <?php if ($is_mobile): ?>
@@ -416,7 +416,7 @@ function render_before_after_menu($is_mobile = false) {
     ?>
     <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
         <a class="nav-link dropdown-toggle" href="<?php echo esc_url(home_url('/before-after/')); ?>" 
-           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
             Before & After
         </a>
         <?php if ($is_mobile): ?>

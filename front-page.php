@@ -114,14 +114,8 @@ include 'hero-section.php';
     <div class="position-relative ps-3 ps-md-4 mb-4">
       <div class="position-absolute start-0 top-0 stat-line-gold"></div>
       <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="<?php
-        // Count top-level surgeon posts
-        $surgeon_count = new WP_Query(array(
-          'post_type' => 'surgeon',
-          'post_parent' => 0,
-          'posts_per_page' => -1,
-          'fields' => 'ids'
-        ));
-        echo $surgeon_count->post_count ? $surgeon_count->post_count : '27';
+        $stats = mia_get_site_stats();
+        echo $stats['surgeons'];
         ?>">0</h3>
       <p class="text-white opacity-75 mb-0 fs-6">Expert Surgeons</p>
     </div>
@@ -132,14 +126,7 @@ include 'hero-section.php';
     <div class="position-relative ps-3 ps-md-4 mb-4">
       <div class="position-absolute start-0 top-0 stat-line-gold"></div>
       <h3 class="display-5 fw-bold text-white mb-2 lh-1" data-count="<?php
-        // Count top-level location posts
-        $location_count = new WP_Query(array(
-          'post_type' => 'location',
-          'post_parent' => 0,
-          'posts_per_page' => -1,
-          'fields' => 'ids'
-        ));
-        echo $location_count->post_count ? $location_count->post_count : '13';
+        echo $stats['locations'];
         ?>">0</h3>
       <p class="text-white opacity-75 mb-0 fs-6">Clinic Locations</p>
     </div>
@@ -596,8 +583,6 @@ include 'hero-section.php';
   </div>
 </section>
 
-<!-- Include Front Page JavaScript -->
-<script src="<?php echo get_template_directory_uri(); ?>/assets/js/front-page.js"></script>
 
 </main>
 <?php get_footer(); ?>

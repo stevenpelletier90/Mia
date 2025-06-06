@@ -38,7 +38,7 @@ function mia_disable_comments() {
     // Redirect any direct access to the comments admin page
     add_action('admin_init', function() {
         global $pagenow;
-        if ($pagenow === 'edit-comments.php') {
+        if ($pagenow === 'edit-comments.php' && !defined('DOING_AJAX') && !wp_doing_ajax()) {
             wp_redirect(admin_url());
             exit;
         }

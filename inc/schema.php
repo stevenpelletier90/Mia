@@ -1,396 +1,863 @@
 <?php
 /**
- * Schema and structured data for Mia Aesthetics theme.
+ * Schema and Structured Data for Mia Aesthetics Theme
+ * 
+ * Generates schema.org structured data for better SEO and rich snippets.
+ * Works alongside Yoast SEO to provide comprehensive schema markup.
+ * 
+ * @package Mia_Aesthetics
  */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 /**
- * Adds specific Schema markup for custom post types, videos, and FAQs.
- * Assumes Yoast SEO is active and handles Organization, WebPage, WebSite schema.
+ * Main schema output function
  */
-function mia_add_schema() {
-    // Don't run if Yoast Schema is disabled or not active (optional check)
-    // if (!class_exists('WPSEO_Frontend') || !WPSEO_Frontend::get_instance()->options['wpseo_json_ld_output']) {
-    //     return;
-    // }
+function mia_output_schema() {
+    // Only add our custom schema if Yoast is active
+    // This ensures we complement Yoast, not compete with it
+    if (!defined('WPSEO_VERSION')) {
+        return; // Exit if Yoast is not active
+    }
+    
+    // Get schema based on current context
+    $schema = mia_get_context_schema();
+    
+    if (!empty($schema)) {
+        mia_render_schema($schema, 'mia-context-schema');
+    }
+    
+    // Add video schema if applicable
+    mia_output_video_schema();
+    
+    // Add FAQ schema if applicable
+    mia_output_faq_schema();
+    
+    // Add organization schema on homepage only if Yoast isn't handling it
+    if (is_front_page() && !mia_yoast_handles_organization_schema()) {
+        mia_output_organization_schema();
+    }
+}
+add_action('wp_head', 'mia_output_schema', 20);
 
+/**
+ * Check if Yoast is handling organization schema
+ */
+function mia_yoast_handles_organization_schema() {
+    // Check if Yoast is outputting organization schema
+    if (class_exists('WPSEO_Schema_Context') && class_exists('WPSEO_Schema_Organization')) {
+        return true;
+    }
+    
+    // For older versions of Yoast
+    if (function_exists('wpseo_json_ld_output') && get_option('wpseo_titles')) {
+        $options = get_option('wpseo_titles');
+        if (!empty($options['company_or_person']) && $options['company_or_person'] === 'company') {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+/**
+ * Get schema based on current context
+ */
+function mia_get_context_schema() {
     $post_type = get_post_type();
-    $schema = null; // Initialize schema as null, only output if populated
-
+    
     switch ($post_type) {
         case 'procedure':
-            if (is_singular('procedure')) {
-                $schema = [
-                    '@context'    => 'https://schema.org',
-                    '@type'       => 'MedicalProcedure',
-                    'name'        => get_the_title(),
-                    'description' => wp_strip_all_tags(get_the_excerpt()),
-                    'url'         => get_permalink()
-                ];
-                if ($procedure_type = get_field('procedure_type')) {
-                    $schema['procedureType'] = $procedure_type;
-                }
-                 // Consider adding 'bodyLocation', 'indication', 'outcome' if available in fields
-            }
-            break;
-
+            return mia_get_procedure_schema();
+            
         case 'surgeon':
-            if (is_singular('surgeon')) {
-                $schema = [
-                    '@context'      => 'https://schema.org',
-                    '@type'         => 'Physician',
-                    'name'          => get_the_title(),
-                    'description'   => wp_strip_all_tags(get_the_excerpt()),
-                    'url'           => get_permalink(),
-                    'address'       => [
-                        '@type'          => 'PostalAddress',
-                        'addressCountry' => 'US'
-                    ],
-                    'telephone'     => get_field('phone_number') ?: '',
-                    'priceRange'    => get_field('price_range') ?: '$-$$$',
-                    'image'         => ''
-                ];
-
-                $street = get_field('street_address') ?: get_field('address');
-                if ($street) $schema['address']['streetAddress'] = $street;
-                if ($city = get_field('city')) $schema['address']['addressLocality'] = $city;
-                if ($state = get_field('state')) $schema['address']['addressRegion'] = $state;
-                if ($zip = get_field('zip_code')) $schema['address']['postalCode'] = $zip;
-
-                if (has_post_thumbnail()) {
-                    $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                } elseif ($image_field = get_field('image')) {
-                    $schema['image'] = is_array($image_field) ? $image_field['url'] : $image_field;
-                } else {
-                    $schema['image'] = get_template_directory_uri() . '/assets/images/default-doctor.jpg';
-                }
-
-                if ($specialty = get_field('medical_specialty')) {
-                    $schema['medicalSpecialty'] = $specialty;
-                }
-
-                $location_id = get_field('surgeon_location');
-                if ($location_id && is_numeric($location_id)) {
-                    $work_location = [
-                        '@type' => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'],
-                        'name' => get_the_title($location_id),
-                        'url' => get_permalink($location_id),
-                         'address' => [
-                            '@type' => 'PostalAddress',
-                            'addressCountry' => 'US'
-                        ],
-                        'telephone' => get_field('phone_number', $location_id) ?: (get_field('location_phone', $location_id) ?: ''),
-                        'image' => ''
-                    ];
-                    $loc_street = get_field('street_address', $location_id) ?: get_field('location_address', $location_id);
-                    if ($loc_street) $work_location['address']['streetAddress'] = $loc_street;
-                    if ($loc_city = get_field('city', $location_id)) $work_location['address']['addressLocality'] = $loc_city;
-                    if ($loc_state = get_field('state', $location_id)) $work_location['address']['addressRegion'] = $loc_state;
-                    if ($loc_zip = get_field('zip_code', $location_id)) $work_location['address']['postalCode'] = $loc_zip;
-
-                    if (has_post_thumbnail($location_id)) {
-                        $work_location['image'] = get_the_post_thumbnail_url($location_id, 'full');
-                    } else {
-                         $work_location['image'] = get_template_directory_uri() . '/assets/images/default-location.jpg';
-                    }
-                    $schema['workLocation'] = $work_location;
-                }
-
-                $schema['memberOf'] = [
-                    '@type' => 'MedicalOrganization',
-                    'name' => get_bloginfo('name'),
-                    'url' => home_url(),
-                    'telephone' => get_field('company_phone', 'option') ?: '',
-                    'address' => [
-                        '@type' => 'PostalAddress',
-                        'streetAddress' => '123 Main Street',
-                        'addressLocality' => 'Miami',
-                        'addressRegion' => 'FL',
-                        'postalCode' => '33101',
-                        'addressCountry' => 'US'
-                    ]
-                ];
-
-            }
-            break;
-
+            return mia_get_surgeon_schema();
+            
         case 'location':
-            if (is_singular('location')) {
-                $schema = [
-                    '@context'    => 'https://schema.org',
-                    '@type'       => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'],
-                    'name'        => get_the_title(),
-                    'description' => wp_strip_all_tags(get_the_excerpt()),
-                    'url'         => get_permalink(),
-                    'address'     => [
-                        '@type'          => 'PostalAddress',
-                        'addressCountry' => 'US'
-                    ],
-                    'telephone'   => '',
-                    'priceRange'  => get_field('price_range') ?: '$-$$$',
-                    'image'       => '',
-                    'currenciesAccepted' => 'USD',
-                    'paymentAccepted' => get_field('payment_methods') ?: 'Cash, Credit Card, Insurance',
-                    'medicalSpecialty' => get_field('medical_specialty') ?: []
-                ];
-
-                $street = get_field('street_address') ?: get_field('location_address');
-                if ($street) $schema['address']['streetAddress'] = $street;
-                if ($city = get_field('city')) $schema['address']['addressLocality'] = $city;
-                if ($state = get_field('state')) $schema['address']['addressRegion'] = $state;
-                if ($zip = get_field('zip_code')) $schema['address']['postalCode'] = $zip;
-
-                $schema['telephone'] = get_field('phone_number') ?: (get_field('location_phone') ?: '');
-
-                if (has_post_thumbnail()) {
-                    $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                } elseif ($image_field = get_field('image')) {
-                    $schema['image'] = is_array($image_field) ? $image_field['url'] : $image_field;
-                } else {
-                    $schema['image'] = get_template_directory_uri() . '/assets/images/default-location.jpg';
-                }
-
-                if ($hours = get_field('opening_hours')) {
-                    $schema['openingHours'] = $hours;
-                } elseif ($hours_array = get_field('hours_of_operation')) {
-                }
-
-                $hours_spec = get_field('opening_hours_specification');
-                if (!empty($hours_spec) && is_array($hours_spec)) {
-                    $schema['openingHoursSpecification'] = [];
-                    foreach ($hours_spec as $spec) {
-                        if (!empty($spec['day_of_week']) && !empty($spec['opens']) && !empty($spec['closes'])) {
-                            $schema['openingHoursSpecification'][] = [
-                                '@type' => 'OpeningHoursSpecification',
-                                'dayOfWeek' => $spec['day_of_week'],
-                                'opens' => $spec['opens'],
-                                'closes' => $spec['closes']
-                            ];
-                        }
-                    }
-                }
-
-                $services = get_field('available_services');
-                if (!empty($services) && is_array($services)) {
-                    $schema['availableService'] = [];
-                    foreach ($services as $service) {
-                        if (!empty($service['name'])) {
-                            $service_schema = [
-                                '@type' => 'MedicalProcedure',
-                                'name' => $service['name']
-                            ];
-                            
-                            if (!empty($service['description'])) {
-                                $service_schema['description'] = $service['description'];
-                            }
-                            
-                            $schema['availableService'][] = $service_schema;
-                        }
-                    }
-                }
-
-                $specialties = get_field('medical_specialties');
-                if (!empty($specialties) && is_array($specialties)) {
-                    $schema['medicalSpecialty'] = $specialties;
-                } elseif ($single_specialty = get_field('medical_specialty')) {
-                    $schema['medicalSpecialty'] = $single_specialty;
-                }
-
-                $latitude = get_field('latitude');
-                $longitude = get_field('longitude');
-                if ($latitude && $longitude) {
-                    $schema['geo'] = [
-                        '@type' => 'GeoCoordinates',
-                        'latitude' => $latitude,
-                        'longitude' => $longitude
-                    ];
-                }
-                
-                $map_url = get_field('map_url');
-                if (!empty($map_url)) {
-                    $schema['hasMap'] = $map_url;
-                }
-                
-                $accepting_patients = get_field('accepting_new_patients');
-                if (isset($accepting_patients)) {
-                    $schema['isAcceptingNewPatients'] = (bool)$accepting_patients;
-                }
-                
-                $network_ids = get_field('health_plan_network_ids');
-                if (!empty($network_ids) && is_array($network_ids)) {
-                    $schema['healthPlanNetworkId'] = $network_ids;
-                } elseif (!empty($network_ids) && is_string($network_ids)) {
-                    $schema['healthPlanNetworkId'] = $network_ids;
-                }
-                
-                $accessibility = get_field('accessibility_features');
-                if (!empty($accessibility) && is_array($accessibility)) {
-                    $schema['amenityFeature'] = [];
-                    foreach ($accessibility as $feature) {
-                        if (!empty($feature['name'])) {
-                            $schema['amenityFeature'][] = [
-                                '@type' => 'LocationFeatureSpecification',
-                                'name' => $feature['name'],
-                                'value' => true
-                            ];
-                        }
-                    }
-                }
-
-                $schema['parentOrganization'] = [
-                    '@type' => 'MedicalOrganization',
-                    'name' => get_bloginfo('name'),
-                    'url' => home_url(),
-                    'address' => [
-                        '@type' => 'PostalAddress',
-                        'streetAddress' => '123 Main Street',
-                        'addressLocality' => 'Miami',
-                        'addressRegion' => 'FL',
-                        'postalCode' => '33101',
-                        'addressCountry' => 'US'
-                    ]
-                ];
-            }
-            break;
-
+            return mia_get_location_schema();
+            
         case 'condition':
-             if (is_singular('condition')) {
-                $schema = [
-                    '@context'    => 'https://schema.org',
-                    '@type'       => 'MedicalCondition',
-                    'name'        => get_the_title(),
-                    'description' => wp_strip_all_tags(get_the_excerpt()),
-                    'url'         => get_permalink()
-                    // Consider adding 'associatedAnatomy', 'cause', 'differentialDiagnosis', 'possibleTreatment', 'riskFactor', 'signOrSymptom' if fields exist
-                ];
-             }
-            break;
-
-        // REMOVED: case 'page': - Let Yoast handle standard WebPage schema.
-        // REMOVED: default: (including is_front_page()) - Let Yoast handle Organization schema.
+            return mia_get_condition_schema();
+            
+        case 'special':
+            return mia_get_special_schema();
+            
+        case 'non-surgical':
+            return mia_get_non_surgical_schema();
+            
+        default:
+            return null;
     }
-
-    // --- Output the main schema block IF one was generated ---
-    if (!empty($schema)) {
-        echo '<script type="application/ld+json" class="mia-custom-schema">'; // Add class for debugging
-        // Filter out empty values recursively before encoding
-        $schema_filtered = array_filter( $schema, function( $value ) {
-            return $value !== '' && $value !== null && (!is_array($value) || !empty(array_filter($value)));
-        });
-        echo esc_html( wp_json_encode( $schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT ) );
-        echo '</script>';
-    }
-
-    // ... (video and FAQ schema output omitted for brevity, but should be included in the real file)
 }
-add_action('wp_head', 'mia_add_schema', 20);
 
 /**
- * Add organization schema with address information for the homepage
- * This adds address details that the free Yoast SEO doesn't provide
+ * Get procedure schema
  */
-function mia_add_organization_address_schema() {
-    // Only add this on the homepage/front page
-    if (!is_front_page() && !is_home()) {
+function mia_get_procedure_schema() {
+    if (!is_singular('procedure')) {
+        return null;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'MedicalProcedure',
+        'name' => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url' => get_permalink()
+    ];
+    
+    // Add procedure type if available
+    if ($procedure_type = get_field('procedure_type')) {
+        $schema['procedureType'] = $procedure_type;
+    }
+    
+    // Add body location if available
+    if ($body_location = get_field('body_location')) {
+        $schema['bodyLocation'] = $body_location;
+    }
+    
+    // Add typical duration
+    if ($duration = get_field('procedure_duration')) {
+        $schema['typicalDuration'] = $duration;
+    }
+    
+    // Add recovery time
+    if ($recovery = get_field('recovery_time')) {
+        $schema['followup'] = $recovery;
+    }
+    
+    return $schema;
+}
+
+/**
+ * Get surgeon schema
+ */
+function mia_get_surgeon_schema() {
+    if (!is_singular('surgeon')) {
+        return null;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Physician',
+        'name' => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url' => get_permalink()
+    ];
+    
+    // Add image
+    if (has_post_thumbnail()) {
+        $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    }
+    
+    // Add contact information
+    if ($phone = get_field('phone_number')) {
+        $schema['telephone'] = $phone;
+    }
+    
+    if ($email = get_field('email')) {
+        $schema['email'] = $email;
+    }
+    
+    // Add address
+    $address = mia_get_address_schema();
+    if (!empty($address)) {
+        $schema['address'] = $address;
+    }
+    
+    // Add medical specialty
+    if ($specialty = get_field('medical_specialty')) {
+        $schema['medicalSpecialty'] = $specialty;
+    }
+    
+    // Add credentials
+    if ($credentials = get_field('credentials')) {
+        $schema['hasCredential'] = $credentials;
+    }
+    
+    // Add affiliated location
+    if ($location_id = get_field('surgeon_location')) {
+        $schema['workLocation'] = mia_get_location_reference($location_id);
+    }
+    
+    // Add organization membership
+    $schema['memberOf'] = mia_get_organization_reference();
+    
+    return $schema;
+}
+
+/**
+ * Get location schema
+ */
+function mia_get_location_schema() {
+    if (!is_singular('location')) {
+        return null;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'],
+        'name' => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url' => get_permalink()
+    ];
+    
+    // Add image
+    if (has_post_thumbnail()) {
+        $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    }
+    
+    // Add contact information
+    $phone = get_field('phone_number') ?: get_field('location_phone');
+    if ($phone) {
+        $schema['telephone'] = $phone;
+    }
+    
+    // Add address
+    $address = mia_get_address_schema();
+    if (!empty($address)) {
+        $schema['address'] = $address;
+    }
+    
+    // Add business details
+    $schema['priceRange'] = get_field('price_range') ?: '$$$';
+    $schema['currenciesAccepted'] = 'USD';
+    $schema['paymentAccepted'] = get_field('payment_methods') ?: 'Cash, Credit Card, Financing Available';
+    
+    // Add opening hours
+    if ($hours = mia_get_opening_hours_schema()) {
+        $schema['openingHoursSpecification'] = $hours;
+    }
+    
+    // Add services
+    if ($services = mia_get_services_schema()) {
+        $schema['availableService'] = $services;
+    }
+    
+    // Add geo coordinates
+    if ($geo = mia_get_geo_schema()) {
+        $schema['geo'] = $geo;
+    }
+    
+    // Add accessibility
+    if ($accessibility = get_field('accessibility_features')) {
+        $schema['amenityFeature'] = mia_format_amenity_features($accessibility);
+    }
+    
+    // Add parent organization
+    $schema['parentOrganization'] = mia_get_organization_reference();
+    
+    return $schema;
+}
+
+/**
+ * Get condition schema
+ */
+function mia_get_condition_schema() {
+    if (!is_singular('condition')) {
+        return null;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'MedicalCondition',
+        'name' => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url' => get_permalink()
+    ];
+    
+    // Add associated anatomy
+    if ($anatomy = get_field('associated_anatomy')) {
+        $schema['associatedAnatomy'] = [
+            '@type' => 'AnatomicalStructure',
+            'name' => $anatomy
+        ];
+    }
+    
+    // Add possible treatments
+    if ($treatments = get_field('possible_treatments')) {
+        $schema['possibleTreatment'] = mia_format_treatments($treatments);
+    }
+    
+    // Add symptoms
+    if ($symptoms = get_field('symptoms')) {
+        $schema['signOrSymptom'] = mia_format_symptoms($symptoms);
+    }
+    
+    return $schema;
+}
+
+/**
+ * Get special/offer schema
+ */
+function mia_get_special_schema() {
+    if (!is_singular('special')) {
+        return null;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Offer',
+        'name' => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url' => get_permalink()
+    ];
+    
+    // Add price information
+    if ($price = get_field('special_price')) {
+        $schema['price'] = $price;
+        $schema['priceCurrency'] = 'USD';
+    }
+    
+    // Add validity dates
+    if ($start_date = get_field('special_start_date')) {
+        $schema['validFrom'] = $start_date;
+    }
+    
+    if ($end_date = get_field('special_end_date')) {
+        $schema['validThrough'] = $end_date;
+    }
+    
+    // Add availability
+    $schema['availability'] = 'https://schema.org/InStock';
+    
+    // Add eligible regions
+    if ($locations = get_field('eligible_locations')) {
+        $schema['eligibleRegion'] = mia_format_eligible_regions($locations);
+    }
+    
+    // Add terms
+    if ($terms = get_field('terms_conditions')) {
+        $schema['termsOfService'] = $terms;
+    }
+    
+    return $schema;
+}
+
+/**
+ * Get non-surgical schema
+ */
+function mia_get_non_surgical_schema() {
+    if (!is_singular('non-surgical')) {
+        return null;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'MedicalProcedure',
+        'name' => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url' => get_permalink()
+    ];
+    
+    // Add procedure type
+    $schema['procedureType'] = 'Non-Surgical';
+    
+    // Add body location if available
+    if ($body_location = get_field('body_location')) {
+        $schema['bodyLocation'] = $body_location;
+    }
+    
+    // Add typical duration
+    if ($duration = get_field('procedure_duration')) {
+        $schema['typicalDuration'] = $duration;
+    }
+    
+    // Add recovery time
+    if ($recovery = get_field('recovery_time')) {
+        $schema['followup'] = $recovery;
+    }
+    
+    // Add treatment benefits if available
+    if ($benefits = get_field('treatment_benefits')) {
+        $schema['expectedBenefit'] = $benefits;
+    }
+    
+    // Add contraindications if available
+    if ($contraindications = get_field('contraindications')) {
+        $schema['contraindication'] = $contraindications;
+    }
+    
+    return $schema;
+}
+
+/**
+ * Output video schema
+ */
+function mia_output_video_schema() {
+    $video_data = mia_get_video_field();
+    
+    if (empty($video_data) || empty($video_data['url'])) {
         return;
     }
     
-    $org_schema = [
+    $video_details = get_video_details($video_data['url']);
+    
+    if (!$video_details) {
+        return;
+    }
+    
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'VideoObject',
+        'name' => $video_data['title'] ?: get_the_title() . ' Video',
+        'description' => $video_data['description'] ?: wp_strip_all_tags(get_the_excerpt()),
+        'contentUrl' => $video_details['url'],
+        'embedUrl' => $video_details['embed_url'],
+        'uploadDate' => get_the_date('c')
+    ];
+    
+    // Add thumbnail
+    if (!empty($video_data['thumbnail'])) {
+        $schema['thumbnailUrl'] = is_array($video_data['thumbnail']) 
+            ? $video_data['thumbnail']['url'] 
+            : $video_data['thumbnail'];
+    }
+    
+    // Add duration if available
+    if (!empty($video_details['duration'])) {
+        $schema['duration'] = $video_details['duration'];
+    }
+    
+    mia_render_schema($schema, 'mia-video-schema');
+}
+
+/**
+ * Output FAQ schema
+ */
+function mia_output_faq_schema() {
+    $faq_section = get_field('faq_section');
+    
+    if (empty($faq_section) || empty($faq_section['faqs'])) {
+        return;
+    }
+    
+    $faq_items = [];
+    
+    foreach ($faq_section['faqs'] as $faq) {
+        if (!empty($faq['question']) && !empty($faq['answer'])) {
+            $faq_items[] = [
+                '@type' => 'Question',
+                'name' => $faq['question'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => wp_strip_all_tags($faq['answer'])
+                ]
+            ];
+        }
+    }
+    
+    if (!empty($faq_items)) {
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => $faq_items
+        ];
+        
+        mia_render_schema($schema, 'mia-faq-schema');
+    }
+}
+
+/**
+ * Output organization schema
+ */
+function mia_output_organization_schema() {
+    $schema = [
         '@context' => 'https://schema.org',
         '@type' => 'MedicalOrganization',
         'name' => get_bloginfo('name'),
         'url' => home_url(),
-        'address' => [
-            '@type' => 'PostalAddress',
-            'streetAddress' => '123 Main Street',
-            'addressLocality' => 'Miami',
-            'addressRegion' => 'FL',
-            'postalCode' => '33101',
-            'addressCountry' => 'US'
-        ],
-        'telephone' => get_field('company_phone', 'option') ?: '',
-        'email' => get_field('company_email', 'option') ?: '',
         'logo' => [
             '@type' => 'ImageObject',
-            'url' => get_field('company_logo', 'option') ?: get_template_directory_uri() . '/assets/images/logo.png'
-        ],
-        'medicalSpecialty' => get_field('company_specialties', 'option') ?: [],
-        'currenciesAccepted' => 'USD',
-        'paymentAccepted' => get_field('company_payment_methods', 'option') ?: 'Cash, Credit Card, Insurance',
-        'priceRange' => get_field('company_price_range', 'option') ?: '$-$$$'
+            'url' => mia_get_logo_url()
+        ]
     ];
     
-    $social_profiles = get_field('social_profiles', 'option');
-    if (!empty($social_profiles) && is_array($social_profiles)) {
-        $org_schema['sameAs'] = [];
-        foreach ($social_profiles as $profile) {
-            if (!empty($profile['url'])) {
-                $org_schema['sameAs'][] = $profile['url'];
-            }
+    // Add description
+    $schema['description'] = get_bloginfo('description');
+    
+    // Add contact information from options
+    if ($phone = get_field('company_phone', 'option')) {
+        $schema['telephone'] = $phone;
+    }
+    
+    if ($email = get_field('company_email', 'option')) {
+        $schema['email'] = $email;
+    }
+    
+    // Add main address from options
+    $address = mia_get_company_address_schema();
+    if (!empty($address)) {
+        $schema['address'] = $address;
+    }
+    
+    // Add social profiles
+    if ($social = mia_get_social_profiles_schema()) {
+        $schema['sameAs'] = $social;
+    }
+    
+    // Add medical specialties
+    if ($specialties = get_field('company_specialties', 'option')) {
+        $schema['medicalSpecialty'] = $specialties;
+    }
+    
+    // Add aggregate rating if available
+    if ($rating = mia_get_aggregate_rating_schema()) {
+        $schema['aggregateRating'] = $rating;
+    }
+    
+    mia_render_schema($schema, 'mia-organization-schema');
+}
+
+/**
+ * Helper Functions
+ */
+
+/**
+ * Get address schema from ACF fields
+ */
+function mia_get_address_schema($post_id = null) {
+    $address = [
+        '@type' => 'PostalAddress',
+        'addressCountry' => 'US'
+    ];
+    
+    // Try multiple field names for compatibility
+    $street = get_field('street_address', $post_id) ?: get_field('address', $post_id);
+    if ($street) {
+        $address['streetAddress'] = $street;
+    }
+    
+    if ($city = get_field('city', $post_id)) {
+        $address['addressLocality'] = $city;
+    }
+    
+    if ($state = get_field('state', $post_id)) {
+        $address['addressRegion'] = mia_get_state_abbr($state);
+    }
+    
+    if ($zip = get_field('zip_code', $post_id)) {
+        $address['postalCode'] = $zip;
+    }
+    
+    // Only return if we have at least one address component
+    if (count($address) > 2) {
+        return $address;
+    }
+    
+    return null;
+}
+
+/**
+ * Get company address schema from options
+ */
+function mia_get_company_address_schema() {
+    $address = [
+        '@type' => 'PostalAddress',
+        'addressCountry' => 'US'
+    ];
+    
+    if ($street = get_field('company_street_address', 'option')) {
+        $address['streetAddress'] = $street;
+    }
+    
+    if ($city = get_field('company_city', 'option')) {
+        $address['addressLocality'] = $city;
+    }
+    
+    if ($state = get_field('company_state', 'option')) {
+        $address['addressRegion'] = mia_get_state_abbr($state);
+    }
+    
+    if ($zip = get_field('company_zip', 'option')) {
+        $address['postalCode'] = $zip;
+    }
+    
+    // Only return if we have address components
+    if (count($address) > 2) {
+        return $address;
+    }
+    
+    return null;
+}
+
+/**
+ * Get organization reference
+ */
+function mia_get_organization_reference() {
+    return [
+        '@type' => 'MedicalOrganization',
+        'name' => get_bloginfo('name'),
+        'url' => home_url()
+    ];
+}
+
+/**
+ * Get location reference
+ */
+function mia_get_location_reference($location_id) {
+    if (!$location_id) {
+        return null;
+    }
+    
+    return [
+        '@type' => ['MedicalClinic', 'MedicalBusiness'],
+        'name' => get_the_title($location_id),
+        'url' => get_permalink($location_id)
+    ];
+}
+
+/**
+ * Get opening hours schema
+ */
+function mia_get_opening_hours_schema($post_id = null) {
+    $hours_spec = get_field('opening_hours_specification', $post_id);
+    
+    if (empty($hours_spec) || !is_array($hours_spec)) {
+        return null;
+    }
+    
+    $hours = [];
+    
+    foreach ($hours_spec as $spec) {
+        if (!empty($spec['day_of_week']) && !empty($spec['opens']) && !empty($spec['closes'])) {
+            $hours[] = [
+                '@type' => 'OpeningHoursSpecification',
+                'dayOfWeek' => $spec['day_of_week'],
+                'opens' => $spec['opens'],
+                'closes' => $spec['closes']
+            ];
         }
     }
     
-    $hours = get_field('company_hours', 'option');
-    if (!empty($hours)) {
-        $org_schema['openingHours'] = $hours;
+    return !empty($hours) ? $hours : null;
+}
+
+/**
+ * Get services schema
+ */
+function mia_get_services_schema($post_id = null) {
+    $services = get_field('available_services', $post_id);
+    
+    if (empty($services) || !is_array($services)) {
+        return null;
     }
     
-    $locations = get_field('company_locations', 'option');
-    if (!empty($locations) && is_array($locations)) {
-        $org_schema['location'] = [];
-        foreach ($locations as $location) {
-            if (!empty($location['name'])) {
-                $location_schema = [
-                    '@type' => ['MedicalClinic', 'MedicalBusiness', 'LocalBusiness'],
-                    'name' => $location['name'],
-                    'address' => [
-                        '@type' => 'PostalAddress',
-                        'addressCountry' => 'US'
-                    ]
-                ];
-                
-                if (!empty($location['address'])) {
-                    $location_schema['address']['streetAddress'] = $location['address'];
-                }
-                if (!empty($location['city'])) {
-                    $location_schema['address']['addressLocality'] = $location['city'];
-                }
-                if (!empty($location['state'])) {
-                    $location_schema['address']['addressRegion'] = $location['state'];
-                }
-                if (!empty($location['zip'])) {
-                    $location_schema['address']['postalCode'] = $location['zip'];
-                }
-                
-                if (!empty($location['phone'])) {
-                    $location_schema['telephone'] = $location['phone'];
-                }
-                
-                if (!empty($location['url'])) {
-                    $location_schema['url'] = $location['url'];
-                }
-                
-                $org_schema['location'][] = $location_schema;
+    $service_schema = [];
+    
+    foreach ($services as $service) {
+        if (!empty($service['name'])) {
+            $item = [
+                '@type' => 'MedicalProcedure',
+                'name' => $service['name']
+            ];
+            
+            if (!empty($service['description'])) {
+                $item['description'] = $service['description'];
             }
+            
+            $service_schema[] = $item;
         }
     }
     
-    $rating = get_field('company_rating', 'option');
-    $rating_count = get_field('company_rating_count', 'option');
-    if (!empty($rating) && !empty($rating_count)) {
-        $org_schema['aggregateRating'] = [
-            '@type' => 'AggregateRating',
-            'ratingValue' => $rating,
-            'ratingCount' => $rating_count
+    return !empty($service_schema) ? $service_schema : null;
+}
+
+/**
+ * Get geo coordinates schema
+ */
+function mia_get_geo_schema($post_id = null) {
+    $latitude = get_field('latitude', $post_id);
+    $longitude = get_field('longitude', $post_id);
+    
+    if ($latitude && $longitude) {
+        return [
+            '@type' => 'GeoCoordinates',
+            'latitude' => $latitude,
+            'longitude' => $longitude
         ];
     }
     
-    $org_schema_filtered = array_filter($org_schema, function($value) {
-        return $value !== '' && $value !== null && (!is_array($value) || !empty(array_filter($value)));
-    });
-    
-    echo '<script type="application/ld+json" class="yoast-schema-graph-address">';
-    echo esc_html( wp_json_encode( $org_schema_filtered, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
-    echo '</script>';
+    return null;
 }
-add_action('wp_head', 'mia_add_organization_address_schema', 11);
-?>
+
+/**
+ * Get social profiles schema
+ */
+function mia_get_social_profiles_schema() {
+    $profiles = [];
+    
+    $social_fields = [
+        'facebook_url',
+        'instagram_url',
+        'twitter_url',
+        'youtube_url',
+        'linkedin_url',
+        'tiktok_url'
+    ];
+    
+    foreach ($social_fields as $field) {
+        $url = get_field($field, 'option');
+        if (!empty($url)) {
+            $profiles[] = $url;
+        }
+    }
+    
+    return !empty($profiles) ? $profiles : null;
+}
+
+/**
+ * Get aggregate rating schema
+ */
+function mia_get_aggregate_rating_schema() {
+    $rating = get_field('company_rating', 'option');
+    $count = get_field('company_rating_count', 'option');
+    
+    if (!empty($rating) && !empty($count)) {
+        return [
+            '@type' => 'AggregateRating',
+            'ratingValue' => $rating,
+            'ratingCount' => $count,
+            'bestRating' => '5',
+            'worstRating' => '1'
+        ];
+    }
+    
+    return null;
+}
+
+/**
+ * Format amenity features
+ */
+function mia_format_amenity_features($features) {
+    if (!is_array($features)) {
+        return null;
+    }
+    
+    $formatted = [];
+    
+    foreach ($features as $feature) {
+        if (!empty($feature['name'])) {
+            $formatted[] = [
+                '@type' => 'LocationFeatureSpecification',
+                'name' => $feature['name'],
+                'value' => true
+            ];
+        }
+    }
+    
+    return !empty($formatted) ? $formatted : null;
+}
+
+/**
+ * Format treatments
+ */
+function mia_format_treatments($treatments) {
+    if (!is_array($treatments)) {
+        return null;
+    }
+    
+    $formatted = [];
+    
+    foreach ($treatments as $treatment) {
+        if (!empty($treatment)) {
+            $formatted[] = [
+                '@type' => 'MedicalProcedure',
+                'name' => $treatment
+            ];
+        }
+    }
+    
+    return !empty($formatted) ? $formatted : null;
+}
+
+/**
+ * Format symptoms
+ */
+function mia_format_symptoms($symptoms) {
+    if (!is_array($symptoms)) {
+        return null;
+    }
+    
+    $formatted = [];
+    
+    foreach ($symptoms as $symptom) {
+        if (!empty($symptom)) {
+            $formatted[] = [
+                '@type' => 'MedicalSymptom',
+                'name' => $symptom
+            ];
+        }
+    }
+    
+    return !empty($formatted) ? $formatted : null;
+}
+
+/**
+ * Format eligible regions
+ */
+function mia_format_eligible_regions($locations) {
+    if (!is_array($locations)) {
+        return null;
+    }
+    
+    $formatted = [];
+    
+    foreach ($locations as $location_id) {
+        $location = get_post($location_id);
+        if ($location) {
+            $formatted[] = [
+                '@type' => 'Place',
+                'name' => $location->post_title
+            ];
+        }
+    }
+    
+    return !empty($formatted) ? $formatted : null;
+}
+
+/**
+ * Render schema JSON-LD
+ */
+function mia_render_schema($schema, $class = 'mia-schema') {
+    if (empty($schema)) {
+        return;
+    }
+    
+    // Filter out empty values
+    $schema = mia_filter_schema($schema);
+    
+    if (empty($schema)) {
+        return;
+    }
+    
+    echo '<script type="application/ld+json" class="' . esc_attr($class) . '">';
+    echo wp_json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS | JSON_HEX_QUOT);
+    echo '</script>' . "\n";
+}
+
+/**
+ * Recursively filter empty values from schema
+ */
+function mia_filter_schema($data) {
+    if (!is_array($data)) {
+        return $data;
+    }
+    
+    $filtered = [];
+    
+    foreach ($data as $key => $value) {
+        if (is_array($value)) {
+            $value = mia_filter_schema($value);
+        }
+        
+        if ($value !== '' && $value !== null && (!is_array($value) || !empty($value))) {
+            $filtered[$key] = $value;
+        }
+    }
+    
+    return $filtered;
+}
