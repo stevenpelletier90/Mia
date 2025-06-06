@@ -37,12 +37,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="/wp-content/uploads/2025/04/injectables-home.jpg?w=400&h=300&crop=1" 
+                                        srcset="https://placehold.co/400x300/6c63ff/ffffff?text=Injectable+Treatments" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="/wp-content/uploads/2025/04/injectables-home.jpg?w=600&h=400&crop=1" 
+                                        srcset="https://placehold.co/600x400/6c63ff/ffffff?text=Injectable+Treatments" 
                                         width="600" height="400">
-                                <img src="/wp-content/uploads/2025/04/injectables-home.jpg?w=800&h=600&crop=1" 
+                                <img src="https://placehold.co/800x600/6c63ff/ffffff?text=Injectable+Treatments" 
                                      alt="Injectable Treatments - Enhance your features with our expert injectable procedures" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -50,7 +50,23 @@ get_header(); ?>
                             </picture>
                             <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
                                 <div class="overlay-content p-3 text-white w-100">
-                                    <span class="category-badge px-2 py-1 rounded-pill small">Injectable Treatments</span>
+                                    <span class="category-badge px-2 py-1 rounded-pill small">
+                                        <?php
+                                        $injectable_count = new WP_Query([
+                                            'post_type' => 'non-surgical',
+                                            'meta_query' => [
+                                                [
+                                                    'key' => 'procedure_category',
+                                                    'value' => 'injectable',
+                                                    'compare' => 'LIKE'
+                                                ]
+                                            ],
+                                            'posts_per_page' => -1
+                                        ]);
+                                        echo $injectable_count->found_posts . ' Procedures';
+                                        wp_reset_postdata();
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -91,12 +107,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="/wp-content/uploads/2025/04/skin-treatments-home.jpg?w=400&h=300&crop=1" 
+                                        srcset="https://placehold.co/400x300/ff6b9d/ffffff?text=Skin+Treatments" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="/wp-content/uploads/2025/04/skin-treatments-home.jpg?w=600&h=400&crop=1" 
+                                        srcset="https://placehold.co/600x400/ff6b9d/ffffff?text=Skin+Treatments" 
                                         width="600" height="400">
-                                <img src="/wp-content/uploads/2025/04/skin-treatments-home.jpg?w=800&h=600&crop=1" 
+                                <img src="https://placehold.co/800x600/ff6b9d/ffffff?text=Skin+Treatments" 
                                      alt="Skin Treatments - Rejuvenate your skin with our advanced treatment options" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -104,7 +120,23 @@ get_header(); ?>
                             </picture>
                             <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
                                 <div class="overlay-content p-3 text-white w-100">
-                                    <span class="category-badge px-2 py-1 rounded-pill small">Skin Treatments</span>
+                                    <span class="category-badge px-2 py-1 rounded-pill small">
+                                        <?php
+                                        $skin_count = new WP_Query([
+                                            'post_type' => 'non-surgical',
+                                            'meta_query' => [
+                                                [
+                                                    'key' => 'procedure_category',
+                                                    'value' => 'skin',
+                                                    'compare' => 'LIKE'
+                                                ]
+                                            ],
+                                            'posts_per_page' => -1
+                                        ]);
+                                        echo $skin_count->found_posts . ' Procedures';
+                                        wp_reset_postdata();
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -145,12 +177,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="/wp-content/uploads/2025/04/body-contouring-home.jpg?w=400&h=300&crop=1" 
+                                        srcset="https://placehold.co/400x300/20bf6b/ffffff?text=Body+Contouring" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="/wp-content/uploads/2025/04/body-contouring-home.jpg?w=600&h=400&crop=1" 
+                                        srcset="https://placehold.co/600x400/20bf6b/ffffff?text=Body+Contouring" 
                                         width="600" height="400">
-                                <img src="/wp-content/uploads/2025/04/body-contouring-home.jpg?w=800&h=600&crop=1" 
+                                <img src="https://placehold.co/800x600/20bf6b/ffffff?text=Body+Contouring" 
                                      alt="Body Contouring - Non-surgical body shaping and contouring treatments" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -158,7 +190,23 @@ get_header(); ?>
                             </picture>
                             <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
                                 <div class="overlay-content p-3 text-white w-100">
-                                    <span class="category-badge px-2 py-1 rounded-pill small">Body Contouring</span>
+                                    <span class="category-badge px-2 py-1 rounded-pill small">
+                                        <?php
+                                        $body_count = new WP_Query([
+                                            'post_type' => 'non-surgical',
+                                            'meta_query' => [
+                                                [
+                                                    'key' => 'procedure_category',
+                                                    'value' => 'body',
+                                                    'compare' => 'LIKE'
+                                                ]
+                                            ],
+                                            'posts_per_page' => -1
+                                        ]);
+                                        echo $body_count->found_posts . ' Procedures';
+                                        wp_reset_postdata();
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -199,12 +247,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="/wp-content/uploads/2025/04/wellness-home.jpg?w=400&h=300&crop=1" 
+                                        srcset="https://placehold.co/400x300/f093fb/ffffff?text=Wellness+Treatments" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="/wp-content/uploads/2025/04/wellness-home.jpg?w=600&h=400&crop=1" 
+                                        srcset="https://placehold.co/600x400/f093fb/ffffff?text=Wellness+Treatments" 
                                         width="600" height="400">
-                                <img src="/wp-content/uploads/2025/04/wellness-home.jpg?w=800&h=600&crop=1" 
+                                <img src="https://placehold.co/800x600/f093fb/ffffff?text=Wellness+Treatments" 
                                      alt="Wellness Treatments - Comprehensive wellness and beauty treatments" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -212,7 +260,23 @@ get_header(); ?>
                             </picture>
                             <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
                                 <div class="overlay-content p-3 text-white w-100">
-                                    <span class="category-badge px-2 py-1 rounded-pill small">Wellness Treatments</span>
+                                    <span class="category-badge px-2 py-1 rounded-pill small">
+                                        <?php
+                                        $wellness_count = new WP_Query([
+                                            'post_type' => 'non-surgical',
+                                            'meta_query' => [
+                                                [
+                                                    'key' => 'procedure_category',
+                                                    'value' => 'wellness',
+                                                    'compare' => 'LIKE'
+                                                ]
+                                            ],
+                                            'posts_per_page' => -1
+                                        ]);
+                                        echo $wellness_count->found_posts . ' Procedures';
+                                        wp_reset_postdata();
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>

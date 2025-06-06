@@ -1,18 +1,36 @@
 <?php
 /**
  * Enqueue helpers and script/style loading for Mia Aesthetics theme.
+ * 
+ * JavaScript Loading Strategy:
+ * - main.js: Global script loaded on most pages (common functionality)
+ * - home.js: Replaces main.js on the front page
+ * - condition.js: Loaded WITH main.js on condition pages
+ * - surgeon.js: Loaded WITH main.js on surgeon pages
+ * - gallery.js: Loaded WITH main.js on gallery pages
+ * - video.js: Additional script for surgeon/location pages
+ * 
+ * CSS Loading Strategy:
+ * - _base.css: Global styles loaded on all pages
+ * - _header.css, _footer.css: Global components
+ * - Context-specific CSS based on page type/template
  */
 
-// Helper: enqueue a local stylesheet with automatic cache-busting version.
+/**
+ * Helper: Enqueue a local stylesheet with automatic cache-busting version.
+ * 
+ * @param string $handle   Unique handle for the stylesheet
+ * @param string $relative Relative path from theme directory
+ * @param array  $deps     Dependencies for this stylesheet
+ * @return bool            True if enqueued successfully
+ */
 function mia_enqueue_local_style( $handle, $relative, $deps = [] ) {
-    $theme_path = get_template_directory();
-    $theme_uri  = get_template_directory_uri();
-    $file_path  = $theme_path . $relative;
+    $file_path = get_template_directory() . $relative;
 
     if ( file_exists( $file_path ) ) {
         wp_enqueue_style(
             $handle,
-            $theme_uri . $relative,
+            get_template_directory_uri() . $relative,
             $deps,
             filemtime( $file_path )
         );
@@ -21,16 +39,22 @@ function mia_enqueue_local_style( $handle, $relative, $deps = [] ) {
     return false;
 }
 
-// Helper: enqueue a local script with automatic cache-busting version.
+/**
+ * Helper: Enqueue a local script with automatic cache-busting version.
+ * 
+ * @param string $handle     Unique handle for the script
+ * @param string $relative   Relative path from theme directory
+ * @param array  $deps       Dependencies for this script
+ * @param bool   $in_footer  Whether to load in footer
+ * @return bool              True if enqueued successfully
+ */
 function mia_enqueue_local_script( $handle, $relative, $deps = [], $in_footer = true ) {
-    $theme_path = get_template_directory();
-    $theme_uri  = get_template_directory_uri();
-    $file_path  = $theme_path . $relative;
+    $file_path = get_template_directory() . $relative;
 
     if ( file_exists( $file_path ) ) {
         wp_enqueue_script(
             $handle,
-            $theme_uri . $relative,
+            get_template_directory_uri() . $relative,
             $deps,
             filemtime( $file_path ),
             $in_footer
@@ -40,238 +64,255 @@ function mia_enqueue_local_script( $handle, $relative, $deps = [], $in_footer = 
     return false;
 }
 
-// Main enqueue function for theme scripts and styles.
-function mia_aesthetics_enqueue_scripts() {
-    $theme_path = get_template_directory();
-    $theme_uri = get_template_directory_uri();
-    $css_path = $theme_path . '/assets/css';
-    $css_uri = $theme_uri . '/assets/css';
-
-// Enqueue local fonts first (before other styles)
-mia_enqueue_local_style( 'mia-fonts', '/assets/css/_fonts.css' );
-
-// Enqueue gallery assets only for the before-after-by-doctor template
-if (is_page_template('page-before-after-by-doctor.php')) {
-    wp_enqueue_style(
-        'mia-gallery-css',
-        get_template_directory_uri() . '/assets/css/_gallery.css',
-        array('bootstrap-css'), // depends on Bootstrap CSS
-        filemtime(get_template_directory() . '/assets/css/_gallery.css')
-    );
-    wp_enqueue_script(
-        'mia-gallery-js',
-        get_template_directory_uri() . '/assets/js/gallery.js',
-        array('bootstrap-js', 'jquery'), // depends on Bootstrap and jQuery
-        filemtime(get_template_directory() . '/assets/js/gallery.js'),
-        true
-    );
-}
-
-    mia_enqueue_local_style( 'font-awesome', '/assets/fontawesome/css/all.min.css' );
-
-    mia_enqueue_local_style(
-        'normalize',
-        '/assets/normalize/normalize.css'
-    );
-
-    mia_enqueue_local_style(
-        'bootstrap-css',
-        '/assets/bootstrap/css/bootstrap.min.css'
-    );
-
-    mia_enqueue_local_script(
-        'bootstrap-js',
-        '/assets/bootstrap/js/bootstrap.bundle.min.js',
-        array('jquery')
-    );
-
-    // Unified CSS loading: base, header, footer, and one page-specific CSS
-    // 1. Enqueue base first (no dependencies)
-    mia_enqueue_local_style( 'mia-base', '/assets/css/_base.css' );
-
-    // 2. Enqueue header/footer (depend on base)
-    mia_enqueue_local_style( 'mia-header', '/assets/css/_header.css', array( 'mia-base' ) );
-    mia_enqueue_local_style( 'mia-footer', '/assets/css/_footer.css', array( 'mia-base' ) );
-
-    // 3. Determine and enqueue page-specific CSS (depends on base)
-    $page_css    = null;
-    $page_handle = null;
-    
-    // Check for canvas templates first (they override default CSS loading)
+/**
+ * Get the appropriate CSS file and handle for the current context.
+ * 
+ * @return array|null Array with [css_file, handle] or null
+ */
+function mia_get_context_styles() {
+    // Canvas templates always use page CSS
     $current_template = get_page_template_slug();
-    $is_canvas_template = in_array($current_template, ['page-blank-canvas.php', 'page-hero-canvas.php']);
-    
-    // For canvas templates, always load page CSS regardless of post type
-    if ($is_canvas_template) {
-        [$page_css, $page_handle] = ['/_page.css', 'mia-page'];
-    } else {
-        // Standard template detection logic
-        switch ( true ) {
-            case is_front_page():
-                [$page_css, $page_handle] = ['/_home.css', 'mia-home'];
-                // Also enqueue hero CSS for front page
-                mia_enqueue_local_style( 'mia-hero', '/assets/css/_hero.css', array( 'mia-base' ) );
-                break;
+    if ( in_array( $current_template, ['page-blank-canvas.php', 'page-hero-canvas.php'] ) ) {
+        return ['/_page.css', 'mia-page'];
+    }
 
-            case is_404():
-                [$page_css, $page_handle] = ['/_404.css', 'mia-404'];
-                break;
+    // Front page
+    if ( is_front_page() ) {
+        return ['/_home.css', 'mia-home'];
+    }
 
-            case is_search():
-                [$page_css, $page_handle] = ['/_search.css', 'mia-search'];
-                break;
+    // Error pages
+    if ( is_404() ) {
+        return ['/_404.css', 'mia-404'];
+    }
 
-            case is_tax():
-                [$page_css, $page_handle] = ['/_taxonomies.css', 'mia-taxonomies'];
-                break;
+    // Search results
+    if ( is_search() ) {
+        return ['/_search.css', 'mia-search'];
+    }
 
-            case is_home():
-            case ( is_archive() && get_post_type() === 'post' ):
-                [$page_css, $page_handle] = ['/_archive.css', 'mia-post-archive'];
-                break;
+    // Taxonomies
+    if ( is_tax() ) {
+        return ['/_taxonomies.css', 'mia-taxonomies'];
+    }
 
-            case is_singular( 'post' ):
-                [$page_css, $page_handle] = ['/_single.css', 'mia-post-single'];
-                break;
+    // Blog archive
+    if ( is_home() || ( is_archive() && get_post_type() === 'post' ) ) {
+        return ['/_archive.css', 'mia-post-archive'];
+    }
 
-            case is_page():
-                [$page_css, $page_handle] = ['/_page.css', 'mia-page'];
-                break;
+    // Single blog post
+    if ( is_singular( 'post' ) ) {
+        return ['/_single.css', 'mia-post-single'];
+    }
 
-            case is_post_type_archive():
-                $pt = get_post_type() ?: get_query_var( 'post_type' );
-                if ( $pt ) {
-                    if ($pt === 'non-surgical') {
-                        // Use non-surgical archive CSS for non-surgical procedures
-                        $page_css    = '/_non-surgical-archive.css';
-                        $page_handle = 'mia-non-surgical-archive';
-                    } else {
-                        $page_css    = '/_' . $pt . '-archive.css';
-                        $page_handle = 'mia-' . $pt . '-archive';
-                    }
-                }
-                break;
-
-            case is_singular():
-                $pt = get_post_type();
-                if ( $pt && ! in_array( $pt, [ 'post', 'page' ], true ) ) {
-                    // Special handling for 2nd-level procedure pages (grandchildren)
-                    if ($pt === 'procedure') {
-                        $post = get_queried_object();
-                        $ancestors = get_post_ancestors($post);
-                        
-                        if (count($ancestors) === 2) {
-                            // Use condition CSS for 2nd-level procedure pages
-                            $page_css    = '/_condition.css';
-                            $page_handle = 'mia-condition-single';
-                        } else {
-                            // Use procedure CSS for other procedure pages
-                            $page_css    = '/_procedure.css';
-                            $page_handle = 'mia-procedure-single';
-                        }
-                    } elseif ($pt === 'non-surgical') {
-                        // Use non-surgical CSS for non-surgical procedures
-                        $page_css    = '/_non-surgical.css';
-                        $page_handle = 'mia-non-surgical-single';
-                    } else {
-                        $page_css    = '/_' . $pt . '.css';
-                        $page_handle = 'mia-' . $pt . '-single';
-                    }
-                }
-                break;
+    // Post type archives (check before static pages)
+    if ( is_post_type_archive() ) {
+        $post_type = get_post_type() ?: get_query_var( 'post_type' );
+        if ( $post_type ) {
+            return ["/_{$post_type}-archive.css", "mia-{$post_type}-archive"];
         }
     }
-    if ( $page_css && $page_handle ) {
-        mia_enqueue_local_style( $page_handle, '/assets/css' . $page_css, array( 'mia-base' ) );
+
+    // Static pages
+    if ( is_page() ) {
+        return ['/_page.css', 'mia-page'];
     }
 
-    // JS loading
-    if (is_singular('condition')) {
-        $js_file = $theme_path . '/assets/js/condition.js';
-        $handle = 'mia-condition-script';
-    } 
-    // Check for 2nd-level procedure pages (grandchildren)
-    elseif (is_singular('procedure')) {
-        $post = get_queried_object();
-        $ancestors = get_post_ancestors($post);
+    // Single custom post types
+    if ( is_singular() ) {
+        $post_type = get_post_type();
         
-        if (count($ancestors) === 2) {
-            // Use condition.js for 2nd-level procedure pages
-            $js_file = $theme_path . '/assets/js/condition.js';
-            $handle = 'mia-condition-script';
-        } else {
-            // Use main.js for other procedure pages
-            $js_file = $theme_path . '/assets/js/main.js';
-            $handle = 'mia-aesthetics-script';
+        // Skip standard post types (already handled above)
+        if ( ! $post_type || in_array( $post_type, ['post', 'page'], true ) ) {
+            return null;
         }
-    }
-    elseif (is_singular('surgeon')) {
-        $js_file = $theme_path . '/assets/js/surgeon.js';
-        $handle = 'mia-surgeon-script';
-    } 
-    elseif (is_front_page()) {
-        $js_file = $theme_path . '/assets/js/home.js';
-        $handle = 'mia-home-script';
-    }
-    else {
-        $js_file = $theme_path . '/assets/js/main.js';
-        $handle = 'mia-aesthetics-script';
-    }
-    
-    if ( isset( $js_file ) ) {
-        mia_enqueue_local_script( $handle, '/assets/js/' . basename( $js_file ), array( 'bootstrap-js' ), true );
-    }
-    
-    if (is_singular('surgeon') || is_singular('location')) {
-        $video_js_file = $theme_path . '/assets/js/video.js';
-        mia_enqueue_local_script( 'mia-video-script', '/assets/js/video.js', array( 'bootstrap-js' ), true );
-    }
-}
-add_action('wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts');
 
-// Debug function to track asset loading and template issues (only in development)
-if (defined('WP_DEBUG') && WP_DEBUG) {
-    function mia_debug_asset_loading() {
-        // Only run on the before-after-by-doctor page
-        if (is_page_template('page-before-after-by-doctor.php')) {
-            error_log('=== MIA Aesthetics Debug Info ===');
-            error_log('Template Detection: Before & After by Doctor template is active');
+        // Special handling for procedure hierarchies
+        if ( $post_type === 'procedure' ) {
+            $ancestors = get_post_ancestors( get_queried_object() );
             
-            // Check template file existence
-            $template_path = get_template_directory() . '/page-before-after-by-doctor.php';
-            error_log('Template file exists: ' . (file_exists($template_path) ? 'Yes' : 'No'));
-            
-            // Check JSON data file
-            $json_path = get_template_directory() . '/assets/data/before-after-gallery.json';
-            error_log('Gallery JSON path: ' . $json_path);
-            error_log('JSON file exists: ' . (file_exists($json_path) ? 'Yes' : 'No'));
-            if (file_exists($json_path)) {
-                $json_content = file_get_contents($json_path);
-                error_log('JSON content length: ' . strlen($json_content));
-                error_log('JSON is valid: ' . (json_decode($json_content) !== null ? 'Yes' : 'No'));
+            // 2nd-level procedures (grandchildren) use condition styles
+            if ( count( $ancestors ) === 2 ) {
+                return ['/_condition.css', 'mia-condition-single'];
             }
-            
-            // Check asset loading
-            error_log('=== Asset Loading Status ===');
-            error_log('Bootstrap CSS: ' . (wp_style_is('bootstrap-css', 'enqueued') ? 'Loaded' : 'Not loaded'));
-            error_log('Bootstrap JS: ' . (wp_script_is('bootstrap-js', 'enqueued') ? 'Loaded' : 'Not loaded'));
-            error_log('jQuery: ' . (wp_script_is('jquery', 'enqueued') ? 'Loaded' : 'Not loaded'));
-            error_log('Gallery CSS: ' . (wp_style_is('mia-gallery-css', 'enqueued') ? 'Loaded' : 'Not loaded'));
-            error_log('Gallery JS: ' . (wp_script_is('mia-gallery-js', 'enqueued') ? 'Loaded' : 'Not loaded'));
-            
-            // Check asset URLs
-            error_log('=== Asset URLs ===');
-            error_log('Gallery CSS URL: ' . get_template_directory_uri() . '/assets/css/gallery.css');
-            error_log('Gallery JS URL: ' . get_template_directory_uri() . '/assets/js/gallery.js');
-            
-            // Check if files exist
-            error_log('=== File Existence ===');
-            error_log('Gallery CSS exists: ' . (file_exists(get_template_directory() . '/assets/css/gallery.css') ? 'Yes' : 'No'));
-            error_log('Gallery JS exists: ' . (file_exists(get_template_directory() . '/assets/js/gallery.js') ? 'Yes' : 'No'));
-            
-            error_log('=== End Debug Info ===');
+        }
+
+        // Default single post type styles
+        return ["/_{$post_type}.css", "mia-{$post_type}-single"];
+    }
+
+    return null;
+}
+
+/**
+ * Get specialized JavaScript files for specific contexts.
+ * Returns null if only the global main.js should be loaded.
+ * 
+ * @return array|null Array with [js_file, handle] or null
+ */
+function mia_get_context_scripts() {
+    // Single condition pages
+    if ( is_singular( 'condition' ) ) {
+        return ['condition.js', 'mia-condition-script'];
+    }
+
+    // Single procedure pages (2nd-level only)
+    if ( is_singular( 'procedure' ) ) {
+        $ancestors = get_post_ancestors( get_queried_object() );
+        
+        // 2nd-level procedures (grandchildren) use condition scripts
+        if ( count( $ancestors ) === 2 ) {
+            return ['condition.js', 'mia-condition-script'];
         }
     }
-    add_action('wp_enqueue_scripts', 'mia_debug_asset_loading', 999);
+
+    // Single surgeon pages
+    if ( is_singular( 'surgeon' ) ) {
+        return ['surgeon.js', 'mia-surgeon-script'];
+    }
+
+    // Front page
+    if ( is_front_page() ) {
+        return ['home.js', 'mia-home-script'];
+    }
+
+    // Gallery pages (if gallery.js isn't already loaded by template)
+    if ( is_page() && has_shortcode( get_post()->post_content, 'gallery' ) ) {
+        return ['gallery.js', 'mia-gallery-script'];
+    }
+
+    // Return null to indicate no specialized script needed
+    return null;
 }
-?>
+
+/**
+ * Main enqueue function for theme scripts and styles.
+ */
+function mia_aesthetics_enqueue_scripts() {
+    // Base styles (loaded in order)
+    mia_enqueue_base_styles();
+    
+    // Template-specific styles
+    mia_enqueue_template_styles();
+    
+    // Context-specific styles
+    mia_enqueue_context_styles();
+    
+    // Scripts
+    mia_enqueue_scripts();
+}
+add_action( 'wp_enqueue_scripts', 'mia_aesthetics_enqueue_scripts' );
+
+/**
+ * Enqueue base styles that load on every page.
+ */
+function mia_enqueue_base_styles() {
+    // Local fonts (before other styles)
+    mia_enqueue_local_style( 'mia-fonts', '/assets/css/_fonts.css' );
+    
+    // Third-party styles
+    mia_enqueue_local_style( 'font-awesome', '/assets/fontawesome/css/all.min.css' );
+    mia_enqueue_local_style( 'normalize', '/assets/normalize/normalize.css' );
+    mia_enqueue_local_style( 'bootstrap-css', '/assets/bootstrap/css/bootstrap.min.css' );
+    
+    // Theme base styles
+    mia_enqueue_local_style( 'mia-base', '/assets/css/_base.css' );
+    
+    // Global components (depend on base)
+    mia_enqueue_local_style( 'mia-header', '/assets/css/_header.css', ['mia-base'] );
+    mia_enqueue_local_style( 'mia-footer', '/assets/css/_footer.css', ['mia-base'] );
+}
+
+/**
+ * Enqueue template-specific styles.
+ */
+function mia_enqueue_template_styles() {
+    // Gallery assets for before-after template
+    if ( is_page_template( 'page-before-after-by-doctor.php' ) ) {
+        mia_enqueue_local_style( 
+            'mia-gallery-css', 
+            '/assets/css/_gallery.css', 
+            ['bootstrap-css'] 
+        );
+    }
+    
+    // Hero styles for front page
+    if ( is_front_page() ) {
+        mia_enqueue_local_style( 'mia-hero', '/assets/css/_hero.css', ['mia-base'] );
+    }
+}
+
+/**
+ * Enqueue context-specific styles based on current page/post type.
+ */
+function mia_enqueue_context_styles() {
+    $context_styles = mia_get_context_styles();
+    
+    if ( $context_styles ) {
+        list( $css_file, $handle ) = $context_styles;
+        mia_enqueue_local_style( $handle, '/assets/css' . $css_file, ['mia-base'] );
+    }
+}
+
+/**
+ * Enqueue all JavaScript files.
+ */
+function mia_enqueue_scripts() {
+    // Bootstrap (depends on jQuery)
+    mia_enqueue_local_script( 
+        'bootstrap-js', 
+        '/assets/bootstrap/js/bootstrap.bundle.min.js', 
+        ['jquery'] 
+    );
+    
+    // Global main.js - loads on all pages except where specialized scripts are used
+    $load_main = true;
+    $specialized_scripts = mia_get_context_scripts();
+    
+    // Check if we have a specialized script for this context
+    if ( $specialized_scripts ) {
+        list( $js_file, $handle ) = $specialized_scripts;
+        
+        // Some pages get both main.js AND specialized scripts
+        $pages_with_both = ['condition.js', 'surgeon.js', 'gallery.js'];
+        
+        if ( ! in_array( $js_file, $pages_with_both ) ) {
+            $load_main = false;
+        }
+        
+        // Enqueue the specialized script
+        mia_enqueue_local_script( 
+            $handle, 
+            '/assets/js/' . $js_file, 
+            ['bootstrap-js', 'jquery'] 
+        );
+    }
+    
+    // Enqueue main.js if needed
+    if ( $load_main ) {
+        mia_enqueue_local_script( 
+            'mia-main-script', 
+            '/assets/js/main.js', 
+            ['bootstrap-js', 'jquery'] 
+        );
+    }
+    
+    // Template-specific scripts
+    if ( is_page_template( 'page-before-after-by-doctor.php' ) ) {
+        mia_enqueue_local_script( 
+            'mia-gallery-js', 
+            '/assets/js/gallery.js', 
+            ['bootstrap-js', 'jquery', 'mia-main-script'] 
+        );
+    }
+    
+    // Video script for specific post types (in addition to other scripts)
+    if ( is_singular( ['surgeon', 'location'] ) ) {
+        mia_enqueue_local_script( 
+            'mia-video-script', 
+            '/assets/js/video.js', 
+            ['bootstrap-js', 'jquery'] 
+        );
+    }
+}
