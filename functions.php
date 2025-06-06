@@ -19,5 +19,4 @@ require_once get_template_directory() . '/inc/media-helpers.php';       // Image
 require_once get_template_directory() . '/inc/menu-helpers.php';        // Menu rendering helpers and caching
 require_once get_template_directory() . '/inc/template-helpers.php';    // Template/UI helpers
 require_once get_template_directory() . '/inc/cache-helpers.php';       // Cache management and clearing
-require_once get_template_directory() . '/inc/security-headers.php';   // Security headers and protections
 ?>
