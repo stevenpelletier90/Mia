@@ -107,7 +107,7 @@ get_header();
                         <?php $location_maps_link = get_field('location_maps_link'); ?>
                         <?php if ($location_maps_link): ?>
                             <div class="location-directions">
-                                <a href="<?php echo esc_url($location_maps_link); ?>" class="location-map-link" target="_blank">
+                                <a href="<?php echo esc_url($location_maps_link); ?>" class="location-map-link" target="_blank" rel="noopener">
                                     <i class="fas fa-map-marker-alt location-icon"></i> Get Directions
                                 </a>
                             </div>

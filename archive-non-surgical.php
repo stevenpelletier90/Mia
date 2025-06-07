@@ -95,7 +95,7 @@ get_header(); ?>
                                     <?php endwhile;
                                     wp_reset_postdata();
                                 endif; ?>
-                                <li><a href="<?php echo esc_url(home_url('/non-surgical-procedures/injectable/')); ?>" class="text-decoration-none"><strong>View All Injectable Treatments</strong></a></li>
+                                <li><a href="<?php echo esc_url(home_url('/')); ?>" class="text-decoration-none"><strong>View All Injectable Treatments</strong></a></li>
                             </ul>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ get_header(); ?>
                                     <?php endwhile;
                                     wp_reset_postdata();
                                 endif; ?>
-                                <li><a href="<?php echo esc_url(home_url('/non-surgical-procedures/skin/')); ?>" class="text-decoration-none"><strong>View All Skin Treatments</strong></a></li>
+                                <li><a href="<?php echo esc_url(home_url('/')); ?>" class="text-decoration-none"><strong>View All Skin Treatments</strong></a></li>
                             </ul>
                         </div>
                     </div>
@@ -235,7 +235,7 @@ get_header(); ?>
                                     <?php endwhile;
                                     wp_reset_postdata();
                                 endif; ?>
-                                <li><a href="<?php echo esc_url(home_url('/non-surgical-procedures/body/')); ?>" class="text-decoration-none"><strong>View All Body Contouring</strong></a></li>
+                                <li><a href="<?php echo esc_url(home_url('/')); ?>" class="text-decoration-none"><strong>View All Body Contouring</strong></a></li>
                             </ul>
                         </div>
                     </div>
@@ -305,7 +305,7 @@ get_header(); ?>
                                     <?php endwhile;
                                     wp_reset_postdata();
                                 endif; ?>
-                                <li><a href="<?php echo esc_url(home_url('/non-surgical-procedures/wellness/')); ?>" class="text-decoration-none"><strong>View All Wellness Treatments</strong></a></li>
+                                <li><a href="<?php echo esc_url(home_url('/')); ?>" class="text-decoration-none"><strong>View All Wellness Treatments</strong></a></li>
                             </ul>
                         </div>
                     </div>

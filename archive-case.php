@@ -37,12 +37,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=400&h=300&crop=1" 
+                                        srcset="/wp-content/uploads/2025/05/body-procedures.jpg?w=400&h=300&crop=1" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=600&h=400&crop=1" 
+                                        srcset="/wp-content/uploads/2025/05/body-procedures.jpg?w=600&h=400&crop=1" 
                                         width="600" height="400">
-                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/body-procedures.jpg?w=800&h=600&crop=1" 
+                                <img src="/wp-content/uploads/2025/05/body-procedures.jpg?w=800&h=600&crop=1" 
                                      alt="Body Case Studies - Real patient transformations for body procedures" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -75,12 +75,12 @@ get_header(); ?>
                         <div class="category-image-container position-relative overflow-hidden">
                             <picture>
                                 <source media="(max-width: 576px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=400&h=300&crop=1" 
+                                        srcset="/wp-content/uploads/2025/05/breast-procedures.jpg?w=400&h=300&crop=1" 
                                         width="400" height="300">
                                 <source media="(max-width: 768px)" 
-                                        srcset="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=600&h=400&crop=1" 
+                                        srcset="/wp-content/uploads/2025/05/breast-procedures.jpg?w=600&h=400&crop=1" 
                                         width="600" height="400">
-                                <img src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/05/breast-procedures.jpg?w=800&h=600&crop=1" 
+                                <img src="/wp-content/uploads/2025/05/breast-procedures.jpg?w=800&h=600&crop=1" 
                                      alt="Breast Case Studies - Real patient transformations for breast procedures" 
                                      class="card-img-top w-100 h-100 object-fit-cover"
                                      width="800" height="600"
@@ -116,7 +116,7 @@ get_header(); ?>
                 <div class="col-lg-8 text-center">
                     <h2 class="h3 mb-3">Browse Results by Surgeon</h2>
                     <p class="lead text-muted mb-4">Explore transformations organized by our expert surgical team members to see their specialized work and artistic approach.</p>
-                    <a href="https://miaprod.wpenginepowered.com/before-after/before-after-by-doctor/" class="btn btn-primary btn-lg">
+                    <a href="/before-after/before-after-by-doctor/" class="btn btn-primary btn-lg">
                         View Results by Surgeon <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </div>

@@ -88,7 +88,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a class="dropdown-item" href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome" target="_blank">
+                      <a class="dropdown-item" href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome" target="_blank" rel="noopener">
                         Patient Portal Login
                       </a>
                     </li>
@@ -96,7 +96,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://shop.miaaesthetics.com/" target="_blank">Shop</a>
+                    <a class="nav-link" href="https://shop.miaaesthetics.com/" target="_blank" rel="noopener">Shop</a>
                 </li>
               </ul>
             </div>
