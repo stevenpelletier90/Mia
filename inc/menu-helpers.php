@@ -446,7 +446,7 @@ function render_desktop_before_after_menu() {
                         <span class="text-dark fw-bold">By Procedure</span>
                     </h6>
                     <ul class="list-unstyled">
-                        <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/arm/')); ?>">Arm Lift</a></li>
+                        <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/arm-lift/')); ?>">Arm Lift</a></li>
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/bbl/')); ?>">Brazilian Butt Lift (BBL)</a></li>
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/breast-augmentation/')); ?>">Breast Augmentation</a></li>
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/breast-lift/')); ?>">Breast Lift</a></li>
