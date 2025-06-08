@@ -71,8 +71,8 @@ get_header(); ?>
                                     <?php the_excerpt(); ?>
                                 </div>
                                 <div class="card-footer bg-white border-top-0">
-                                    <a href="<?php the_permalink(); ?>" class="read-more-link" style="color: #000; text-decoration: none; font-weight: 500;">
-                                        Read More <i class="fas fa-arrow-right" style="color: #D4AF37;"></i>
+                                    <a href="<?php the_permalink(); ?>" class="read-more-link">
+                                        Read Full Article: <?php the_title(); ?> <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
