@@ -92,6 +92,19 @@ add_action('init', function() {
         'index.php?case-category=$matches[1]',
         'bottom'
     );
+    
+    // Redirect old case-category URLs to new structure
+    add_rewrite_rule(
+        '^case-category/([^/]+)/([^/]+)/?$',
+        'index.php?case-category=$matches[2]',
+        'top'
+    );
+    
+    add_rewrite_rule(
+        '^case-category/([^/]+)/?$',
+        'index.php?case-category=$matches[1]',
+        'top'
+    );
 }, 25);
 
 /**
@@ -100,8 +113,17 @@ add_action('init', function() {
 add_action('template_redirect', function() {
     global $wp_query;
     
+    // Handle old case-category URLs - redirect to new structure
+    $request_uri = $_SERVER['REQUEST_URI'];
+    if (preg_match('#^/case-category/(.+)$#', $request_uri, $matches)) {
+        $category_path = $matches[1];
+        $new_url = home_url('/before-after/' . $category_path);
+        wp_redirect($new_url, 301);
+        exit;
+    }
+    
     // Check if this is a case post with a custom template selected
-    if (is_single() && get_post_type() === 'case') {
+    if (is_single() && get_post_type() === 'case' && !is_404()) {
         global $post;
         $page_template = get_post_meta($post->ID, '_wp_page_template', true);
         if ($page_template && $page_template !== 'default') {
@@ -109,23 +131,96 @@ add_action('template_redirect', function() {
             include(locate_template($page_template));
             exit;
         }
-    }
-    
-    // If we're trying to load a case post but it's 404 or showing wrong content
-    if (is_single() && get_post_type() === 'case' && is_404()) {
-        // Case post rewrite rule worked, nothing to do
+        // If no custom template, let WordPress handle normally
         return;
     }
     
-    // No automatic redirects - let rewrite rules handle priority
+    // Handle 404 errors that might be misrouted case posts or categories
+    if (is_404()) {
+        $request_uri = $_SERVER['REQUEST_URI'];
+        
+        // Check for hierarchical category archives that might be 404ing
+        if (preg_match('#^/before-after/([^/]+)/([^/]+)/?$#', $request_uri, $matches)) {
+            $parent_slug = $matches[1];
+            $child_slug = $matches[2];
+            
+            // First check if this is a case post
+            $case_post = get_page_by_path($child_slug, OBJECT, 'case');
+            if ($case_post && $case_post->post_status === 'publish') {
+                // Verify this case belongs to the specified category
+                $terms = wp_get_object_terms($case_post->ID, 'case-category');
+                $category_matches = false;
+                
+                if (!empty($terms) && !is_wp_error($terms)) {
+                    foreach ($terms as $term) {
+                        if ($term->slug === $parent_slug || $term->slug === $child_slug) {
+                            $category_matches = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if ($category_matches) {
+                    // Set up the query properly for case post
+                    global $post;
+                    $post = $case_post;
+                    setup_postdata($post);
+                    
+                    $wp_query->init();
+                    $wp_query->query = array('case' => $child_slug);
+                    $wp_query->query_vars = array('case' => $child_slug);
+                    $wp_query->queried_object = $case_post;
+                    $wp_query->queried_object_id = $case_post->ID;
+                    $wp_query->is_single = true;
+                    $wp_query->is_singular = true;
+                    $wp_query->is_404 = false;
+                    $wp_query->post = $case_post;
+                    $wp_query->posts = array($case_post);
+                    $wp_query->post_count = 1;
+                    $wp_query->found_posts = 1;
+                    status_header(200);
+                    
+                    // Check for custom template
+                    $page_template = get_post_meta($case_post->ID, '_wp_page_template', true);
+                    if ($page_template && $page_template !== 'default') {
+                        include(locate_template($page_template));
+                    } else {
+                        include(get_query_template('single-case'));
+                    }
+                    exit;
+                }
+            } else {
+                // Not a case post, check if it's a hierarchical category archive
+                $child_term = get_term_by('slug', $child_slug, 'case-category');
+                if ($child_term) {
+                    // Set up the query for taxonomy archive
+                    $wp_query->init();
+                    $wp_query->query = array('case-category' => $child_slug);
+                    $wp_query->query_vars = array('case-category' => $child_slug);
+                    $wp_query->queried_object = $child_term;
+                    $wp_query->queried_object_id = $child_term->term_id;
+                    $wp_query->is_tax = true;
+                    $wp_query->is_archive = true;
+                    $wp_query->is_404 = false;
+                    status_header(200);
+                    
+                    include(get_query_template('taxonomy-case-category'));
+                    exit;
+                }
+            }
+        }
+    }
     
-    // Handle uncategorized case posts
+    // Handle uncategorized case posts (single slug pattern)
     if (is_404() && preg_match('#^/before-after/([^/]+)/?$#', $_SERVER['REQUEST_URI'], $matches)) {
         $slug = $matches[1];
         
         // Check if this slug is a case post (not a category)
         $case_post = get_page_by_path($slug, OBJECT, 'case');
         if ($case_post && $case_post->post_status === 'publish') {
+            // Check if this post has no categories assigned or should be treated as uncategorized
+            $terms = wp_get_object_terms($case_post->ID, 'case-category');
+            
             // Set up the query and global post properly
             global $post;
             $post = $case_post;
