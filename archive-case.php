@@ -58,12 +58,10 @@ get_header(); ?>
                             <h2 class="h4 mb-3">Body Cases</h2>
                             <p class="card-text text-muted mb-3">See real transformations from our body contouring and sculpting procedures.</p>
                             <ul class="list-unstyled case-links">
-                                <li><a href="#" class="text-decoration-none">Brazilian Butt Lift (BBL) Cases</a></li>
-                                <li><a href="#" class="text-decoration-none">Tummy Tuck Transformations</a></li>
-                                <li><a href="#" class="text-decoration-none">Liposuction Results</a></li>
-                                <li><a href="#" class="text-decoration-none">Mommy Makeover Cases</a></li>
-                                <li><a href="#" class="text-decoration-none">Mia Waist Corset&trade; Results</a></li>
-                                <li><a href="#" class="text-decoration-none"><strong>View All Body Cases</strong></a></li>
+                                <li><a href="/before-after/arm/" class="text-decoration-none">Arm Lift Cases</a></li>
+                                <li><a href="/before-after/bbl/" class="text-decoration-none">Brazilian Butt Lift (BBL) Cases</a></li>
+                                <li><a href="/before-after/lipo-360/" class="text-decoration-none">Lipo 360 Results</a></li>
+                                <li><a href="/before-after/body/" class="text-decoration-none"><strong>View All Body Cases</strong></a></li>
                             </ul>
                         </div>
                     </div>
@@ -96,11 +94,10 @@ get_header(); ?>
                             <h2 class="h4 mb-3">Breast Cases</h2>
                             <p class="card-text text-muted mb-3">Explore real results from our comprehensive breast surgery procedures.</p>
                             <ul class="list-unstyled case-links">
-                                <li><a href="#" class="text-decoration-none">Breast Augmentation Cases</a></li>
-                                <li><a href="#" class="text-decoration-none">Breast Reduction Results</a></li>
-                                <li><a href="#" class="text-decoration-none">Breast Lift Transformations</a></li>
-                                <li><a href="#" class="text-decoration-none">Breast Implant Revision Cases</a></li>
-                                <li><a href="#" class="text-decoration-none"><strong>View All Breast Cases</strong></a></li>
+                                <li><a href="/before-after/breast-augmentation/" class="text-decoration-none">Breast Augmentation Cases</a></li>
+                                <li><a href="/before-after/breast-reduction/" class="text-decoration-none">Breast Reduction Results</a></li>
+                                <li><a href="/before-after/breast-lift/" class="text-decoration-none">Breast Lift Transformations</a></li>
+                                <li><a href="/before-after/" class="text-decoration-none"><strong>View All Breast Cases</strong></a></li>
                             </ul>
                         </div>
                     </div>
