@@ -158,7 +158,10 @@ function mia_featured_image_bulk_action_notices() {
     if (!empty($_REQUEST['featured_images_removed'])) {
         $count = intval($_REQUEST['featured_images_removed']);
         echo '<div class="notice notice-success is-dismissible">';
-        echo '<p>' . sprintf(_n('Featured image removed from %s post.', 'Featured images removed from %s posts.', $count), $count) . '</p>';
+        $message = ($count === 1) 
+            ? sprintf('Featured image removed from %s post.', $count)
+            : sprintf('Featured images removed from %s posts.', $count);
+        echo '<p>' . $message . '</p>';
         echo '</div>';
     }
 }

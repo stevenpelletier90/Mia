@@ -30,8 +30,6 @@ if (!function_exists('clear_mia_caches')) {
         if ($post_type === 'location') {
             wp_cache_delete('mia_header_locations');
             wp_cache_delete('mia_footer_locations');
-            delete_transient('mia_header_locations');
-            delete_transient('mia_footer_locations');
             $cache_cleared = true;
         }
         
@@ -39,8 +37,6 @@ if (!function_exists('clear_mia_caches')) {
         if ($post_type === 'surgeon') {
             wp_cache_delete('mia_header_surgeons');
             wp_cache_delete('mia_footer_surgeons');
-            delete_transient('mia_header_surgeons');
-            delete_transient('mia_footer_surgeons');
             
             // Clear surgeon by location caches
             $locations = get_posts([
@@ -50,7 +46,6 @@ if (!function_exists('clear_mia_caches')) {
             ]);
             foreach ($locations as $location_id) {
                 wp_cache_delete('mia_footer_surgeons_location_' . $location_id);
-                delete_transient('mia_footer_surgeons_location_' . $location_id);
             }
             $cache_cleared = true;
         }
@@ -58,43 +53,38 @@ if (!function_exists('clear_mia_caches')) {
         // Clear procedure-related caches
         if ($post_type === 'procedure') {
             wp_cache_delete('mia_header_procedures');
-            delete_transient('mia_header_procedures');
             $cache_cleared = true;
         }
         
         // Clear condition-related caches
         if ($post_type === 'condition') {
             wp_cache_delete('mia_header_conditions');
-            delete_transient('mia_header_conditions');
             $cache_cleared = true;
         }
         
         // Clear non-surgical-related caches
         if ($post_type === 'non-surgical') {
             wp_cache_delete('mia_header_non_surgical');
-            delete_transient('mia_header_non_surgical');
             $cache_cleared = true;
         }
         
         // Clear case-related caches
         if ($post_type === 'case') {
             wp_cache_delete('mia_recent_cases');
-            delete_transient('mia_recent_cases');
             $cache_cleared = true;
         }
         
         // Clear special-related caches
         if ($post_type === 'special') {
             wp_cache_delete('mia_active_specials');
-            delete_transient('mia_active_specials');
             $cache_cleared = true;
         }
         
         // Clear site statistics cache for any content type
         if (in_array($post_type, ['surgeon', 'location', 'procedure', 'case'])) {
-            delete_transient('mia_site_stats');
-            delete_transient("mia_count_{$post_type}_" . md5(serialize(['post_parent' => 0])));
-            delete_transient("mia_count_{$post_type}_" . md5(serialize([])));
+            wp_cache_delete('mia_site_stats');
+            wp_cache_delete("mia_count_{$post_type}_" . md5(serialize(['post_parent' => 0])));
+            wp_cache_delete("mia_count_{$post_type}_" . md5(serialize([])));
             $cache_cleared = true;
         }
         
@@ -181,7 +171,6 @@ function mia_clear_all_menu_caches() {
     
     foreach ($cache_keys as $key) {
         wp_cache_delete($key);
-        delete_transient($key);
     }
     
     // Clear surgeon by location caches
@@ -284,7 +273,7 @@ add_action('init', 'mia_wp_rocket_exclude_dynamic_content');
  */
 function mia_get_cached_post_count($post_type, $args = []) {
     $cache_key = "mia_count_{$post_type}_" . md5(serialize($args));
-    $count = get_transient($cache_key);
+    $count = wp_cache_get($cache_key);
     
     if (false === $count) {
         $default_args = [
@@ -301,8 +290,8 @@ function mia_get_cached_post_count($post_type, $args = []) {
         $query = new WP_Query($query_args);
         $count = $query->post_count;
         
-        // Cache for 2 hours
-        set_transient($cache_key, $count, 2 * HOUR_IN_SECONDS);
+        // Cache for 2 hours using object cache
+        wp_cache_set($cache_key, $count, '', 2 * HOUR_IN_SECONDS);
         wp_reset_postdata();
     }
     
@@ -314,7 +303,7 @@ function mia_get_cached_post_count($post_type, $args = []) {
  */
 function mia_get_site_stats() {
     $cache_key = 'mia_site_stats';
-    $stats = get_transient($cache_key);
+    $stats = wp_cache_get($cache_key);
     
     if (false === $stats) {
         $stats = [
@@ -324,8 +313,8 @@ function mia_get_site_stats() {
             'cases' => mia_get_cached_post_count('case') ?: 1000,
         ];
         
-        // Cache for 2 hours
-        set_transient($cache_key, $stats, 2 * HOUR_IN_SECONDS);
+        // Cache for 2 hours using object cache
+        wp_cache_set($cache_key, $stats, '', 2 * HOUR_IN_SECONDS);
     }
     
     return $stats;

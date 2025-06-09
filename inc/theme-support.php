@@ -240,10 +240,10 @@ add_action('after_setup_theme', 'mia_block_editor_settings');
  */
 function mia_register_menus() {
     register_nav_menus([
-        'primary'   => __('Primary Navigation', 'mia'),
-        'footer'    => __('Footer Navigation', 'mia'),
-        'legal'     => __('Legal Links', 'mia'),
-        'social'    => __('Social Media Links', 'mia'),
+        'primary'   => 'Primary Navigation',
+        'footer'    => 'Footer Navigation',
+        'legal'     => 'Legal Links',
+        'social'    => 'Social Media Links',
     ]);
 }
 add_action('after_setup_theme', 'mia_register_menus');
@@ -286,7 +286,7 @@ function mia_starter_content() {
         ],
         'nav_menus' => [
             'primary' => [
-                'name' => __('Primary Navigation', 'mia'),
+                'name' => 'Primary Navigation',
                 'items' => [
                     'link_home',
                     'page_about',
@@ -322,7 +322,7 @@ function mia_register_block_patterns() {
     if (function_exists('register_block_pattern_category')) {
         register_block_pattern_category(
             'mia-aesthetics',
-            ['label' => __('Mia Aesthetics', 'mia')]
+            ['label' => 'Mia Aesthetics']
         );
     }
 }

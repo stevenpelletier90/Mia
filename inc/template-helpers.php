@@ -97,7 +97,7 @@ function mia_the_logo($args = []) {
             $link_attrs = [
                 'href' => esc_url(home_url('/')),
                 'class' => esc_attr($args['link_class']),
-                'aria-label' => esc_attr__('Home', 'mia-aesthetics')
+                'aria-label' => 'Home'
             ];
             
             echo '<a';
@@ -361,7 +361,7 @@ function mia_display_faqs($show_heading = true) {
             <?php
             $section_title = !empty($faq_section['title']) 
                 ? $faq_section['title'] 
-                : __('Frequently Asked Questions', 'mia-aesthetics');
+                : 'Frequently Asked Questions';
             ?>
             <h2 id="faq-heading-<?php echo get_the_ID(); ?>" class="mb-4">
                 <?php echo esc_html($section_title); ?>
@@ -625,11 +625,11 @@ function mia_get_hero_title() {
     }
     
     if (is_search()) {
-        return sprintf(__('Search Results for: %s', 'mia-aesthetics'), get_search_query());
+        return sprintf('Search Results for: %s', get_search_query());
     }
     
     if (is_404()) {
-        return __('Page Not Found', 'mia-aesthetics');
+        return 'Page Not Found';
     }
     
     return get_the_title();

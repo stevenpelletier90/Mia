@@ -3,7 +3,9 @@
     "allow": [
       "Bash(find:*)",
       "Bash(wp post list:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(wp:*)"
     ],
     "deny": []
   }

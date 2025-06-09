@@ -7,6 +7,7 @@
  */
 
 // Load helper modules (see inc/ for details)
+require_once get_template_directory() . '/inc/textdomain.php';          // Text domain and translation loading
 require_once get_template_directory() . '/inc/theme-support.php';         // WordPress theme support features
 require_once get_template_directory() . '/inc/state-abbreviations.php'; // US state abbreviation lookup and helper
 require_once get_template_directory() . '/inc/disable-comments.php';    // Disables all comment functionality
