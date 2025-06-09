@@ -28,6 +28,7 @@ function mia_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'mia_enqueue_assets');
 
+
 /**
  * Enqueue all stylesheets with proper dependencies and loading order
  */
@@ -88,7 +89,7 @@ function mia_enqueue_context_styles($assets_url, $version) {
     $dependencies = ['mia-base', 'mia-header', 'mia-footer'];
     
     // Add specific dependencies based on context
-    if (in_array($context['type'], ['archive', 'single'])) {
+    if (in_array($context['type'], ['archive', 'single'], true)) {
         $dependencies[] = 'mia-bootstrap';
     }
     
@@ -100,7 +101,7 @@ function mia_enqueue_context_styles($assets_url, $version) {
     );
     
     // Special case: Hero styles for front page
-    if (is_front_page()) {
+    if ($context['type'] === 'home') {
         mia_enqueue_style(
             'mia-hero',
             $assets_url . '/css/_hero.css',
@@ -131,14 +132,13 @@ function mia_enqueue_scripts() {
     mia_enqueue_script(
         'mia-bootstrap',
         $assets_url . '/bootstrap/js/bootstrap.bundle.min.js',
-        ['jquery'],
+        ['jquery', 'wp-util', 'underscore'],
         $theme_version,
         true
     );
     
     // Get context for conditional script loading
     $context = mia_get_current_context();
-    $load_main = true;
     
     // Context-specific scripts
     if ($context) {
@@ -148,11 +148,10 @@ function mia_enqueue_scripts() {
                 mia_enqueue_script(
                     'mia-home',
                     $assets_url . '/js/home.js',
-                    ['mia-bootstrap', 'jquery'],
+                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
                     $theme_version,
                     true
                 );
-                $load_main = false;
                 break;
                 
             case 'condition':
@@ -161,7 +160,7 @@ function mia_enqueue_scripts() {
                 mia_enqueue_script(
                     'mia-condition',
                     $assets_url . '/js/condition.js',
-                    ['mia-bootstrap', 'jquery'],
+                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
                     $theme_version,
                     true
                 );
@@ -172,7 +171,7 @@ function mia_enqueue_scripts() {
                 mia_enqueue_script(
                     'mia-surgeon',
                     $assets_url . '/js/surgeon.js',
-                    ['mia-bootstrap', 'jquery'],
+                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
                     $theme_version,
                     true
                 );
@@ -183,20 +182,25 @@ function mia_enqueue_scripts() {
                 mia_enqueue_script(
                     'mia-gallery',
                     $assets_url . '/js/gallery.js',
-                    ['mia-bootstrap', 'jquery'],
+                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
                     $theme_version,
                     true
                 );
                 break;
+                
+            case 'case':
+                // Case pages use main.js with WordPress dependencies
+                // No additional case-specific script needed
+                break;
         }
     }
     
-    // Load main.js on most pages
-    if ($load_main) {
+    // Load main.js on most pages (except home page which has its own script)
+    if (!$context || $context['type'] !== 'home') {
         mia_enqueue_script(
             'mia-main',
             $assets_url . '/js/main.js',
-            ['mia-bootstrap', 'jquery'],
+            ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
             $theme_version,
             true
         );
@@ -207,18 +211,18 @@ function mia_enqueue_scripts() {
         mia_enqueue_script(
             'mia-video',
             $assets_url . '/js/video.js',
-            ['mia-bootstrap', 'jquery'],
+            ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
             $theme_version,
             true
         );
     }
     
     // Front page specific script
-    if (is_front_page()) {
+    if ($context && $context['type'] === 'home') {
         mia_enqueue_script(
             'mia-front-page',
             $assets_url . '/js/front-page.js',
-            ['jquery'],
+            ['jquery', 'wp-util', 'underscore'],
             $theme_version,
             true
         );
@@ -228,7 +232,7 @@ function mia_enqueue_scripts() {
     mia_enqueue_script(
         'mia-header',
         $assets_url . '/js/header.js',
-        ['mia-bootstrap'],
+        ['mia-bootstrap', 'wp-util', 'underscore'],
         $theme_version,
         true
     );
@@ -238,11 +242,13 @@ function mia_enqueue_scripts() {
  * Add inline scripts for runtime configuration
  */
 function mia_add_inline_scripts() {
-    // Add AJAX URL for scripts that need it
-    wp_localize_script('jquery', 'mia_ajax', [
-        'url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('mia_ajax_nonce')
-    ]);
+    // Add AJAX URL for scripts that need it (only if jQuery is enqueued)
+    if (wp_script_is('jquery', 'enqueued')) {
+        wp_localize_script('jquery', 'mia_ajax', [
+            'url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('mia_ajax_nonce')
+        ]);
+    }
     
     // Add theme configuration
     $theme_config = [
@@ -273,7 +279,7 @@ function mia_enqueue_style($handle, $src, $deps = [], $ver = false) {
         
         if (!file_exists($file_path)) {
             if (WP_DEBUG) {
-                error_log("Mia Theme: Style file not found - {$file_path}");
+                error_log("[mia_enqueue_style] Style file not found - {$file_path}");
             }
             return false;
         }
@@ -302,7 +308,7 @@ function mia_enqueue_script($handle, $src, $deps = [], $ver = false, $in_footer 
         
         if (!file_exists($file_path)) {
             if (WP_DEBUG) {
-                error_log("Mia Theme: Script file not found - {$file_path}");
+                error_log("[mia_enqueue_script] Script file not found - {$file_path}");
             }
             return false;
         }
@@ -321,64 +327,81 @@ function mia_enqueue_script($handle, $src, $deps = [], $ver = false, $in_footer 
  * Get the current page context for conditional asset loading
  */
 function mia_get_current_context() {
+    // Static cache to prevent multiple computations per request
+    static $ctx = null;
+    if ($ctx !== null) {
+        return $ctx;
+    }
+    
     // Special templates
     if (is_page_template('page-blank-canvas.php') || is_page_template('page-hero-canvas.php')) {
-        return ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
+        $ctx = ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
+        return $ctx;
     }
     
     if (is_page_template('page-before-after-by-doctor.php')) {
-        return ['type' => 'gallery', 'file' => 'gallery.css', 'handle' => 'gallery'];
+        $ctx = ['type' => 'gallery', 'file' => 'gallery.css', 'handle' => 'gallery'];
+        return $ctx;
     }
     
     // Front page
     if (is_front_page()) {
-        return ['type' => 'home', 'file' => 'home.css', 'handle' => 'home'];
+        $ctx = ['type' => 'home', 'file' => 'home.css', 'handle' => 'home'];
+        return $ctx;
     }
     
     // Error pages
     if (is_404()) {
-        return ['type' => '404', 'file' => '404.css', 'handle' => '404'];
+        $ctx = ['type' => '404', 'file' => '404.css', 'handle' => '404'];
+        return $ctx;
     }
     
     // Search
     if (is_search()) {
-        return ['type' => 'search', 'file' => 'search.css', 'handle' => 'search'];
+        $ctx = ['type' => 'search', 'file' => 'search.css', 'handle' => 'search'];
+        return $ctx;
     }
     
     // Taxonomies
     if (is_tax()) {
-        return ['type' => 'taxonomy', 'file' => 'taxonomies.css', 'handle' => 'taxonomies'];
+        $ctx = ['type' => 'taxonomy', 'file' => 'taxonomies.css', 'handle' => 'taxonomies'];
+        return $ctx;
     }
     
     // Blog
     if (is_home() || (is_archive() && get_post_type() === 'post')) {
-        return ['type' => 'archive', 'file' => 'archive.css', 'handle' => 'archive'];
+        $ctx = ['type' => 'archive', 'file' => 'archive.css', 'handle' => 'archive'];
+        return $ctx;
     }
     
     if (is_singular('post')) {
-        return ['type' => 'single', 'file' => 'single.css', 'handle' => 'single'];
+        $ctx = ['type' => 'single', 'file' => 'single.css', 'handle' => 'single'];
+        return $ctx;
     }
     
     // Custom post type archives
     if (is_post_type_archive()) {
         $post_type = get_post_type() ?: get_query_var('post_type');
         if ($post_type) {
-            return [
+            $ctx = [
                 'type' => 'archive',
                 'file' => $post_type . '-archive.css',
                 'handle' => $post_type . '-archive'
             ];
+            return $ctx;
         }
     }
     
     // Pages
     if (is_page()) {
         // Check for gallery shortcode
-        global $post;
-        if ($post && has_shortcode($post->post_content, 'gallery')) {
-            return ['type' => 'gallery', 'file' => 'gallery.css', 'handle' => 'gallery'];
+        $post_content = get_post_field('post_content', get_the_ID());
+        if ($post_content && has_shortcode($post_content, 'gallery')) {
+            $ctx = ['type' => 'gallery', 'file' => 'gallery.css', 'handle' => 'gallery'];
+            return $ctx;
         }
-        return ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
+        $ctx = ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
+        return $ctx;
     }
     
     // Custom post type singles
@@ -389,38 +412,51 @@ function mia_get_current_context() {
         if ($post_type === 'procedure') {
             $ancestors = get_post_ancestors(get_queried_object());
             if (count($ancestors) === 2) {
-                return ['type' => 'condition-child', 'file' => 'condition.css', 'handle' => 'condition'];
+                $ctx = ['type' => 'condition-child', 'file' => 'condition.css', 'handle' => 'condition'];
+                return $ctx;
             }
         }
         
         // Special handling for conditions
         if ($post_type === 'condition') {
-            return ['type' => 'condition', 'file' => 'condition.css', 'handle' => 'condition'];
+            $ctx = ['type' => 'condition', 'file' => 'condition.css', 'handle' => 'condition'];
+            return $ctx;
         }
         
         // Special handling for surgeons
         if ($post_type === 'surgeon') {
-            return ['type' => 'surgeon', 'file' => 'surgeon.css', 'handle' => 'surgeon'];
+            $ctx = ['type' => 'surgeon', 'file' => 'surgeon.css', 'handle' => 'surgeon'];
+            return $ctx;
+        }
+        
+        // Special handling for cases
+        if ($post_type === 'case') {
+            $ctx = ['type' => 'case', 'file' => 'case.css', 'handle' => 'case'];
+            return $ctx;
         }
         
         // Default single post type
         if ($post_type && !in_array($post_type, ['post', 'page'])) {
-            return [
+            $ctx = [
                 'type' => 'single',
                 'file' => $post_type . '.css',
                 'handle' => $post_type
             ];
+            return $ctx;
         }
     }
     
-    return null;
+    $ctx = null;
+    return $ctx;
 }
 
 /**
  * Get the primary script handle for the current page
  */
 function mia_get_primary_script_handle() {
-    if (is_front_page()) {
+    $context = mia_get_current_context();
+    
+    if ($context && $context['type'] === 'home') {
         return 'mia-home';
     }
     
@@ -484,14 +520,14 @@ function mia_defer_scripts($tag, $handle, $src) {
     }
     
     // Scripts that should not be deferred
-    $no_defer = ['jquery', 'jquery-core', 'jquery-migrate'];
+    $no_defer = ['jquery', 'jquery-core', 'jquery-migrate', 'wp-util', 'underscore', 'wp-api-request'];
     
     if (in_array($handle, $no_defer)) {
         return $tag;
     }
     
-    // Add defer attribute to non-critical scripts
-    if (strpos($tag, 'defer') === false) {
+    // Add defer attribute to non-critical scripts (guard against double-insertion)
+    if (strpos($tag, ' defer') === false) {
         return str_replace(' src', ' defer src', $tag);
     }
     
