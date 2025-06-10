@@ -82,7 +82,7 @@
         </div>
         <?php endif; ?>
         <div class="hero-box-overlay">
-          <h4 class="hero-box-title">Before & After</h4>
+          <div class="hero-box-title">Before & After</div>
           <a href="<?php echo esc_url(home_url('/before-after/')); ?>" class="mia-button" data-variant="hero">
             View Gallery <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -108,7 +108,7 @@
         </div>
         <?php endif; ?>
         <div class="hero-box-overlay">
-          <h4 class="hero-box-title">Financing</h4>
+          <div class="hero-box-title">Financing</div>
           <a href="<?php echo esc_url(home_url('/financing/')); ?>" class="mia-button" data-variant="hero">
             View Options <i class="fa-solid fa-arrow-right"></i>
           </a>

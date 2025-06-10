@@ -166,6 +166,17 @@ function mia_enqueue_scripts() {
                 );
                 break;
                 
+            case 'fat-transfer':
+                // Fat-transfer pages use the same JS as condition pages
+                mia_enqueue_script(
+                    'mia-condition',
+                    $assets_url . '/js/condition.js',
+                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
             case 'surgeon':
                 // Surgeon pages load both main.js and surgeon.js
                 mia_enqueue_script(
@@ -383,6 +394,13 @@ function mia_get_current_context() {
     if (is_post_type_archive()) {
         $post_type = get_post_type() ?: get_query_var('post_type');
         if ($post_type) {
+            // Special handling for fat-transfer archive - use same CSS as single
+            if ($post_type === 'fat-transfer') {
+                $ctx = ['type' => 'fat-transfer', 'file' => 'fat-transfer.css', 'handle' => 'fat-transfer'];
+                return $ctx;
+            }
+            
+            // Default archive handling for other post types
             $ctx = [
                 'type' => 'archive',
                 'file' => $post_type . '-archive.css',
@@ -420,6 +438,12 @@ function mia_get_current_context() {
         // Special handling for conditions
         if ($post_type === 'condition') {
             $ctx = ['type' => 'condition', 'file' => 'condition.css', 'handle' => 'condition'];
+            return $ctx;
+        }
+        
+        // Special handling for fat-transfer
+        if ($post_type === 'fat-transfer') {
+            $ctx = ['type' => 'fat-transfer', 'file' => 'fat-transfer.css', 'handle' => 'fat-transfer'];
             return $ctx;
         }
         

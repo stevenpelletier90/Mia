@@ -45,9 +45,9 @@
         <!-- Offcanvas Container -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
           <div class="offcanvas-header border-bottom border-secondary">
-            <h5 class="offcanvas-title" id="navbarOffcanvasLabel">
+            <div class="offcanvas-title" id="navbarOffcanvasLabel">
               <?php mia_the_logo(['height' => '30', 'width' => '120', 'loading' => 'lazy']); ?>
-            </h5>
+            </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">

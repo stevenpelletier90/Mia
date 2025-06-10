@@ -173,9 +173,9 @@ function render_desktop_procedures_menu($procedures) {
             <div class="row">
                 <?php foreach ($procedures['sections'] as $section_key => $section): ?>
                     <div class="col-md-3 mb-3">
-                        <h6 class="dropdown-header">
+                        <div class="dropdown-header">
                             <a href="<?php echo esc_url($section['url']); ?>" class="text-dark fw-bold text-decoration-none"><?php echo esc_html($section['title']); ?></a>
-                        </h6>
+                        </div>
                         <ul class="list-unstyled">
                             <?php foreach ($section['items'] as $item): ?>
                                 <?php 
@@ -442,9 +442,9 @@ function render_desktop_before_after_menu() {
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <h6 class="dropdown-header">
+                    <div class="dropdown-header">
                         <span class="text-dark fw-bold">By Procedure</span>
-                    </h6>
+                    </div>
                     <ul class="list-unstyled">
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/arm/')); ?>">Arm Lift</a></li>
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/bbl/')); ?>">Brazilian Butt Lift (BBL)</a></li>
@@ -457,9 +457,9 @@ function render_desktop_before_after_menu() {
                     </ul>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <h6 class="dropdown-header">
+                    <div class="dropdown-header">
                         <span class="text-dark fw-bold">By Category</span>
-                    </h6>
+                    </div>
                     <ul class="list-unstyled">
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
                         <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/before-after/patient-journeys/')); ?>">Patient Videos</a></li>
