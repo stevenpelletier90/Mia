@@ -81,15 +81,22 @@
             <h2 class="footer-heading mb-3">Locations & Surgeons</h2>
             <div class="accordion" id="locationsAccordion">
                 <?php
-                // Use cached locations instead of running a new query
-                $cached_locations = get_cached_locations();
+                // Direct query for locations
+                $locations_query = new WP_Query([
+                    'post_type' => 'location',
+                    'posts_per_page' => -1,
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                    'post_parent' => 0
+                ]);
                 
-                if (!empty($cached_locations)) :
+                if ($locations_query->have_posts()) :
                     $location_index = 0;
-                    foreach ($cached_locations as $location_data) :
-                        $location_id = $location_data['id'];
-                        $location_title = $location_data['title'];
-                        $location_url = $location_data['url'];
+                    while ($locations_query->have_posts()) :
+                        $locations_query->the_post();
+                        $location_id = get_the_ID();
+                        $location_title = get_the_title();
+                        $location_url = get_permalink();
                         $location_index++;
                 ?>
                 <div class="accordion-item">
@@ -109,31 +116,45 @@
                             </div>
                             
                             <?php
-                            // Get cached surgeons for this location
-                            $location_surgeons = get_cached_surgeons_by_location($location_id);
+                            // Direct query for surgeons at this location
+                            $surgeons_query = new WP_Query([
+                                'post_type' => 'surgeon',
+                                'posts_per_page' => -1,
+                                'meta_query' => [
+                                    [
+                                        'key' => 'surgeon_location',
+                                        'value' => $location_id,
+                                        'compare' => '='
+                                    ]
+                                ]
+                            ]);
                             
-                            if (!empty($location_surgeons)) :
+                            if ($surgeons_query->have_posts()) :
                             ?>
                                 <div class="surgeons-list">
                                     <ul class="list-unstyled">
-                                        <?php foreach ($location_surgeons as $surgeon) : ?>
+                                        <?php while ($surgeons_query->have_posts()) : $surgeons_query->the_post(); ?>
                                             <li class="mb-2">
-                                                <a href="<?php echo esc_url($surgeon['url']); ?>" class="surgeon-link">
-                                                    <span><?php echo esc_html($surgeon['title']); ?></span>
+                                                <a href="<?php echo esc_url(get_permalink()); ?>" class="surgeon-link">
+                                                    <span><?php echo esc_html(get_the_title()); ?></span>
                                                     <i class="fas fa-arrow-right surgeon-arrow" aria-hidden="true"></i>
                                                 </a>
                                             </li>
-                                        <?php endforeach; ?>
+                                        <?php endwhile; ?>
                                     </ul>
                                 </div>
                             <?php else : ?>
                                 <p class="mb-0">No surgeons currently listed for this location.</p>
-                            <?php endif; ?>
+                            <?php 
+                            endif;
+                            wp_reset_postdata();
+                            ?>
                         </div>
                     </div>
                 </div>
                 <?php
-                    endforeach;
+                    endwhile;
+                    wp_reset_postdata();
                 else :
                 ?>
                     <p>No locations found.</p>

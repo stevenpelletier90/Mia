@@ -14,129 +14,75 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Cache location queries
+ * Get locations directly (no caching)
  */
-function get_cached_locations() {
-    $cache_key = 'mia_header_locations';
-    $locations = wp_cache_get($cache_key);
+function get_locations_direct() {
+    $args = [
+        'post_type' => 'location',
+        'posts_per_page' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'post_parent' => 0
+    ];
     
-    if (false === $locations) {
-        $args = [
-            'post_type' => 'location',
-            'posts_per_page' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'post_parent' => 0
-        ];
-        
-        $query = new WP_Query($args);
-        $locations = [];
-        
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                $locations[] = [
-                    'id' => get_the_ID(),
-                    'title' => get_the_title(),
-                    'url' => get_permalink(),
-                    'state' => get_field('state')
-                ];
-            }
-            wp_reset_postdata();
+    $query = new WP_Query($args);
+    $locations = [];
+    
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $locations[] = [
+                'id' => get_the_ID(),
+                'title' => get_the_title(),
+                'url' => get_permalink(),
+                'state' => get_field('state')
+            ];
         }
-        
-        wp_cache_set($cache_key, $locations, '', 3600); // Cache for 1 hour
+        wp_reset_postdata();
     }
     
     return $locations;
 }
 
 /**
- * Cache surgeon queries
+ * Get surgeons directly (no caching)
  */
-function get_cached_surgeons() {
-    $cache_key = 'mia_header_surgeons';
-    $surgeons = wp_cache_get($cache_key);
+function get_surgeons_direct() {
+    $args = [
+        'post_type' => 'surgeon',
+        'posts_per_page' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC'
+    ];
     
-    if (false === $surgeons) {
-        $args = [
-            'post_type' => 'surgeon',
-            'posts_per_page' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC'
-        ];
-        
-        $query = new WP_Query($args);
-        $surgeons = [];
-        
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                $surgeon_name = get_the_title();
-                $name_parts = explode(' ', $surgeon_name);
-                $last_name = isset($name_parts[1]) ? $name_parts[1] : $surgeon_name;
-                
-                $surgeons[] = [
-                    'id' => get_the_ID(),
-                    'name' => $surgeon_name,
-                    'url' => get_permalink(),
-                    'last_name' => $last_name
-                ];
-            }
-            wp_reset_postdata();
+    $query = new WP_Query($args);
+    $surgeons = [];
+    
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $surgeon_name = get_the_title();
+            $name_parts = explode(' ', $surgeon_name);
+            $last_name = isset($name_parts[1]) ? $name_parts[1] : $surgeon_name;
             
-            // Sort surgeons by last name
-            usort($surgeons, function($a, $b) {
-                return strcasecmp($a['last_name'], $b['last_name']);
-            });
+            $surgeons[] = [
+                'id' => get_the_ID(),
+                'name' => $surgeon_name,
+                'url' => get_permalink(),
+                'last_name' => $last_name
+            ];
         }
+        wp_reset_postdata();
         
-        wp_cache_set($cache_key, $surgeons, '', 3600); // Cache for 1 hour
+        // Sort surgeons by last name
+        usort($surgeons, function($a, $b) {
+            return strcasecmp($a['last_name'], $b['last_name']);
+        });
     }
     
     return $surgeons;
 }
 
-/**
- * Cache surgeons by location queries
- */
-function get_cached_surgeons_by_location($location_id) {
-    $cache_key = 'mia_footer_surgeons_location_' . $location_id;
-    $surgeons = wp_cache_get($cache_key);
-    
-    if (false === $surgeons) {
-        $args = [
-            'post_type' => 'surgeon',
-            'posts_per_page' => -1,
-            'meta_query' => [
-                [
-                    'key' => 'surgeon_location',
-                    'value' => $location_id,
-                    'compare' => '='
-                ]
-            ]
-        ];
-        
-        $query = new WP_Query($args);
-        $surgeons = [];
-        
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                $surgeons[] = [
-                    'id' => get_the_ID(),
-                    'title' => get_the_title(),
-                    'url' => get_permalink()
-                ];
-            }
-            wp_reset_postdata();
-        }
-        
-        wp_cache_set($cache_key, $surgeons, '', 3600); // Cache for 1 hour
-    }
-    
-    return $surgeons;
-}
 
 /**
  * Render procedures dropdown
@@ -223,7 +169,7 @@ function render_mobile_procedures_menu($procedures) {
  * Render locations menu for both desktop and mobile
  */
 function render_locations_menu($is_mobile = false) {
-    $locations = get_cached_locations();
+    $locations = get_locations_direct();
     $dropdown_class = $is_mobile ? 'd-xl-none' : 'position-static d-none d-xl-block';
     ?>
     <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
@@ -321,7 +267,7 @@ function render_mobile_locations_menu($locations) {
  * Render surgeons menu for both desktop and mobile
  */
 function render_surgeons_menu($is_mobile = false) {
-    $surgeons = get_cached_surgeons();
+    $surgeons = get_surgeons_direct();
     $dropdown_class = $is_mobile ? 'd-xl-none' : 'position-static d-none d-xl-block';
     ?>
     <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
