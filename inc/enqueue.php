@@ -39,7 +39,6 @@ function mia_enqueue_styles() {
     // Critical CSS - Load with high priority
     $critical_styles = [
         'mia-fonts' => '/css/_fonts.css',
-        'mia-normalize' => '/normalize/normalize.css',
         'mia-bootstrap' => '/bootstrap/css/bootstrap.min.css',
         'mia-base' => '/css/_base.css'
     ];

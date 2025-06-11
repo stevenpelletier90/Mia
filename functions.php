@@ -9,7 +9,6 @@
 // Load helper modules (see inc/ for details)
 require_once get_template_directory() . '/inc/theme-support.php';         // WordPress theme support features
 require_once get_template_directory() . '/inc/state-abbreviations.php'; // US state abbreviation lookup and helper
-require_once get_template_directory() . '/inc/disable-comments.php';    // Disables all comment functionality
 require_once get_template_directory() . '/inc/enqueue.php';             // Enqueue scripts and styles
 require_once get_template_directory() . '/inc/schema.php';              // Schema and structured data output
 require_once get_template_directory() . '/inc/menus.php';               // Menu structure and rendering
@@ -19,5 +18,4 @@ require_once get_template_directory() . '/inc/menu-helpers.php';        // Menu 
 require_once get_template_directory() . '/inc/template-helpers.php';    // Template/UI helpers
 require_once get_template_directory() . '/inc/cache-helpers.php';       // Cache management and clearing
 require_once get_template_directory() . '/inc/case-rewrites.php';       // Case post type URL structure customization
-require_once get_template_directory() . '/inc/featured-image-column.php';  // Featured image column for admin lists
 ?>
