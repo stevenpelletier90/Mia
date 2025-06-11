@@ -29,13 +29,11 @@
     <div class="container-fluid">
       <div class="d-flex flex-wrap align-items-center w-100">
         <!-- Logo -->
-        <a class="navbar-brand me-xl-3" href="<?php echo esc_url(home_url('/')); ?>">
-          <?php mia_the_logo(['fetchpriority' => true]); ?>
-        </a>
+        <?php mia_the_logo(['fetchpriority' => true, 'link_class' => 'navbar-brand me-xl-3', 'aria_label' => 'Homepage – Main Navigation']); ?>
         <!-- Medium Mobile CTA - Only visible on medium mobile devices -->
         <div class="d-none d-sm-block d-xl-none mx-auto">
           <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn">
-            Free Virtual Consultation <i class="fa-solid fa-arrow-right"></i>
+            Free Virtual Consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
         <!-- Mobile Toggle Button -->
@@ -46,7 +44,7 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
           <div class="offcanvas-header border-bottom border-secondary">
             <div class="offcanvas-title" id="navbarOffcanvasLabel">
-              <?php mia_the_logo(['height' => '30', 'width' => '120', 'loading' => 'lazy']); ?>
+              <?php mia_the_logo(['height' => '30', 'width' => '120', 'loading' => 'lazy', 'aria_label' => 'Homepage – Offcanvas Navigation']); ?>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
@@ -109,7 +107,7 @@
         <!-- Right Side Items -->
         <div class="d-none d-xl-block ms-auto">
           <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn desktop-cta">
-            Free Virtual Consultation <i class="fa-solid fa-arrow-right"></i>
+            Free Virtual Consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -122,4 +120,3 @@
     Free Virtual Consultation <i class="fa-solid fa-arrow-right"></i>
   </a>
 </div>
-

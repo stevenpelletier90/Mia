@@ -29,10 +29,10 @@ get_header(); ?>
                         
                         <div class="post-meta text-muted small mb-3">
                             <div class="d-flex align-items-center">
-                                <i class="far fa-calendar-alt me-2"></i>
+                                <i class="far fa-calendar-alt me-2" aria-hidden="true"></i>
                                 <span><?php echo get_the_date(); ?></span>
                                 <span class="mx-2">•</span>
-                                <i class="far fa-clock me-2"></i>
+                                <i class="far fa-clock me-2" aria-hidden="true"></i>
                                 <span><?php echo $reading_time; ?> min read</span>
                             </div>
                         </div>
@@ -84,19 +84,19 @@ get_header(); ?>
                                 <ul class="list-unstyled">
                                     <li class="mb-2">
                                         <a href="/before-after/" class="text-decoration-none">
-                                            <i class="fas fa-images me-2"></i>
+                                            <i class="fas fa-images me-2" aria-hidden="true"></i>
                                             Before & After Gallery
                                         </a>
                                     </li>
                                     <li class="mb-2">
                                         <a href="/faqs/" class="text-decoration-none">
-                                            <i class="fas fa-question-circle me-2"></i>
+                                            <i class="fas fa-question-circle me-2" aria-hidden="true"></i>
                                             Frequently Asked Questions
                                         </a>
                                     </li>
                                     <li class="mb-2">
                                         <a href="/conditions/" class="text-decoration-none">
-                                            <i class="fas fa-heart me-2"></i>
+                                            <i class="fas fa-heart me-2" aria-hidden="true"></i>
                                             Conditions We Treat
                                         </a>
                                     </li>

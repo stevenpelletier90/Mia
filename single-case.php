@@ -216,7 +216,7 @@ get_header(); ?>
                             ?>
                                 <a href="<?php echo get_permalink($linked_page); ?>" class="list-group-item list-group-item-action">
                                     <?php echo get_the_title($linked_page); ?>
-                                    <i class="fas fa-chevron-right"></i>
+                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
                                 </a>
                             <?php 
                                 endif;

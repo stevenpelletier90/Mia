@@ -51,7 +51,7 @@ get_header();
                         <?php if ($phone_number): ?>
                             <div class="location-detail mb-2">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-phone location-icon"></i>
+                                    <i class="fas fa-phone location-icon" aria-hidden="true"></i>
                                     <a href="tel:<?php echo esc_attr($phone_number); ?>" class="location-phone">
                                         <?php echo esc_html($phone_number); ?>
                                     </a>
@@ -98,7 +98,7 @@ get_header();
                         if (!empty($output)) : ?>
                             <div class="location-detail mb-2">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-clock location-icon"></i>
+                                    <i class="fas fa-clock location-icon" aria-hidden="true"></i>
                                     <span><?php echo implode(' | ', $output); ?></span>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ get_header();
                         <?php if ($location_maps_link): ?>
                             <div class="location-directions">
                                 <a href="<?php echo esc_url($location_maps_link); ?>" class="location-map-link" target="_blank" rel="noopener">
-                                    <i class="fas fa-map-marker-alt location-icon"></i> Get Directions
+                                    <i class="fas fa-map-marker-alt location-icon" aria-hidden="true"></i> Get Directions
                                 </a>
                             </div>
                         <?php endif; ?>
@@ -152,9 +152,9 @@ get_header();
                                     width="640"
                                     height="360"
                                 />
-                                <div class="video-play-button">
-                                    <i class="fa-solid fa-play"></i>
-                                </div>
+                                <button class="video-play-button" aria-label="Play video about <?php echo esc_attr(get_the_title()); ?>">
+                                    <i class="fa-solid fa-play" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@ get_header();
                                     <div class="card-body">
                                         <h3 class="h4"><?php the_title(); ?></h3>
                                         <p class="surgeon-title">Plastic Surgeon</p>
-                                        <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="gold-outline">View Profile <i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="gold-outline">View Profile <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>

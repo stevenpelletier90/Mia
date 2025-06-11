@@ -7,22 +7,22 @@
                 <h2 class="footer-heading">Follow Us</h2>
                 <div class="social-icons d-flex flex-wrap gap-3 mb-3">
                     <a href="https://www.facebook.com/miaaestheticssurgery/" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon">
-                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
                     </a>
                     <a href="https://www.instagram.com/mia_aesthetics/?hl=en" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
-                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
                     </a>
                     <a href="https://www.tiktok.com/@mia_aesthetics?lang=en" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon">
-                        <i class="fab fa-tiktok"></i>
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
                     </a>
                     <a href="https://x.com/mia_aesthetics?lang=en" target="_blank" rel="noopener" aria-label="Twitter" class="social-icon">
-                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
                     </a>
                     <a href="https://www.snapchat.com/add/miaaesthetics" target="_blank" rel="noopener" aria-label="SnapChat" class="social-icon">
-                        <i class="fab fa-snapchat-ghost"></i>
+                        <i class="fab fa-snapchat-ghost" aria-hidden="true"></i>
                     </a>
                     <a href="https://www.youtube.com/mia_aesthetics" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon">
-                        <i class="fab fa-youtube"></i>
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                             <div class="location-link mb-3">
                                 <a href="<?php echo esc_url($location_url); ?>" class="surgeon-link">
                                     <span>View <?php echo esc_html($location_title); ?> Location</span>
-                                    <i class="fas fa-arrow-right surgeon-arrow"></i>
+                                    <i class="fas fa-arrow-right surgeon-arrow" aria-hidden="true"></i>
                                 </a>
                             </div>
                             
@@ -114,7 +114,7 @@
                                             <li class="mb-2">
                                                 <a href="<?php echo esc_url($surgeon['url']); ?>" class="surgeon-link">
                                                     <span><?php echo esc_html($surgeon['title']); ?></span>
-                                                    <i class="fas fa-arrow-right surgeon-arrow"></i>
+                                                    <i class="fas fa-arrow-right surgeon-arrow" aria-hidden="true"></i>
                                                 </a>
                                             </li>
                                         <?php endforeach; ?>

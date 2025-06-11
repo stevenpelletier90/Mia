@@ -56,7 +56,7 @@ get_header(); ?>
         $overview_item = get_sub_field('overview_item');
         if (!empty(trim($overview_item))): ?>
             <div class="overview-item">
-                <i class="fa-solid fa-check-circle overview-check"></i>
+                <i class="fa-solid fa-check-circle overview-check" aria-hidden="true"></i>
                 <?php echo $overview_item; ?>
             </div>
         <?php endif;

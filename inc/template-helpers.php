@@ -62,7 +62,8 @@ function mia_the_logo($args = []) {
         'fetchpriority' => false,
         'loading' => false,
         'link' => true,
-        'link_class' => 'navbar-brand'
+        'link_class' => 'navbar-brand',
+        'aria_label' => 'Homepage'
     ];
     
     $args = wp_parse_args($args, $defaults);
@@ -97,7 +98,7 @@ function mia_the_logo($args = []) {
             $link_attrs = [
                 'href' => esc_url(home_url('/')),
                 'class' => esc_attr($args['link_class']),
-                'aria-label' => 'Home'
+                'aria-label' => esc_attr($args['aria_label'])
             ];
             
             echo '<a';
@@ -397,7 +398,6 @@ function mia_display_faqs($show_heading = true) {
                     </h3>
                     <div id="<?php echo esc_attr($collapse_id); ?>"
                          class="accordion-collapse collapse <?php echo $is_first ? 'show' : ''; ?>"
-                         aria-labelledby="<?php echo esc_attr($heading_id); ?>"
                          data-bs-parent="#<?php echo esc_attr($accordion_id); ?>">
                         <div class="accordion-body">
                             <?php echo wp_kses_post($faq['answer']); ?>

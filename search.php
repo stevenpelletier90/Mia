@@ -5,21 +5,43 @@
 
 get_header(); ?>
 
-<main>
-    <header class="bg-light py-5">
+<main class="search-results">
+    <div class="container">
+        <?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+        }
+        ?>
+    </div>
+    
+    <!-- Page Header -->
+    <section class="post-header py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <h1>
                         <?php printf(
                             esc_html__('Search Results for: %s', 'mia-aesthetics'),
-                            '<span>' . get_search_query() . '</span>'
+                            '<span style="color: var(--color-gold);">' . get_search_query() . '</span>'
                         ); ?>
                     </h1>
+                    <?php
+                    global $wp_query;
+                    $total_results = $wp_query->found_posts;
+                    if ($total_results > 0) {
+                        printf(
+                            '<p class="lead mb-0">Found %d %s matching your search.</p>',
+                            $total_results,
+                            $total_results === 1 ? 'result' : 'results'
+                        );
+                    } else {
+                        echo '<p class="lead mb-0">No results found for your search query.</p>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <section class="py-5">
         <div class="container">
@@ -62,7 +84,18 @@ get_header(); ?>
             <?php else : ?>
                 <div class="row">
                     <div class="col">
-                        <p><?php esc_html_e('No results found.', 'mia-aesthetics'); ?></p>
+                        <div class="no-results">
+                            <h3>No Results Found</h3>
+                            <p>We couldn't find any content matching your search. Try different keywords or browse our procedures and services.</p>
+                            <div class="mt-4">
+                                <a href="<?php echo esc_url(home_url('/procedures/')); ?>" class="mia-button me-3" data-variant="gold-outline">
+                                    Browse Procedures
+                                </a>
+                                <a href="<?php echo esc_url(home_url('/')); ?>" class="mia-button" data-variant="gold-outline">
+                                    Return Home
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php endif; ?>

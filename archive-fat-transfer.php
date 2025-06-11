@@ -130,7 +130,7 @@ get_header(); ?>
                 Can fat transfer be reversed or removed?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-1" class="accordion-collapse collapse show" aria-labelledby="heading-faq-fat-transfer-1" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-1" class="accordion-collapse collapse show" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 Fat transfer is technically not reversible, but if issues like lumps, asymmetry, or dissatisfaction arise, surgical revision can be used to remove or adjust the transferred fat. Sometimes these issues are corrected by adding more fat. At other times, liposuction can smooth out the added fat for a better contour. You should generally wait three months to seek a revision, however, to ensure that all of the residual swelling has subsided and that all the fat cells that are going to die have done so.
             </div>
@@ -144,7 +144,7 @@ get_header(); ?>
                 What happens if you gain weight after fat transfer?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-2" class="accordion-collapse collapse" aria-labelledby="heading-faq-fat-transfer-2" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-2" class="accordion-collapse collapse" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 The fat cells transferred during your procedure are, of course, all yours. This means that they will respond to weight changes in the same manner as other fat cells in your body. If you gain a significant amount of weight after surgery, your fat cells can get larger, altering and distorting your surgical results. The same is true if you lose a significant amount of weight. The transplanted fat cells can shrink and change your body's new shape.
             </div>
@@ -158,7 +158,7 @@ get_header(); ?>
                 Can you combine fat transfer with other procedures (like facelift or tummy tuck)?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-3" class="accordion-collapse collapse" aria-labelledby="heading-faq-fat-transfer-3" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-3" class="accordion-collapse collapse" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 You sure can. Fat transfer is frequently combined with other cosmetic surgeries, such as facelifts for added volume or tummy tucks for contouring. Combining procedures can enhance results and reduce overall recovery time. Fat transfer can also be combined with dermal fillers if you are a little short on donor fat or lose a bit of volume again over time as you age. You can combine fat augmentation with Botox as well, if, for example, you want to address under-eye hollows as well as crow's feet.
             </div>
@@ -172,7 +172,7 @@ get_header(); ?>
                 Is fat transfer safer than implants?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-4" class="accordion-collapse collapse" aria-labelledby="heading-faq-fat-transfer-4" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-4" class="accordion-collapse collapse" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 Both procedures are safe when performed by a qualified and skilled plastic surgeon with adequate experience. Fat transfer is generally considered lower risk, however, because it uses your own body tissue. This reduces the risk of rejection, allergic reactions, or, in the case of a fat transfer breast augmentation, capsular contracture. Remember, though, that every surgical procedure carries some risk, and fat transfer still comes with some rare but possible complications.
             </div>
@@ -186,7 +186,7 @@ get_header(); ?>
                 What does fat feel like after it's transferred?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-5" class="accordion-collapse collapse" aria-labelledby="heading-faq-fat-transfer-5" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-5" class="accordion-collapse collapse" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 When fully healed, transferred fat feels like, well… you. It should feel soft and natural, just like the tissue in the surrounding area. In the first few weeks after the procedure, you may feel some mild firmness or small lumps. (Actually, you shouldn't, since you should avoid touching the area! Tsk-tsk.) In time, these feelings will give way to a natural sensation.
             </div>
@@ -200,7 +200,7 @@ get_header(); ?>
                 Can fat transfer migrate to other parts of the body?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-6" class="accordion-collapse collapse" aria-labelledby="heading-faq-fat-transfer-6" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-6" class="accordion-collapse collapse" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 Nope. Once fat is transferred and establishes itself in its new home with a good blood supply, it won't go anywhere. As you heal, it may look like things are moving and shifting. Slight shifting during healing is normal, and your fat cells can die and be reabsorbed at different rates, making it appear as though things are moving. Once you're fully healed, however, your fat cells aren't going anywhere.
             </div>
@@ -214,7 +214,7 @@ get_header(); ?>
                 How does Mia Aesthetics ensure fat survival rates are high?
             </button>
         </h3>
-        <div id="collapse-faq-fat-transfer-7" class="accordion-collapse collapse" aria-labelledby="heading-faq-fat-transfer-7" data-bs-parent="#faq-accordion-fat-transfer">
+        <div id="collapse-faq-fat-transfer-7" class="accordion-collapse collapse" data-bs-parent="#faq-accordion-fat-transfer">
             <div class="accordion-body">
                 At Mia Aesthetics, we use advanced fat purification techniques, gentle harvesting methods, and meticulous injection execution to maximize fat viability and retention. Post-op care instructions are also tailored to help patients retain the most fat volume long-term.
             </div>

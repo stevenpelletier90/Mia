@@ -100,9 +100,9 @@ get_header(); ?>
                                 
                                 // Previous button
                                 if ($current_page > 1) {
-                                    echo '<a href="' . get_pagenum_link($current_page - 1) . '" class="btn btn-outline-primary" aria-label="Previous page"><i class="fas fa-chevron-left me-1"></i> Previous</a>';
+                                    echo '<a href="' . get_pagenum_link($current_page - 1) . '" class="btn btn-outline-primary" aria-label="Previous page"><i class="fas fa-chevron-left me-1" aria-hidden="true"></i> Previous</a>';
                                 } else {
-                                    echo '<button class="btn btn-outline-primary disabled" aria-label="Previous page" disabled><i class="fas fa-chevron-left me-1"></i> Previous</button>';
+                                    echo '<button class="btn btn-outline-primary disabled" aria-label="Previous page" disabled><i class="fas fa-chevron-left me-1" aria-hidden="true"></i> Previous</button>';
                                 }
                                 
                                 // Page indicator
@@ -110,9 +110,9 @@ get_header(); ?>
                                 
                                 // Next button
                                 if ($current_page < $total_pages) {
-                                    echo '<a href="' . get_pagenum_link($current_page + 1) . '" class="btn btn-outline-primary" aria-label="Next page">Next <i class="fas fa-chevron-right ms-1"></i></a>';
+                                    echo '<a href="' . get_pagenum_link($current_page + 1) . '" class="btn btn-outline-primary" aria-label="Next page">Next <i class="fas fa-chevron-right ms-1" aria-hidden="true"></i></a>';
                                 } else {
-                                    echo '<button class="btn btn-outline-primary disabled" aria-label="Next page" disabled>Next <i class="fas fa-chevron-right ms-1"></i></button>';
+                                    echo '<button class="btn btn-outline-primary disabled" aria-label="Next page" disabled>Next <i class="fas fa-chevron-right ms-1" aria-hidden="true"></i></button>';
                                 }
                                 
                                 echo '</div>';

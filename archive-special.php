@@ -270,7 +270,7 @@ get_header(); ?>
                                     How do I redeem a special offer?
                                 </button>
                             </h2>
-                            <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#specialsFaq">
+                            <div id="faqCollapse1" class="accordion-collapse collapse show" data-bs-parent="#specialsFaq">
                                 <div class="accordion-body">
                                     Mention the special when booking your consultation. Our staff will apply the discount to your procedure when scheduled within the valid timeframe.
                                 </div>
@@ -283,7 +283,7 @@ get_header(); ?>
                                     Can specials be combined with other offers?
                                 </button>
                             </h2>
-                            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#specialsFaq">
+                            <div id="faqCollapse2" class="accordion-collapse collapse" data-bs-parent="#specialsFaq">
                                 <div class="accordion-body">
                                     Generally, our special offers cannot be combined with other promotions. Each special applies to a specific procedure or service as described.
                                 </div>
@@ -296,7 +296,7 @@ get_header(); ?>
                                     How long are specials typically available?
                                 </button>
                             </h2>
-                            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#specialsFaq">
+                            <div id="faqCollapse3" class="accordion-collapse collapse" data-bs-parent="#specialsFaq">
                                 <div class="accordion-body">
                                     Each special has its own expiration date clearly listed. Most offers are available for 1-3 months, but limited-time offers may be shorter.
                                 </div>
@@ -309,7 +309,7 @@ get_header(); ?>
                                     Do I need to pay in full to get the special price?
                                 </button>
                             </h2>
-                            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#specialsFaq">
+                            <div id="faqCollapse4" class="accordion-collapse collapse" data-bs-parent="#specialsFaq">
                                 <div class="accordion-body">
                                     Payment requirements vary by special. Some offers require payment in full at booking, while others work with our standard payment plans. Details are specified on each special offer page.
                                 </div>

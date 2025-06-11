@@ -96,7 +96,6 @@ get_header(); ?>
                                         <div 
                                             id="<?php echo $collapse_id; ?>" 
                                             class="condition-collapse collapse" 
-                                            aria-labelledby="<?php echo $heading_id; ?>" 
                                             data-bs-parent="#conditionsAccordion">
                                             <div class="condition-body">
                                                 <div class="child-conditions-list">

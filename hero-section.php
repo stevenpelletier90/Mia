@@ -31,7 +31,7 @@
                  width="1920"
                  height="1080"
                  class="d-block w-100" 
-                 alt="Slide 1" 
+                 alt="Mia Aesthetics homepage banner showcasing plastic surgery procedures" 
                  fetchpriority="high">
             <?php else: ?>
             <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 1080px;">
@@ -49,7 +49,7 @@
                  width="1920"
                  height="1080"
                  class="d-block w-100" 
-                 alt="Slide 2"
+                 alt="Non-surgical treatments and aesthetic procedures at Mia Aesthetics"
                  loading="lazy">
             <?php else: ?>
             <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 1080px;">
@@ -84,7 +84,7 @@
         <div class="hero-box-overlay">
           <div class="hero-box-title">Before & After</div>
           <a href="<?php echo esc_url(home_url('/before-after/')); ?>" class="mia-button" data-variant="hero">
-            View Gallery <i class="fa-solid fa-arrow-right"></i>
+            View Gallery <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -110,7 +110,7 @@
         <div class="hero-box-overlay">
           <div class="hero-box-title">Financing</div>
           <a href="<?php echo esc_url(home_url('/financing/')); ?>" class="mia-button" data-variant="hero">
-            View Options <i class="fa-solid fa-arrow-right"></i>
+            View Options <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>

@@ -95,7 +95,7 @@ get_header(); ?>
                                         </p>
                                         <?php endif; ?>
                                         
-                                        <a href="<?php the_permalink(); ?>" class="surgeon-bio-link">View Bio <i class="fas fa-arrow-right"></i></a>
+                                        <a href="<?php the_permalink(); ?>" class="surgeon-bio-link">View Bio <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>

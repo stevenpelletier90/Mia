@@ -37,7 +37,7 @@ get_header(); ?>
                     <?php else: ?>
                         <div class="surgeon-headshot surgeon-headshot-placeholder">
                             <div class="placeholder-circle">
-                                <i class="fa-solid fa-user-doctor"></i>
+                                <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -144,9 +144,9 @@ get_header(); ?>
                                     width="640"
                                     height="360"
                                 />
-                                <div class="video-play-button">
-                                    <i class="fa-solid fa-play"></i>
-                                </div>
+                                <button class="video-play-button" aria-label="Play video about <?php echo esc_attr(get_the_title()); ?>">
+                                    <i class="fa-solid fa-play" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@ get_header(); ?>
                                             ?>
                                             <p class="card-text small"><?php echo $excerpt; ?></p>
                                             <div class="text-end">
-                                                <span>Learn More <i class="fa-solid fa-arrow-right procedure-arrow"></i></span>
+                                                <span>Learn More <i class="fa-solid fa-arrow-right procedure-arrow" aria-hidden="true"></i></span>
                                             </div>
                                         </div>
                                     </a>
@@ -218,9 +218,9 @@ get_header(); ?>
                                         width="640"
                                         height="360"
                                     />
-                                    <div class="video-play-button">
-                                        <i class="fa-solid fa-play"></i>
-                                    </div>
+                                    <button class="video-play-button" aria-label="Play video about <?php echo esc_attr(get_the_title()); ?>">
+                                        <i class="fa-solid fa-play" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -248,15 +248,15 @@ get_header(); ?>
                             <!-- Enhanced CTA Buttons -->
                             <div class="sidebar-cta-buttons">
                                 <a href="#" class="btn btn-sidebar">
-                                    <i class="fa-solid fa-road-circle-check"></i>
+                                    <i class="fa-solid fa-road-circle-check" aria-hidden="true"></i>
                                     <span>Surgical Journey</span>
                                 </a>
                                 <a href="#" class="btn btn-sidebar">
-                                    <i class="fa-solid fa-plane-departure"></i>
+                                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                                     <span>Out of Town Patients</span>
                                 </a>
                                 <a href="#" class="btn btn-sidebar">
-                                    <i class="fa-solid fa-credit-card"></i>
+                                    <i class="fa-solid fa-credit-card" aria-hidden="true"></i>
                                     <span>Financing</span>
                                 </a>
                             </div>

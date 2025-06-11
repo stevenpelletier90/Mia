@@ -123,7 +123,7 @@ $hero_id = get_post_thumbnail_id( $post );
 
                             <div class="text-center mt-4">
                                 <a href="#gallery" class="mia-button" data-variant="gold">
-                                    View More Results <i class="fa-solid fa-arrow-right"></i>
+                                    View More Results <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>

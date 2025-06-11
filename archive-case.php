@@ -114,7 +114,7 @@ get_header(); ?>
                     <h2 class="h3 mb-3">Browse Results by Surgeon</h2>
                     <p class="lead text-muted mb-4">Explore transformations organized by our expert surgical team members to see their specialized work and artistic approach.</p>
                     <a href="/before-after/before-after-by-doctor/" class="btn btn-primary btn-lg">
-                        View Results by Surgeon <i class="fas fa-arrow-right ms-2"></i>
+                        View Results by Surgeon <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
