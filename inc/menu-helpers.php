@@ -491,5 +491,3 @@ function render_mobile_before_after_menu() {
     </ul>
     <?php
 }
-
-?>

@@ -5,7 +5,8 @@
       "Bash(wp post list:*)",
       "Bash(grep:*)",
       "Bash(rg:*)",
-      "Bash(wp:*)"
+      "Bash(wp:*)",
+      "Bash(-print)"
     ],
     "deny": []
   }

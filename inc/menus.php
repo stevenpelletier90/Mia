@@ -93,4 +93,3 @@ function render_mia_menu($type = 'desktop') {
 }
 
 // (Other menu rendering functions are defined in inc/menu-helpers.php)
-?>

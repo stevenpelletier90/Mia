@@ -327,4 +327,3 @@ function mia_register_block_patterns() {
     }
 }
 add_action('init', 'mia_register_block_patterns');
-?>

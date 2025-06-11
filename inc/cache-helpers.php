@@ -78,4 +78,3 @@ function mia_get_site_stats() {
 
 	return $stats;
 }
-?>

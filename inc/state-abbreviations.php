@@ -44,4 +44,3 @@ function mia_get_state_abbr($state) {
     }
     return $state;
 }
-?>

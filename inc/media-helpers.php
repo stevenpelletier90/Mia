@@ -269,4 +269,3 @@ function mia_before_after_img( $img, $label ) {
     $src = is_array( $img ) ? $img['url'] : $img;
     return "<img src='" . esc_url( $src ) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " surgery image' loading='lazy'>";
 }
-?>

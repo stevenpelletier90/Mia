@@ -32,7 +32,7 @@
         <?php mia_the_logo(['fetchpriority' => true, 'link_class' => 'navbar-brand me-xl-3', 'aria_label' => 'Homepage – Main Navigation']); ?>
         <!-- Medium Mobile CTA - Only visible on medium mobile devices -->
         <div class="d-none d-sm-block d-xl-none mx-auto">
-          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn">
+          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn" aria-label="Schedule free virtual consultation">
             Free Virtual Consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
@@ -63,10 +63,10 @@
                 <!-- Procedures Menu - Mobile (using refactored functions) -->
                 <?php render_procedures_menu($menu_structure['procedures'], true); ?>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="non-surgical-dropdown" aria-describedby="non-surgical-menu">
                     Non-Surgical
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu" aria-labelledby="non-surgical-dropdown" id="non-surgical-menu">
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/non-surgical/j-plasma-skin-tightening/')); ?>">J-Plasma</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/weight-loss/')); ?>">Skinny Shot</a></li>
                   </ul>
@@ -85,10 +85,10 @@
                 </li>
                 <!-- Patient Portal Dropdown -->
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="patient-portal-dropdown" aria-describedby="patient-portal-menu">
                     Patient Portal
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu" aria-labelledby="patient-portal-dropdown" id="patient-portal-menu">
                     <li>
                       <a class="dropdown-item" href="https://patient.miaaesthetics.com/s/login?ec=302&startURL=%2Fs%2Fhome" target="_blank" rel="noopener">
                         Patient Portal Login
@@ -106,7 +106,7 @@
         </div>
         <!-- Right Side Items -->
         <div class="d-none d-xl-block ms-auto">
-          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn desktop-cta">
+          <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="header-btn desktop-cta" aria-label="Schedule free virtual consultation">
             Free Virtual Consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
@@ -116,7 +116,7 @@
 </header>
 <!-- Mobile Floating CTA Button - Only visible on mobile -->
 <div id="mobileCta" class="mobile-cta-container">
-  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="mobile-consultation-btn">
-    Free Virtual Consultation <i class="fa-solid fa-arrow-right"></i>
+  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="mobile-consultation-btn" aria-label="Schedule free virtual consultation">
+    Free Virtual Consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
   </a>
 </div>
