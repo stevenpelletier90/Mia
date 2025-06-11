@@ -47,7 +47,7 @@ function mia_modify_archive_queries($query) {
     
     // Case archive modifications
     elseif (is_post_type_archive('case')) {
-        $query->set('posts_per_page', 12);      // Paginate cases
+        $query->set('posts_per_page', -1);      // Show all cases
         $query->set('orderby', 'date');         // Most recent first
         $query->set('order', 'DESC');
     }
@@ -101,7 +101,7 @@ function mia_modify_taxonomy_queries($query) {
     
     // Case category taxonomy
     if (is_tax('case-category')) {
-        $query->set('posts_per_page', 12);      // Paginate cases
+        $query->set('posts_per_page', -1);      // Show all cases
         $query->set('orderby', 'date');         // Most recent first
         $query->set('order', 'DESC');
     }
@@ -308,7 +308,7 @@ add_action('pre_get_posts', 'mia_optimize_queries', 999);
  */
 function mia_pagination_rewrite_rules() {
     // Add rewrite rules for custom post type pagination
-    $post_types = ['case', 'special'];
+    $post_types = ['special'];
     
     foreach ($post_types as $post_type) {
         add_rewrite_rule(
@@ -325,7 +325,7 @@ add_action('init', 'mia_pagination_rewrite_rules');
  */
 function mia_fix_pagination($query) {
     if (!is_admin() && $query->is_main_query()) {
-        if (is_post_type_archive(['case', 'special'])) {
+        if (is_post_type_archive(['special'])) {
             if (get_query_var('paged')) {
                 $query->set('paged', get_query_var('paged'));
             } elseif (get_query_var('page')) {
@@ -335,3 +335,73 @@ function mia_fix_pagination($query) {
     }
 }
 add_action('pre_get_posts', 'mia_fix_pagination');
+
+/**
+ * Get all non-surgical procedures grouped by category
+ * Optimized single query instead of multiple individual queries
+ */
+function mia_get_non_surgical_by_category() {
+    static $cached_results = null;
+    
+    if ($cached_results !== null) {
+        return $cached_results;
+    }
+    
+    $all_procedures = new WP_Query([
+        'post_type' => 'non-surgical',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'orderby' => 'menu_order title',
+        'order' => 'ASC',
+        'meta_query' => [
+            [
+                'key' => 'procedure_category',
+                'compare' => 'EXISTS'
+            ]
+        ],
+        'update_post_meta_cache' => true,
+        'update_post_term_cache' => false
+    ]);
+    
+    $grouped = [
+        'injectable' => [],
+        'skin' => [],
+        'body' => [],
+        'wellness' => []
+    ];
+    
+    $counts = [
+        'injectable' => 0,
+        'skin' => 0,
+        'body' => 0,
+        'wellness' => 0
+    ];
+    
+    if ($all_procedures->have_posts()) {
+        while ($all_procedures->have_posts()) {
+            $all_procedures->the_post();
+            
+            $categories = get_field('procedure_category');
+            if (is_array($categories)) {
+                foreach ($categories as $category) {
+                    if (isset($grouped[$category])) {
+                        $grouped[$category][] = get_post();
+                        $counts[$category]++;
+                    }
+                }
+            } elseif (is_string($categories) && isset($grouped[$categories])) {
+                $grouped[$categories][] = get_post();
+                $counts[$categories]++;
+            }
+        }
+    }
+    
+    wp_reset_postdata();
+    
+    $cached_results = [
+        'grouped' => $grouped,
+        'counts' => $counts
+    ];
+    
+    return $cached_results;
+}

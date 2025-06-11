@@ -52,19 +52,8 @@ get_header(); ?>
                                 <div class="overlay-content p-3 text-white w-100">
                                     <span class="category-badge px-2 py-1 rounded-pill small">
                                         <?php
-                                        $injectable_count = new WP_Query([
-                                            'post_type' => 'non-surgical',
-                                            'meta_query' => [
-                                                [
-                                                    'key' => 'procedure_category',
-                                                    'value' => 'injectable',
-                                                    'compare' => 'LIKE'
-                                                ]
-                                            ],
-                                            'posts_per_page' => -1
-                                        ]);
-                                        echo $injectable_count->found_posts . ' Procedures';
-                                        wp_reset_postdata();
+                                        $procedures_data = mia_get_non_surgical_by_category();
+                                        echo $procedures_data['counts']['injectable'] . ' Procedures';
                                         ?>
                                     </span>
                                 </div>

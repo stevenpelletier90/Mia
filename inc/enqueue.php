@@ -492,32 +492,6 @@ function mia_get_primary_script_handle() {
     return 'jquery';
 }
 
-/**
- * Preload critical assets for better performance
- */
-function mia_preload_critical_assets() {
-    $assets_url = get_template_directory_uri() . '/assets';
-    
-    // Preload critical fonts
-    $fonts = [
-        'Inter-VariableFont_opsz,wght.woff2',
-        'Montserrat-VariableFont_wght.woff2'
-    ];
-    
-    foreach ($fonts as $font) {
-        echo '<link rel="preload" href="' . esc_url($assets_url . '/fonts/' . $font) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
-    }
-    
-    // Preload Font Awesome fonts
-    echo '<link rel="preload" href="' . esc_url($assets_url . '/fontawesome/webfonts/fa-solid-900.woff2') . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
-    echo '<link rel="preload" href="' . esc_url($assets_url . '/fontawesome/webfonts/fa-regular-400.woff2') . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
-    
-    // Preload critical CSS
-    echo '<link rel="preload" href="' . esc_url($assets_url . '/css/_fonts.css') . '" as="style">' . "\n";
-    echo '<link rel="preload" href="' . esc_url($assets_url . '/bootstrap/css/bootstrap.min.css') . '" as="style">' . "\n";
-    echo '<link rel="preload" href="' . esc_url($assets_url . '/css/_base.css') . '" as="style">' . "\n";
-}
-add_action('wp_head', 'mia_preload_critical_assets', 2);
 
 /**
  * Add resource hints for external resources
@@ -533,27 +507,3 @@ function mia_resource_hints($hints, $relation_type) {
 }
 add_filter('wp_resource_hints', 'mia_resource_hints', 10, 2);
 
-/**
- * Defer non-critical JavaScript (frontend only)
- */
-function mia_defer_scripts($tag, $handle, $src) {
-    // Don't defer scripts in admin area
-    if (is_admin()) {
-        return $tag;
-    }
-    
-    // Scripts that should not be deferred
-    $no_defer = ['jquery', 'jquery-core', 'jquery-migrate', 'wp-util', 'underscore', 'wp-api-request'];
-    
-    if (in_array($handle, $no_defer)) {
-        return $tag;
-    }
-    
-    // Add defer attribute to non-critical scripts (guard against double-insertion)
-    if (strpos($tag, ' defer') === false) {
-        return str_replace(' src', ' defer src', $tag);
-    }
-    
-    return $tag;
-}
-add_filter('script_loader_tag', 'mia_defer_scripts', 10, 3);
