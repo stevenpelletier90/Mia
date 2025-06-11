@@ -94,9 +94,9 @@ get_header(); ?>
                             <h2 class="h4 mb-3">Breast Cases</h2>
                             <p class="card-text text-muted mb-3">Explore real results from our comprehensive breast surgery procedures.</p>
                             <ul class="list-unstyled case-links">
-                                <li><a href="/before-after/breast/breast-augmentation/" class="text-decoration-none">Breast Augmentation Cases</a></li>
-                                <li><a href="/before-after/breast/breast-reduction/" class="text-decoration-none">Breast Reduction Results</a></li>
-                                <li><a href="/before-after/breast/breast-lift/" class="text-decoration-none">Breast Lift Transformations</a></li>
+                                <li><a href="/before-after/breast-augmentation/" class="text-decoration-none">Breast Augmentation Cases</a></li>
+                                <li><a href="/before-after/breast-reduction/" class="text-decoration-none">Breast Reduction Results</a></li>
+                                <li><a href="/before-after/breast-lift/" class="text-decoration-none">Breast Lift Transformations</a></li>
                                 <li><a href="/before-after/" class="text-decoration-none"><strong>View All Breast Cases</strong></a></li>
                             </ul>
                         </div>

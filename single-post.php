@@ -21,7 +21,7 @@ get_header(); ?>
         $reading_time = ceil($word_count / 200);
     ?>
 
-        <header class="post-header py-5">
+        <section class="post-header py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -43,7 +43,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
 
         <article class="py-5">
             <div class="container">

@@ -14,7 +14,7 @@ get_header(); ?>
     </div>
     
     <!-- Archive Header -->
-    <header class="post-header py-5">
+    <section class="post-header py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -22,7 +22,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Archive Content -->
     <section class="py-5">
