@@ -6,7 +6,8 @@
       "Bash(grep:*)",
       "Bash(rg:*)",
       "Bash(wp:*)",
-      "Bash(-print)"
+      "Bash(-print)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

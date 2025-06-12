@@ -187,20 +187,15 @@ get_header(); ?>
                     </section>
                     <?php endif; ?>
 
-                    <?php if (get_field('case_background')) : ?>
+                    <?php if (get_the_content()) : ?>
                     <!-- Patient Background -->
                     <section class="mb-5">
                         <h2 class="h4 mb-3">Patient Background</h2>
                         <div class="case-background">
-                            <?php echo get_field('case_background'); ?>
+                            <?php the_content(); ?>
                         </div>
                     </section>
                     <?php endif; ?>
-
-                    <!-- Main Content -->
-                    <div class="content">
-                        <?php the_content(); ?>
-                    </div>
                     
                     <?php 
                     // Treatment & Recovery Links

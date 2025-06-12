@@ -61,7 +61,6 @@
                 render_procedures_menu($menu_structure['procedures'], false); 
                 ?>
                 <!-- Procedures Menu - Mobile (using refactored functions) -->
-                <?php render_procedures_menu($menu_structure['procedures'], true); ?>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="non-surgical-dropdown" aria-describedby="non-surgical-menu">
                     Non-Surgical
@@ -73,13 +72,10 @@
                 </li>
                 <!-- Locations Menu (using refactored functions) -->
                 <?php render_locations_menu(false); ?>
-                <?php render_locations_menu(true); ?>
                 <!-- Surgeons Menu (using refactored functions) -->
                 <?php render_surgeons_menu(false); ?>
-                <?php render_surgeons_menu(true); ?>
                 <!-- Before & After Menu (using refactored functions) -->
                 <?php render_before_after_menu(false); ?>
-                <?php render_before_after_menu(true); ?>
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo esc_url(home_url('/financing/')); ?>">Financing</a>
                 </li>

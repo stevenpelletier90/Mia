@@ -1,183 +1,156 @@
 <?php
 /**
- * Featured Image Column for Admin Lists
- * 
- * Adds a featured image column to post, page, and custom post type admin lists
- * to quickly see which items have featured images set.
- * 
+ * Lean featured‑image column for every thumbnail‑enabled post type.
+ *
  * @package Mia_Aesthetics
  */
 
-// Prevent direct access
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-/**
- * Add featured image column to post types
- */
-function mia_add_featured_image_columns($columns) {
-    // Insert featured image column after title
-    $new_columns = [];
-    foreach ($columns as $key => $value) {
-        $new_columns[$key] = $value;
-        if ($key === 'title') {
-            $new_columns['featured_image'] = '<span class="dashicons dashicons-format-image" title="Featured Image"></span>';
-        }
-    }
-    return $new_columns;
+add_action( 'admin_init', 'mia_featured_image_columns_init' );
+
+function mia_featured_image_columns_init() {
+
+	/* ---------------------------------------------------------------------
+	 * Register the column, render its cells, and make it sortable.
+	 * ------------------------------------------------------------------ */
+	foreach ( get_post_types( [ 'public' => true ] ) as $type ) {
+		if ( post_type_supports( $type, 'thumbnail' ) ) {
+
+			// 1. Add header.
+			add_filter(
+				"manage_{$type}_posts_columns",
+				static function ( $cols ) {
+					$label = sprintf(
+						'<span class="dashicons dashicons-format-image" aria-hidden="true"></span>
+						 <span class="screen-reader-text">%s</span>',
+						esc_html__( 'Featured', 'mia' )
+					);
+					// Place after Title.
+					$offset = array_search( 'title', array_keys( $cols ), true );
+					return array_slice( $cols, 0, $offset + 1, true )
+						+ [ 'thumb' => $label ]
+						+ array_slice( $cols, $offset + 1, null, true );
+				}
+			);
+
+			// 2. Render each cell.
+			add_action(
+				"manage_{$type}_posts_custom_column",
+				static function ( $column, $post_id ) {
+					if ( 'thumb' !== $column ) {
+						return;
+					}
+
+					$id = get_post_thumbnail_id( $post_id );
+					if ( $id ) {
+						echo wp_kses_post(
+							wp_get_attachment_image( $id, [ 40, 40 ], false, [
+								'style' => 'width:40px;height:40px;object-fit:cover;border-radius:4px;',
+								'loading' => 'lazy',
+							] )
+						);
+					} else {
+						printf(
+							'<span class="dashicons dashicons-format-image" style="opacity:.3;font-size:20px;" aria-hidden="true"></span><span class="screen-reader-text">%s</span>',
+							esc_html__( 'No featured image set', 'mia' )
+						);
+					}
+				},
+				10,
+				2
+			);
+
+			// 3. Make sortable.
+			add_filter(
+				"manage_edit-{$type}_sortable_columns",
+				static fn( $cols ) => $cols + [ 'thumb' => 'has_thumb' ]
+			);
+		}
+	}
+
+	// 4. Alter main query when the user clicks to sort.
+	add_action(
+		'pre_get_posts',
+		static function ( $q ) {
+			if ( ! is_admin() || ! $q->is_main_query() ) {
+				return;
+			}
+			if ( 'has_thumb' === $q->get( 'orderby' ) ) {
+				$q->set( 'meta_key', '_thumbnail_id' );
+				$q->set( 'orderby', 'meta_value_num' );
+				$q->set( 'order', $q->get( 'order' ) ?: 'DESC' );
+			}
+		}
+	);
+
+	/* ---------------------------------------------------------------------
+	 * Custom bulk action: remove featured image.
+	 * (Setting a thumbnail from Media Library involves JS; omit here.)
+	 * ------------------------------------------------------------------ */
+	$screen_ids = array_map(
+		static fn( $pt ) => 'edit-' . $pt,
+		array_filter(
+			get_post_types( [ 'public' => true ] ),
+			static fn( $pt ) => post_type_supports( $pt, 'thumbnail' )
+		)
+	);
+
+	foreach ( $screen_ids as $screen ) {
+		add_filter(
+			"bulk_actions-{$screen}",
+			static fn( $acts ) => $acts + [ 'remove_thumb' => __( 'Remove Featured Image', 'mia' ) ]
+		);
+
+		add_filter(
+			"handle_bulk_actions-{$screen}",
+			static function ( $redirect, $action, $ids ) {
+				if ( 'remove_thumb' !== $action ) {
+					return $redirect;
+				}
+				if ( ! current_user_can( 'edit_posts' ) ) {
+					return $redirect;
+				}
+				foreach ( $ids as $id ) {
+					delete_post_thumbnail( $id );
+				}
+				return add_query_arg(
+					[ 'thumbs_removed' => count( $ids ) ],
+					$redirect
+				);
+			},
+			10,
+			3
+		);
+	}
+
+	add_action(
+		'admin_notices',
+		static function () {
+			if ( empty( $_GET['thumbs_removed'] ) ) {
+				return;
+			}
+			$count = (int) $_GET['thumbs_removed'];
+			printf(
+				'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
+				esc_html(
+					sprintf(
+						/* translators: %s = number of posts */
+						_n( 'Removed featured image from %s item.', 'Removed featured images from %s items.', $count, 'mia' ),
+						number_format_i18n( $count )
+					)
+				)
+			);
+		}
+	);
+
+	/* ---------------------------------------------------------------------
+	 * A tiny dashicon‑inline style so we avoid an extra stylesheet request.
+	 * ------------------------------------------------------------------ */
+	wp_add_inline_style(
+		'dashicons',
+		'.column-thumb { width:60px;text-align:center; }'
+	);
 }
-
-/**
- * Display featured image column content
- */
-function mia_show_featured_image_column($column, $post_id) {
-    if ($column === 'featured_image') {
-        if (has_post_thumbnail($post_id)) {
-            $thumbnail = get_the_post_thumbnail($post_id, [40, 40], [
-                'style' => 'width: 40px; height: 40px; object-fit: cover; border-radius: 4px;'
-            ]);
-            echo '<span title="Has featured image">' . $thumbnail . '</span>';
-        } else {
-            echo '<span class="dashicons dashicons-format-image" style="color: #ccc; font-size: 40px;" title="No featured image"></span>';
-        }
-    }
-}
-
-/**
- * Make featured image column sortable
- */
-function mia_make_featured_image_column_sortable($columns) {
-    $columns['featured_image'] = 'featured_image';
-    return $columns;
-}
-
-/**
- * Handle sorting by featured image
- */
-function mia_sort_by_featured_image($query) {
-    if (!is_admin() || !$query->is_main_query()) {
-        return;
-    }
-
-    $orderby = $query->get('orderby');
-    if ($orderby === 'featured_image') {
-        $query->set('meta_key', '_thumbnail_id');
-        $query->set('orderby', 'meta_value_num');
-        
-        // Show posts with featured images first when sorting
-        if ($query->get('order') === 'ASC') {
-            $query->set('meta_query', [
-                'relation' => 'OR',
-                [
-                    'key' => '_thumbnail_id',
-                    'compare' => 'EXISTS'
-                ],
-                [
-                    'key' => '_thumbnail_id',
-                    'compare' => 'NOT EXISTS'
-                ]
-            ]);
-        }
-    }
-}
-
-/**
- * Set column width for featured image column
- */
-function mia_featured_image_column_css() {
-    echo '<style>
-        .column-featured_image {
-            width: 60px;
-            text-align: center;
-        }
-        .column-featured_image .dashicons {
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
-        }
-    </style>';
-}
-
-/**
- * Apply to all relevant post types
- */
-function mia_init_featured_image_columns() {
-    // Get all public post types
-    $post_types = get_post_types(['public' => true], 'names');
-    
-    // Add featured image support to post types that might not have it
-    $supported_types = ['post', 'page', 'case', 'procedure', 'surgeon', 'location', 'special', 'condition', 'non-surgical'];
-    
-    foreach ($supported_types as $post_type) {
-        if (post_type_exists($post_type)) {
-            // Add featured image column
-            add_filter("manage_{$post_type}_posts_columns", 'mia_add_featured_image_columns');
-            add_action("manage_{$post_type}_posts_custom_column", 'mia_show_featured_image_column', 10, 2);
-            add_filter("manage_edit-{$post_type}_sortable_columns", 'mia_make_featured_image_column_sortable');
-        }
-    }
-    
-    // Add sorting functionality
-    add_action('pre_get_posts', 'mia_sort_by_featured_image');
-    
-    // Add CSS
-    add_action('admin_head', 'mia_featured_image_column_css');
-}
-
-// Initialize the featured image columns
-add_action('admin_init', 'mia_init_featured_image_columns');
-
-/**
- * Add bulk action to set featured images from media library
- */
-function mia_add_bulk_featured_image_actions($actions) {
-    $actions['set_featured_image'] = 'Set Featured Image';
-    $actions['remove_featured_image'] = 'Remove Featured Image';
-    return $actions;
-}
-
-/**
- * Handle bulk featured image actions
- */
-function mia_handle_bulk_featured_image_actions($redirect_url, $action, $post_ids) {
-    if ($action === 'remove_featured_image') {
-        foreach ($post_ids as $post_id) {
-            delete_post_thumbnail($post_id);
-        }
-        $redirect_url = add_query_arg('featured_images_removed', count($post_ids), $redirect_url);
-    }
-    
-    return $redirect_url;
-}
-
-/**
- * Show admin notices for bulk actions
- */
-function mia_featured_image_bulk_action_notices() {
-    if (!empty($_REQUEST['featured_images_removed'])) {
-        $count = intval($_REQUEST['featured_images_removed']);
-        echo '<div class="notice notice-success is-dismissible">';
-        $message = ($count === 1) 
-            ? sprintf('Featured image removed from %s post.', $count)
-            : sprintf('Featured images removed from %s posts.', $count);
-        echo '<p>' . $message . '</p>';
-        echo '</div>';
-    }
-}
-
-// Add bulk actions for all post types
-function mia_init_bulk_actions() {
-    $post_types = ['post', 'page', 'case', 'procedure', 'surgeon', 'location', 'special', 'condition', 'non-surgical'];
-    
-    foreach ($post_types as $post_type) {
-        if (post_type_exists($post_type)) {
-            add_filter("bulk_actions-edit-{$post_type}", 'mia_add_bulk_featured_image_actions');
-            add_filter("handle_bulk_actions-edit-{$post_type}", 'mia_handle_bulk_featured_image_actions', 10, 3);
-        }
-    }
-    
-    add_action('admin_notices', 'mia_featured_image_bulk_action_notices');
-}
-
-add_action('admin_init', 'mia_init_bulk_actions');
