@@ -1,10 +1,8 @@
-/* Post header styling to match archive pages */
 .post-header {
   background-color: #f8f8f8;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Consent button styling for dark background */
 .single-case .consent-trigger {
   color: var(--color-gold);
   text-decoration: underline;
@@ -15,16 +13,6 @@
 .single-case .consent-trigger:hover {
   color: #ffffff;
   text-decoration: underline;
-}
-
-/* Additional desktop spacing */
-@media (min-width: 1200px) {
-  .single-case .col-xl-7 {
-    padding-right: 3rem;
-  }
-  .single-case .col-xl-5 {
-    padding-left: 2rem;
-  }
 }
 
 .post-header h1 {
@@ -84,7 +72,6 @@ header h1 {
   height: 100%;
 }
 
-/* Arrow-style links for surgeon and location */
 .case-surgeon-arrow-link,
 .case-location-arrow-link {
   color: #666;
@@ -121,7 +108,6 @@ header h1 {
   transform: translateX(3px);
 }
 
-/* Legacy button-style links (keeping for backward compatibility) */
 .case-surgeon-link,
 .case-location-link {
   display: flex;
@@ -187,9 +173,8 @@ header h1 {
   margin-top: 2rem;
 }
 
-/* Modal styling - simplified to match gallery */
 #imageModal .modal-dialog {
-  max-width: 900px; /* Slightly wider */
+  max-width: 900px;
   margin: 1.75rem auto;
 }
 
@@ -199,14 +184,13 @@ header h1 {
 }
 
 #imageModal .modal-body {
-  padding: 40px; /* Reduced padding - arrows closer to image */
+  padding: 40px;
   position: relative;
   background-color: #fff;
 }
 
-/* Carousel image styling */
 #caseCarousel img {
-  max-height: 70vh; /* Reduced to prevent scrolling */
+  max-height: 70vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -214,7 +198,6 @@ header h1 {
   margin: 0 auto;
 }
 
-/* Carousel control arrows - dark background for visibility */
 #caseCarousel .carousel-control-prev,
 #caseCarousel .carousel-control-next {
   background-color: rgba(0, 0, 0, 0.5);
@@ -240,14 +223,12 @@ header h1 {
   right: 10px;
 }
 
-/* Center the arrow icons */
 #caseCarousel .carousel-control-prev-icon,
 #caseCarousel .carousel-control-next-icon {
   width: 20px;
   height: 20px;
 }
 
-/* Consultation card - remove old background, let gravity form handle styling */
 .consultation-card {
   background: transparent;
   border: none;
@@ -265,7 +246,6 @@ header h1 {
   padding: 0;
 }
 
-/* Gravity Forms styling for single case pages - copied from single procedure */
 .single-case .gform_wrapper {
   padding: 0 !important;
 }
@@ -495,9 +475,20 @@ header h1 {
 }
 
 @media (min-width: 1200px) {
+  .single-case .col-xl-7 {
+    padding-right: 3rem;
+  }
+
+  .single-case .col-xl-5 {
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
   .col-lg-8 {
     padding-right: 30px;
   }
+
   .col-lg-4 {
     padding-left: 30px;
   }
@@ -507,12 +498,15 @@ header h1 {
   .case-image-container {
     max-width: 100%;
   }
+
   .treatment-recovery-links {
     margin-bottom: 3rem;
   }
+
   .patient-info-card {
     padding: 0.75rem;
   }
+
   .consultation-card {
     margin-top: 40px;
   }
@@ -550,6 +544,7 @@ header h1 {
   .col-lg-8 h2.h4 {
     font-size: 1.15rem;
   }
+
   .consultation-card .card-body {
     padding: 15px;
   }

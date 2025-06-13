@@ -375,15 +375,10 @@ function mia_get_current_context() {
     
     // Specific taxonomy handling
     if (is_tax('case-category')) {
-        $ctx = ['type' => 'taxonomy', 'file' => 'taxonomy-case-category.css', 'handle' => 'taxonomy-case-category'];
+        $ctx = ['type' => 'case-category', 'file' => 'case-category.css', 'handle' => 'case-category'];
         return $ctx;
     }
 
-    // Generic taxonomies
-    if (is_tax()) {
-        $ctx = ['type' => 'taxonomy', 'file' => 'taxonomies.css', 'handle' => 'taxonomies'];
-        return $ctx;
-    }
 
     // Category pages
     if (is_category()) {
@@ -398,7 +393,7 @@ function mia_get_current_context() {
     }
     
     if (is_singular('post')) {
-        $ctx = ['type' => 'single', 'file' => 'single.css', 'handle' => 'single'];
+        $ctx = ['type' => 'post', 'file' => 'post.css', 'handle' => 'post'];
         return $ctx;
     }
     

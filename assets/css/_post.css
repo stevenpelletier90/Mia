@@ -251,15 +251,11 @@
   background-color: #fff;
   color: #333;
   line-height: 1.6;
-  /* font-size removed: use base or utility class */
 }
 
 @media (max-width: 991px) {
   .post-header {
     padding: 2rem 0;
-  }
-  .post-header h1 {
-    /* font-size removed: use base or utility class */
   }
   .col-lg-4 {
     margin-top: 3rem;
@@ -269,11 +265,5 @@
 @media (max-width: 767px) {
   .post-header {
     padding: 1.5rem 0;
-  }
-  .post-header h1 {
-    /* font-size removed: use base or utility class */
-  }
-  .content {
-    /* font-size removed: use base or utility class */
   }
 }
