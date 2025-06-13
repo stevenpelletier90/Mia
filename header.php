@@ -61,21 +61,22 @@
                 render_procedures_menu($menu_structure['procedures'], false); 
                 ?>
                 <!-- Procedures Menu - Mobile (using refactored functions) -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="non-surgical-dropdown" aria-describedby="non-surgical-menu">
-                    Non-Surgical
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="non-surgical-dropdown" id="non-surgical-menu">
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/non-surgical/j-plasma-skin-tightening/')); ?>">J-Plasma</a></li>
-                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/weight-loss/')); ?>">Skinny Shot</a></li>
-                  </ul>
-                </li>
+                <?php render_procedures_menu($menu_structure['procedures'], true); ?>
                 <!-- Locations Menu (using refactored functions) -->
-                <?php render_locations_menu(false); ?>
+                <?php 
+                  render_locations_menu(false); // desktop
+                  render_locations_menu(true);  // mobile
+                ?>
                 <!-- Surgeons Menu (using refactored functions) -->
-                <?php render_surgeons_menu(false); ?>
+                <?php 
+                  render_surgeons_menu(false); // desktop
+                  render_surgeons_menu(true);  // mobile
+                ?>
                 <!-- Before & After Menu (using refactored functions) -->
-                <?php render_before_after_menu(false); ?>
+                <?php 
+                  render_before_after_menu(false); // desktop
+                  render_before_after_menu(true);  // mobile
+                ?>
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo esc_url(home_url('/financing/')); ?>">Financing</a>
                 </li>

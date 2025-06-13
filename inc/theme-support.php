@@ -62,11 +62,14 @@ function mia_setup() {
     ] );
 
     /* ---- Images ------------------------------------------------------- */
-    add_image_size( 'hero-mobile',   640,  400, true );
-    add_image_size( 'hero-tablet',  1024,  600, true );
-    add_image_size( 'hero-desktop', 1920,  800, true );
-    add_image_size( 'card-thumb',    600,  400, true );
-    add_image_size( 'profile',       600,  600, true );
+    add_image_size( 'hero-mobile',    640,  400, true );
+    add_image_size( 'hero-tablet',   1024,  600, true );
+    add_image_size( 'hero-desktop',  1920,  800, true );
+    add_image_size( 'card-thumb',     600,  400, true );
+    add_image_size( 'profile',        600,  600, true );
+    add_image_size( 'gallery-small',  300,  225, true );
+    add_image_size( 'gallery-medium', 450,  338, true );
+    add_image_size( 'gallery-large',  600,  450, true );
 
     /* ---- Content width (classic embeds) ------------------------------ */
     $GLOBALS['content_width'] = 1200;

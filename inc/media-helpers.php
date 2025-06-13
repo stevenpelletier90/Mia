@@ -13,92 +13,6 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Add custom image sizes for responsive hero images
- */
-add_image_size( 'hero-mobile', 640, 400, true );    // Mobile hero images
-add_image_size( 'hero-tablet', 1024, 600, true );   // Tablet hero images  
-add_image_size( 'hero-desktop', 1920, 800, true );  // Desktop hero images
-
-/**
- * Add custom image sizes for before/after gallery images
- */
-add_image_size( 'gallery-small', 300, 225, true );   // Small gallery images (mobile)
-add_image_size( 'gallery-medium', 450, 338, true );  // Medium gallery images (tablet)
-add_image_size( 'gallery-large', 600, 450, true );   // Large gallery images (desktop)
-
-/**
- * Exclude hero images from lazy loading to optimize LCP
- */
-function mia_exclude_hero_from_lazy_loading($attr, $attachment, $size) {
-    // Check if this is a hero image size
-    if (in_array($size, ['hero-mobile', 'hero-tablet', 'hero-desktop'])) {
-        // Add loading="eager" to prevent lazy loading
-        $attr['loading'] = 'eager';
-        // Remove any lazy loading classes that might be added by plugins
-        if (isset($attr['class'])) {
-            $attr['class'] = str_replace(['lazy', 'lazyload'], '', $attr['class']);
-            $attr['class'] = trim(preg_replace('/\s+/', ' ', $attr['class']));
-        }
-    }
-    return $attr;
-}
-add_filter('wp_get_attachment_image_attributes', 'mia_exclude_hero_from_lazy_loading', 10, 3);
-
-/**
- * Disable lazy loading for hero images in procedure templates
- */
-function mia_disable_lazy_loading_for_hero($value, $image, $context) {
-    // Check if we're on a procedure page and this might be the hero image
-    if (is_singular('procedure') && $context === 'the_content') {
-        // Check if the image has hero-related classes or is positioned absolutely
-        if (strpos($image, 'position-absolute') !== false || 
-            strpos($image, 'hero-') !== false ||
-            strpos($image, 'procedure background') !== false) {
-            // Remove lazy loading attributes
-            $image = str_replace(['loading="lazy"', 'data-lazy-src', 'data-lazy-srcset', 'data-lazy-sizes'], 
-                               ['loading="eager"', 'src', 'srcset', 'sizes'], $image);
-            // Add fetchpriority if not present
-            if (strpos($image, 'fetchpriority') === false) {
-                $image = str_replace('<img ', '<img fetchpriority="high" ', $image);
-            }
-        }
-    }
-    return $value;
-}
-add_filter('wp_lazy_loading_enabled', 'mia_disable_lazy_loading_for_hero', 10, 3);
-
-/**
- * Completely disable lazy loading for hero images with specific class
- */
-function mia_disable_lazy_loading_for_hero_class($attr, $attachment, $size) {
-    // If this is a hero image or has the mia-hero-image class, disable lazy loading
-    if (isset($attr['class']) && strpos($attr['class'], 'mia-hero-image') !== false) {
-        $attr['loading'] = 'eager';
-        // Remove lazy loading classes
-        $attr['class'] = str_replace(['lazy', 'lazyload'], '', $attr['class']);
-        $attr['class'] = trim(preg_replace('/\s+/', ' ', $attr['class']));
-    }
-    return $attr;
-}
-add_filter('wp_get_attachment_image_attributes', 'mia_disable_lazy_loading_for_hero_class', 20, 3);
-
-/**
- * Enqueue hero images script for procedure pages
- */
-function mia_enqueue_hero_images_script() {
-    if (is_singular('procedure')) {
-        wp_enqueue_script(
-            'mia-hero-images',
-            get_template_directory_uri() . '/assets/js/hero-images.js',
-            [],
-            wp_get_theme()->get('Version'),
-            true
-        );
-    }
-}
-add_action('wp_enqueue_scripts', 'mia_enqueue_hero_images_script');
-
-/**
  * Extract video details from URL (YouTube, Vimeo, MP4, fallback)
  *
  * @param string $video_url URL to video
@@ -109,19 +23,18 @@ function get_video_details($video_url) {
         return false;
     }
 
-    // --- simple object-cache layer --------------------------------------------------
-    // Avoid re-processing the same video URL on every page load.
+    // Object-cache layer - avoid re-processing the same URL
     $cache_key = 'video_details_' . md5($video_url);
     $cached    = wp_cache_get($cache_key);
     if ($cached !== false) {
-        return $cached; // short-circuit if we already have the parsed data
+        return $cached;
     }
 
     $video_data = array(
         'url' => '',
         'embed_url' => '',
-        'type' => 'unknown', // Default type
-        'duration' => '' // Duration is harder to get reliably without API calls
+        'type' => 'unknown',
+        'duration' => ''
     );
 
     // Trim whitespace
@@ -158,20 +71,19 @@ function get_video_details($video_url) {
         return $video_data;
     }
 
-    // Fallback: Check if direct file URL (mp4) - simple check
+    // Fallback: Check if direct file URL (mp4)
     if (filter_var($video_url, FILTER_VALIDATE_URL) && pathinfo(parse_url($video_url, PHP_URL_PATH), PATHINFO_EXTENSION) === 'mp4') {
         $video_data['url'] = $video_url;
-        $video_data['embed_url'] = $video_url; // Direct link for embed
+        $video_data['embed_url'] = $video_url;
         $video_data['type'] = 'mp4';
         wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
 
-    // Fallback: If it's a valid URL but type is unknown, return it
+    // Fallback: If it's a valid URL but type is unknown
     if (filter_var($video_url, FILTER_VALIDATE_URL)) {
         $video_data['url'] = $video_url;
-        $video_data['embed_url'] = $video_url; // Use direct URL as fallback embed
-        // $video_data['type'] remains 'unknown'
+        $video_data['embed_url'] = $video_url;
         wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
         return $video_data;
     }
@@ -185,35 +97,35 @@ function get_video_details($video_url) {
  *
  * Looks for 'video_details', 'featured_video' or 'video' field groups/fields
  * and returns a unified array:
- *   ['url','title','description','thumbnail']  – empty array if none found.
+ *   ['url','title','description','thumbnail'] – empty array if none found.
  *
  * @param int|null $post_id Post ID or current post if null.
  * @return array|null
  */
-function mia_get_video_field( $post_id = null ) {
-    if ( $post_id === null ) {
+function mia_get_video_field($post_id = null) {
+    if ($post_id === null) {
         $post_id = get_the_ID();
     }
 
-    $candidates = [ 'video_details', 'featured_video', 'video' ];
-    foreach ( $candidates as $field ) {
-        $val = get_field( $field, $post_id );
-        if ( empty( $val ) ) {
+    $candidates = ['video_details', 'featured_video', 'video'];
+    foreach ($candidates as $field) {
+        $val = get_field($field, $post_id);
+        if (empty($val)) {
             continue;
         }
 
-        // Case 1: ACF repeater/group with explicit keys (video_url etc.)
-        if ( is_array( $val ) ) {
-            if ( ! empty( $val['video_url'] ) ) {
+        // Case 1: ACF repeater/group with explicit keys
+        if (is_array($val)) {
+            if (!empty($val['video_url'])) {
                 return [
-                    'url'         => is_array( $val['video_url'] ) ? $val['video_url']['url'] : $val['video_url'],
+                    'url'         => is_array($val['video_url']) ? $val['video_url']['url'] : $val['video_url'],
                     'title'       => $val['video_title']       ?? '',
                     'description' => $val['video_description'] ?? '',
                     'thumbnail'   => $val['video_thumbnail']   ?? '',
                 ];
             }
-            // Generic link array { url, title, description, thumbnail }
-            if ( ! empty( $val['url'] ) ) {
+            // Generic link array
+            if (!empty($val['url'])) {
                 return [
                     'url'         => $val['url'],
                     'title'       => $val['title']       ?? '',
@@ -224,7 +136,7 @@ function mia_get_video_field( $post_id = null ) {
         }
 
         // Case 2: Simple URL string
-        if ( is_string( $val ) && filter_var( $val, FILTER_VALIDATE_URL ) ) {
+        if (is_string($val) && filter_var($val, FILTER_VALIDATE_URL)) {
             return [
                 'url'         => $val,
                 'title'       => '',
@@ -240,19 +152,23 @@ function mia_get_video_field( $post_id = null ) {
 /**
  * Helper function for before/after gallery images
  * Handles both image IDs and URLs, with fallback to placeholder
+ *
+ * @param mixed $img Image ID, URL, or array
+ * @param string $label Image label (before/after)
+ * @return string HTML img tag
  */
-function mia_before_after_img( $img, $label ) {
-    // Sanitize the label parameter to prevent XSS
-    $safe_label = esc_attr( $label );
+function mia_before_after_img($img, $label) {
+    // Sanitize the label parameter
+    $safe_label = esc_attr($label);
     
-    if ( ! $img ) {
+    if (!$img) {
         $src = 'https://placehold.co/600x450';
-        return "<img src='" . esc_url( $src ) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " placeholder' loading='lazy'>";
+        return "<img src='" . esc_url($src) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " placeholder' loading='lazy'>";
     }
 
-    $id  = is_numeric( $img ) ? $img : attachment_url_to_postid( $img );
+    $id = is_numeric($img) ? $img : attachment_url_to_postid($img);
     
-    if ( $id ) {
+    if ($id) {
         return wp_get_attachment_image(
             $id,
             'gallery-small',
@@ -265,7 +181,7 @@ function mia_before_after_img( $img, $label ) {
         );
     }
     
-    // Fallback for direct URLs that couldn't be converted to attachment ID
-    $src = is_array( $img ) ? $img['url'] : $img;
-    return "<img src='" . esc_url( $src ) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " surgery image' loading='lazy'>";
+    // Fallback for direct URLs
+    $src = is_array($img) ? $img['url'] : $img;
+    return "<img src='" . esc_url($src) . "' class='img-fluid w-100 object-fit-cover' alt='" . $safe_label . " surgery image' loading='lazy'>";
 }

@@ -9,6 +9,15 @@
  * @package MiaAesthetics
  */
 
+/* Enqueue template-specific stylesheet */
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'mia-hero-canvas',
+        get_template_directory_uri() . '/assets/css/_hero-canvas.css',
+        ['mia-base', 'mia-bootstrap'],
+        wp_get_theme()->get('Version')
+    );
+});
 get_header(); ?>
 
 <main id="primary" <?php post_class(); ?>>

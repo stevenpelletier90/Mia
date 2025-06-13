@@ -109,15 +109,6 @@ function mia_enqueue_context_styles($assets_url, $version) {
         );
     }
     
-    // Special case: Gallery styles
-    if ($context['type'] === 'gallery' || is_page_template('page-before-after-by-doctor.php')) {
-        mia_enqueue_style(
-            'mia-gallery',
-            $assets_url . '/css/_gallery.css',
-            ['mia-bootstrap'],
-            $version
-        );
-    }
 }
 
 /**
@@ -344,13 +335,23 @@ function mia_get_current_context() {
     }
     
     // Special templates
-    if (is_page_template('page-blank-canvas.php') || is_page_template('page-hero-canvas.php')) {
-        $ctx = ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
+    if (is_page_template('page-blank-canvas.php')) {
+        $ctx = ['type' => 'page', 'file' => 'page-blank-canvas.css', 'handle' => 'page-blank-canvas'];
         return $ctx;
     }
-    
+
+    if (is_page_template('page-hero-canvas.php')) {
+        $ctx = ['type' => 'page', 'file' => 'page-hero-canvas.css', 'handle' => 'page-hero-canvas'];
+        return $ctx;
+    }
+
     if (is_page_template('page-before-after-by-doctor.php')) {
-        $ctx = ['type' => 'gallery', 'file' => 'gallery.css', 'handle' => 'gallery'];
+        $ctx = ['type' => 'page', 'file' => 'page-before-after-by-doctor.css', 'handle' => 'page-before-after-by-doctor'];
+        return $ctx;
+    }
+
+    if (is_page_template('page-case-category.php')) {
+        $ctx = ['type' => 'page', 'file' => 'page-case-category.css', 'handle' => 'page-case-category'];
         return $ctx;
     }
     
@@ -372,9 +373,21 @@ function mia_get_current_context() {
         return $ctx;
     }
     
-    // Taxonomies
+    // Specific taxonomy handling
+    if (is_tax('case-category')) {
+        $ctx = ['type' => 'taxonomy', 'file' => 'taxonomy-case-category.css', 'handle' => 'taxonomy-case-category'];
+        return $ctx;
+    }
+
+    // Generic taxonomies
     if (is_tax()) {
         $ctx = ['type' => 'taxonomy', 'file' => 'taxonomies.css', 'handle' => 'taxonomies'];
+        return $ctx;
+    }
+
+    // Category pages
+    if (is_category()) {
+        $ctx = ['type' => 'category', 'file' => 'category.css', 'handle' => 'category'];
         return $ctx;
     }
     
@@ -411,12 +424,6 @@ function mia_get_current_context() {
     
     // Pages
     if (is_page()) {
-        // Check for gallery shortcode
-        $post_content = get_post_field('post_content', get_the_ID());
-        if ($post_content && has_shortcode($post_content, 'gallery')) {
-            $ctx = ['type' => 'gallery', 'file' => 'gallery.css', 'handle' => 'gallery'];
-            return $ctx;
-        }
         $ctx = ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
         return $ctx;
     }
