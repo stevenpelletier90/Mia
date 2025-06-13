@@ -1,3 +1,7 @@
+/* Single Condition Template JavaScript */
+// Template: single-condition.php
+// Condition-specific functionality
+
 /**
  * JavaScript specific to the “Condition” single template
  * (extracted from the former global main.js)

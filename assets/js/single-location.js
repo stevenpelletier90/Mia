@@ -1,14 +1,18 @@
+/* Single Location Template JavaScript */
+// Template: single-location.php
+// Location-specific functionality
+
 /**
- * JavaScript for handling video thumbnail functionality
+ * JavaScript specific to the "Location" single template
  */
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Set up video thumbnail click handling for lazy loading
+  // Set up video thumbnail functionality
   setupVideoThumbnails();
 });
 
 /**
- * Sets up click handlers for video thumbnails to enable lazy loading
+ * Video thumbnail functionality for location videos
  */
 function setupVideoThumbnails() {
   // Find all video thumbnails on the page

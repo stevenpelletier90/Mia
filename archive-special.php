@@ -338,49 +338,5 @@ get_header(); ?>
 </main>
 
 
-<?php 
-// If you're using Slick Slider or similar for testimonials
-wp_enqueue_script(
-    'slick-slider', 
-    get_template_directory_uri() . '/assets/js/slick.min.js', 
-    array('jquery'), 
-    '1.8.1', 
-    true
-);
-
-// Custom JS for the page
-?>
-<script>
-jQuery(document).ready(function($) {
-    // Initialize slick slider if it exists and you're using it
-    if ($.fn.slick) {
-        $('.testimonial-slider').slick({
-            dots: true,
-            arrows: false,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    }
-    
-    // Optional: Countdown timer for expiring specials
-    // You would add your custom code here
-});
-</script>
 
 <?php get_footer(); ?>

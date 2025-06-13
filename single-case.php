@@ -282,28 +282,6 @@ get_header(); ?>
     </div>
 </div>
 
-<!-- Modal Initialisation Script -->
-<script>
-// Bootstrap 5 modal / carousel synchronisation
-(function() {
-    const imageModal = document.getElementById('imageModal');
-    if (!imageModal) return;
-
-    imageModal.addEventListener('show.bs.modal', function (event) {
-        const button   = event.relatedTarget;
-        const title    = button?.getAttribute('data-bs-title');
-        const carousel = bootstrap.Carousel.getInstance(document.getElementById('caseCarousel'));
-
-        if (carousel && title) {
-            carousel.to(title === 'Before Treatment' ? 0 : 1);
-        }
-    });
-
-    // Indicate clickability for all triggers
-    document.querySelectorAll('[data-bs-toggle="modal"][data-bs-target="#imageModal"]').forEach(el => {
-        el.style.cursor = 'pointer';
-    });
-})();
-</script>
+    <!-- Modal logic moved to assets/js/single-case-modal-sync.js -->
 
 <?php get_footer(); ?>

@@ -99,15 +99,6 @@ function mia_enqueue_context_styles($assets_url, $version) {
         $version
     );
     
-    // Special case: Hero styles for front page
-    if ($context['type'] === 'home') {
-        mia_enqueue_style(
-            'mia-hero',
-            $assets_url . '/css/_hero.css',
-            ['mia-home'],
-            $version
-        );
-    }
     
 }
 
@@ -122,7 +113,7 @@ function mia_enqueue_scripts() {
     mia_enqueue_script(
         'mia-bootstrap',
         $assets_url . '/bootstrap/js/bootstrap.bundle.min.js',
-        ['jquery', 'wp-util', 'underscore'],
+        [],
         $theme_version,
         true
     );
@@ -136,9 +127,9 @@ function mia_enqueue_scripts() {
             case 'home':
                 // Home page uses its own script instead of main.js
                 mia_enqueue_script(
-                    'mia-home',
-                    $assets_url . '/js/home.js',
-                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                    'mia-front-page',
+                    $assets_url . '/js/front-page.js',
+                    ['mia-bootstrap', 'jquery'],
                     $theme_version,
                     true
                 );
@@ -146,94 +137,210 @@ function mia_enqueue_scripts() {
                 
             case 'condition':
             case 'condition-child':
-                // Condition pages load both main.js and condition.js
+                // Condition pages and second child of procedures load condition.js
                 mia_enqueue_script(
-                    'mia-condition',
-                    $assets_url . '/js/condition.js',
-                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                    'mia-single-condition',
+                    $assets_url . '/js/single-condition.js',
+                    ['mia-bootstrap', 'jquery'],
                     $theme_version,
                     true
                 );
                 break;
                 
             case 'fat-transfer':
-                // Fat-transfer pages use the same JS as condition pages
+                // Fat-transfer pages use their own specific JS
                 mia_enqueue_script(
-                    'mia-condition',
-                    $assets_url . '/js/condition.js',
-                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                    'mia-single-fat-transfer',
+                    $assets_url . '/js/single-fat-transfer.js',
+                    ['mia-bootstrap', 'jquery'],
                     $theme_version,
                     true
                 );
                 break;
                 
             case 'surgeon':
-                // Surgeon pages load both main.js and surgeon.js
+                // Surgeon pages load surgeon.js
                 mia_enqueue_script(
-                    'mia-surgeon',
-                    $assets_url . '/js/surgeon.js',
-                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                    'mia-single-surgeon',
+                    $assets_url . '/js/single-surgeon.js',
+                    ['mia-bootstrap', 'jquery'],
                     $theme_version,
                     true
                 );
                 break;
                 
-            case 'gallery':
-                // Gallery pages load both main.js and gallery.js
+            case 'page-before-after-by-doctor':
+            case 'page-blank-canvas':
+            case 'page-case-category':
+            case 'page-hero-canvas':
+                // Page template scripts
                 mia_enqueue_script(
-                    'mia-gallery',
-                    $assets_url . '/js/gallery.js',
-                    ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                    'mia-' . $context['handle'],
+                    $assets_url . '/js/' . $context['handle'] . '.js',
+                    ['mia-bootstrap', 'jquery'],
                     $theme_version,
                     true
                 );
                 break;
                 
             case 'case':
-                // Case pages use main.js with WordPress dependencies
-                // No additional case-specific script needed
+                // Single “case” pages need extra modal/carousel sync logic
+                mia_enqueue_script(
+                    'mia-single-case',
+                    $assets_url . '/js/single-case.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'location':
+                // Location pages load location.js
+                mia_enqueue_script(
+                    'mia-single-location',
+                    $assets_url . '/js/single-location.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'non-surgical':
+                // Non-surgical pages load non-surgical.js
+                mia_enqueue_script(
+                    'mia-single-non-surgical',
+                    $assets_url . '/js/single-non-surgical.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'special':
+                // Special pages load special.js
+                mia_enqueue_script(
+                    'mia-single-special',
+                    $assets_url . '/js/single-special.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'procedure':
+                // Procedure pages load procedure.js
+                mia_enqueue_script(
+                    'mia-single-procedure',
+                    $assets_url . '/js/single-procedure.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'post':
+                // Single post pages load post.js
+                mia_enqueue_script(
+                    'mia-single-post',
+                    $assets_url . '/js/single-post.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'page':
+                // Regular pages load page.js
+                mia_enqueue_script(
+                    'mia-page',
+                    $assets_url . '/js/page.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'archive':
+                // Archive pages load archive.js
+                mia_enqueue_script(
+                    'mia-archive',
+                    $assets_url . '/js/archive.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'search':
+                // Search pages load search.js
+                mia_enqueue_script(
+                    'mia-search',
+                    $assets_url . '/js/search.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case '404':
+                // 404 pages load 404.js
+                mia_enqueue_script(
+                    'mia-404',
+                    $assets_url . '/js/404.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'case-category':
+                // Case category pages load case-category.js
+                mia_enqueue_script(
+                    'mia-case-category',
+                    $assets_url . '/js/case-category.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
+                break;
+                
+            case 'category':
+                // Category pages load category.js
+                mia_enqueue_script(
+                    'mia-category',
+                    $assets_url . '/js/category.js',
+                    ['mia-bootstrap', 'jquery'],
+                    $theme_version,
+                    true
+                );
                 break;
         }
     }
     
-    // Load main.js on most pages (except home page which has its own script)
-    if (!$context || $context['type'] !== 'home') {
-        mia_enqueue_script(
-            'mia-main',
-            $assets_url . '/js/main.js',
-            ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
-            $theme_version,
-            true
-        );
+    /* -------------------------------------------------------------
+     * Archive-specific scripts for all post type archives
+     * ------------------------------------------------------------- */
+    if (is_post_type_archive()) {
+        $post_type = get_post_type() ?: get_query_var('post_type');
+        if ($post_type) {
+            mia_enqueue_script(
+                'mia-archive-' . $post_type,
+                $assets_url . '/js/archive-' . $post_type . '.js',
+                ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
+                $theme_version,
+                true
+            );
+        }
     }
+
     
-    // Video script for surgeon and location pages
-    if (is_singular(['surgeon', 'location'])) {
-        mia_enqueue_script(
-            'mia-video',
-            $assets_url . '/js/video.js',
-            ['mia-bootstrap', 'jquery', 'wp-util', 'underscore'],
-            $theme_version,
-            true
-        );
-    }
     
-    // Front page specific script
-    if ($context && $context['type'] === 'home') {
-        mia_enqueue_script(
-            'mia-front-page',
-            $assets_url . '/js/front-page.js',
-            ['jquery', 'wp-util', 'underscore'],
-            $theme_version,
-            true
-        );
-    }
     
     // Header script for mobile CTA functionality
     mia_enqueue_script(
         'mia-header',
         $assets_url . '/js/header.js',
-        ['mia-bootstrap', 'wp-util', 'underscore'],
+        ['mia-bootstrap'],
         $theme_version,
         true
     );
@@ -336,64 +443,64 @@ function mia_get_current_context() {
     
     // Special templates
     if (is_page_template('page-blank-canvas.php')) {
-        $ctx = ['type' => 'page', 'file' => 'page-blank-canvas.css', 'handle' => 'page-blank-canvas'];
+        $ctx = ['type' => 'page', 'file' => '_page-blank-canvas.css', 'handle' => 'page-blank-canvas'];
         return $ctx;
     }
 
     if (is_page_template('page-hero-canvas.php')) {
-        $ctx = ['type' => 'page', 'file' => 'page-hero-canvas.css', 'handle' => 'page-hero-canvas'];
+        $ctx = ['type' => 'page', 'file' => '_page-hero-canvas.css', 'handle' => 'page-hero-canvas'];
         return $ctx;
     }
 
     if (is_page_template('page-before-after-by-doctor.php')) {
-        $ctx = ['type' => 'page', 'file' => 'page-before-after-by-doctor.css', 'handle' => 'page-before-after-by-doctor'];
+        $ctx = ['type' => 'page', 'file' => '_page-before-after-by-doctor.css', 'handle' => 'page-before-after-by-doctor'];
         return $ctx;
     }
 
     if (is_page_template('page-case-category.php')) {
-        $ctx = ['type' => 'page', 'file' => 'page-case-category.css', 'handle' => 'page-case-category'];
+        $ctx = ['type' => 'page', 'file' => '_page-case-category.css', 'handle' => 'page-case-category'];
         return $ctx;
     }
     
     // Front page
     if (is_front_page()) {
-        $ctx = ['type' => 'home', 'file' => 'home.css', 'handle' => 'home'];
+        $ctx = ['type' => 'home', 'file' => '_front-page.css', 'handle' => 'front-page'];
         return $ctx;
     }
     
     // Error pages
     if (is_404()) {
-        $ctx = ['type' => '404', 'file' => '404.css', 'handle' => '404'];
+        $ctx = ['type' => '404', 'file' => '_404.css', 'handle' => '404'];
         return $ctx;
     }
     
     // Search
     if (is_search()) {
-        $ctx = ['type' => 'search', 'file' => 'search.css', 'handle' => 'search'];
+        $ctx = ['type' => 'search', 'file' => '_search.css', 'handle' => 'search'];
         return $ctx;
     }
     
     // Specific taxonomy handling
     if (is_tax('case-category')) {
-        $ctx = ['type' => 'case-category', 'file' => 'case-category.css', 'handle' => 'case-category'];
+        $ctx = ['type' => 'case-category', 'file' => '_case-category.css', 'handle' => 'case-category'];
         return $ctx;
     }
 
 
     // Category pages
     if (is_category()) {
-        $ctx = ['type' => 'category', 'file' => 'category.css', 'handle' => 'category'];
+        $ctx = ['type' => 'category', 'file' => '_category.css', 'handle' => 'category'];
         return $ctx;
     }
     
     // Blog
     if (is_home() || (is_archive() && get_post_type() === 'post')) {
-        $ctx = ['type' => 'archive', 'file' => 'archive.css', 'handle' => 'archive'];
+        $ctx = ['type' => 'archive', 'file' => '_archive.css', 'handle' => 'archive'];
         return $ctx;
     }
     
     if (is_singular('post')) {
-        $ctx = ['type' => 'post', 'file' => 'post.css', 'handle' => 'post'];
+        $ctx = ['type' => 'post', 'file' => '_post.css', 'handle' => 'post'];
         return $ctx;
     }
     
@@ -403,23 +510,16 @@ function mia_get_current_context() {
         if ($post_type) {
             // Special handling for fat-transfer archive - use same CSS as single
             if ($post_type === 'fat-transfer') {
-                $ctx = ['type' => 'fat-transfer', 'file' => 'fat-transfer.css', 'handle' => 'fat-transfer'];
+                $ctx = ['type' => 'fat-transfer', 'file' => '_fat-transfer.css', 'handle' => 'fat-transfer'];
                 return $ctx;
             }
             
-            // Default archive handling for other post types
-            $ctx = [
-                'type' => 'archive',
-                'file' => $post_type . '-archive.css',
-                'handle' => $post_type . '-archive'
-            ];
-            return $ctx;
         }
     }
     
     // Pages
     if (is_page()) {
-        $ctx = ['type' => 'page', 'file' => 'page.css', 'handle' => 'page'];
+        $ctx = ['type' => 'page', 'file' => '_page.css', 'handle' => 'page'];
         return $ctx;
     }
     
@@ -431,48 +531,66 @@ function mia_get_current_context() {
         if ($post_type === 'procedure') {
             $ancestors = get_post_ancestors(get_queried_object());
             if (count($ancestors) === 2) {
-                $ctx = ['type' => 'condition-child', 'file' => 'condition.css', 'handle' => 'condition'];
+                $ctx = ['type' => 'condition-child', 'file' => '_condition.css', 'handle' => 'condition'];
+                return $ctx;
+            } else {
+                $ctx = ['type' => 'procedure', 'file' => '_procedure.css', 'handle' => 'procedure'];
                 return $ctx;
             }
         }
         
         // Special handling for conditions
         if ($post_type === 'condition') {
-            $ctx = ['type' => 'condition', 'file' => 'condition.css', 'handle' => 'condition'];
+            $ctx = ['type' => 'condition', 'file' => '_condition.css', 'handle' => 'condition'];
             return $ctx;
         }
         
         // Special handling for fat-transfer
         if ($post_type === 'fat-transfer') {
-            $ctx = ['type' => 'fat-transfer', 'file' => 'fat-transfer.css', 'handle' => 'fat-transfer'];
+            $ctx = ['type' => 'fat-transfer', 'file' => '_fat-transfer.css', 'handle' => 'fat-transfer'];
             return $ctx;
         }
         
         // Special handling for surgeons
         if ($post_type === 'surgeon') {
-            $ctx = ['type' => 'surgeon', 'file' => 'surgeon.css', 'handle' => 'surgeon'];
+            $ctx = ['type' => 'surgeon', 'file' => '_surgeon.css', 'handle' => 'surgeon'];
             return $ctx;
         }
         
         // Special handling for cases
         if ($post_type === 'case') {
-            $ctx = ['type' => 'case', 'file' => 'case.css', 'handle' => 'case'];
+            $ctx = ['type' => 'case', 'file' => '_case.css', 'handle' => 'case'];
             return $ctx;
         }
         
-        // Default single post type
-        if ($post_type && !in_array($post_type, ['post', 'page'])) {
-            $ctx = [
-                'type' => 'single',
-                'file' => $post_type . '.css',
-                'handle' => $post_type
-            ];
+        // Special handling for locations
+        if ($post_type === 'location') {
+            $ctx = ['type' => 'location', 'file' => '_location.css', 'handle' => 'location'];
             return $ctx;
         }
+        
+        // Special handling for non-surgical
+        if ($post_type === 'non-surgical') {
+            $ctx = ['type' => 'non-surgical', 'file' => '_non-surgical.css', 'handle' => 'non-surgical'];
+            return $ctx;
+        }
+        
+        // Special handling for special
+        if ($post_type === 'special') {
+            $ctx = ['type' => 'special', 'file' => '_special.css', 'handle' => 'special'];
+            return $ctx;
+        }
+        
     }
     
-    $ctx = null;
-    return $ctx;
+    // Log unexpected scenarios for debugging
+    if (WP_DEBUG) {
+        $current_url = $_SERVER['REQUEST_URI'] ?? 'unknown';
+        $post_type = get_post_type() ?: 'none';
+        error_log("[mia_get_current_context] No context found for URL: {$current_url}, Post Type: {$post_type}");
+    }
+    
+    return null;
 }
 
 /**
@@ -482,30 +600,34 @@ function mia_get_primary_script_handle() {
     $context = mia_get_current_context();
     
     if ($context && $context['type'] === 'home') {
-        return 'mia-home';
+        return 'mia-front-page';
     }
     
-    // Check if main.js is enqueued
-    if (wp_script_is('mia-main', 'enqueued')) {
-        return 'mia-main';
+    // Check if context-specific script is enqueued
+    if ($context) {
+        $script_handle = '';
+        
+        switch ($context['type']) {
+            case 'page-before-after-by-doctor':
+            case 'page-blank-canvas': 
+            case 'page-case-category':
+            case 'page-hero-canvas':
+                $script_handle = 'mia-' . $context['handle'];
+                break;
+            default:
+                $script_handle = 'mia-' . $context['type'];
+                break;
+        }
+        
+        if ($script_handle && wp_script_is($script_handle, 'enqueued')) {
+            return $script_handle;
+        }
     }
     
-    // Fallback to jQuery
+    // Fallback to header script, then jQuery
+    if (wp_script_is('mia-header', 'enqueued')) {
+        return 'mia-header';
+    }
+    
     return 'jquery';
 }
-
-
-/**
- * Add resource hints for external resources
- */
-function mia_resource_hints($hints, $relation_type) {
-    if ('dns-prefetch' === $relation_type) {
-        // Add any external domains used
-        $hints[] = '//fonts.googleapis.com';
-        $hints[] = '//www.google-analytics.com';
-    }
-    
-    return $hints;
-}
-add_filter('wp_resource_hints', 'mia_resource_hints', 10, 2);
-
