@@ -1,55 +1,69 @@
 <?php
 /**
  * Template Name: Hero Canvas
- * Template Post Type: post, page, procedure, condition, case, location, non-surgical
- * Description: Full-width canvas template with breadcrumbs and hero section.
- * Provides maximum flexibility for custom layouts using Bootstrap containers.
- * Similar to Blank Canvas but includes structured breadcrumbs and hero.
+ * Template Post Type: page, post, procedure, non-surgical, surgeon, location, case, special, fat-transfer
+ * Description: Full‑width canvas template that keeps the flexibility of a blank
+ * canvas but adds structured breadcrumbs and a hero header. Built for
+ * Gutenberg or Classic editor content blocks wrapped in Bootstrap containers.
  *
- * @package MiaAesthetics
+ * @package Mia_Aesthetics
  */
 
-/* Enqueue template-specific stylesheet */
-add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style(
-        'mia-hero-canvas',
-        get_template_directory_uri() . '/assets/css/_hero-canvas.css',
-        ['mia-base', 'mia-bootstrap'],
-        wp_get_theme()->get('Version')
-    );
-});
-get_header(); ?>
+get_header();
+?>
 
-<main id="primary" <?php post_class(); ?>>
-    <!-- Breadcrumbs -->
-    <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
-    </div>
-    
-    <?php while (have_posts()) : the_post(); ?>
-        <!-- Page Header -->
-        <section class="post-header py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h1><?php the_title(); ?></h1>
-                    </div>
-                </div>
-            </div>
-        </section>
+<main id="primary" class="hero-canvas-main">
+	<!-- Breadcrumbs ---------------------------------------------------->
+	<div class="container">
+		<?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+			<nav aria-label="Breadcrumb" class="breadcrumb-nav">
+				<?php yoast_breadcrumb(); ?>
+			</nav>
+		<?php endif; ?>
+	</div>
 
-        <!-- Full-Width Content Canvas -->
-        <?php
-            // The_content prints whatever HTML you drop in the editor
-            // Use Bootstrap containers (.container, .container-fluid) within your content
-            // to control width and layout as needed
-            the_content();
-        ?>
-    <?php endwhile; ?>
+	<?php while ( have_posts() ) : the_post(); ?>
+		<!-- Page Header / Hero ----------------------------------------->
+		<section class="post-header py-5">
+			<div class="container">
+				<h1><?php echo esc_html( get_the_title() ); ?></h1>
+			</div>
+		</section>
+
+		<?php
+		/**
+		 * Optional featured hero image. Full‑width and lazy‑loaded.
+		 * Comment out this block if your design doesn’t call for a hero image.
+		 */
+		if ( has_post_thumbnail() ) : ?>
+			<div class="container mb-5">
+				<?php the_post_thumbnail( 'full', [
+					'class'   => 'img-fluid w-100',
+					'loading' => 'lazy',
+					'alt'     => esc_attr( get_the_title() ),
+				] ); ?>
+			</div>
+		<?php endif; ?>
+
+		<!-- Full‑width Content Canvas ---------------------------------->
+		<article <?php post_class( 'entry-content' ); ?>>
+			<?php
+				/**
+				 * the_content() will render exactly what the editor outputs. Encourage
+				 * layout control via  <div class="container"> / .container‑fluid
+				 * blocks inside the editor content.
+				 */
+				the_content();
+
+				// Support for Gutenberg/Classic page breaks.
+				wp_link_pages( [
+					'before' => '<nav class="page-links" aria-label="' . esc_attr__( 'Page', 'mia-aesthetics' ) . '">',
+					'after'  => '</nav>',
+				] );
+			?>
+		</article>
+
+	<?php endwhile; ?>
 </main>
 
 <?php get_footer(); ?>

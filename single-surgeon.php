@@ -5,11 +5,11 @@
 get_header(); ?>
 <main tabindex="0">
     <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
+        <?php endif; ?>
     </div>
 
     <div class="surgeon-hero-section">

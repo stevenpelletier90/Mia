@@ -3,10 +3,6 @@
     Keep minimal; extend without affecting global CSS
 -------------------------------------------------------------------- */
 
-#breadcrumbs {
-  margin-bottom: 1.25rem;
-}
-
 .post-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -14,6 +10,12 @@
 
 #primary .post-header {
   margin-bottom: 0;
+}
+
+/* Hero styles – mirror generic page template (_page.css) */
+.post-header {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 @media (min-width: 992px) {

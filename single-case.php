@@ -14,9 +14,11 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php if ( function_exists( 'yoast_breadcrumb' ) ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
-        } ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
+        <?php endif; ?>
     </div>
 
     <?php
@@ -97,11 +99,12 @@ get_header(); ?>
                     <?php /* ---------------- Patient Information -------------- */ ?>
                     <?php
                     $has_height_weight_bmi = $height || $weight || $bmi;
+                    $has_surgeon_location = $surgeon || $location;
                     ?>
                     <section class="mb-5">
                         <h2 class="h4 mb-3">Patient Information</h2>
                         <div class="row g-3">
-                            <?php if ( ! $has_height_weight_bmi ) : ?>
+                            <?php if ( ! $has_height_weight_bmi && ! $has_surgeon_location ) : ?>
                                 <div class="col-12">
                                     <div class="alert alert-info text-center" role="status" aria-live="polite">
                                         Protected for Patient Privacy
@@ -109,7 +112,7 @@ get_header(); ?>
                                 </div>
                             <?php else : ?>
                                 <?php if ( $height ) : ?>
-                                <div class="col-4 col-md-4">
+                                <div class="col-6 col-md-4 col-lg-3">
                                     <div class="patient-info-card">
                                         <h5 class="h6">Height</h5>
                                         <p class="mb-0"><?php echo esc_html( $height ); ?></p>
@@ -118,7 +121,7 @@ get_header(); ?>
                                 <?php endif; ?>
 
                                 <?php if ( $weight ) : ?>
-                                <div class="col-4 col-md-4">
+                                <div class="col-6 col-md-4 col-lg-3">
                                     <div class="patient-info-card">
                                         <h5 class="h6">Weight</h5>
                                         <p class="mb-0"><?php echo esc_html( $weight ); ?> lbs</p>
@@ -127,49 +130,36 @@ get_header(); ?>
                                 <?php endif; ?>
 
                                 <?php if ( $bmi ) : ?>
-                                <div class="col-4 col-md-4">
+                                <div class="col-6 col-md-4 col-lg-3">
                                     <div class="patient-info-card">
                                         <h5 class="h6">BMI</h5>
                                         <p class="mb-0"><?php echo esc_html( $bmi ); ?></p>
                                     </div>
                                 </div>
                                 <?php endif; ?>
+
+                                <?php if ( $surgeon ) : ?>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <a href="<?php echo esc_url( get_permalink( $surgeon ) ); ?>" class="patient-info-card patient-info-card-link text-decoration-none">
+                                        <h5 class="h6">Performed by</h5>
+                                        <p class="mb-0"><?php echo esc_html( get_the_title( $surgeon ) ); ?></p>
+                                        <i class="fas fa-chevron-right patient-info-arrow" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if ( $location ) : ?>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <a href="<?php echo esc_url( get_permalink( $location ) ); ?>" class="patient-info-card patient-info-card-link text-decoration-none">
+                                        <h5 class="h6">Location</h5>
+                                        <p class="mb-0"><?php echo esc_html( get_the_title( $location ) ); ?></p>
+                                        <i class="fas fa-chevron-right patient-info-arrow" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                     </section>
-
-                    <?php /* ------------- Surgeon & Location ----------------- */ ?>
-                    <?php if ( $surgeon || $location ) : ?>
-                    <section class="mb-5">
-                        <div class="row g-3">
-                            <?php if ( $surgeon ) : ?>
-                            <div class="col-6">
-                                <h2 class="h4 mb-3">Performed by</h2>
-                                <a href="<?php echo esc_url( get_permalink( $surgeon ) ); ?>" class="case-surgeon-arrow-link">
-                                    <?php
-                                    // If a dedicated ACF last_name field exists, prefer it.
-                                    $last_name = get_field( 'last_name', $surgeon );
-                                    if ( ! $last_name ) {
-                                        $name_parts = explode( ' ', get_the_title( $surgeon ) );
-                                        $last_name  = preg_replace( '/,.*$/', '', end( $name_parts ) );
-                                    }
-                                    echo 'Dr. ' . esc_html( $last_name );
-                                    ?>
-                                </a>
-                            </div>
-                            <?php endif; ?>
-
-                            <?php if ( $location ) : ?>
-                            <div class="col-6">
-                                <h2 class="h4 mb-3">Location</h2>
-                                <a href="<?php echo esc_url( get_permalink( $location ) ); ?>" class="case-location-arrow-link">
-                                    <?php echo esc_html( get_the_title( $location ) ); ?>
-                                </a>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                    </section>
-                    <?php endif; ?>
 
                     <?php /* ------------- Procedure Performed --------------- */ ?>
                     <?php if ( ! empty( $procedure_performed ) ) : ?>
@@ -202,14 +192,16 @@ get_header(); ?>
                     <?php if ( ! empty( $case_links ) ) : ?>
                     <section class="mt-5">
                         <h2 class="h4 mb-3">Treatment &amp; Recovery Resources</h2>
-                        <div class="list-group treatment-recovery-links">
+                        <ul class="list-unstyled mb-0">
                             <?php foreach ( (array) $case_links as $resource_id ) : ?>
-                                <a href="<?php echo esc_url( get_permalink( $resource_id ) ); ?>" class="list-group-item list-group-item-action">
-                                    <?php echo esc_html( get_the_title( $resource_id ) ); ?>
-                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                                </a>
+                                <li class="mb-1">
+                                    <a href="<?php echo esc_url( get_permalink( $resource_id ) ); ?>" class="case-procedure-link">
+                                        <?php echo esc_html( get_the_title( $resource_id ) ); ?>
+                                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                    </a>
+                                </li>
                             <?php endforeach; ?>
-                        </div>
+                        </ul>
                     </section>
                     <?php endif; ?>
                 </div>

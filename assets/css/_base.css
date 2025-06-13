@@ -103,24 +103,23 @@ ol {
   color: #fff;
 }
 
-#breadcrumbs {
-  margin-bottom: 0;
-  padding: 1rem 0;
+.breadcrumb-nav {
+  margin: 0.75rem 0;
   font-family: var(--font-body);
 }
 
-#breadcrumbs a {
+.breadcrumb-nav a {
   color: var(--color-primary);
   text-decoration: underline;
 }
 
-#breadcrumbs a:hover,
-#breadcrumbs a:focus {
+.breadcrumb-nav a:hover,
+.breadcrumb-nav a:focus {
   color: var(--color-gold);
   text-decoration: underline;
 }
 
-#breadcrumbs .breadcrumb_last {
+.breadcrumb-nav .breadcrumb_last {
   color: var(--color-primary);
 }
 

@@ -12,23 +12,28 @@
 get_header();
 ?>
 
-<main id="main-content" class="container py-5" role="main" tabindex="-1">
-  <!--
-    Before & After Gallery by Doctor
-    - This section is static HTML, refactored for minimalism, accessibility, and Bootstrap 5.3 compliance.
-    - All custom CSS/JS should be moved to assets and enqueued via inc/enqueue.php.
-    - Document any custom logic or layout below.
-  -->
-  <!--
-    Before & After Gallery by Doctor
-    - Static gallery markup below. All custom CSS/JS should be moved to assets and enqueued.
-    - For accessibility, all images have descriptive alt text and controls are keyboard accessible.
-  -->
-  <section id="doctors-gallery">
-    <h1 class="text-center mb-5">
-      Before&nbsp;&&nbsp;After
-      <small class="d-block fs-4">Results by Surgeon</small>
-    </h1>
+<main id="main-content" role="main" tabindex="-1">
+  <!-- Breadcrumbs ---------------------------------------------------->
+  <div class="container">
+    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+        <?php yoast_breadcrumb(); ?>
+      </nav>
+    <?php endif; ?>
+  </div>
+
+  <!-- Page Hero / Title ----------------------------------------->
+  <section class="post-header py-5">
+    <div class="container">
+      <h1 class="text-center">
+        Before&nbsp;&&nbsp;After
+        <small class="d-block fs-4">Results by Surgeon</small>
+      </h1>
+    </div>
+  </section>
+
+  <div class="container py-5">
+    <section id="doctors-gallery">
 
     <!-- Surgeon selector -->
     <div class="d-flex justify-content-center mb-5">
@@ -170,6 +175,7 @@ endif;
     Custom gallery JS and CSS are now in assets/js/gallery.js and assets/css/gallery.css.
     Enqueue these in inc/enqueue.php for this template.
   -->
+  </div>
 </main>
 
 <?php get_footer(); ?>
