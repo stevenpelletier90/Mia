@@ -103,16 +103,16 @@ get_header(); ?>
                     ?>
                     <section class="mb-5">
                         <h2 class="h4 mb-3">Patient Information</h2>
-                        <div class="row g-3">
-                            <?php if ( ! $has_height_weight_bmi && ! $has_surgeon_location ) : ?>
-                                <div class="col-12">
-                                    <div class="alert alert-info text-center" role="status" aria-live="polite">
-                                        Protected for Patient Privacy
-                                    </div>
-                                </div>
-                            <?php else : ?>
+                        <?php if ( ! $has_height_weight_bmi && ! $has_surgeon_location ) : ?>
+                            <div class="alert alert-info text-center" role="status" aria-live="polite">
+                                Protected for Patient Privacy
+                            </div>
+                        <?php else : ?>
+                            <?php if ( $has_height_weight_bmi ) : ?>
+                            <!-- Height, Weight, BMI Row -->
+                            <div class="row g-3 mb-3">
                                 <?php if ( $height ) : ?>
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-4">
                                     <div class="patient-info-card">
                                         <h5 class="h6">Height</h5>
                                         <p class="mb-0"><?php echo esc_html( $height ); ?></p>
@@ -121,7 +121,7 @@ get_header(); ?>
                                 <?php endif; ?>
 
                                 <?php if ( $weight ) : ?>
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-4">
                                     <div class="patient-info-card">
                                         <h5 class="h6">Weight</h5>
                                         <p class="mb-0"><?php echo esc_html( $weight ); ?> lbs</p>
@@ -130,16 +130,21 @@ get_header(); ?>
                                 <?php endif; ?>
 
                                 <?php if ( $bmi ) : ?>
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-4">
                                     <div class="patient-info-card">
                                         <h5 class="h6">BMI</h5>
                                         <p class="mb-0"><?php echo esc_html( $bmi ); ?></p>
                                     </div>
                                 </div>
                                 <?php endif; ?>
+                            </div>
+                            <?php endif; ?>
 
+                            <?php if ( $has_surgeon_location ) : ?>
+                            <!-- Surgeon and Location Row -->
+                            <div class="row g-3">
                                 <?php if ( $surgeon ) : ?>
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-6">
                                     <a href="<?php echo esc_url( get_permalink( $surgeon ) ); ?>" class="patient-info-card patient-info-card-link text-decoration-none">
                                         <h5 class="h6">Performed by</h5>
                                         <p class="mb-0"><?php echo esc_html( get_the_title( $surgeon ) ); ?></p>
@@ -149,7 +154,7 @@ get_header(); ?>
                                 <?php endif; ?>
 
                                 <?php if ( $location ) : ?>
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-6">
                                     <a href="<?php echo esc_url( get_permalink( $location ) ); ?>" class="patient-info-card patient-info-card-link text-decoration-none">
                                         <h5 class="h6">Location</h5>
                                         <p class="mb-0"><?php echo esc_html( get_the_title( $location ) ); ?></p>
@@ -157,8 +162,9 @@ get_header(); ?>
                                     </a>
                                 </div>
                                 <?php endif; ?>
+                            </div>
                             <?php endif; ?>
-                        </div>
+                        <?php endif; ?>
                     </section>
 
                     <?php /* ------------- Procedure Performed --------------- */ ?>

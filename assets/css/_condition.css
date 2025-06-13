@@ -45,8 +45,8 @@
 
 .overview-check {
   color: var(--color-gold);
-  margin-right: 0.5em;
   flex-shrink: 0;
+  margin-top: 0.1em;
 }
 
 .overview-item:last-child {
@@ -72,13 +72,6 @@
 
 .single-condition .faqs-section h2:after {
   display: none;
-}
-
-.overview-item {
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 0.75em;
 }
 
 .toc-container {
@@ -160,11 +153,16 @@ html {
 
   .single-condition .overview-section {
     margin-bottom: 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .single-condition article {
     padding-top: 1.5rem;
     padding-bottom: 2rem;
+  }
+
+  .single-condition .post-header h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
   }
 }
 

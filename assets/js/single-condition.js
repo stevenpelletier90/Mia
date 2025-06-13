@@ -31,8 +31,9 @@ function setupTableOfContents() {
   tocList.innerHTML = "";
 
   // Get navbar height for offset calculations
-  const navbarHeight = document.querySelector("header.position-sticky")?.offsetHeight || 65;
-  const scrollOffset = navbarHeight + 10; // Reduced extra offset for better positioning
+  const navbar = document.querySelector("header.position-sticky") || document.querySelector("header");
+  const navbarHeight = navbar?.offsetHeight || 65;
+  const scrollOffset = navbarHeight + 20; // Extra offset for better positioning
 
   // Add headings to TOC
   const tocLinks = [];
