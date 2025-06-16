@@ -20,7 +20,7 @@ $hero_id = get_post_thumbnail_id( $post );
     </div>
 
     <?php while (have_posts()) : the_post(); ?>
-        <header class="procedure-header py-5 position-relative overflow-hidden">
+        <header class="non-surgical-header py-5 position-relative overflow-hidden">
             <?php if ($hero_id): ?>
                 <picture class="hero-picture">
                     <source media="(max-width: 640px)" 
@@ -40,7 +40,7 @@ $hero_id = get_post_thumbnail_id( $post );
                     <div class="col-lg-7 mb-4 mb-lg-0">
                         <h1><?php the_title(); ?></h1>
                         <?php 
-                        $procedure_price = get_field('procedure_price');
+                        $procedure_price = get_field('non_surgical_price');
                         if ($procedure_price): ?>
                             <div class="pricing-info mt-3">
                                 <h2 class="h4 mb-1">Starting Price: <?php echo $procedure_price; ?>*</h2>
@@ -61,7 +61,7 @@ $hero_id = get_post_thumbnail_id( $post );
             </div>
         </header>
 
-        <article class="single-procedure">
+        <article class="single-non-surgical">
             <section class="main-content">
                 <?php the_content(); ?>
             </section>
