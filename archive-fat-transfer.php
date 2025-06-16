@@ -21,7 +21,7 @@ get_header(); ?>
     <section class="post-header py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-12">
                     <h1>Fat Transfer Procedures</h1>
                 </div>
             </div>

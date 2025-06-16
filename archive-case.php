@@ -19,7 +19,7 @@ get_header(); ?>
     <section class="post-header py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-12">
                     <h1 class="mb-2">Case Studies</h1>
                     <p class="lead mb-0">Explore real patient transformations and see the exceptional results achieved by our skilled surgical team.</p>
                 </div>

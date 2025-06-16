@@ -70,6 +70,16 @@ function get_mia_menu_structure() {
                     ]
                 ]
             ]
+        ],
+        'non-surgical' => [
+            'title' => 'Non-Surgical',
+            'url' => home_url('/non-surgical/'),
+            'categories' => [
+                'injectable' => 'Injectable Treatments',
+                'skin' => 'Skin Treatments', 
+                'body' => 'Body Contouring',
+                'wellness' => 'Wellness Treatments'
+            ]
         ]
     ];
 }
@@ -87,6 +97,8 @@ function render_mia_menu($type = 'desktop') {
     foreach ($menu as $key => $section) {
         if ($key === 'procedures') {
             render_procedures_menu($section, $is_mobile);
+        } elseif ($key === 'non-surgical') {
+            render_non_surgical_menu($is_mobile);
         }
         // Add other menu sections here as needed.
     }

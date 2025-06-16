@@ -1,7 +1,7 @@
 <?php
 /**
- * Basic Single Template
- * Use as: single.php, single-procedures.php, single-surgeons.php, etc.
+ * Template Name: Condition
+ * Template Post Type: condition, procedure, non-surgical
  */
 
 get_header(); ?>

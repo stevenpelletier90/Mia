@@ -1,11 +1,9 @@
-/* Non-Surgical Procedure Styles - Adapted from procedure.css */
-
-.non-surgical-header {
+.procedure-header {
   position: relative;
   min-height: 400px;
 }
 
-.non-surgical-header::before {
+.procedure-header::before {
   content: "";
   position: absolute;
   top: 0;
@@ -16,7 +14,7 @@
   z-index: 1;
 }
 
-.non-surgical-header .container {
+.procedure-header .container {
   position: relative;
   z-index: 2;
 }
@@ -32,19 +30,19 @@
   z-index: 0;
 }
 
-.non-surgical-header h1,
-.non-surgical-header .pricing-info {
+.procedure-header h1,
+.procedure-header .pricing-info {
   color: #fff;
   font-family: var(--font-heading);
 }
 
-.non-surgical-header h1 {
+.procedure-header h1 {
   font-weight: 600;
   color: #fff;
   text-shadow: 2px 2px 4px black;
 }
 
-.non-surgical-header .pricing-info {
+.procedure-header .pricing-info {
   font-weight: 600;
 }
 
@@ -197,6 +195,8 @@
   margin-bottom: 0;
 }
 
+/* Accordion styles now in _base.css - no procedure-specific overrides needed */
+
 .faq-container {
   padding: 1.5rem;
 }
@@ -206,43 +206,43 @@
   padding: 5px 10px;
 }
 
-.single-non-surgical .gform_wrapper {
+.single-procedure .gform_wrapper {
   padding: 0 !important;
 }
 
-.single-non-surgical .gform_wrapper input[type="text"],
-.single-non-surgical .gform_wrapper input[type="email"],
-.single-non-surgical .gform_wrapper input[type="tel"],
-.single-non-surgical .gform_wrapper input[type="number"],
-.single-non-surgical .gform_wrapper input[type="url"],
-.single-non-surgical .gform_wrapper select,
-.single-non-surgical .gform_wrapper textarea {
+.single-procedure .gform_wrapper input[type="text"],
+.single-procedure .gform_wrapper input[type="email"],
+.single-procedure .gform_wrapper input[type="tel"],
+.single-procedure .gform_wrapper input[type="number"],
+.single-procedure .gform_wrapper input[type="url"],
+.single-procedure .gform_wrapper select,
+.single-procedure .gform_wrapper textarea {
   font-size: 16px;
 }
 
-.single-non-surgical .gform_wrapper .gfield_checkbox .gchoice {
+.single-procedure .gform_wrapper .gfield_checkbox .gchoice {
   margin-bottom: 0;
 }
 
-.single-non-surgical .gform_wrapper .gform_footer .gform_button {
+.single-procedure .gform_wrapper .gform_footer .gform_button {
   width: 100%;
   justify-content: center;
   padding: 0.75rem 1rem;
   font-size: 15px;
 }
 
-.single-non-surgical .gform_wrapper .gform_fields {
+.single-procedure .gform_wrapper .gform_fields {
   grid-gap: 0.75rem !important;
 }
 
-.single-non-surgical .gform_wrapper input,
-.single-non-surgical .gform_wrapper select {
+.single-procedure .gform_wrapper input,
+.single-procedure .gform_wrapper select {
   -webkit-tap-highlight-color: transparent;
 }
 
-.single-non-surgical .consultation-card,
+.single-procedure .consultation-card,
 .consultation-card,
-.single-non-surgical .gform_wrapper.gravity-theme {
+.single-procedure .gform_wrapper.gravity-theme {
   background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
   color: #fff;
 }
@@ -267,8 +267,23 @@
   color: var(--color-primary);
 }
 
-/* All the form styling from procedure.css for consistency */
-.single-non-surgical .gform_wrapper .gfield_label {
+fieldset#field_1_55 {
+  margin-bottom: 0px !important;
+}
+
+fieldset#field_1_57 {
+  margin-bottom: 0px !important;
+}
+
+fieldset#field_1_58 {
+  margin-bottom: 0px !important;
+}
+
+div#field_1_54 {
+  margin-bottom: 0px !important;
+}
+
+.single-procedure .gform_wrapper .gfield_label {
   position: absolute !important;
   width: 1px;
   height: 1px;
@@ -280,11 +295,57 @@
   border: 0;
 }
 
-.single-non-surgical .gform_wrapper .gform_required_legend {
+.gform-footer.gform_footer.top_label {
+  padding-bottom: 0 !important;
+}
+
+a.consent-trigger {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.5rem;
+  position: relative;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+a.consent-trigger:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+a.consent-trigger:hover {
+  color: #ffffff;
+}
+
+a.consent-trigger:hover:after {
+  width: 100%;
+}
+
+.single-procedure .gform_wrapper .ginput_container input[type="text"],
+.single-procedure .gform_wrapper .ginput_container input[type="email"],
+.single-procedure .gform_wrapper .ginput_container input[type="tel"],
+.single-procedure .gform_wrapper .ginput_container input[type="number"],
+.single-procedure .gform_wrapper .ginput_container input[type="url"],
+.single-procedure .gform_wrapper .ginput_container textarea,
+.single-procedure .gform_wrapper .gfield select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.single-procedure .gform_wrapper .gform_required_legend {
   display: none !important;
 }
 
-.single-non-surgical .gform_wrapper .gform_fields {
+.single-procedure .gform_wrapper .gform_fields {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   grid-gap: 0.75rem !important;
@@ -292,17 +353,66 @@
   margin: 0 !important;
 }
 
-.single-non-surgical .gform_wrapper .gfield {
+.single-procedure .gform_wrapper .gfield {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.single-non-surgical .gform_wrapper input[type="text"],
-.single-non-surgical .gform_wrapper input[type="email"],
-.single-non-surgical .gform_wrapper input[type="tel"],
-.single-non-surgical .gform_wrapper input[type="number"],
-.single-non-surgical .gform_wrapper input[type="url"],
-.single-non-surgical .gform_wrapper select {
+#field_1_13 {
+  grid-column: span 2 !important;
+}
+
+.single-procedure .gform_wrapper .ginput_complex.ginput_container_name {
+  display: flex !important;
+  gap: 0.75rem !important;
+  margin: 0 !important;
+}
+
+.single-procedure .gform_wrapper .ginput_complex.ginput_container_name span {
+  flex: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#field_1_2,
+#field_1_3 {
+  grid-column: span 1 !important;
+}
+
+#field_1_36,
+#field_1_42 {
+  grid-column: span 1 !important;
+}
+
+#field_1_33,
+#field_1_38 {
+  grid-column: span 1 !important;
+}
+
+#field_1_55,
+#field_1_57,
+#field_1_58,
+#field_1_54 {
+  grid-column: span 2 !important;
+  margin-top: 0.5rem !important;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.single-procedure .gform_wrapper .gform_footer {
+  margin-top: 1rem !important;
+  padding: 0 !important;
+}
+
+.single-procedure .gform_wrapper input[type="text"],
+.single-procedure .gform_wrapper input[type="email"],
+.single-procedure .gform_wrapper input[type="tel"],
+.single-procedure .gform_wrapper input[type="number"],
+.single-procedure .gform_wrapper input[type="url"],
+.single-procedure .gform_wrapper select {
   height: 48px;
   padding: 0.625rem 0.75rem;
   line-height: 1.5;
@@ -318,15 +428,39 @@
   transition: all 0.3s ease;
 }
 
-.single-non-surgical .gform_wrapper select {
+.single-procedure .gform_wrapper select {
+  padding: 0.625rem 0.75rem;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 10px 10px;
   padding-right: 2.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.single-non-surgical .gform_wrapper textarea {
+.single-procedure .gform_wrapper select option {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 8px 10px;
+}
+
+.single-procedure .gform_wrapper select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
+  outline: none;
+}
+
+.single-procedure .gform_wrapper textarea {
   min-height: 120px;
   padding: 0.625rem 0.75rem;
   line-height: 1.5;
@@ -335,19 +469,84 @@
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.2);
   color: #ffffff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   transition: all 0.3s ease;
 }
 
-.single-non-surgical .gform_wrapper input:focus,
-.single-non-surgical .gform_wrapper select:focus,
-.single-non-surgical .gform_wrapper textarea:focus {
+.single-procedure .gform_wrapper input:focus,
+.single-procedure .gform_wrapper select:focus,
+.single-procedure .gform_wrapper textarea:focus {
   outline: none;
   border-color: var(--color-gold);
   box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.single-non-surgical .gform_wrapper .gform_footer .gform_button {
+.single-procedure .gform_wrapper input::placeholder,
+.single-procedure .gform_wrapper textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox .gchoice {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 0.25rem 0;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #000000;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox label {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+  cursor: pointer;
+}
+
+.single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"]:hover {
+  border-color: var(--color-gold);
+}
+
+.single-procedure .gform_wrapper .gform_footer .gform_button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -367,12 +566,32 @@
   width: 100% !important;
 }
 
-.single-non-surgical .gform_wrapper .gform_footer .gform_button:hover,
-.single-non-surgical .gform_wrapper .gform_footer .gform_button:focus {
+.single-procedure .gform_wrapper .gform_footer .gform_button::after {
+  content: "\f061";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+  transition: transform 0.3s ease;
+}
+
+.single-procedure .gform_wrapper .gform_footer .gform_button:hover,
+.single-procedure .gform_wrapper .gform_footer .gform_button:focus {
   color: var(--color-primary);
   background-color: var(--color-gold);
   border-color: var(--color-gold);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.single-procedure .gform_wrapper .gform_footer .gform_button:hover::after,
+.single-procedure .gform_wrapper .gform_footer .gform_button:focus::after {
+  transform: translateX(5px);
+}
+
+.single-procedure .gform_wrapper .gform_footer {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  text-align: center;
 }
 
 .results-resources-section .list-group-item {
@@ -418,7 +637,7 @@
     margin-top: 3rem;
   }
 
-  .non-surgical-subsection {
+  .procedure-subsection {
     margin-top: 2rem;
     padding-top: 1.5rem;
   }
@@ -429,10 +648,9 @@
 }
 
 @media (max-width: 767px) {
-  .non-surgical-header {
+  .procedure-header {
     min-height: 240px;
   }
-  
   .faq-container {
     padding: 1.5rem;
   }
@@ -454,23 +672,52 @@
     padding: 3px 8px;
   }
 
-  .non-surgical-header .row .col-lg-5 {
+  .procedure-header .row .col-lg-5 {
     display: none;
   }
 
-  .non-surgical-header .row.min-vh-50 {
+  .procedure-header .row.min-vh-50 {
     min-height: 300px !important;
   }
 
-  .non-surgical-header .col-lg-7 {
+  .procedure-header .col-lg-7 {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .non-surgical-header .section-title:after {
+  .procedure-header .section-title:after {
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .single-procedure .gform_wrapper {
+    padding: 0 !important;
+  }
+
+  .single-procedure .gform_wrapper input[type="text"],
+  .single-procedure .gform_wrapper input[type="email"],
+  .single-procedure .gform_wrapper input[type="tel"],
+  .single-procedure .gform_wrapper input[type="number"],
+  .single-procedure .gform_wrapper input[type="url"],
+  .single-procedure .gform_wrapper select,
+  .single-procedure .gform_wrapper textarea {
+    font-size: 15px;
+  }
+
+  .single-procedure .gform_wrapper .gfield_checkbox .gchoice {
+    margin-bottom: 0;
+  }
+
+  .single-procedure .gform_wrapper .gform_footer .gform_button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+  }
+
+  .single-procedure .gform_wrapper .gform_fields {
+    grid-gap: 0.5rem !important;
   }
 
   .main-content {
@@ -481,7 +728,7 @@
     margin-top: 2.5rem;
   }
 
-  .non-surgical-subsection {
+  .procedure-subsection {
     margin-top: 1.5rem;
     padding-top: 1rem;
   }
@@ -496,14 +743,28 @@
   }
 }
 
-/* Additional non-surgical specific styles */
-.non-surgical-subsection {
+@media (max-width: 480px) {
+  .single-procedure .gform_wrapper input,
+  .single-procedure .gform_wrapper select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .single-procedure .gform_wrapper .gfield_checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Additional procedure section styles for better template integration */
+
+/* Procedure subsection styling */
+.procedure-subsection {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.non-surgical-subsection h3 {
+.procedure-subsection h3 {
   color: var(--color-primary);
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -543,15 +804,13 @@
   align-self: flex-start;
 }
 
-/* Ensure proper header styling inheritance for both procedure and non-surgical templates */
-.procedure-header,
-.non-surgical-header {
+/* Hero Image Responsive Styles */
+.procedure-header {
   position: relative;
   overflow: hidden;
 }
 
-.procedure-header .hero-bg,
-.non-surgical-header .hero-bg {
+.hero-bg {
   position: absolute;
   top: 0;
   left: 0;

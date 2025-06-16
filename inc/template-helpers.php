@@ -126,6 +126,39 @@ function mia_the_logo($args = []) {
  */
 
 /**
+ * Get attachment ID by filename with caching
+ * 
+ * @param string $filename The filename to search for
+ * @return int|false Attachment ID or false if not found
+ */
+function mia_get_attachment_id_by_filename($filename) {
+    if (empty($filename)) {
+        return false;
+    }
+    
+    // Create cache key
+    $cache_key = 'mia_attachment_id_' . md5($filename);
+    $attachment_id = wp_cache_get($cache_key, 'mia_theme');
+    
+    if ($attachment_id === false) {
+        global $wpdb;
+        
+        $attachment_id = $wpdb->get_var($wpdb->prepare(
+            "SELECT post_id FROM {$wpdb->postmeta} 
+            WHERE meta_key = '_wp_attached_file' 
+            AND meta_value LIKE %s 
+            LIMIT 1",
+            '%' . $wpdb->esc_like($filename)
+        ));
+        
+        // Cache result for 2 hours (attachment files rarely change)
+        wp_cache_set($cache_key, $attachment_id ?: 0, 'mia_theme', 2 * HOUR_IN_SECONDS);
+    }
+    
+    return $attachment_id ?: false;
+}
+
+/**
  * Get image URL by filename from uploads directory
  * 
  * @param string $filename The filename to search for
@@ -148,16 +181,8 @@ function mia_get_image_url_by_filename($filename, $subdir = '') {
         }
     }
     
-    // Search for attachment
-    global $wpdb;
-    
-    $attachment_id = $wpdb->get_var($wpdb->prepare(
-        "SELECT post_id FROM {$wpdb->postmeta} 
-        WHERE meta_key = '_wp_attached_file' 
-        AND meta_value LIKE %s 
-        LIMIT 1",
-        '%' . $wpdb->esc_like($filename)
-    ));
+    // Use cached attachment lookup
+    $attachment_id = mia_get_attachment_id_by_filename($filename);
     
     if ($attachment_id) {
         return wp_get_attachment_url($attachment_id);
@@ -175,39 +200,46 @@ function mia_get_image_url_by_filename($filename, $subdir = '') {
  * @return array|false Array with src, srcset, sizes or false
  */
 function mia_get_responsive_image_data($filename, $subdir = '', $size = 'full') {
-    // Try to find attachment ID
-    global $wpdb;
-    
-    $attachment_id = $wpdb->get_var($wpdb->prepare(
-        "SELECT post_id FROM {$wpdb->postmeta} 
-        WHERE meta_key = '_wp_attached_file' 
-        AND meta_value LIKE %s 
-        LIMIT 1",
-        '%' . $wpdb->esc_like($filename)
-    ));
-    
-    if ($attachment_id) {
-        return [
-            'id' => $attachment_id,
-            'src' => wp_get_attachment_image_url($attachment_id, $size),
-            'srcset' => wp_get_attachment_image_srcset($attachment_id, $size),
-            'sizes' => wp_get_attachment_image_sizes($attachment_id, $size)
-        ];
+    if (empty($filename)) {
+        return false;
     }
     
-    // Fallback to manual construction
-    $src = mia_get_image_url_by_filename($filename, $subdir);
+    // Create cache key including all parameters
+    $cache_key = 'mia_responsive_image_' . md5($filename . '|' . $subdir . '|' . $size);
+    $image_data = wp_cache_get($cache_key, 'mia_theme');
     
-    if ($src) {
-        return [
-            'id' => 0,
-            'src' => $src,
-            'srcset' => $src . ' 1x',
-            'sizes' => '100vw'
-        ];
+    if ($image_data === false) {
+        // Try to find attachment ID using shared function
+        $attachment_id = mia_get_attachment_id_by_filename($filename);
+        
+        if ($attachment_id) {
+            $image_data = [
+                'id' => $attachment_id,
+                'src' => wp_get_attachment_image_url($attachment_id, $size),
+                'srcset' => wp_get_attachment_image_srcset($attachment_id, $size),
+                'sizes' => wp_get_attachment_image_sizes($attachment_id, $size)
+            ];
+        } else {
+            // Fallback to manual construction
+            $src = mia_get_image_url_by_filename($filename, $subdir);
+            
+            if ($src) {
+                $image_data = [
+                    'id' => 0,
+                    'src' => $src,
+                    'srcset' => $src . ' 1x',
+                    'sizes' => '100vw'
+                ];
+            } else {
+                $image_data = null;
+            }
+        }
+        
+        // Cache result for 2 hours
+        wp_cache_set($cache_key, $image_data ?: 0, 'mia_theme', 2 * HOUR_IN_SECONDS);
     }
     
-    return false;
+    return $image_data ?: false;
 }
 
 /**
@@ -541,38 +573,9 @@ function mia_social_links($args = []) {
  */
 
 /**
- * Use single-condition.php template for 2nd-level procedure children
- */
-function mia_procedure_template_hierarchy($template) {
-    if (is_singular('procedure')) {
-        $post = get_queried_object();
-        $ancestors = get_post_ancestors($post);
-        
-        // Check if this is a 2nd-level child (grandchild)
-        if (count($ancestors) === 2) {
-            $condition_template = locate_template('single-condition.php');
-            if ($condition_template) {
-                return $condition_template;
-            }
-        }
-    }
-    
-    return $template;
-}
-add_filter('single_template', 'mia_procedure_template_hierarchy');
-
-/**
  * Add custom body classes for template identification
  */
 function mia_template_body_classes($classes) {
-    // Add class for procedures using condition template
-    if (is_singular('procedure')) {
-        $ancestors = get_post_ancestors(get_queried_object());
-        if (count($ancestors) === 2) {
-            $classes[] = 'procedure-as-condition';
-        }
-    }
-    
     // Add class for pages with gallery shortcode
     if (is_page()) {
         global $post;

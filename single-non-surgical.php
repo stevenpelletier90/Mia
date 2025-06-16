@@ -71,7 +71,7 @@ $hero_id = get_post_thumbnail_id( $post );
                     <div class="row g-4 g-lg-5 align-items-start">
                         <div class="col-lg-7 mb-4 mb-lg-0">
                             <h2 id="results-heading" class="h3 fw-bold mb-4 text-white">Before &amp; After Results</h2>
-                            <div id="results-description" class="sr-only">Patient before and after treatment results gallery</div>
+                            <div id="results-description" class="sr-only">Patient before and after surgery results gallery</div>
 
                             <div class="row g-4">
                                 <?php
@@ -137,7 +137,7 @@ $hero_id = get_post_thumbnail_id( $post );
                                 if ($related_procedures):
                                     $related_ids = array_map(function($p) { return is_object($p) ? $p->ID : (int)$p; }, $related_procedures);
                                     $related_query = new WP_Query([
-                                        'post_type' => 'non-surgical',
+                                        'post_type' => 'procedure',
                                         'post__in' => $related_ids,
                                         'orderby' => 'post__in',
                                         'posts_per_page' => count($related_ids)
@@ -146,10 +146,10 @@ $hero_id = get_post_thumbnail_id( $post );
                                         while ($related_query->have_posts()): $related_query->the_post(); ?>
                                             <a class="list-group-item list-group-item-action d-flex gap-3 py-3"
                                                href="<?php the_permalink(); ?>">
-                                                <i class="fa-solid fa-hand-sparkles fs-4 flex-shrink-0" aria-hidden="true"></i>
+                                                <i class="fa-solid fa-stethoscope fs-4 flex-shrink-0" aria-hidden="true"></i>
                                                 <span>
                                                     <strong>Related: <?php the_title(); ?></strong><br>
-                                                    <small class="text-muted">Learn about this complementary treatment</small>
+                                                    <small class="text-muted">Learn about this complementary procedure</small>
                                                 </span>
                                             </a>
                                         <?php endwhile;

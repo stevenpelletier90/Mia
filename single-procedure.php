@@ -1,6 +1,7 @@
 <?php
 /**
- * Single procedure post template
+ * Template Name: Procedure
+ * Template Post Type: procedure
  * 
  * @package Mia_Aesthetics
  */

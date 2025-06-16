@@ -16,11 +16,11 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
+        <?php endif; ?>
     </div>
     <?php while (have_posts()) : the_post(); ?>
         <!-- Page Header -->
@@ -28,7 +28,7 @@ get_header(); ?>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1><?php the_title(); ?></h1>
+                        <h1 class="mb-2"><?php the_title(); ?></h1>
                     </div>
                 </div>
             </div>

@@ -45,7 +45,8 @@ function mia_register_asset( $type, $handle, $path, $deps = [], $footer = true )
         error_log( "[mia_register_asset] Missing {$type} asset: {$file}" );
     }
 
-    $ver = file_exists( $file ) ? substr( md5_file( $file ), 0, MIA_ASSET_HASH_LEN ) : null;
+    // Use file modification time for versioning—lighter than computing an MD5 hash on every request.
+    $ver = file_exists( $file ) ? filemtime( $file ) : null;
 
     if ( $type === 'style' ) {
         wp_register_style( $handle, $src, $deps, $ver );
@@ -80,15 +81,22 @@ function mia_get_context_mappings() {
 
         // Custom post types
         'procedure'        => ['type' => 'procedure',        'css' => '_procedure.css',        'js' => 'single-procedure.js'],
+        'procedure-archive'=> ['type' => 'procedure-archive','css' => '_archive-procedure.css','js' => 'archive-procedure.js'],
         'condition'        => ['type' => 'condition',        'css' => '_condition.css',        'js' => 'single-condition.js'],
         'condition-child'  => ['type' => 'condition-child',  'css' => '_condition.css',        'js' => 'single-condition.js'],
+        'condition-archive'=> ['type' => 'condition-archive','css' => '_archive-condition.css','js' => 'archive-condition.js'],
         'fat-transfer'     => ['type' => 'fat-transfer',     'css' => '_fat-transfer.css',     'js' => 'single-fat-transfer.js'],
         'surgeon'          => ['type' => 'surgeon',          'css' => '_surgeon.css',          'js' => 'single-surgeon.js'],
+        'surgeon-archive'  => ['type' => 'surgeon-archive',  'css' => '_archive-surgeon.css',  'js' => 'archive-surgeon.js'],
         'case'             => ['type' => 'case',             'css' => '_case.css',             'js' => 'single-case.js'],
-        'case-archive'     => ['type' => 'case-archive',     'css' => '_case-archive.css',     'js' => 'archive-case.js'],
+        'case-archive'     => ['type' => 'case-archive',     'css' => '_archive-case.css',     'js' => 'archive-case.js'],
         'location'         => ['type' => 'location',         'css' => '_location.css',         'js' => 'single-location.js'],
+        'location-archive' => ['type' => 'location-archive', 'css' => '_archive-location.css', 'js' => 'archive-location.js'],
         'non-surgical'     => ['type' => 'non-surgical',     'css' => '_non-surgical.css',     'js' => 'single-non-surgical.js'],
+        'non-surgical-archive' => ['type' => 'non-surgical-archive', 'css' => '_archive-non-surgical.css', 'js' => 'archive-non-surgical.js'],
         'special'          => ['type' => 'special',          'css' => '_special.css',          'js' => 'single-special.js'],
+        'special-archive'  => ['type' => 'special-archive',  'css' => '_archive-special.css',  'js' => 'archive-special.js'],
+        'fat-transfer-archive' => ['type' => 'fat-transfer-archive', 'css' => '_archive.css', 'js' => 'archive-fat-transfer.js'],
     ];
 }
 
@@ -122,8 +130,14 @@ function mia_detect_context_key() {
     // CPT archive
     if ( is_post_type_archive() ) {
         $pt = get_post_type() ?: get_query_var( 'post_type' );
-        if ( $pt === 'fat-transfer' ) return 'fat-transfer';
+        if ( $pt === 'fat-transfer' ) return 'fat-transfer-archive';
         if ( $pt === 'case' )        return 'case-archive';
+        if ( $pt === 'procedure' )   return 'procedure-archive';
+        if ( $pt === 'location' )    return 'location-archive';
+        if ( $pt === 'surgeon' )     return 'surgeon-archive';
+        if ( $pt === 'condition' )   return 'condition-archive';
+        if ( $pt === 'non-surgical' ) return 'non-surgical-archive';
+        if ( $pt === 'special' )     return 'special-archive';
         if ( $pt )                   return 'archive'; // Generic archive assets
     }
 
@@ -133,9 +147,13 @@ function mia_detect_context_key() {
     // CPT single
     if ( is_singular() ) {
         $pt = get_post_type();
+        // Check for custom template selection via page template dropdown
         if ( $pt === 'procedure' ) {
-            $ancestors = get_post_ancestors( get_queried_object() );
-            return count( $ancestors ) === 2 ? 'condition-child' : 'procedure';
+            $template = get_page_template_slug();
+            if ( $template === 'single-condition.php' ) {
+                return 'condition';
+            }
+            return 'procedure';
         }
         if ( array_key_exists( $pt, mia_get_context_mappings() ) ) {
             return $pt;

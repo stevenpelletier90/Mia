@@ -8,24 +8,24 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
+        <?php endif; ?>
     </div>
     
     <!-- Archive Header -->
-    <header class="bg-light py-5">
+    <section class="post-header py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-                    <h1><?php post_type_archive_title(); ?></h1>
-                    <p class="lead">Meet our team of board-certified plastic surgeons dedicated to providing exceptional care and results.</p>
+                <div class="col-12">
+                    <h1 class="mb-2"><?php post_type_archive_title(); ?></h1>
+                    <p class="lead mb-0">Meet our team of board-certified plastic surgeons dedicated to providing exceptional care and results.</p>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Archive Content -->
     <section class="py-5">

@@ -17,11 +17,11 @@ get_header(); ?>
     <header class="bg-light py-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8">
+                <div class="col-12">
                     <h1 class="mb-2">Current Specials & Offers</h1>
                     <p class="lead mb-0">Limited-time promotions on our most popular procedures</p>
                 </div>
-                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                <div class="col-12 text-center mt-4">
                     <!-- Call to Action Button -->
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact-us'))); ?>" class="btn btn-primary">
                         Schedule a Consultation

@@ -45,6 +45,35 @@ function get_locations_direct() {
 }
 
 /**
+ * Get non-surgical procedures directly (no caching)
+ */
+function get_non_surgical_direct() {
+    $args = [
+        'post_type' => 'non-surgical',
+        'posts_per_page' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC'
+    ];
+    
+    $query = new WP_Query($args);
+    $procedures = [];
+    
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $procedures[] = [
+                'id' => get_the_ID(),
+                'title' => get_the_title(),
+                'url' => get_permalink()
+            ];
+        }
+        wp_reset_postdata();
+    }
+    
+    return $procedures;
+}
+
+/**
  * Get surgeons directly (no caching)
  */
 function get_surgeons_direct() {
@@ -434,6 +463,68 @@ function render_mobile_before_after_menu() {
         <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/tummy-tuck/')); ?>">Tummy Tuck</a></li>
         <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/patient-journeys/')); ?>">Patient Videos</a></li>
         <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/before-after/before-after-by-doctor/')); ?>">Results by Surgeon</a></li>
+    </ul>
+    <?php
+}
+
+/**
+ * Render non-surgical menu for both desktop and mobile
+ */
+function render_non_surgical_menu($is_mobile = false) {
+    $procedures = get_non_surgical_direct();
+    $dropdown_class = $is_mobile ? 'd-xl-none' : 'position-static d-none d-xl-block';
+    ?>
+    <li class="nav-item dropdown <?php echo $dropdown_class; ?>">
+        <a class="nav-link dropdown-toggle" href="<?php echo esc_url(home_url('/non-surgical/')); ?>" 
+           role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+            Non-Surgical
+        </a>
+        <?php if ($is_mobile): ?>
+            <?php render_mobile_non_surgical_menu($procedures); ?>
+        <?php else: ?>
+            <?php render_desktop_non_surgical_menu($procedures); ?>
+        <?php endif; ?>
+    </li>
+    <?php
+}
+
+/**
+ * Render desktop non-surgical mega menu
+ */
+function render_desktop_non_surgical_menu($procedures) {
+    ?>
+    <div class="dropdown-menu mega-menu w-100 p-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <a class="mega-menu-title" href="<?php echo esc_url(home_url('/non-surgical/')); ?>">View All Non-Surgical Procedures <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <ul class="list-unstyled">
+                        <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/non-surgical/j-plasma-skin-tightening/')); ?>">J-Plasma</a></li>
+                        <li><a class="dropdown-item py-1" href="<?php echo esc_url(home_url('/weight-loss/')); ?>">Weight Loss</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3"></div>
+                <div class="col-md-3 mb-3"></div>
+                <div class="col-md-3 mb-3"></div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Render mobile non-surgical dropdown menu
+ */
+function render_mobile_non_surgical_menu($procedures) {
+    ?>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/non-surgical/')); ?>">View All Non-Surgical</a></li>
+        <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/non-surgical/j-plasma-skin-tightening/')); ?>">J-Plasma</a></li>
+        <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/weight-loss/')); ?>">Weight Loss</a></li>
     </ul>
     <?php
 }

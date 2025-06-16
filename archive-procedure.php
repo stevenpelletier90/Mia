@@ -8,18 +8,18 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-        }
-        ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
+        <?php endif; ?>
     </div>
     
     <!-- Archive Header -->
     <section class="post-header py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-12">
                     <h1 class="mb-2">Our Procedures</h1>
                     <p class="lead mb-0">Our highly skilled surgical team is actualizing dreams, facilitating one transformation at a time.</p>
                 </div>

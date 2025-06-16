@@ -9,6 +9,11 @@
 .post-header h1 {
   font-weight: 700;
   margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.post-header .lead {
+  font-size: clamp(1rem, 4vw, 1.25rem);
 }
 
 /* Page content styles */

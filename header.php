@@ -62,6 +62,11 @@
                 ?>
                 <!-- Procedures Menu - Mobile (using refactored functions) -->
                 <?php render_procedures_menu($menu_structure['procedures'], true); ?>
+                <!-- Non-Surgical Menu (using refactored functions) -->
+                <?php 
+                  render_non_surgical_menu(false); // desktop
+                  render_non_surgical_menu(true);  // mobile
+                ?>
                 <!-- Locations Menu (using refactored functions) -->
                 <?php 
                   render_locations_menu(false); // desktop

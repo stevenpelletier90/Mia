@@ -9,24 +9,24 @@ get_header();
 
 <main>
     <div class="container">
-        <?php if (function_exists('yoast_breadcrumb')) : ?>
-            <?php yoast_breadcrumb('<p id="breadcrumbs">', '</p>'); ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
         <?php endif; ?>
     </div>
 
     <!-- Archive Header -->
-    <header class="py-5">
+    <section class="post-header py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-                    <h1><?php post_type_archive_title(); ?></h1>
-                    <p class="lead">
-                        Find a Mia Aesthetics location near you and schedule your consultation today.
-                    </p>
+                <div class="col-12">
+                    <h1 class="mb-2"><?php post_type_archive_title(); ?></h1>
+                    <p class="lead mb-0">Find a Mia Aesthetics location near you and schedule your consultation today.</p>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Archive Content -->
     <section class="location-archive-section py-5">
