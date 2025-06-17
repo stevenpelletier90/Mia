@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Procedure
- * Template Post Type: procedure, non-surgical, fat-transfer
+ * Template Post Type: procedure, non-surgical, fat-transfer, page
  * 
  * @package Mia_Aesthetics
  */

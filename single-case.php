@@ -49,53 +49,54 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Before & After Images Section -->
-    <?php if ( $before_photo || $after_photo ) : ?>
-    <section class="case-images py-4 bg-light">
+    <!-- Main Content - Two Column Layout -->
+    <article class="py-5 py-lg-6">
         <div class="container">
-            <div class="row g-3 justify-content-center">
-                <?php if ( $before_photo ) : ?>
-                <div class="col-6 col-md-5 col-lg-4">
-                    <div class="position-relative case-image-container">
-                        <img src="<?php echo esc_url( $before_photo['sizes']['medium_large'] ?? $before_photo['url'] ); ?>"
-                             class="img-fluid rounded cursor-pointer"
-                             alt="Before Treatment – <?php echo esc_attr( get_the_title() ); ?>"
-                             loading="lazy"
-                             data-bs-toggle="modal"
-                             data-bs-target="#imageModal"
-                             data-bs-image="<?php echo esc_url( $before_photo['url'] ); ?>"
-                             data-bs-title="Before Treatment">
-                        <span class="before-label">Before</span>
-                    </div>
-                </div>
-                <?php endif; ?>
+            <div class="row g-4 g-lg-5">
+                <!-- Before & After Images Column -->
+                <div class="col-lg-6">
+                    <?php if ( $before_photo || $after_photo ) : ?>
+                    <div class="case-images-container">
+                        <h2 class="h4 mb-3">Before & After</h2>
+                        <div class="row g-3">
+                            <?php if ( $before_photo ) : ?>
+                            <div class="col-6">
+                                <div class="position-relative case-image-container">
+                                    <img src="<?php echo esc_url( $before_photo['sizes']['medium_large'] ?? $before_photo['url'] ); ?>"
+                                         class="img-fluid rounded cursor-pointer"
+                                         alt="Before Treatment – <?php echo esc_attr( get_the_title() ); ?>"
+                                         loading="lazy"
+                                         data-bs-toggle="modal"
+                                         data-bs-target="#imageModal"
+                                         data-bs-image="<?php echo esc_url( $before_photo['url'] ); ?>"
+                                         data-bs-title="Before Treatment">
+                                    <span class="before-label">Before</span>
+                                </div>
+                            </div>
+                            <?php endif; ?>
 
-                <?php if ( $after_photo ) : ?>
-                <div class="col-6 col-md-5 col-lg-4">
-                    <div class="position-relative case-image-container">
-                        <img src="<?php echo esc_url( $after_photo['sizes']['medium_large'] ?? $after_photo['url'] ); ?>"
-                             class="img-fluid rounded cursor-pointer"
-                             alt="After Treatment – <?php echo esc_attr( get_the_title() ); ?>"
-                             loading="lazy"
-                             data-bs-toggle="modal"
-                             data-bs-target="#imageModal"
-                             data-bs-image="<?php echo esc_url( $after_photo['url'] ); ?>"
-                             data-bs-title="After Treatment">
-                        <span class="after-label">After</span>
+                            <?php if ( $after_photo ) : ?>
+                            <div class="col-6">
+                                <div class="position-relative case-image-container">
+                                    <img src="<?php echo esc_url( $after_photo['sizes']['medium_large'] ?? $after_photo['url'] ); ?>"
+                                         class="img-fluid rounded cursor-pointer"
+                                         alt="After Treatment – <?php echo esc_attr( get_the_title() ); ?>"
+                                         loading="lazy"
+                                         data-bs-toggle="modal"
+                                         data-bs-target="#imageModal"
+                                         data-bs-image="<?php echo esc_url( $after_photo['url'] ); ?>"
+                                         data-bs-title="After Treatment">
+                                    <span class="after-label">After</span>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
 
-    <!-- Main Content -->
-    <article class="py-5">
-        <div class="container">
-            <div class="row">
-                <!-- Main Content Column -->
-                <div class="col-xl-7 col-lg-12">
+                <!-- Patient Information Column -->
+                <div class="col-lg-6">
                     <?php /* ---------------- Patient Information -------------- */ ?>
                     <?php
                     $has_height_weight_bmi = $height || $weight || $bmi;
@@ -140,8 +141,8 @@ get_header(); ?>
                             </div>
                             <?php endif; ?>
 
-                            <?php if ( $has_surgeon_location ) : ?>
-                            <!-- Surgeon and Location Row -->
+                            <?php if ( $has_surgeon_location || ! empty( $procedure_performed ) ) : ?>
+                            <!-- Surgeon, Location, and Procedure Row -->
                             <div class="row g-3">
                                 <?php if ( $surgeon ) : ?>
                                 <div class="col-6">
@@ -162,74 +163,145 @@ get_header(); ?>
                                     </a>
                                 </div>
                                 <?php endif; ?>
+
+                                <?php if ( ! empty( $procedure_performed ) ) : ?>
+                                    <?php foreach ( (array) $procedure_performed as $procedure_id ) : ?>
+                                        <div class="col-6">
+                                            <a href="<?php echo esc_url( get_permalink( $procedure_id ) ); ?>" class="patient-info-card patient-info-card-link text-decoration-none">
+                                                <h5 class="h6">Procedure<?php echo count( $procedure_performed ) > 1 ? 's' : ''; ?></h5>
+                                                <p class="mb-0"><?php echo esc_html( get_the_title( $procedure_id ) ); ?></p>
+                                                <i class="fas fa-chevron-right patient-info-arrow" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </div>
                             <?php endif; ?>
                         <?php endif; ?>
                     </section>
 
-                    <?php /* ------------- Procedure Performed --------------- */ ?>
-                    <?php if ( ! empty( $procedure_performed ) ) : ?>
-                    <section class="mb-5">
-                        <h2 class="h4 mb-3">Procedure<?php echo count( $procedure_performed ) > 1 ? 's' : ''; ?> Performed</h2>
-                        <ul class="list-unstyled mb-0">
-                            <?php foreach ( (array) $procedure_performed as $procedure_id ) : ?>
-                                <li class="mb-1">
-                                    <a href="<?php echo esc_url( get_permalink( $procedure_id ) ); ?>" class="case-procedure-link">
-                                        <?php echo esc_html( get_the_title( $procedure_id ) ); ?>
-                                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </section>
-                    <?php endif; ?>
 
-                    <?php /* ---------------- Patient Background ------------- */ ?>
-                    <?php if ( get_the_content() ) : ?>
-                    <section class="mb-5">
-                        <h2 class="h4 mb-3">Patient Background</h2>
-                        <div class="case-background">
-                            <?php the_content(); ?>
-                        </div>
-                    </section>
-                    <?php endif; ?>
-
-                    <?php /* ------------- Treatment & Recovery -------------- */ ?>
-                    <?php if ( ! empty( $case_links ) ) : ?>
-                    <section class="mt-5">
-                        <h2 class="h4 mb-3">Treatment &amp; Recovery Resources</h2>
-                        <ul class="list-unstyled mb-0">
-                            <?php foreach ( (array) $case_links as $resource_id ) : ?>
-                                <li class="mb-1">
-                                    <a href="<?php echo esc_url( get_permalink( $resource_id ) ); ?>" class="case-procedure-link">
-                                        <?php echo esc_html( get_the_title( $resource_id ) ); ?>
-                                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </section>
-                    <?php endif; ?>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="col-xl-5 col-lg-12">
-                    <div class="card consultation-card mb-4 shadow-sm">
-                        <div class="card-body p-3">
-                            <h3 class="h5 mb-3 text-center">Schedule a Consultation</h3>
-                            <?php gravity_form( 1, false, false, false, '', true ); ?>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </article>
 
+    <?php /* ---------------- Patient Background ------------- */ ?>
+    <?php if ( get_the_content() ) : ?>
+    <section class="py-4 py-lg-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-4">Patient Background</h2>
+                    <div class="case-background">
+                        <?php the_content(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <?php /* ------------- Treatment & Recovery -------------- */ ?>
+    <?php if ( ! empty( $case_links ) ) : ?>
+    <section class="py-4 py-lg-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-4">Treatment &amp; Recovery Resources</h2>
+                    <div class="row g-3">
+                        <?php foreach ( (array) $case_links as $resource_id ) : ?>
+                            <div class="col-6">
+                                <a href="<?php echo esc_url( get_permalink( $resource_id ) ); ?>" class="patient-info-card patient-info-card-link text-decoration-none">
+                                    <h5 class="h6">Resource</h5>
+                                    <p class="mb-0"><?php echo esc_html( get_the_title( $resource_id ) ); ?></p>
+                                    <i class="fas fa-chevron-right patient-info-arrow" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <?php /* ------------- Related Cases -------------- */ ?>
+    <?php
+    // Get related cases based on case-categories taxonomy
+    $current_categories = wp_get_post_terms(get_the_ID(), 'case-categories', ['fields' => 'ids']);
+    
+    $related_cases = null;
+    
+    if (!empty($current_categories)) {
+        // Get cases with the same categories
+        $related_cases = new WP_Query([
+            'post_type' => 'case',
+            'post__not_in' => [get_the_ID()],
+            'posts_per_page' => 4,
+            'orderby' => 'rand',
+            'tax_query' => [
+                [
+                    'taxonomy' => 'case-categories',
+                    'field' => 'term_id',
+                    'terms' => $current_categories,
+                    'operator' => 'IN'
+                ]
+            ]
+        ]);
+    }
+
+    if (!$related_cases || !$related_cases->have_posts()) {
+        // Fallback: get any recent cases if no related ones found
+        $related_cases = new WP_Query([
+            'post_type' => 'case',
+            'post__not_in' => [get_the_ID()],
+            'posts_per_page' => 4,
+            'orderby' => 'date',
+            'order' => 'DESC'
+        ]);
+    }
+
+    if ($related_cases->have_posts()) : ?>
+    <section class="py-4 py-lg-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-4">Related Cases</h2>
+                    <div class="row g-3">
+                        <?php while ($related_cases->have_posts()) : $related_cases->the_post(); ?>
+                            <div class="col-md-6">
+                                <div class="related-case-item">
+                                    <a href="<?php the_permalink(); ?>" class="related-case-link">
+                                        <div class="related-case-number">
+                                            <span><?php echo str_pad($related_cases->current_post + 1, 2, '0', STR_PAD_LEFT); ?></span>
+                                        </div>
+                                        <div class="related-case-content">
+                                            <h3 class="related-case-title"><?php the_title(); ?></h3>
+                                            <span class="related-case-meta">Case Study</span>
+                                        </div>
+                                        <div class="related-case-arrow">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php 
+    endif;
+    wp_reset_postdata();
+    ?>
+
     <?php /* -------------------- FAQ Section ---------------------- */ ?>
     <?php
     $faq_section = get_field( 'faq_section' );
     if ( $faq_section && ! empty( $faq_section['faqs'] ) ) : ?>
-    <section class="py-5">
+    <section class="py-5 py-lg-6">
         <div class="container">
             <div class="faq-container">
                 <?php echo display_page_faqs(); ?>

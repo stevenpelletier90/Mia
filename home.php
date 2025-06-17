@@ -15,9 +15,11 @@ get_header(); ?>
 
 <main>
     <div class="container">
-        <?php if (function_exists("yoast_breadcrumb")) {
-            yoast_breadcrumb('<p id="breadcrumbs">', "</p>");
-        } ?>
+        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <?php yoast_breadcrumb(); ?>
+            </nav>
+        <?php endif; ?>
     </div>
     <!-- Blog Header -->
     <header class="bg-light py-5">
