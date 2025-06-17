@@ -1,7 +1,7 @@
 <?php
 /**
- * Basic Archive Template
- * Can be used as: archive-procedures.php, archive-surgeons.php, etc.
+ * Conditions Archive Template
+ * Displays conditions in a hierarchical structure with parents and children
  */
 
 get_header(); ?>
@@ -18,121 +18,148 @@ get_header(); ?>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1><?php post_type_archive_title(); ?></h1>
+                    <h1 class="mb-2">Conditions We Treat</h1>
+                    <p class="lead mb-0">Browse our comprehensive list of conditions organized by category.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Archive Content -->
+    <!-- Conditions Content -->
     <section class="py-5">
         <div class="container">
             <?php
-            // Custom query to get only top-level conditions (no parent)
-            $top_level_conditions = new WP_Query([
+            // Get all parent conditions (no parent)
+            $parent_conditions = new WP_Query([
                 'post_type' => 'condition',
-                'post_parent' => 0, // Only get top-level conditions
-                'posts_per_page' => -1, // Show all
+                'post_parent' => 0,
+                'posts_per_page' => -1,
                 'orderby' => 'title',
                 'order' => 'ASC'
             ]);
 
-            if ($top_level_conditions->have_posts()) : ?>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="conditions-accordion" id="conditionsAccordion">
-                            <?php 
-                            $accordion_index = 0;
-                            while ($top_level_conditions->have_posts()) : $top_level_conditions->the_post(); 
-                                $condition_id = get_the_ID();
-                                $accordion_id = 'condition-' . $condition_id;
-                                $heading_id = 'heading-' . $accordion_id;
-                                $collapse_id = 'collapse-' . $accordion_id;
+            if ($parent_conditions->have_posts()) : ?>
+                <div class="conditions-grid">
+                    <?php while ($parent_conditions->have_posts()) : $parent_conditions->the_post(); 
+                        $parent_id = get_the_ID();
+                        
+                        // Get child conditions for this parent
+                        $child_conditions = new WP_Query([
+                            'post_type' => 'condition',
+                            'post_parent' => $parent_id,
+                            'posts_per_page' => -1,
+                            'orderby' => 'title',
+                            'order' => 'ASC'
+                        ]);
+                        
+                        $has_children = $child_conditions->have_posts();
+                    ?>
+                        <div class="condition-group mb-5">
+                            <div class="condition-parent">
+                                <h2 class="condition-title">
+                                    <a href="<?php the_permalink(); ?>" class="text-decoration-none">
+                                        <?php the_title(); ?>
+                                    </a>
+                                </h2>
                                 
-                                // Check for child conditions
-                                $has_children = false;
-                                $child_conditions = new WP_Query([
-                                    'post_type' => 'condition',
-                                    'post_parent' => $condition_id,
-                                    'posts_per_page' => -1,
-                                    'orderby' => 'title',
-                                    'order' => 'ASC'
-                                ]);
-                                
-                                if ($child_conditions->have_posts()) {
-                                    $has_children = true;
-                                }
-                            ?>
-                                <div class="condition-item mb-3">
-                                    <h2 class="condition-header d-flex align-items-center justify-content-between" id="<?php echo $heading_id; ?>">
-                                        <div class="d-flex align-items-center">
-                                            <?php if ($has_children) : ?>
-                                                <button 
-                                                    class="condition-button collapsed p-0 pe-3" 
-                                                    type="button" 
-                                                    data-bs-toggle="collapse" 
-                                                    data-bs-target="#<?php echo $collapse_id; ?>" 
-                                                    aria-expanded="false" 
-                                                    aria-controls="<?php echo $collapse_id; ?>">
-                                                    <span class="condition-title">
-                                                        <?php the_title(); ?>
-                                                    </span>
-                                                </button>
-                                            <?php else: ?>
-                                                <a href="<?php the_permalink(); ?>" class="condition-link text-decoration-none condition-title">
-                                                    <?php the_title(); ?>
-                                                </a>
-                                            <?php endif; ?>
-                                        </div>
-                                        <a href="<?php the_permalink(); ?>" class="view-condition-link">
-                                            View Condition
-                                        </a>
-                                    </h2>
-                                    
-                                    <?php if ($has_children) : ?>
-                                        <a href="<?php the_permalink(); ?>" class="view-main-condition-link d-block mb-2">
-                                            View Condition
-                                        </a>
-                                        <div 
-                                            id="<?php echo $collapse_id; ?>" 
-                                            class="condition-collapse collapse" 
-                                            data-bs-parent="#conditionsAccordion">
-                                            <div class="condition-body">
-                                                <div class="child-conditions-list">
-                                                    <ul class="list-unstyled mb-0">
-                                                        <?php while ($child_conditions->have_posts()) : $child_conditions->the_post(); ?>
-                                                            <li class="child-condition-item">
-                                                                <a href="<?php the_permalink(); ?>" class="child-condition-link d-flex justify-content-between align-items-center">
-                                                                    <span><?php the_title(); ?></span>
-                                                                    <i class="fa-solid fa-arrow-right"></i>
-                                                                </a>
-                                                            </li>
-                                                        <?php endwhile; ?>
-                                                    </ul>
+                                <?php if (has_excerpt()) : ?>
+                                    <p class="condition-excerpt text-muted mb-3">
+                                        <?php echo get_the_excerpt(); ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <?php if ($has_children) : ?>
+                                <div class="condition-children">
+                                    <div class="row g-3">
+                                        <?php while ($child_conditions->have_posts()) : $child_conditions->the_post(); ?>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="condition-item">
+                                                    <a href="<?php the_permalink(); ?>" class="condition-link">
+                                                        <span class="condition-name"><?php the_title(); ?></span>
+                                                        <i class="fa-solid fa-arrow-right"></i>
+                                                    </a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endif;
-                                    wp_reset_postdata(); // Reset after child query
-                                    ?>
+                                        <?php endwhile; ?>
+                                    </div>
                                 </div>
-                            <?php 
-                                $accordion_index++;
-                                endwhile; 
-                            ?>
+                                <?php wp_reset_postdata(); ?>
+                            <?php endif; ?>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+                
+                <?php
+                // Also show standalone conditions (those without parents AND without children)
+                $standalone_conditions = new WP_Query([
+                    'post_type' => 'condition',
+                    'post_parent' => 0,
+                    'posts_per_page' => -1,
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                    'meta_query' => [
+                        [
+                            'key' => 'has_children',
+                            'compare' => 'NOT EXISTS'
+                        ]
+                    ]
+                ]);
+                
+                // Filter out conditions that have children
+                $standalone_posts = [];
+                if ($standalone_conditions->have_posts()) {
+                    while ($standalone_conditions->have_posts()) {
+                        $standalone_conditions->the_post();
+                        $condition_id = get_the_ID();
+                        
+                        // Check if this condition has children
+                        $children_check = new WP_Query([
+                            'post_type' => 'condition',
+                            'post_parent' => $condition_id,
+                            'posts_per_page' => 1
+                        ]);
+                        
+                        if (!$children_check->have_posts()) {
+                            $standalone_posts[] = get_post($condition_id);
+                        }
+                        wp_reset_postdata();
+                    }
+                }
+                
+                if (!empty($standalone_posts)) : ?>
+                    <div class="condition-group">
+                        <div class="condition-parent">
+                            <h2 class="condition-title">Other Conditions</h2>
+                        </div>
+                        <div class="condition-children">
+                            <div class="row g-3">
+                                <?php foreach ($standalone_posts as $post) : 
+                                    setup_postdata($post); ?>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="condition-item">
+                                            <a href="<?php the_permalink(); ?>" class="condition-link">
+                                                <span class="condition-name"><?php the_title(); ?></span>
+                                                <i class="fa-solid fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <?php wp_reset_postdata(); ?>
+                <?php endif; ?>
+                
             <?php else: ?>
                 <div class="row">
-                    <div class="col">
-                        <p>No conditions found.</p>
+                    <div class="col-12">
+                        <p class="text-center text-muted">No conditions found.</p>
                     </div>
                 </div>
-            <?php 
-            endif;
-            wp_reset_postdata(); // Reset after main query
-            ?>
+            <?php endif; ?>
+            
+            <?php wp_reset_postdata(); ?>
         </div>
     </section>
 </main>

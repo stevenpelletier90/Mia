@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Condition
- * Template Post Type: condition, procedure, non-surgical
+ * Template Post Type: condition, procedure, non-surgical, fat-transfer
  */
 
 get_header(); ?>

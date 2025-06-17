@@ -43,6 +43,28 @@
   font-style: italic;
   color: #555;
 }
+
+/* Main content link styles */
+.content a {
+  color: #0000FF;
+}
+
+.content a:hover,
+.content a:focus {
+  color: #551A8B; /* deeper shade or brand-friendly dark blue */
+  text-decoration-thickness: 2px;
+}
+
+/* FAQ/Accordion body link styles */
+.accordion-body a {
+  color: #0000FF;
+}
+
+.accordion-body a:hover,
+.accordion-body a:focus {
+  color: #551A8B; /* deeper shade or brand-friendly dark blue */
+  text-decoration-thickness: 2px;
+}
 .related-topics .h5 {
   position: relative;
   padding-bottom: 0.5rem;

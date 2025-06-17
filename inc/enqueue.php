@@ -96,7 +96,7 @@ function mia_get_context_mappings() {
         'non-surgical-archive' => ['type' => 'non-surgical-archive', 'css' => '_archive-non-surgical.css', 'js' => 'archive-non-surgical.js'],
         'special'          => ['type' => 'special',          'css' => '_special.css',          'js' => 'single-special.js'],
         'special-archive'  => ['type' => 'special-archive',  'css' => '_archive-special.css',  'js' => 'archive-special.js'],
-        'fat-transfer-archive' => ['type' => 'fat-transfer-archive', 'css' => '_archive.css', 'js' => 'archive-fat-transfer.js'],
+        'fat-transfer-archive' => ['type' => 'fat-transfer-archive', 'css' => '_archive-fat-transfer.css', 'js' => 'archive-fat-transfer.js'],
     ];
 }
 

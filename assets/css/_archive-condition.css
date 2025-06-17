@@ -1,3 +1,5 @@
+/* Conditions Archive Template Styles */
+
 .post-header {
   background-color: #f8f8f8;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -8,161 +10,134 @@
   margin-bottom: 0;
 }
 
-.conditions-accordion {
+.conditions-grid {
   margin-bottom: 2rem;
 }
 
-.condition-item {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
-  transition: all 0.3s ease;
+.condition-group {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 2rem;
 }
 
-.condition-item:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+.condition-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.condition-header {
-  padding: 1rem 1.5rem;
-  margin: 0;
-  background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.condition-button {
-  background: none;
-  border: none;
-  font-weight: 600;
-  text-align: left;
-  color: #333;
-  display: flex;
-  align-items: center;
-  transition: color 0.2s;
-}
-
-.condition-button:hover,
-.condition-button:focus {
-  color: #007bff;
-  text-decoration: none;
+.condition-parent {
+  margin-bottom: 1.5rem;
 }
 
 .condition-title {
+  font-family: var(--font-heading);
   font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
 }
 
-.condition-link,
-.condition-link:hover {
-  color: #333;
-  text-decoration: none;
+.condition-title a {
+  color: var(--color-primary);
+  transition: color 0.2s ease;
 }
 
-.condition-link:hover {
-  color: #007bff;
+.condition-title a:hover {
+  color: var(--color-gold);
 }
 
-.view-condition-link,
-.view-main-condition-link {
-  color: #007bff;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 0.35rem 0.75rem;
-  border-radius: 4px;
-  transition: all 0.2s;
-  white-space: nowrap;
+.condition-excerpt {
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
-.view-condition-link {
-  display: inline-block;
+.condition-children {
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-gold);
 }
 
-.view-main-condition-link {
-  display: inline-block;
-  margin-left: 1.5rem;
-  margin-bottom: 0.5rem;
+.condition-item {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
-.view-condition-link:hover,
-.view-main-condition-link:hover {
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
+.condition-item:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.condition-body {
-  padding: 0 1.5rem 1.5rem;
-}
-
-.child-conditions-list {
-  margin-top: 0.5rem;
-}
-
-.child-condition-item {
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.child-condition-item:last-child {
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-.child-condition-link {
+.condition-link {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0.5rem;
-  color: #555;
+  justify-content: space-between;
+  padding: 1rem;
+  color: var(--color-primary);
   text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
-.child-condition-link:hover {
-  background-color: rgba(0, 123, 255, 0.08);
-  color: #007bff;
-  text-decoration: none;
+.condition-link:hover {
+  color: var(--color-primary);
+  background-color: rgba(200, 178, 115, 0.05);
 }
 
-.child-condition-link i {
-  color: #007bff;
-  opacity: 0.8;
-  transition: all 0.2s;
+.condition-name {
+  font-weight: 500;
+  flex: 1;
 }
 
-.child-condition-link:hover i {
+.condition-link i {
+  color: var(--color-gold);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.condition-link:hover i {
   opacity: 1;
   transform: translateX(3px);
 }
 
-.condition-button::after {
-  content: "\f078";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  margin-left: 0.5rem;
-  color: #aaa;
-  transition: transform 0.3s;
+/* Content link styles to match other templates */
+.content a {
+  color: #0000FF;
 }
 
-.condition-button.collapsed::after {
-  transform: rotate(-90deg);
+.content a:hover,
+.content a:focus {
+  color: #551A8B;
+  text-decoration-thickness: 2px;
 }
 
-@media (max-width: 767px) {
-  .condition-header {
-    padding: 0.75rem 1rem;
-    flex-direction: column;
-    align-items: flex-start;
+@media (max-width: 991.98px) {
+  .condition-children {
+    padding-left: 0.5rem;
+    border-left-width: 2px;
   }
-
-  .view-condition-link {
-    margin-top: 0.5rem;
-    align-self: flex-start;
+  
+  .condition-item {
+    margin-bottom: 0.75rem;
   }
+}
 
-  .view-main-condition-link {
-    margin-left: 1rem;
+@media (max-width: 767.98px) {
+  .condition-parent {
+    margin-bottom: 1rem;
+  }
+  
+  .condition-children {
+    padding-left: 0;
+    border-left: none;
+    border-top: 2px solid var(--color-gold);
+    padding-top: 1rem;
+  }
+  
+  .condition-link {
+    padding: 0.75rem;
+  }
+  
+  .condition-excerpt {
+    font-size: 1rem;
   }
 }
