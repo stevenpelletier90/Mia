@@ -5,13 +5,11 @@
  */
 get_header(); ?>
 <main>
-    <div class="container">
-        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-            <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
-                <?php yoast_breadcrumb(); ?>
-            </nav>
-        <?php endif; ?>
-    </div>
+    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+        <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
+            <?php yoast_breadcrumb(); ?>
+        </nav>
+    <?php endif; ?>
     
     <!-- Specials Archive Header -->
     <section class="post-header py-5">

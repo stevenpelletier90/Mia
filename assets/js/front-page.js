@@ -230,82 +230,95 @@ document.addEventListener("DOMContentLoaded", function () {
   initProcedureDropdown();
 });
 
-// ===== TAB NAVIGATION (needs to wait for full page load) =====
-window.addEventListener("load", function () {
-  // Function to initialize the tab navigation
-  function initTabNavigation() {
-    // Select elements using vanilla JS
-    const tabsContainer = document.querySelector(".procedure-tabs-container");
-    const tabsWrapper = document.querySelector(".tabs-wrapper");
-    const tabsList = document.querySelector(".procedure-tabs");
-    const prevArrow = document.querySelector(".prev-arrow");
-    const nextArrow = document.querySelector(".next-arrow");
-    const tabLinks = document.querySelectorAll(".procedure-tabs .nav-link");
-
-    // Only run if all necessary elements exist
-    if (tabsList && tabLinks.length) {
-      // Handle tab changes to ensure active tab is visible
-      tabLinks.forEach(function (tabLink) {
-        tabLink.addEventListener("shown.bs.tab", function () {
-          // Scroll the active tab into view using the native scroll-snap
-          const activeTab = document.querySelector(".procedure-tabs .nav-link.active");
-          if (activeTab) {
-            const activeTabItem = activeTab.parentElement;
-            // Prevent unwanted vertical scroll by only scrolling horizontally
-            if (tabsList && typeof tabsList.scrollLeft !== "undefined") {
-              const tabRect = activeTabItem.getBoundingClientRect();
-              const listRect = tabsList.getBoundingClientRect();
-              // Only scroll if tab is out of horizontal view
-              if (tabRect.left < listRect.left || tabRect.right > listRect.right) {
-                activeTabItem.scrollIntoView({
-                  behavior: "smooth",
-                  block: "nearest",
-                  inline: "center",
-                  scrollMode: "if-needed",
-                });
-              }
-            }
-          }
-        });
-      });
-
-      // Initialize - make sure active tab is visible
-      const activeTab = document.querySelector(".procedure-tabs .nav-link.active");
-      if (activeTab) {
-        const activeTabItem = activeTab.parentElement;
-        // Prevent unwanted vertical scroll by only scrolling horizontally
-        if (tabsList && typeof tabsList.scrollLeft !== "undefined") {
-          const tabRect = activeTabItem.getBoundingClientRect();
-          const listRect = tabsList.getBoundingClientRect();
-          // Only scroll if tab is out of horizontal view
-          if (tabRect.left < listRect.left || tabRect.right > listRect.right) {
-            activeTabItem.scrollIntoView({
-              behavior: "smooth",
-              block: "nearest",
-              inline: "center",
-              scrollMode: "if-needed",
-            });
-          }
-        }
-      }
-
-      // Optional: Add arrow navigation for accessibility
-      if (prevArrow && nextArrow) {
-        // Simple arrow navigation that works with the native scroll behavior
-        prevArrow.addEventListener("click", function () {
-          tabsList.scrollBy({ left: -100, behavior: "smooth" });
-        });
-
-        nextArrow.addEventListener("click", function () {
-          tabsList.scrollBy({ left: 100, behavior: "smooth" });
-        });
-      }
-    }
+// ===== TAB NAVIGATION (Clean & Efficient) =====
+document.addEventListener("DOMContentLoaded", function () {
+  // Run arrow logic only ≥ md (≥ 768px). Early-exit on mobile.
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    initTabArrows();
   }
 
-  // Initialize immediately
-  initTabNavigation();
+  function initTabArrows() {
+    const tabs = document.querySelector(".procedure-tabs");
+    const prevArrow = document.querySelector(".prev-arrow");
+    const nextArrow = document.querySelector(".next-arrow");
 
-  // Also initialize after a short delay to ensure everything is loaded
-  setTimeout(initTabNavigation, 500);
+    if (!tabs || !prevArrow || !nextArrow) return;
+
+    let currentTabIndex = 0;
+    const tabLinks = tabs.querySelectorAll(".nav-link");
+
+    // Helper – keep arrows live but disable when useless
+    function updateArrows() {
+      const maxScroll = tabs.scrollWidth - tabs.clientWidth;
+
+      // Debug logging (remove in production)
+      console.log("Debug arrows:", {
+        scrollWidth: tabs.scrollWidth,
+        clientWidth: tabs.clientWidth,
+        maxScroll: maxScroll,
+        scrollLeft: tabs.scrollLeft,
+        tabCount: tabLinks.length,
+        currentTabIndex: currentTabIndex,
+      });
+
+      // Always enable arrows - they work regardless of overflow
+      prevArrow.disabled = false;
+      nextArrow.disabled = false;
+    }
+
+    // Enhanced click handlers that work with or without overflow
+    function handleArrowClick(direction) {
+      const maxScroll = tabs.scrollWidth - tabs.clientWidth;
+
+      if (maxScroll > 0) {
+        // Normal scroll behavior when overflow exists
+        const step = 150;
+        tabs.scrollBy({ left: direction * step, behavior: "smooth" });
+      } else {
+        // Tab cycling when no overflow
+        if (direction > 0) {
+          // Next tab
+          currentTabIndex = (currentTabIndex + 1) % tabLinks.length;
+        } else {
+          // Previous tab
+          currentTabIndex = (currentTabIndex - 1 + tabLinks.length) % tabLinks.length;
+        }
+
+        // Activate the new tab
+        tabLinks[currentTabIndex].click();
+      }
+    }
+
+    // Click handlers
+    prevArrow.addEventListener("click", () => handleArrowClick(-1));
+    nextArrow.addEventListener("click", () => handleArrowClick(1));
+
+    // Track active tab changes
+    tabLinks.forEach((link, index) => {
+      link.addEventListener("click", () => {
+        currentTabIndex = index;
+      });
+    });
+
+    // Keep arrows in sync
+    tabs.addEventListener("scroll", updateArrows);
+    window.addEventListener("resize", updateArrows, { passive: true });
+
+    // Initial call
+    updateArrows();
+
+    // Call after fonts are ready
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateArrows);
+    }
+
+    // Call after first paint
+    requestAnimationFrame(() => requestAnimationFrame(updateArrows));
+
+    // Force re-calc after everything settles
+    window.addEventListener("load", () => {
+      // All images, web-fonts, etc. are done
+      updateArrows();
+    });
+  }
 });

@@ -278,58 +278,71 @@
   padding: 5rem 0;
 }
 
-.procedure-tabs-container {
+/* Procedure tabs shell - desktop only */
+.procedure-tabs-shell {
+  margin-bottom: 2rem;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
-  z-index: 50;
+  max-width: 100%;
 }
 
-.tabs-wrapper {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  margin: 0 50px;
-}
-
+/* Scrollable tab strip */
 .procedure-tabs {
   border-bottom: none;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  max-width: 100%;
-  position: relative;
-  z-index: 1;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 5px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 0 60px; /* Space for arrows */
 }
 
+/* Hide scrollbars */
 .procedure-tabs::-webkit-scrollbar {
   display: none;
-}
-
-.procedure-tabs .nav-item {
-  scroll-snap-align: center;
-}
-
-.procedure-tabs .nav-item {
-  margin: 0 0.25rem;
-  white-space: nowrap;
 }
 
 .procedure-tabs .nav-link {
   color: var(--color-primary);
   font-weight: 600;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border: 1px solid transparent;
   border-radius: 4px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+/* Responsive tab sizing */
+@media (min-width: 768px) and (max-width: 991px) {
+  .procedure-tabs .nav-link {
+    min-width: 110px;
+    padding: 0.75rem 0.625rem;
+    font-size: 0.875rem;
+  }
+
+  .procedure-tabs {
+    margin: 0 50px; /* Reduce arrow space */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .procedure-tabs .nav-link {
+    min-width: 140px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .procedure-tabs .nav-link {
+    min-width: 160px;
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 .procedure-tabs .nav-link:hover {
@@ -343,42 +356,24 @@
   border-color: var(--color-gold);
 }
 
-.procedure-dropdown {
-  display: none;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-.procedure-dropdown .form-select {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  color: var(--color-primary);
-  border-color: var(--color-gold);
-}
-
-.procedure-dropdown .form-select:focus {
-  box-shadow: 0 0 0 0.25rem rgba(200, 178, 115, 0.25);
-  border-color: var(--color-gold);
-}
-
+/* Arrow buttons - positioned absolutely for perfect centering */
 .procedure-nav-arrow {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 40px;
   height: 40px;
+  border: 1px solid var(--color-gold);
+  background: #fff;
+  color: var(--color-gold);
+  border-radius: 50%;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border: 1px solid var(--color-gold);
-  color: var(--color-gold);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 999;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: auto;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .prev-arrow {
@@ -392,6 +387,7 @@
 .procedure-nav-arrow:hover {
   background-color: var(--color-gold);
   color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .procedure-nav-arrow:focus {
@@ -399,14 +395,26 @@
   outline-offset: 2px;
 }
 
+.procedure-nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .procedure-nav-arrow i {
   font-size: 1rem;
 }
 
-.procedure-nav-arrow.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
+/* Mobile dropdown styling */
+#procedureDropdown {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-primary);
+  border-color: var(--color-gold);
+}
+
+#procedureDropdown:focus {
+  box-shadow: 0 0 0 0.25rem rgba(200, 178, 115, 0.25);
+  border-color: var(--color-gold);
 }
 
 .procedure-title {
@@ -717,14 +725,6 @@ h3.section-subheading {
 
   .procedures-section {
     padding: 3rem 0;
-  }
-
-  .procedure-tabs-container {
-    display: none;
-  }
-
-  .procedure-dropdown {
-    display: block;
   }
 }
 

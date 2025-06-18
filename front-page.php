@@ -228,58 +228,56 @@ include 'hero-section.php';
     <!-- Procedure Navigation Tabs -->
     <div class="row">
       <div class="col-12">
-        <!-- Mobile Dropdown (shown only on mobile) -->
-        <div class="procedure-dropdown">
-          <select id="procedureDropdown" class="form-select" aria-label="Select a procedure category">
-            <option value="body-content" selected>Body</option>
-            <option value="breast-content">Breast</option>
-            <option value="face-content">Face</option>
-            <option value="nonsurgical-content">Non-Surgical</option>
-            <option value="men-content">Men</option>
-          </select>
-        </div>
-        
-        <!-- Desktop Tabs (hidden on mobile) -->
-        <div class="procedure-tabs-container position-relative">
-          <!-- Tab navigation arrows positioned outside the tabs list -->
-          <button class="procedure-nav-arrow prev-arrow" type="button" aria-label="Previous procedures" tabindex="0">
+        <!-- Desktop: tabs with arrows (≥768px) -->
+        <div class="procedure-tabs-shell d-none d-md-flex align-items-center">
+          <!-- Arrow – Previous -->
+          <button class="procedure-nav-arrow prev-arrow me-2" type="button" aria-label="Previous procedure category">
             <i class="fa-solid fa-chevron-left"></i>
           </button>
-          
-          <div class="tabs-wrapper">
-            <ul class="nav nav-tabs procedure-tabs justify-content-center" id="procedureTabs" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="body-tab" data-bs-toggle="tab" data-bs-target="#body-content" type="button" role="tab" aria-controls="body-content" aria-selected="true">
-                  Body
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="breast-tab" data-bs-toggle="tab" data-bs-target="#breast-content" type="button" role="tab" aria-controls="breast-content" aria-selected="false">
-                  Breast
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="face-tab" data-bs-toggle="tab" data-bs-target="#face-content" type="button" role="tab" aria-controls="face-content" aria-selected="false">
-                  Face
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="nonsurgical-tab" data-bs-toggle="tab" data-bs-target="#nonsurgical-content" type="button" role="tab" aria-controls="nonsurgical-content" aria-selected="false">
-                  Non-Surgical
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="men-tab" data-bs-toggle="tab" data-bs-target="#men-content" type="button" role="tab" aria-controls="men-content" aria-selected="false">
-                  Men
-                </button>
-              </li>
-            </ul>
-          </div>
-          
-          <button class="procedure-nav-arrow next-arrow" type="button" aria-label="Next procedures" tabindex="0">
+
+          <!-- Scrollable tab strip -->
+          <ul class="nav nav-tabs procedure-tabs flex-nowrap overflow-auto" id="procedureTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="body-tab" data-bs-toggle="tab" data-bs-target="#body-content" type="button" role="tab" aria-controls="body-content" aria-selected="true">
+                Body
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="breast-tab" data-bs-toggle="tab" data-bs-target="#breast-content" type="button" role="tab" aria-controls="breast-content" aria-selected="false">
+                Breast
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="face-tab" data-bs-toggle="tab" data-bs-target="#face-content" type="button" role="tab" aria-controls="face-content" aria-selected="false">
+                Face
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="nonsurgical-tab" data-bs-toggle="tab" data-bs-target="#nonsurgical-content" type="button" role="tab" aria-controls="nonsurgical-content" aria-selected="false">
+                Non-Surgical
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="men-tab" data-bs-toggle="tab" data-bs-target="#men-content" type="button" role="tab" aria-controls="men-content" aria-selected="false">
+                Men
+              </button>
+            </li>
+          </ul>
+
+          <!-- Arrow – Next -->
+          <button class="procedure-nav-arrow next-arrow ms-2" type="button" aria-label="Next procedure category">
             <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
+
+        <!-- Mobile: simple select (<768px) -->
+        <select id="procedureDropdown" class="form-select d-block d-md-none mt-3" aria-label="Select a procedure category">
+          <option value="body-content" selected>Body</option>
+          <option value="breast-content">Breast</option>
+          <option value="face-content">Face</option>
+          <option value="nonsurgical-content">Non-Surgical</option>
+          <option value="men-content">Men</option>
+        </select>
       </div>
     </div>
 

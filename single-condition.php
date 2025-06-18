@@ -8,13 +8,11 @@
 get_header(); ?>
 
 <main data-bs-spy="scroll" data-bs-target="#tableOfContents" data-bs-offset="100" data-bs-smooth-scroll="true">
-    <div class="container">
-        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-            <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
-                <?php yoast_breadcrumb(); ?>
-            </nav>
-        <?php endif; ?>
-    </div>
+    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+        <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
+            <?php yoast_breadcrumb(); ?>
+        </nav>
+    <?php endif; ?>
     <?php while (have_posts()) : the_post(); ?>
         <!-- Page Header -->
         <section class="post-header py-5">
