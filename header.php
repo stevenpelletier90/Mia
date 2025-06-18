@@ -24,7 +24,7 @@
 <body <?php body_class(); ?><?php if (!is_singular('surgeon')): ?> data-bs-spy="scroll" data-bs-target="#surgeon-tabs" data-bs-offset="120"<?php endif; ?>>
 <?php wp_body_open(); ?>
 
-<header class="position-sticky top-0 z-1030">
+<header class="position-sticky site-header top-0">
   <nav class="navbar navbar-expand-xl navbar-dark" id="primary-navigation" aria-label="Main navigation">
     <div class="container-fluid">
       <div class="d-flex flex-wrap align-items-center w-100">
@@ -117,8 +117,8 @@
   </nav>
 </header>
 <!-- Mobile Floating CTA Button - Only visible on mobile -->
-<div id="mobileCta" class="mobile-cta-container">
-  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="mobile-consultation-btn" aria-label="Schedule free virtual consultation">
+<div id="mobileCta" class="mobile-cta-container d-flex justify-content-center align-items-center position-fixed bottom-0 start-0 w-100 p-3">
+  <a href="<?php echo esc_url(home_url('/free-plastic-surgery-consultation/')); ?>" class="mobile-consultation-btn d-inline-block text-center text-decoration-none" aria-label="Schedule free virtual consultation">
     Free Virtual Consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
   </a>
 </div>

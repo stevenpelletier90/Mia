@@ -138,7 +138,7 @@ function render_procedures_menu($procedures, $is_mobile = false) {
  */
 function render_desktop_procedures_menu($procedures) {
     ?>
-    <div class="dropdown-menu mega-menu w-100 p-3">
+    <div class="dropdown-menu mega-menu w-100 p-3 rounded-0 mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3">
@@ -220,7 +220,7 @@ function render_locations_menu($is_mobile = false) {
  */
 function render_desktop_locations_menu($locations) {
     ?>
-    <div class="dropdown-menu mega-menu w-100 p-3">
+    <div class="dropdown-menu mega-menu w-100 p-3 rounded-0 mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3">
@@ -318,7 +318,7 @@ function render_surgeons_menu($is_mobile = false) {
  */
 function render_desktop_surgeons_menu($surgeons) {
     ?>
-    <div class="dropdown-menu mega-menu w-100 p-3">
+    <div class="dropdown-menu mega-menu w-100 p-3 rounded-0 mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3">
@@ -408,7 +408,7 @@ function render_before_after_menu($is_mobile = false) {
  */
 function render_desktop_before_after_menu() {
     ?>
-    <div class="dropdown-menu mega-menu w-100 p-3">
+    <div class="dropdown-menu mega-menu w-100 p-3 rounded-0 mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3">
@@ -493,7 +493,7 @@ function render_non_surgical_menu($is_mobile = false) {
  */
 function render_desktop_non_surgical_menu($procedures) {
     ?>
-    <div class="dropdown-menu mega-menu w-100 p-3">
+    <div class="dropdown-menu mega-menu w-100 p-3 rounded-0 mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3">
