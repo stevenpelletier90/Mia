@@ -1,4 +1,4 @@
-/* Category Template Styles */
+/* Page Template Styles */
 
 /* Post header styling to match single pages */
 .post-header {
@@ -44,12 +44,7 @@
   margin-bottom: 0;
 }
 
-/* Archive description styling */
-.archive-description {
-  color: #666;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
+/* Accordion styles now in _base.css for global use */
 
 /* Media queries for responsive design */
 @media (max-width: 767px) {

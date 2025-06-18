@@ -15,16 +15,17 @@
 get_header(); ?>
 
 <main>
-    <div class="container">
-        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
-                <?php yoast_breadcrumb(); ?>
-            </nav>
-        <?php endif; ?>
-    </div>
+  <!-- Breadcrumbs ---------------------------------------------------->
+  <div class="container">
+    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+        <?php yoast_breadcrumb(); ?>
+      </nav>
+    <?php endif; ?>
+  </div>
     <?php while (have_posts()) : the_post(); ?>
         <!-- Page Header -->
-        <header class="bg-light py-5">
+        <section class="post-header py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -32,7 +33,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
 
         <!-- Content -->
         <article class="py-5">

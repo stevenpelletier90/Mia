@@ -11,7 +11,7 @@ get_header();
         <?php endif; ?>
     </div>
 
-    <header class="location-header py-5">
+    <section class="location-header py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -162,7 +162,7 @@ get_header();
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <article class="py-5">
         <div class="container">

@@ -6,6 +6,7 @@
 .post-header h1 {
   font-weight: 700;
   margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
 }
 
 .overview-section {

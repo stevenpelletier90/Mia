@@ -14,7 +14,8 @@
       "Bash(cp:*)",
       "Bash(sed:*)",
       "Bash(ls:*)",
-      "Bash(diff:*)"
+      "Bash(diff:*)",
+      "WebFetch(domain:developer.wordpress.org)"
     ],
     "deny": []
   }

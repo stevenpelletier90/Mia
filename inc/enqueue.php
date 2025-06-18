@@ -67,7 +67,6 @@ function mia_get_template_mappings() {
         'page-blank-canvas'           => ['css' => 'page-blank-canvas.css',           'js' => 'page-blank-canvas.js'],
         'page-hero-canvas'            => ['css' => 'page-hero-canvas.css',            'js' => 'page-hero-canvas.js'],
         'page-before-after-by-doctor' => ['css' => 'page-before-after-by-doctor.css', 'js' => 'page-before-after-by-doctor.js'],
-        'page-case-category'          => ['css' => 'page-case-category.css',          'js' => 'page-case-category.js'],
         'page-treatment-layout'       => ['css' => 'page-treatment-layout.css',       'js' => 'page-treatment-layout.js'],
         'page-condition-layout'       => ['css' => 'page-condition-layout.css',       'js' => 'page-condition-layout.js'],
         
@@ -97,6 +96,9 @@ function mia_get_template_mappings() {
         'archive-procedure'   => ['css' => 'archive-procedure.css',   'js' => 'archive-procedure.js'],
         'archive-special'     => ['css' => 'archive-special.css',     'js' => 'archive-special.js'],
         'archive-surgeon'     => ['css' => 'archive-surgeon.css',     'js' => 'archive-surgeon.js'],
+        // Home & Index
+        'home'               => ['css' => 'home.css',          'js' => 'home.js'],
+        'index'              => ['css' => 'index.css',         'js' => 'index.js'],
     ];
 }
 
@@ -124,7 +126,8 @@ function mia_detect_template_key() {
     if ( is_search() )                    return 'search';
     if ( is_tax( 'case-category' ) )      return 'case-category';
     if ( is_category() )                  return 'category';
-    if ( is_home() || ( is_archive() && get_post_type() === 'post' ) ) return 'archive';
+    if ( is_home() )                       return 'home';
+    if ( is_archive() && get_post_type() === 'post' ) return 'archive';
     
     // 3. Archive pages
     if ( is_post_type_archive() ) {
@@ -149,7 +152,7 @@ function mia_detect_template_key() {
         }
     }
     
-    return null;
+    return 'index';
 }
 
 /**

@@ -1,3 +1,33 @@
+:root {
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.5rem;
+  --spacing-2xl: 2rem;
+  --spacing-3xl: 3rem;
+  --spacing-4xl: 4rem;
+
+  /* Form Field Heights */
+  --input-height: 48px;
+  --input-padding: 0.625rem 0.75rem;
+  --input-font-size: 16px;
+
+  /* Transitions */
+  --transition-base: all 0.3s ease;
+  --transition-fast: all 0.2s ease;
+
+  /* Border Radius */
+  --radius-sm: 3px;
+  --radius-base: 4px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.3);
+  --shadow-text: 2px 2px 4px #000000d1;
+}
+
 .treatment-header {
   position: relative;
   min-height: 400px;
@@ -6,10 +36,7 @@
 .treatment-header::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(27, 27, 27, 0.5));
   z-index: 1;
 }
@@ -21,10 +48,7 @@
 
 .hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   object-fit: cover;
   object-position: center center;
   z-index: 0;
@@ -37,9 +61,11 @@
 }
 
 .treatment-header h1 {
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
-  text-shadow: 2px 2px 4px black;
+  text-shadow: var(--shadow-text);
+  font-size: clamp(2.5rem, 5vw, 62px);
+  letter-spacing: -2px;
 }
 
 .treatment-header .pricing-info {
@@ -47,15 +73,15 @@
 }
 
 .treatment-subsection {
-  margin-top: 3rem;
-  padding-top: 2rem;
+  margin-top: var(--spacing-3xl);
+  padding-top: var(--spacing-2xl);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .treatment-subsection h3 {
   color: var(--color-primary);
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 .pricing-info h2 {
@@ -66,26 +92,24 @@
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  padding: 4rem 0;
+  padding-block: var(--spacing-4xl);
 }
 
 .main-content > .container-fluid,
 .main-content > .container,
 .main-content > section,
 .main-content > div {
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .main-content > * + * {
-  margin-top: 4rem;
+  margin-top: var(--spacing-4xl);
 }
 
 .results-resources-section {
   background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-block: var(--spacing-2xl);
+  border-block: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .results-resources-section .badge-after {
@@ -94,52 +118,15 @@
 
 .before-after-card {
   background: #fff;
-  border-radius: 4px;
+  border-radius: var(--radius-base);
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: border-color 0.2s ease;
-  margin-bottom: 1.5rem;
+  transition: border-color var(--transition-fast);
+  margin-bottom: var(--spacing-xl);
 }
 
 .before-after-card:hover {
   border-color: rgba(200, 178, 115, 0.3);
-}
-
-.consultation-card .gform_wrapper {
-  padding: 0 !important;
-}
-
-.consultation-card .gform_wrapper input[type="text"],
-.consultation-card .gform_wrapper input[type="email"],
-.consultation-card .gform_wrapper input[type="tel"],
-.consultation-card .gform_wrapper input[type="number"],
-.consultation-card .gform_wrapper input[type="url"],
-.consultation-card .gform_wrapper select,
-.consultation-card .gform_wrapper textarea {
-  font-size: 16px;
-}
-
-.consultation-card .gform_wrapper .gfield_checkbox .gchoice,
-.consultation-card .gform_wrapper .gfield_checkbox .gchoice {
-  margin-bottom: 0 !important;
-}
-
-.consultation-card .gform_wrapper .gform_footer .gform_button,
-.consultation-card .gform_wrapper .gform_footer .gform_button {
-  width: 100% !important;
-  justify-content: center !important;
-  padding: 0.75rem 1rem !important;
-  font-size: 15px !important;
-}
-
-.consultation-card .gform_wrapper .gform_fields,
-.consultation-card .gform_wrapper .gform_fields {
-  grid-gap: 0.75rem !important;
-}
-
-.consultation-card .gform_wrapper input,
-.consultation-card .gform_wrapper select {
-  -webkit-tap-highlight-color: transparent;
 }
 
 .consultation-card {
@@ -148,14 +135,12 @@
 }
 
 .consultation-card .gform_wrapper {
+  padding: 0 !important;
   background: transparent !important;
   border: none !important;
 }
 
-.consultation-card h3,
-.consultation-card strong,
-.consultation-card p,
-.consultation-card h2 {
+.consultation-card :is(h3, strong, p, h2) {
   color: #fff;
 }
 
@@ -172,19 +157,7 @@
   color: var(--color-primary);
 }
 
-fieldset#field_1_55 {
-  margin-bottom: 0px !important;
-}
-
-fieldset#field_1_57 {
-  margin-bottom: 0px !important;
-}
-
-fieldset#field_1_58 {
-  margin-bottom: 0px !important;
-}
-
-div#field_1_54 {
+:is(#field_1_55, #field_1_57, #field_1_58, #field_1_54) {
   margin-bottom: 0px !important;
 }
 
@@ -204,13 +177,17 @@ div#field_1_54 {
   padding-bottom: 0 !important;
 }
 
-.consultation-card .gform_wrapper .ginput_container input[type="text"],
-.consultation-card .gform_wrapper .ginput_container input[type="email"],
-.consultation-card .gform_wrapper .ginput_container input[type="tel"],
-.consultation-card .gform_wrapper .ginput_container input[type="number"],
-.consultation-card .gform_wrapper .ginput_container input[type="url"],
-.consultation-card .gform_wrapper .ginput_container textarea,
-.consultation-card .gform_wrapper .gfield select {
+.consultation-card
+  .gform_wrapper
+  :is(
+    .ginput_container input[type="text"],
+    .ginput_container input[type="email"],
+    .ginput_container input[type="tel"],
+    .ginput_container input[type="number"],
+    .ginput_container input[type="url"],
+    .ginput_container textarea,
+    .gfield select
+  ) {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -223,7 +200,7 @@ div#field_1_54 {
 .consultation-card .gform_wrapper .gform_fields {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
-  grid-gap: 0.75rem !important;
+  gap: var(--spacing-md) !important;
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -233,13 +210,21 @@ div#field_1_54 {
   padding: 0 !important;
 }
 
-#field_1_13 {
+:is(#field_1_13, #field_1_55, #field_1_57, #field_1_58, #field_1_54) {
   grid-column: span 2 !important;
+}
+
+:is(#field_1_2, #field_1_3, #field_1_36, #field_1_42, #field_1_33, #field_1_38) {
+  grid-column: span 1 !important;
+}
+
+:is(#field_1_55, #field_1_57, #field_1_58, #field_1_54) {
+  margin-top: var(--spacing-sm) !important;
 }
 
 .consultation-card .gform_wrapper .ginput_complex.ginput_container_name {
   display: flex !important;
-  gap: 0.75rem !important;
+  gap: var(--spacing-md) !important;
   margin: 0 !important;
 }
 
@@ -249,69 +234,38 @@ div#field_1_54 {
   padding: 0 !important;
 }
 
-#field_1_2,
-#field_1_3 {
-  grid-column: span 1 !important;
-}
-
-#field_1_36,
-#field_1_42 {
-  grid-column: span 1 !important;
-}
-
-#field_1_33,
-#field_1_38 {
-  grid-column: span 1 !important;
-}
-
-#field_1_55,
-#field_1_57,
-#field_1_58,
-#field_1_54 {
-  grid-column: span 2 !important;
-  margin-top: 0.5rem !important;
-}
-
 .consultation-card .gform_wrapper .gfield_checkbox {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin-block: 0 !important;
 }
 
 .consultation-card .gform_wrapper .gform_footer {
-  margin-top: 1rem !important;
+  margin-top: var(--spacing-lg) !important;
   padding: 0 !important;
 }
 
-.consultation-card .gform_wrapper input[type="text"],
-.consultation-card .gform_wrapper input[type="email"],
-.consultation-card .gform_wrapper input[type="tel"],
-.consultation-card .gform_wrapper input[type="number"],
-.consultation-card .gform_wrapper input[type="url"],
-.consultation-card .gform_wrapper select {
-  height: 48px;
-  padding: 0.625rem 0.75rem;
+.consultation-card
+  .gform_wrapper
+  :is(input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="url"], select) {
+  height: var(--input-height);
+  padding: var(--input-padding);
   line-height: 1.5;
-  font-size: 16px;
+  font-size: var(--input-font-size);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  border-radius: var(--radius-base);
   background-color: rgba(0, 0, 0, 0.2);
   color: #ffffff;
   width: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
 }
 
 .consultation-card .gform_wrapper select {
-  padding: 0.625rem 0.75rem;
+  padding: var(--input-padding);
   position: relative;
   background-color: rgba(0, 0, 0, 0.2);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  border-radius: var(--radius-base);
   appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
@@ -337,30 +291,25 @@ div#field_1_54 {
 
 .consultation-card .gform_wrapper textarea {
   min-height: 120px;
-  padding: 0.625rem 0.75rem;
+  padding: var(--input-padding);
   line-height: 1.5;
-  font-size: 16px;
+  font-size: var(--input-font-size);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  border-radius: var(--radius-base);
   background-color: rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
 }
 
-.consultation-card .gform_wrapper input:focus,
-.consultation-card .gform_wrapper select:focus,
-.consultation-card .gform_wrapper textarea:focus {
+.consultation-card .gform_wrapper :is(input, select, textarea):focus {
   outline: none;
   border-color: var(--color-gold);
   box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.consultation-card .gform_wrapper input::placeholder,
-.consultation-card .gform_wrapper textarea::placeholder {
+.consultation-card .gform_wrapper :is(input, textarea)::placeholder {
   color: rgba(255, 255, 255, 0.6);
   opacity: 1;
 }
@@ -375,22 +324,20 @@ div#field_1_54 {
   display: flex;
   align-items: center;
   margin-bottom: 0;
-  padding: 0.25rem 0;
+  padding-block: var(--spacing-xs);
 }
 
 .consultation-card .gform_wrapper .gfield_checkbox input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   width: 18px;
   height: 18px;
   border: 2px solid rgba(255, 255, 255, 0.6);
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   margin-right: 10px;
   position: relative;
   cursor: pointer;
   background-color: transparent;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
 }
 
 .consultation-card .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked {
@@ -430,11 +377,11 @@ div#field_1_54 {
   color: #ffffff;
   background-color: transparent;
   border: 2px solid #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
   padding: 0.625rem 1.5rem;
   font-size: 15px;
-  border-radius: 3px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
   text-transform: capitalize;
   text-decoration: none;
   cursor: pointer;
@@ -445,27 +392,25 @@ div#field_1_54 {
   content: "\f061";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  margin-left: 0.5rem;
+  margin-left: var(--spacing-sm);
   font-size: 0.85em;
   transition: transform 0.3s ease;
 }
 
-.consultation-card .gform_wrapper .gform_footer .gform_button:hover,
-.consultation-card .gform_wrapper .gform_footer .gform_button:focus {
+.consultation-card .gform_wrapper .gform_footer .gform_button:is(:hover, :focus) {
   color: var(--color-primary);
   background-color: var(--color-gold);
   border-color: var(--color-gold);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
-.consultation-card .gform_wrapper .gform_footer .gform_button:hover::after,
-.consultation-card .gform_wrapper .gform_footer .gform_button:focus::after {
+.consultation-card .gform_wrapper .gform_footer .gform_button:is(:hover, :focus)::after {
   transform: translateX(5px);
 }
 
 .consultation-card .gform_wrapper .gform_footer {
-  margin-top: 1rem;
-  padding-top: 0.5rem;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-sm);
   text-align: center;
 }
 
@@ -473,12 +418,11 @@ div#field_1_54 {
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
+  margin-bottom: var(--spacing-sm);
+  border-radius: var(--radius-base);
 }
 
-.results-resources-section .list-group-item:hover,
-.results-resources-section .list-group-item:focus {
+.results-resources-section .list-group-item:is(:hover, :focus) {
   background-color: rgba(200, 178, 115, 0.2);
   border-color: rgba(200, 178, 115, 0.4);
   color: #fff;
@@ -502,13 +446,13 @@ a.consent-trigger {
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-sm);
   position: relative;
   padding-bottom: 2px;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
 }
 
-a.consent-trigger:after {
+a.consent-trigger::after {
   content: "";
   position: absolute;
   width: 0;
@@ -516,30 +460,29 @@ a.consent-trigger:after {
   bottom: 0;
   left: 0;
   background-color: #ffffff;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
 }
 
 a.consent-trigger:hover {
   color: #ffffff;
 }
 
-a.consent-trigger:hover:after {
+a.consent-trigger:hover::after {
   width: 100%;
 }
 
-/* Media Queries */
 @media (max-width: 991px) {
   .main-content {
-    padding: 3rem 0;
+    padding-block: var(--spacing-3xl);
   }
 
   .main-content > * + * {
-    margin-top: 3rem;
+    margin-top: var(--spacing-3xl);
   }
 
   .treatment-subsection {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xl);
   }
 }
 
@@ -558,11 +501,10 @@ a.consent-trigger:hover:after {
 
   .treatment-header .col-lg-7 {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
   }
 
-  .treatment-header .section-title:after {
+  .treatment-header .section-title::after {
     left: 50%;
     transform: translateX(-50%);
   }
@@ -571,13 +513,17 @@ a.consent-trigger:hover:after {
     padding: 0 !important;
   }
 
-  .consultation-card .gform_wrapper input[type="text"],
-  .consultation-card .gform_wrapper input[type="email"],
-  .consultation-card .gform_wrapper input[type="tel"],
-  .consultation-card .gform_wrapper input[type="number"],
-  .consultation-card .gform_wrapper input[type="url"],
-  .consultation-card .gform_wrapper select,
-  .consultation-card .gform_wrapper textarea {
+  .consultation-card
+    .gform_wrapper
+    :is(
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      input[type="url"],
+      select,
+      textarea
+    ) {
     font-size: 15px;
   }
 
@@ -588,16 +534,16 @@ a.consent-trigger:hover:after {
   .consultation-card .gform_wrapper .gform_footer .gform_button {
     width: 100%;
     justify-content: center;
-    padding: 0.75rem 1rem;
+    padding: var(--spacing-md) var(--spacing-lg);
     font-size: 14px;
   }
 
   .consultation-card .gform_wrapper .gform_fields {
-    grid-gap: 0.5rem !important;
+    gap: var(--spacing-sm) !important;
   }
 
   .main-content {
-    padding: 2rem 0;
+    padding-block: var(--spacing-2xl);
   }
 
   .main-content > * + * {
@@ -605,14 +551,13 @@ a.consent-trigger:hover:after {
   }
 
   .treatment-subsection {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
   }
 }
 
 @media (max-width: 480px) {
-  .consultation-card .gform_wrapper input,
-  .consultation-card .gform_wrapper select {
+  .consultation-card .gform_wrapper :is(input, select) {
     -webkit-tap-highlight-color: transparent;
   }
 

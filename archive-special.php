@@ -14,7 +14,7 @@ get_header(); ?>
     </div>
     
     <!-- Specials Archive Header -->
-    <header class="bg-light py-5">
+    <section class="post-header py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
@@ -29,7 +29,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
     
     <!-- Filter/Category Navigation (Optional) -->
     <div class="bg-white border-bottom py-3">

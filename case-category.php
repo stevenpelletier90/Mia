@@ -18,7 +18,7 @@ $term = get_queried_object();
         <?php endif; ?>
     </div>
     <!-- Archive Header -->
-    <header class="bg-light py-5">
+    <section class="post-header py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -36,7 +36,7 @@ $term = get_queried_object();
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Archive Content -->
     <section class="py-5">
