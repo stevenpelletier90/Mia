@@ -30,7 +30,9 @@
 
 .treatment-header {
   position: relative;
-  min-height: 400px;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
 }
 
 .treatment-header::before {
@@ -49,9 +51,18 @@
 .hero-bg {
   position: absolute;
   inset: 0;
+  width: 100vw;
+  height: 100%;
   object-fit: cover;
   object-position: center center;
   z-index: 0;
+}
+
+.hero-picture {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100%;
 }
 
 .treatment-header h1,
@@ -486,27 +497,28 @@ a.consent-trigger:hover::after {
   }
 }
 
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .treatment-header {
+    min-height: 400px;
+  }
+  
+  .treatment-header .col-12 {
+    padding-inline: 2rem;
+  }
+}
+
 @media (max-width: 767px) {
   .treatment-header {
     min-height: 240px;
-  }
-
-  .treatment-header .row .col-lg-5 {
-    display: none;
   }
 
   .treatment-header .row.min-vh-50 {
     min-height: 300px !important;
   }
 
-  .treatment-header .col-lg-7 {
-    text-align: center;
-    margin-inline: auto;
-  }
-
-  .treatment-header .section-title::after {
-    left: 50%;
-    transform: translateX(-50%);
+  .treatment-header .col-12 {
+    padding-inline: 1rem;
   }
 
   .consultation-card .gform_wrapper {

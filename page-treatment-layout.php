@@ -8,20 +8,21 @@
 
 get_header(); 
 
+?>
+<a href="#main-content" class="visually-hidden-focusable skip-link">Skip to main content</a>
+<?php
 $post = get_queried_object();
 $hero_id = get_post_thumbnail_id( $post );
 ?>
-<main>
-    <div class="container">
-        <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-            <nav aria-label="Breadcrumb" class="breadcrumb-nav">
-                <?php yoast_breadcrumb(); ?>
-            </nav>
-        <?php endif; ?>
-    </div>
+<main id="main-content" role="main">
+    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+<nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
+            <?php yoast_breadcrumb(); ?>
+        </nav>
+    <?php endif; ?>
 
     <?php while (have_posts()) : the_post(); ?>
-        <section class="treatment-header py-5 position-relative overflow-hidden">
+<section class="treatment-header py-5 position-relative overflow-hidden" role="banner" aria-labelledby="page-title-<?php echo get_the_ID(); ?>">
             <?php if ($hero_id): ?>
                 <picture class="hero-picture">
                     <source media="(max-width: 640px)" 
@@ -37,9 +38,9 @@ $hero_id = get_post_thumbnail_id( $post );
             <?php endif; ?>
             
             <div class="container">
-                <div class="row min-vh-50 d-flex align-items-center">
-                    <div class="col-lg-7 mb-4 mb-lg-0">
-                        <h1><?php the_title(); ?></h1>
+                <div class="row min-vh-50 d-flex align-items-center justify-content-center">
+                    <div class="col-12 col-lg-7 mb-4 mb-lg-0 text-center text-lg-start">
+<h1 id="page-title-<?php echo get_the_ID(); ?>"><?php the_title(); ?></h1>
                         <?php 
                         // Try both price fields for flexibility
                         $procedure_price = get_field('procedure_price') ?: get_field('non_surgical_price');
@@ -51,11 +52,13 @@ $hero_id = get_post_thumbnail_id( $post );
                         <?php endif; ?>
                     </div>
                     
-                    <div class="col-lg-5">
-                        <div class="card shadow-sm consultation-card">
+                    <div class="col-lg-5 d-none d-lg-block">
+<div class="card shadow-sm consultation-card" role="complementary" aria-label="Free Virtual Consultation">
                             <div class="card-body p-4">
                                 <h3 class="h4 text-center">Free Virtual Consultation</h3>
-                                <?php gravity_form(1, false, false, false, '', true); ?>
+<div class="gf-wrapper" aria-label="Free Virtual Consultation Form">
+    <?php gravity_form(1, false, false, false, false, true); ?>
+</div>
                             </div>
                         </div>
                     </div>
@@ -82,7 +85,7 @@ $hero_id = get_post_thumbnail_id( $post );
                                     foreach (array_slice($before_after_gallery, 0, 2) as $pair): ?>
                                         <div class="col-6">
                                             <figure class="before-after-card h-100 overflow-hidden position-relative">
-                                                <span class="badge bg-dark position-absolute top-0 start-0 m-2"><?php echo esc_html(__('Before', 'mia')); ?></span>
+<span class="badge bg-dark position-absolute top-0 start-0 m-2" aria-hidden="true"><?php echo esc_html(__('Before', 'mia')); ?></span>
                                                 <?php echo mia_before_after_img($pair['before_image'], 'Before'); ?>
                                                 <figcaption class="small text-muted text-center py-2">
                                                     <?php echo !empty($pair['caption']) ? esc_html($pair['caption']) : 'Actual patient results may vary'; ?>
@@ -92,7 +95,7 @@ $hero_id = get_post_thumbnail_id( $post );
 
                                         <div class="col-6">
                                             <figure class="before-after-card h-100 overflow-hidden position-relative">
-                                                <span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after"><?php echo esc_html(__('After', 'mia')); ?></span>
+<span class="badge text-dark position-absolute top-0 start-0 m-2 badge-after" aria-hidden="true"><?php echo esc_html(__('After', 'mia')); ?></span>
                                                 <?php echo mia_before_after_img($pair['after_image'], 'After'); ?>
                                                 <figcaption class="small text-muted text-center py-2">
                                                     <?php echo !empty($pair['caption']) ? esc_html($pair['caption']) : 'Actual patient results may vary'; ?>

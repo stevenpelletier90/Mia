@@ -1,24 +1,14 @@
-/* keep jump links & scroll-spy in the right place */
-html {
-  scroll-padding-top: 76px; /* header is 76px tall */
-}
-
-/* For logged-in WordPress users with admin bar */
-body.admin-bar html {
-  scroll-padding-top: 108px; /* 76px header + 32px admin bar */
-}
-
-.z-1030 {
-  z-index: 1030;
-}
 .navbar {
   background: linear-gradient(to bottom, var(--color-primary), #000);
+  /* ensure navbar (and its mega-menus) sit above page content */
+  z-index: 1030;
 }
 .navbar-nav .nav-item {
   margin: 0 0.1rem;
 }
 .navbar-nav .nav-link {
-  font-size: clamp(0.75rem, 1vw, 0.95rem);
+  /* slightly smaller overall but still fully fluid */
+  font-size: clamp(0.6rem, 0.7vw + 0.2rem, 0.85rem);
   font-weight: 600;
   text-decoration: none;
 }
@@ -93,7 +83,7 @@ body.admin-bar html {
   max-width: 80%;
   background-color: #1b1b1b;
   color: #fff;
-  z-index: 1060; /* Ensure it appears above everything including the navbar-toggler */
+  z-index: 1300; /* Highest site layer – above mega-menu and toggler */
 }
 .offcanvas-header {
   padding: 1rem;
@@ -110,14 +100,6 @@ body.admin-bar html {
 
 @media (min-width: 1200px) {
   /* roomier desktop header */
-  html {
-    scroll-padding-top: 76px; /* header is 76px tall */
-  }
-
-  body.admin-bar html {
-    scroll-padding-top: 108px; /* 76px header + 32px admin bar */
-  }
-
   .navbar {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -139,6 +121,8 @@ body.admin-bar html {
     position: static;
   }
   .dropdown-menu.mega-menu {
+    /* appear above navbar, footer and off-canvas */
+    z-index: 1200;
     border-radius: 0;
     border-top: 3px solid var(--color-gold);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -208,11 +192,6 @@ body.admin-bar html {
   .navbar-nav .nav-item {
     margin: 0 0.05rem;
   }
-  .navbar-nav .nav-link {
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.8rem;
-  }
   .desktop-cta {
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
@@ -236,11 +215,6 @@ body.admin-bar html {
     margin-left: 0.25rem;
     font-size: 0.65em;
   }
-  .navbar-nav .nav-link {
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
-    font-size: 0.75rem;
-  }
 }
 
 @media (min-width: 1400px) {
@@ -255,7 +229,6 @@ body.admin-bar html {
     font-size: 0.8em;
   }
   .navbar-nav .nav-link {
-    font-size: 0.9rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -264,7 +237,7 @@ body.admin-bar html {
 /* Add z-index to navbar-toggler to ensure it's below the offcanvas */
 .navbar-toggler {
   position: relative;
-  z-index: 1050;
+  z-index: 1220;
 }
 
 @media (max-width: 1199.98px) {

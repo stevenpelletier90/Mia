@@ -106,6 +106,10 @@ ol {
 .breadcrumb-nav {
   margin: 0.75rem 0;
   font-family: var(--font-body);
+  padding-left: max(1rem, calc(50vw - 660px));
+  padding-right: 1rem;
+  max-width: 100%;
+  width: 100%;
 }
 
 .breadcrumb-nav a {
@@ -407,4 +411,59 @@ ol {
   .accordion-body {
     padding: 1.25rem;
   }
+}
+
+/* -----------------------------------------------------------------
+   Accessibility utility classes
+   ----------------------------------------------------------------- */
+.visually-hidden,
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Elements are hidden until they receive focus,
+   useful for skip links & in-page navigation */
+.visually-hidden-focusable:not(:focus):not(:active) {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.visually-hidden-focusable:focus,
+.visually-hidden-focusable:active {
+  position: static !important;
+  width: auto;
+  height: auto;
+  clip: auto;
+  overflow: visible;
+  margin: 0;
+}
+
+/* Skip link styling */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background: var(--color-gold);
+  color: #000;
+  z-index: 100;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.skip-link:focus,
+.skip-link:active {
+  transform: translateY(0);
 }
