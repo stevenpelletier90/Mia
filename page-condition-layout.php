@@ -1,8 +1,7 @@
 <?php
 /**
- * Single Condition Template
- * 
- * @package Mia_Aesthetics
+ * Template Name: Condition Layout
+ * Template Post Type: procedure, non-surgical, fat-transfer, page
  */
 
 get_header(); ?>

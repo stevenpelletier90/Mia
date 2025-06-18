@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Procedure
+ * Template Name: Treatment Layout
  * Template Post Type: procedure, non-surgical, fat-transfer, page
  * 
  * @package Mia_Aesthetics
@@ -21,7 +21,7 @@ $hero_id = get_post_thumbnail_id( $post );
     </div>
 
     <?php while (have_posts()) : the_post(); ?>
-        <header class="procedure-header py-5 position-relative overflow-hidden">
+        <section class="treatment-header py-5 position-relative overflow-hidden">
             <?php if ($hero_id): ?>
                 <picture class="hero-picture">
                     <source media="(max-width: 640px)" 
@@ -29,7 +29,7 @@ $hero_id = get_post_thumbnail_id( $post );
                     <source media="(max-width: 1024px)" 
                         srcset="<?php echo esc_url(wp_get_attachment_image_url($hero_id, 'hero-tablet')); ?>">
                     <img src="<?php echo esc_url(wp_get_attachment_image_url($hero_id, 'hero-desktop')); ?>" 
-                        alt="<?php echo esc_attr(get_the_title()); ?> procedure background"
+                        alt="<?php echo esc_attr(get_the_title()); ?> treatment background"
                         class="hero-bg"
                         loading="eager"
                         fetchpriority="high">
@@ -41,11 +41,12 @@ $hero_id = get_post_thumbnail_id( $post );
                     <div class="col-lg-7 mb-4 mb-lg-0">
                         <h1><?php the_title(); ?></h1>
                         <?php 
-                        $procedure_price = get_field('procedure_price');
+                        // Try both price fields for flexibility
+                        $procedure_price = get_field('procedure_price') ?: get_field('non_surgical_price');
                         if ($procedure_price): ?>
                             <div class="pricing-info mt-3">
                                 <h2 class="h4 mb-1">Starting Price: <?php echo $procedure_price; ?>*</h2>
-                                <small>* Pricing varies by surgeon</small>
+                                <small>* Pricing varies by provider</small>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -53,16 +54,16 @@ $hero_id = get_post_thumbnail_id( $post );
                     <div class="col-lg-5">
                         <div class="card shadow-sm consultation-card">
                             <div class="card-body p-4">
-                                <h3 class="h4 text-center">FREE VIRTUAL CONSULTATION</h3>
+                                <h3 class="h4 text-center">Free Virtual Consultation</h3>
                                 <?php gravity_form(1, false, false, false, '', true); ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <article class="single-procedure">
+        <article class="single-treatment">
             <section class="main-content">
                 <?php the_content(); ?>
             </section>

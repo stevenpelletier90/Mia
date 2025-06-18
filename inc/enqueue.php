@@ -61,105 +61,94 @@ function mia_register_asset( $type, $handle, $path, $deps = [], $footer = true )
  * Context mappings (single source of truth for CSS/JS filenames)
  * ---------------------------------------------------------------------------
  */
-function mia_get_context_mappings() {
+function mia_get_template_mappings() {
     return [
-        // Special templates
-        'page-blank-canvas'           => ['type' => 'page', 'css' => '_page-blank-canvas.css',           'js' => 'page-blank-canvas.js'],
-        'page-hero-canvas'            => ['type' => 'page', 'css' => '_page-hero-canvas.css',            'js' => 'page-hero-canvas.js'],
-        'page-before-after-by-doctor' => ['type' => 'page', 'css' => '_page-before-after-by-doctor.css', 'js' => 'page-before-after-by-doctor.js'],
-        'page-case-category'          => ['type' => 'page', 'css' => '_page-case-category.css',          'js' => 'page-case-category.js'],
-
-        // Core
-        'home'         => ['type' => 'home',         'css' => '_front-page.css', 'js' => 'front-page.js'],
-        '404'          => ['type' => '404',          'css' => '_404.css',        'js' => '404.js'],
-        'search'       => ['type' => 'search',       'css' => '_search.css',     'js' => 'search.js'],
-        'case-category'=> ['type' => 'case-category','css' => '_case-category.css','js' => 'case-category.js'],
-        'category'     => ['type' => 'category',     'css' => '_category.css',   'js' => 'category.js'],
-        'archive'      => ['type' => 'archive',      'css' => '_archive.css',    'js' => 'archive.js'],
-        'post'         => ['type' => 'post',         'css' => '_post.css',       'js' => 'single-post.js'],
-        'page'         => ['type' => 'page',         'css' => '_page.css',       'js' => 'page.js'],
-
-        // Custom post types
-        'procedure'        => ['type' => 'procedure',        'css' => '_procedure.css',        'js' => 'single-procedure.js'],
-        'procedure-archive'=> ['type' => 'procedure-archive','css' => '_archive-procedure.css','js' => 'archive-procedure.js'],
-        'condition'        => ['type' => 'condition',        'css' => '_condition.css',        'js' => 'single-condition.js'],
-        'condition-child'  => ['type' => 'condition-child',  'css' => '_condition.css',        'js' => 'single-condition.js'],
-        'condition-archive'=> ['type' => 'condition-archive','css' => '_archive-condition.css','js' => 'archive-condition.js'],
-        'fat-transfer'     => ['type' => 'fat-transfer',     'css' => '_fat-transfer.css',     'js' => 'single-fat-transfer.js'],
-        'surgeon'          => ['type' => 'surgeon',          'css' => '_surgeon.css',          'js' => 'single-surgeon.js'],
-        'surgeon-archive'  => ['type' => 'surgeon-archive',  'css' => '_archive-surgeon.css',  'js' => 'archive-surgeon.js'],
-        'case'             => ['type' => 'case',             'css' => '_case.css',             'js' => 'single-case.js'],
-        'case-archive'     => ['type' => 'case-archive',     'css' => '_archive-case.css',     'js' => 'archive-case.js'],
-        'location'         => ['type' => 'location',         'css' => '_location.css',         'js' => 'single-location.js'],
-        'location-archive' => ['type' => 'location-archive', 'css' => '_archive-location.css', 'js' => 'archive-location.js'],
-        'non-surgical'     => ['type' => 'non-surgical',     'css' => '_non-surgical.css',     'js' => 'single-non-surgical.js'],
-        'non-surgical-archive' => ['type' => 'non-surgical-archive', 'css' => '_archive-non-surgical.css', 'js' => 'archive-non-surgical.js'],
-        'special'          => ['type' => 'special',          'css' => '_special.css',          'js' => 'single-special.js'],
-        'special-archive'  => ['type' => 'special-archive',  'css' => '_archive-special.css',  'js' => 'archive-special.js'],
-        'fat-transfer-archive' => ['type' => 'fat-transfer-archive', 'css' => '_archive-fat-transfer.css', 'js' => 'archive-fat-transfer.js'],
+        // Page Templates (available for selection)
+        'page-blank-canvas'           => ['css' => 'page-blank-canvas.css',           'js' => 'page-blank-canvas.js'],
+        'page-hero-canvas'            => ['css' => 'page-hero-canvas.css',            'js' => 'page-hero-canvas.js'],
+        'page-before-after-by-doctor' => ['css' => 'page-before-after-by-doctor.css', 'js' => 'page-before-after-by-doctor.js'],
+        'page-case-category'          => ['css' => 'page-case-category.css',          'js' => 'page-case-category.js'],
+        'page-treatment-layout'       => ['css' => 'page-treatment-layout.css',       'js' => 'page-treatment-layout.js'],
+        'page-condition-layout'       => ['css' => 'page-condition-layout.css',       'js' => 'page-condition-layout.js'],
+        
+        // Core WordPress Templates
+        'front-page'      => ['css' => 'front-page.css',    'js' => 'front-page.js'],
+        '404'             => ['css' => '404.css',           'js' => '404.js'],
+        'search'          => ['css' => 'search.css',        'js' => 'search.js'],
+        'case-category'   => ['css' => 'case-category.css', 'js' => 'case-category.js'],
+        'category'        => ['css' => 'category.css',      'js' => 'category.js'],
+        'archive'         => ['css' => 'archive.css',       'js' => 'archive.js'],
+        'single-post'     => ['css' => 'single-post.css',   'js' => 'single-post.js'],
+        'page'            => ['css' => 'page.css',          'js' => 'page.js'],
+        
+        // Default Single Templates (fallbacks for fixed post types)
+        'single-case'        => ['css' => 'single-case.css',        'js' => 'single-case.js'],
+        'single-condition'   => ['css' => 'page-condition-layout.css','js' => 'page-condition-layout.js'],
+        'single-location'    => ['css' => 'single-location.css',    'js' => 'single-location.js'],
+        'single-surgeon'     => ['css' => 'single-surgeon.css',     'js' => 'single-surgeon.js'],
+        'single-special'     => ['css' => 'single-special.css',     'js' => 'single-special.js'],
+        
+        // Archive Templates
+        'archive-case'        => ['css' => 'archive-case.css',        'js' => 'archive-case.js'],
+        'archive-condition'   => ['css' => 'archive-condition.css',   'js' => 'archive-condition.js'],
+        'archive-fat-transfer'=> ['css' => 'page-condition-layout.css','js' => 'page-condition-layout.js'],
+        'archive-location'    => ['css' => 'archive-location.css',    'js' => 'archive-location.js'],
+        'archive-non-surgical'=> ['css' => 'archive-non-surgical.css','js' => 'archive-non-surgical.js'],
+        'archive-procedure'   => ['css' => 'archive-procedure.css',   'js' => 'archive-procedure.js'],
+        'archive-special'     => ['css' => 'archive-special.css',     'js' => 'archive-special.js'],
+        'archive-surgeon'     => ['css' => 'archive-surgeon.css',     'js' => 'archive-surgeon.js'],
     ];
 }
 
 /**
- * Detect the current context key for asset mapping.
+ * Detect the current template for asset loading.
+ * Priority: Selected Template > Default Template > Fallback
  *
- * @return string|null Mapping key or null when not found.
+ * @return string|null Template key for asset mapping.
  */
-function mia_detect_context_key() {
-    // Template → mapping key look‑up
-    $template_map = [
-        'page-blank-canvas.php'           => 'page-blank-canvas',
-        'page-hero-canvas.php'            => 'page-hero-canvas',
-        'page-before-after-by-doctor.php' => 'page-before-after-by-doctor',
-        'page-case-category.php'          => 'page-case-category',
-    ];
-    foreach ( $template_map as $tpl => $key ) {
-        if ( is_page_template( $tpl ) ) {
-            return $key;
-        }
-    }
-
-    if ( is_front_page() )                                  return 'home';
-    if ( is_404() )                                         return '404';
-    if ( is_search() )                                      return 'search';
-    if ( is_tax( 'case-category' ) )                        return 'case-category';
-    if ( is_category() )                                    return 'category';
-    if ( is_home() || ( is_archive() && get_post_type() === 'post' ) ) return 'archive';
-    if ( is_singular( 'post' ) )                            return 'post';
-
-    // CPT archive
-    if ( is_post_type_archive() ) {
-        $pt = get_post_type() ?: get_query_var( 'post_type' );
-        if ( $pt === 'fat-transfer' ) return 'fat-transfer-archive';
-        if ( $pt === 'case' )        return 'case-archive';
-        if ( $pt === 'procedure' )   return 'procedure-archive';
-        if ( $pt === 'location' )    return 'location-archive';
-        if ( $pt === 'surgeon' )     return 'surgeon-archive';
-        if ( $pt === 'condition' )   return 'condition-archive';
-        if ( $pt === 'non-surgical' ) return 'non-surgical-archive';
-        if ( $pt === 'special' )     return 'special-archive';
-        if ( $pt )                   return 'archive'; // Generic archive assets
-    }
-
-    // Page
-    if ( is_page() ) return 'page';
-
-    // CPT single
-    if ( is_singular() ) {
-        $pt = get_post_type();
-        // Check for custom template selection via page template dropdown
-        if ( $pt === 'procedure' ) {
-            $template = get_page_template_slug();
-            if ( $template === 'single-condition.php' ) {
-                return 'condition';
+function mia_detect_template_key() {
+    // 1. Check for user-selected template (highest priority)
+    if ( is_singular() || is_page() ) {
+        $selected_template = get_page_template_slug();
+        if ( $selected_template ) {
+            $template_key = str_replace( '.php', '', $selected_template );
+            if ( array_key_exists( $template_key, mia_get_template_mappings() ) ) {
+                return $template_key;
             }
-            return 'procedure';
-        }
-        if ( array_key_exists( $pt, mia_get_context_mappings() ) ) {
-            return $pt;
         }
     }
-
+    
+    // 2. WordPress core pages
+    if ( is_front_page() )                return 'front-page';
+    if ( is_404() )                       return '404';
+    if ( is_search() )                    return 'search';
+    if ( is_tax( 'case-category' ) )      return 'case-category';
+    if ( is_category() )                  return 'category';
+    if ( is_home() || ( is_archive() && get_post_type() === 'post' ) ) return 'archive';
+    
+    // 3. Archive pages
+    if ( is_post_type_archive() ) {
+        $post_type = get_post_type() ?: get_query_var( 'post_type' );
+        $archive_template = 'archive-' . $post_type;
+        if ( array_key_exists( $archive_template, mia_get_template_mappings() ) ) {
+            return $archive_template;
+        }
+        return 'archive'; // Fallback to generic archive
+    }
+    
+    // 4. Single posts/pages
+    if ( is_singular( 'post' ) )          return 'single-post';
+    if ( is_page() )                      return 'page';
+    
+    // 5. Custom post type singles (fallback to default templates)
+    if ( is_singular() ) {
+        $post_type = get_post_type();
+        $single_template = 'single-' . $post_type;
+        if ( array_key_exists( $single_template, mia_get_template_mappings() ) ) {
+            return $single_template;
+        }
+    }
+    
     return null;
 }
 
@@ -181,19 +170,19 @@ function mia_enqueue_assets() {
     mia_register_asset( 'script', 'mia-bootstrap', '/bootstrap/js/bootstrap.bundle.min.js' ); // no jQuery
     mia_register_asset( 'script', 'mia-header',    '/js/header.js', [ 'mia-bootstrap' ] );
 
-    // ------------------------ Context assets -------------------------------
-    $key      = mia_detect_context_key();
-    $mappings = mia_get_context_mappings();
+    // ------------------------ Template-specific assets ---------------------
+    $template_key = mia_detect_template_key();
+    $templates    = mia_get_template_mappings();
 
-    if ( $key && isset( $mappings[ $key ] ) ) {
-        $map = $mappings[ $key ];
+    if ( $template_key && isset( $templates[ $template_key ] ) ) {
+        $template = $templates[ $template_key ];
 
-        if ( ! empty( $map['css'] ) ) {
-            mia_register_asset( 'style', 'mia-' . $key, '/css/' . $map['css'], [ 'mia-base', 'mia-header', 'mia-footer' ] );
+        if ( ! empty( $template['css'] ) ) {
+            mia_register_asset( 'style', 'mia-' . $template_key, '/css/' . $template['css'], [ 'mia-base', 'mia-header', 'mia-footer' ] );
         }
 
-        if ( ! empty( $map['js'] ) ) {
-            mia_register_asset( 'script', 'mia-' . $key, '/js/' . $map['js'], [ 'mia-bootstrap' ] );
+        if ( ! empty( $template['js'] ) ) {
+            mia_register_asset( 'script', 'mia-' . $template_key, '/js/' . $template['js'], [ 'mia-bootstrap' ] );
         }
     }
 
@@ -239,10 +228,10 @@ function mia_attach_config() {
  * @return string Handle of the primary script.
  */
 function mia_get_primary_script_handle() {
-    $key = mia_detect_context_key();
+    $template_key = mia_detect_template_key();
 
-    if ( $key && wp_script_is( 'mia-' . $key, 'registered' ) ) {
-        return 'mia-' . $key;
+    if ( $template_key && wp_script_is( 'mia-' . $template_key, 'registered' ) ) {
+        return 'mia-' . $template_key;
     }
 
     if ( wp_script_is( 'mia-header', 'registered' ) ) {
