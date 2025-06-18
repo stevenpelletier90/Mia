@@ -543,6 +543,36 @@ div#field_1_54 {
     padding: 0 !important;
   }
 
+  a.consent-trigger {
+    color: var(--color-gold);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 0.5rem;
+    position: relative;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+  }
+
+  a.consent-trigger:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  a.consent-trigger:hover {
+    color: #ffffff;
+  }
+
+  a.consent-trigger:hover:after {
+    width: 100%;
+  }
+
   .consultation-card .gform_wrapper input[type="text"],
   .consultation-card .gform_wrapper input[type="email"],
   .consultation-card .gform_wrapper input[type="tel"],
