@@ -51,7 +51,9 @@ This is a custom WordPress theme for Mia Aesthetics, a multi-location plastic su
    - `page-treatment-layout.php` - Unified treatment template for procedures/non-surgical/fat-transfer
    - `page-condition-layout.php` - Condition-style layout (available for flexible post types)
    - `page-hero-canvas.php` - Hero-style layout
+   - `page-hero-canvas-no-bc.php` - Hero-style layout without breadcrumbs
    - `page-blank-canvas.php` - Minimal custom layout
+   - `page-no-bc.php` - Standard page layout without breadcrumbs
    - `page-before-after-by-doctor.php` - Gallery template (case-specific)
    - `page-case-category.php` - Case category template (case-specific)
 
@@ -109,6 +111,11 @@ Before/after gallery data is stored in `/assets/data/before-after-gallery.json` 
 - **Template assets** are loaded based on selected template, not post type
 - **ACF fields** can be associated with templates or post types via WordPress admin
 
+**Special Template Features:**
+- **`single-special.php`**: Includes ACF `banner_image` field with responsive srcset for optimal loading
+- **Mobile CTA**: Hidden on single special posts via CSS (`#mobileCta { display: none !important; }`)
+- **Case Category Template**: Displays case grid without excerpts, enhanced "View Case" buttons with gold gradient styling
+
 **Performance Optimization:**
 - **Caching Strategy:** `wp_cache` with 2-hour expiration for post counts and site stats (`inc/cache-helpers.php`)
 - **Query Optimization:** `update_post_meta_cache` and `update_post_term_cache` disabled when not needed (`inc/queries.php`)
@@ -133,6 +140,10 @@ Before/after gallery data is stored in `/assets/data/before-after-gallery.json` 
 - `inc/schema.php` - Medical schema.org structured data
 - `inc/cache-helpers.php` - Performance caching utilities
 
+**Navigation Enhancements:**
+- **Patient Portal Dropdown**: Added "Patient Portal Guide" link (`/patient-portal-guide/`) between login and support links
+- **Header Menu Structure**: Patient Portal Login → Patient Portal Guide → Portal Support
+
 ## CSS and Form Integration
 
 **Gravity Forms Integration:**
@@ -140,6 +151,12 @@ Before/after gallery data is stored in `/assets/data/before-after-gallery.json` 
 - CSS targets `.consultation-card .gform_wrapper` hierarchy
 - Styled for dark gradient background with custom field styling
 - Field-specific targeting using actual Gravity Form field IDs
+
+**Custom Form Elements:**
+- **Dropdown arrows**: Replaced SVG with Font Awesome chevron-down icon (`\f078`)
+- **Interactive dropdowns**: JavaScript-controlled rotation animation on open/close
+- **CSS classes**: `.dropdown-open` added/removed via JavaScript for proper state management
+- **Animation**: Smooth 0.2s transition with 180° rotation when dropdown opens
 
 **CSS Optimization:**
 - Template CSS files cleaned of unused selectors
@@ -155,8 +172,18 @@ Before/after gallery data is stored in `/assets/data/before-after-gallery.json` 
 - Asset naming must match template names exactly
 - Remove unused/orphaned CSS and JS files regularly
 
+**Recent Template Additions:**
+- `page-hero-canvas-no-bc.php/css/js` - Hero layout without breadcrumbs
+- `page-no-bc.php/css/js` - Standard layout without breadcrumbs
+- All templates properly registered in `inc/enqueue.php` template mappings
+
 **ACF Field Management:**
 - Custom fields can be associated with specific post types
 - Custom fields can be associated with specific templates
 - User controls field visibility via WordPress admin interface
 - Template selection overrides post-type-specific styling
+
+**ACF Implementation Examples:**
+- **Special Posts**: `banner_image` field displays responsive images with srcset
+- **Case Information**: ACF fields for surgeon, location, and procedure data in case posts
+- **Responsive Images**: Proper WordPress image sizes (medium, large, full) with fallback alt text
