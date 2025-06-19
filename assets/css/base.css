@@ -104,8 +104,9 @@ ol {
 }
 
 .breadcrumb-nav {
-  margin: 0.75rem 0;
+  padding: 0.75rem 0;
   font-family: var(--font-body);
+  background: #fff;
 }
 
 .breadcrumb-nav a {

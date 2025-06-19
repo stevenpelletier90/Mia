@@ -117,18 +117,8 @@ get_header();
                                             </div>
                                         <?php endif; ?>
 
-                                        <?php if ( has_excerpt() ) : ?>
-                                            <p class="case-description">
-                                                <?php echo esc_html( wp_trim_words( get_the_excerpt(), 20 ) ); ?>
-                                            </p>
-                                        <?php elseif ( get_the_content() ) : ?>
-                                            <p class="case-description">
-                                                <?php echo esc_html( wp_trim_words( get_the_content(), 20 ) ); ?>
-                                            </p>
-                                        <?php endif; ?>
-
-                                        <a href="<?php echo esc_url( get_permalink() ); ?>" class="view-case-link">
-                                            View Case <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                        <a href="<?php echo esc_url( get_permalink() ); ?>" class="btn btn-primary btn-view-case mt-auto">
+                                            View Case <i class="fa-solid fa-arrow-right ms-1" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                 </div>

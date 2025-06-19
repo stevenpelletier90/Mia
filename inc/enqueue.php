@@ -66,7 +66,10 @@ function mia_get_template_mappings() {
         // Page Templates (available for selection)
         'page-blank-canvas'           => ['css' => 'page-blank-canvas.css',           'js' => 'page-blank-canvas.js'],
         'page-hero-canvas'            => ['css' => 'page-hero-canvas.css',            'js' => 'page-hero-canvas.js'],
+        'page-hero-canvas-no-bc'      => ['css' => 'page-hero-canvas-no-bc.css',      'js' => 'page-hero-canvas-no-bc.js'],
+        'page-no-bc'                  => ['css' => 'page-no-bc.css',                  'js' => 'page-no-bc.js'],
         'page-before-after-by-doctor' => ['css' => 'page-before-after-by-doctor.css', 'js' => 'page-before-after-by-doctor.js'],
+        'page-case-category'          => ['css' => 'page-case-category.css',          'js' => 'page-case-category.js'],
         'page-treatment-layout'       => ['css' => 'page-treatment-layout.css',       'js' => 'page-treatment-layout.js'],
         'page-condition-layout'       => ['css' => 'page-condition-layout.css',       'js' => 'page-condition-layout.js'],
         
@@ -126,7 +129,7 @@ function mia_detect_template_key() {
     if ( is_search() )                    return 'search';
     if ( is_tax( 'case-category' ) )      return 'case-category';
     if ( is_category() )                  return 'category';
-    if ( is_home() )                       return 'home';
+    if ( is_home() )                      return 'home';
     if ( is_archive() && get_post_type() === 'post' ) return 'archive';
     
     // 3. Archive pages

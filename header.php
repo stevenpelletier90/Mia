@@ -96,6 +96,7 @@
                         Patient Portal Login
                       </a>
                     </li>
+                    <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/patient-portal-guide/')); ?>">Patient Portal Guide</a></li>
                     <li><a class="dropdown-item" href="<?php echo esc_url(home_url('/web-to-case/')); ?>">Portal Support</a></li>
                   </ul>
                 </li>
