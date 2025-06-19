@@ -14,11 +14,7 @@ get_header();
 
 <main>
     <!-- Breadcrumbs ---------------------------------------------------->
-    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-        <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
-            <?php yoast_breadcrumb(); ?>
-        </nav>
-    <?php endif; ?>
+<?php mia_breadcrumbs(); ?>
 
     <?php while ( have_posts() ) : the_post(); ?>
         <!-- Page Hero / Title ----------------------------------------->

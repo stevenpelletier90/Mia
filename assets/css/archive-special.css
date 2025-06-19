@@ -1,77 +1,106 @@
-/* Special Card Styling */
+/* ==========================================================================
+   Mia Aesthetics - Specials Archive
+   ========================================================================== */
+
+/* -- Color Palette suggestion (customize with your brand colors) -- */
+:root {
+  --mia-primary: #d995a6; /* A soft, elegant pink for primary actions */
+  --mia-primary-dark: #c77b8f; /* A darker shade for hover states */
+  --mia-dark: #343a40; /* For primary headings */
+  --mia-secondary: #6c757d; /* For body text and excerpts */
+  --mia-light-bg: #fdfcfa; /* A very light, warm background */
+}
+
+/* -- Override Bootstrap colors for consistency -- */
+.btn-primary {
+  background-color: var(--mia-primary);
+  border-color: var(--mia-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--mia-primary-dark);
+  border-color: var(--mia-primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--mia-primary);
+  border-color: var(--mia-primary);
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--mia-primary);
+  border-color: var(--mia-primary);
+}
+
+/* -- Hero Section Styling -- */
+.specials-hero {
+  background-color: var(--mia-light-bg);
+  padding: 5rem 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.specials-hero h1 {
+  color: var(--mia-dark);
+  margin-bottom: 0.5rem;
+}
+
+.specials-hero .lead {
+  color: var(--mia-secondary);
+  font-weight: 400;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -- Grid Section Styling -- */
+.specials-grid {
+  background-color: #fff;
+}
+
+/* -- Special Card Styling -- */
 .special-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
+  border: none; /* Remove default card border */
+  border-radius: 0.75rem; /* Softer corners */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden; /* Ensures child elements conform to border-radius */
 }
 
 .special-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-8px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
 }
 
-.special-featured {
-  border-color: var(--color-gold);
-}
-
-.card-img-container {
-  height: 200px;
+/* Card Image container to handle image zoom effect */
+.special-card .card-img-container {
   overflow: hidden;
 }
 
-.card-img-container img {
-  width: 100%;
-  height: 100%;
+.special-card .card-img-top {
+  aspect-ratio: 4 / 3; /* Ensures all images are the same shape */
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
-.special-card:hover .card-img-container img {
+.special-card:hover .card-img-top {
   transform: scale(1.05);
 }
 
-/* Badge for discount percentage */
-.special-badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: var(--color-gold);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-weight: 600;
-  z-index: 1;
+/* Card Body & Content */
+.special-card .card-body {
+  padding: 1.5rem;
 }
 
-/* Special Filters Styling */
-.special-filters .nav-link {
-  color: var(--color-primary);
-  border-radius: 30px;
-  padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
+.special-card .card-title a:hover {
+  color: var(--mia-primary) !important;
 }
 
-.special-filters .nav-link.active {
-  background-color: var(--color-gold);
-  color: #fff;
+.special-card .card-text {
+  line-height: 1.6;
 }
 
-/* Newsletter Form */
-@media (max-width: 767.98px) {
-  .newsletter-form .btn {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-}
-
-/* Testimonial Slider (you'll need to add slick slider or similar) */
-.testimonial-slider {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-@media (max-width: 767.98px) {
-  .testimonial-slider {
-    grid-template-columns: 1fr;
-  }
+.special-card .btn {
+  border-radius: 50rem; /* Pill-shaped buttons */
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
 }

@@ -9,11 +9,7 @@
 get_header(); ?>
 
 <main data-bs-spy="scroll" data-bs-target="#tableOfContents" data-bs-offset="100" data-bs-smooth-scroll="true">
-    <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-        <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
-            <?php yoast_breadcrumb(); ?>
-        </nav>
-    <?php endif; ?>
+<?php mia_breadcrumbs(); ?>
     
     <!-- Page Header -->
     <section class="post-header py-5">

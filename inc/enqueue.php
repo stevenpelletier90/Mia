@@ -162,13 +162,13 @@ function mia_detect_template_key() {
  */
 function mia_enqueue_assets() {
     // ------------------------ Critical/global assets -----------------------
-    mia_register_asset( 'style', 'mia-fonts',     '/css/_fonts.css' );
+    mia_register_asset( 'style', 'mia-fonts',     '/css/fonts.css' );
     mia_register_asset( 'style', 'mia-bootstrap', '/bootstrap/css/bootstrap.min.css', [ 'mia-fonts' ] );
-    mia_register_asset( 'style', 'mia-base',      '/css/_base.css', [ 'mia-bootstrap' ] );
+    mia_register_asset( 'style', 'mia-base',      '/css/base.css', [ 'mia-bootstrap' ] );
 
     mia_register_asset( 'style', 'mia-fontawesome', '/fontawesome/css/all.min.css', [ 'mia-base' ] );
-    mia_register_asset( 'style', 'mia-header',       '/css/_header.css', [ 'mia-base', 'mia-bootstrap' ] );
-    mia_register_asset( 'style', 'mia-footer',       '/css/_footer.css', [ 'mia-base', 'mia-bootstrap' ] );
+    mia_register_asset( 'style', 'mia-header',       '/css/header.css', [ 'mia-base', 'mia-bootstrap' ] );
+    mia_register_asset( 'style', 'mia-footer',       '/css/footer.css', [ 'mia-base', 'mia-bootstrap' ] );
 
     mia_register_asset( 'script', 'mia-bootstrap', '/bootstrap/js/bootstrap.bundle.min.js' ); // no jQuery
     mia_register_asset( 'script', 'mia-header',    '/js/header.js', [ 'mia-bootstrap' ] );

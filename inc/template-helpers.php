@@ -569,6 +569,40 @@ function mia_social_links($args = []) {
 }
 
 /**
+ * Breadcrumb Component
+ *
+ * Centralized wrapper for Yoast breadcrumbs so styling can be changed in one place.
+ *
+ * Usage in templates:
+ * <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+ *     <?php mia_breadcrumbs(); ?>
+ * <?php endif; ?>
+ *
+ * Adjust HTML/CSS once here to affect all templates.
+ *
+ * @return void
+ */
+function mia_breadcrumbs() {
+    if ( ! function_exists( 'yoast_breadcrumb' ) ) {
+        return;
+    }
+
+    // Yoast outputs breadcrumb trail as string.
+    $breadcrumbs = yoast_breadcrumb( '', '', false );
+
+    if ( empty( $breadcrumbs ) ) {
+        return;
+    }
+
+    // Standard wrapper for consistency & accessibility.
+    echo '<nav aria-label="Breadcrumb" class="breadcrumb-nav">';
+    echo '<div class="container">';
+    echo '<span class="visually-hidden">You are here:</span>';
+    echo $breadcrumbs;
+    echo '</div></nav>';
+}
+
+/**
  * Template Filter Functions
  */
 
