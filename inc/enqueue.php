@@ -4,7 +4,7 @@
  *
  * Handles all script and style enqueueing with caching‑friendly filename‑hash
  * versioning, conditional loading, and performance optimizations tailored for
- * WP Engine + WP Rocket.
+ * WP Engine + WP Rocket.
  *
  * @package Mia_Aesthetics
  */
@@ -99,6 +99,7 @@ function mia_get_template_mappings() {
         'archive-procedure'   => ['css' => 'archive-procedure.css',   'js' => 'archive-procedure.js'],
         'archive-special'     => ['css' => 'archive-special.css',     'js' => 'archive-special.js'],
         'archive-surgeon'     => ['css' => 'archive-surgeon.css',     'js' => 'archive-surgeon.js'],
+        
         // Home & Index
         'home'               => ['css' => 'home.css',          'js' => 'home.js'],
         'index'              => ['css' => 'index.css',         'js' => 'index.js'],
@@ -129,10 +130,17 @@ function mia_detect_template_key() {
     if ( is_search() )                    return 'search';
     if ( is_tax( 'case-category' ) )      return 'case-category';
     if ( is_category() )                  return 'category';
-    if ( is_home() )                      return 'home';
+    
+    // 3. Check for blog/posts page BEFORE generic archive check
+    // is_home() is true for the posts page when set in Settings > Reading
+    if ( is_home() && ! is_front_page() ) {
+        // This is the blog posts page - use archive template
+        return 'archive';
+    }
+    
+    // 4. Archive pages
     if ( is_archive() && get_post_type() === 'post' ) return 'archive';
     
-    // 3. Archive pages
     if ( is_post_type_archive() ) {
         $post_type = get_post_type() ?: get_query_var( 'post_type' );
         $archive_template = 'archive-' . $post_type;
@@ -142,11 +150,11 @@ function mia_detect_template_key() {
         return 'archive'; // Fallback to generic archive
     }
     
-    // 4. Single posts/pages
+    // 5. Single posts/pages
     if ( is_singular( 'post' ) )          return 'single-post';
     if ( is_page() )                      return 'page';
     
-    // 5. Custom post type singles (fallback to default templates)
+    // 6. Custom post type singles (fallback to default templates)
     if ( is_singular() ) {
         $post_type = get_post_type();
         $single_template = 'single-' . $post_type;
@@ -155,6 +163,7 @@ function mia_detect_template_key() {
         }
     }
     
+    // 7. Final fallback
     return 'index';
 }
 
@@ -179,6 +188,29 @@ function mia_enqueue_assets() {
     // ------------------------ Template-specific assets ---------------------
     $template_key = mia_detect_template_key();
     $templates    = mia_get_template_mappings();
+
+    // Debug output for development
+    if ( WP_DEBUG && current_user_can( 'manage_options' ) ) {
+        echo '<div style="position:fixed;top:0;right:0;background:#000;color:#fff;padding:10px;z-index:999999;font-size:12px;max-width:300px;">';
+        echo '<strong>Template Debug:</strong><br>';
+        echo 'Detected Key: ' . ($template_key ?: 'none') . '<br>';
+        echo 'Selected Template: ' . (get_page_template_slug() ?: 'default') . '<br>';
+        echo 'Post Type: ' . (get_post_type() ?: 'none') . '<br>';
+        echo 'Query Type: ';
+        if (is_front_page()) echo 'front-page';
+        elseif (is_home()) echo 'home (posts page)';
+        elseif (is_archive()) echo 'archive';
+        elseif (is_singular()) echo 'singular';
+        elseif (is_404()) echo '404';
+        elseif (is_search()) echo 'search';
+        else echo 'other';
+        echo '<br>';
+        if ($template_key && isset($templates[$template_key])) {
+            echo 'CSS: ' . $templates[$template_key]['css'] . '<br>';
+            echo 'JS: ' . $templates[$template_key]['js'];
+        }
+        echo '</div>';
+    }
 
     if ( $template_key && isset( $templates[ $template_key ] ) ) {
         $template = $templates[ $template_key ];

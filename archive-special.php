@@ -12,10 +12,10 @@ get_header(); ?>
     <!-- 1. Hero Section -->
     <header class="specials-hero text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold text-dark">Mia Aesthetics Specials</h1>
-            <p class="lead text-secondary mb-4">Your dream look, now within reach.</p>
-            <a href="/free-virtual-consultation/" class="btn btn-primary btn-lg px-4 shadow">
-                Free Virtual Consultation
+            <h1 class="display-4 fw-bold">Current Specials</h1>
+            <p class="lead mb-4">Limited-time offers on your favorite treatments</p>
+            <a href="/free-virtual-consultation/" class="mia-button" data-variant="gold" data-size="lg">
+                Free Virtual Consultation <i class="fas fa-arrow-right"></i>
             </a>
         </div>
     </header>
@@ -31,24 +31,24 @@ get_header(); ?>
                     <?php while ( have_posts() ) : the_post(); ?>
 
                         <div class="col">
-                            <div class="card h-100 shadow-sm special-card">
+                            <article class="special-card h-100">
                                 <?php if ( has_post_thumbnail() ) : ?>
-                                    <div class="card-img-container">
-                                        <a href="<?php the_permalink(); ?>">
-                                            <?php the_post_thumbnail('large', ['class' => 'card-img-top']); ?>
+                                    <div class="special-card-image">
+                                        <a href="<?php the_permalink(); ?>" aria-label="View <?php echo esc_attr(get_the_title()); ?>">
+                                            <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
                                         </a>
                                     </div>
                                 <?php endif; ?>
-                                <div class="card-body d-flex flex-column">
-                                    <?php the_title( '<h2 class="card-title h5"><a href="' . esc_url( get_permalink() ) . '" class="text-decoration-none text-dark">', '</a></h2>' ); ?>
-                                    <div class="card-text text-secondary small">
+                                <div class="special-card-body">
+                                    <?php the_title( '<h2 class="special-card-title"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); ?>
+                                    <div class="special-card-excerpt">
                                         <?php the_excerpt(); ?>
                                     </div>
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary mt-auto align-self-start">
-                                        Learn More
+                                    <a href="<?php the_permalink(); ?>" class="mia-button" data-variant="gold-outline">
+                                        View Special <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
-                            </div>
+                            </article>
                         </div>
 
                     <?php endwhile; ?>

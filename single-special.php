@@ -32,28 +32,19 @@ get_header(); ?>
                     <?php endif; ?>
                     
                     <div class="card shadow-sm consultation-card" role="complementary" aria-label="Free Virtual Consultation">
-                        <div class="card-body p-4">
-                            <h3 class="h4 text-center">Free Virtual Consultation</h3>
+                        <div class="card-body p-4">                            
                             <div class="gf-wrapper" aria-label="Free Virtual Consultation Form">
                                 <?php gravity_form(1, false, false, false, false, true); ?>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="special-disclaimer">
+                        <?php the_content(); ?>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <article class="single-special">
-            <section class="main-content">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <?php the_content(); ?>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </article>
     <?php endwhile; ?>
 </main>
 

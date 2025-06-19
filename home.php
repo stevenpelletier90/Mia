@@ -14,12 +14,7 @@
 get_header(); ?>
 
 <main>
-  <!-- Breadcrumbs ---------------------------------------------------->
-  <?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
-    <nav aria-label="Breadcrumb" class="breadcrumb-nav"><span class="visually-hidden">You are here:</span>
-      <?php yoast_breadcrumb(); ?>
-    </nav>
-  <?php endif; ?>
+<?php mia_breadcrumbs(); ?>
     <!-- Blog Header -->
     <section class="post-header py-5">
         <div class="container">
