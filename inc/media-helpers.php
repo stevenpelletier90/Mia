@@ -94,9 +94,6 @@ function get_video_details($video_url) {
     $video_data['embed_url'] = esc_url_raw($video_url);
     wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
     return $video_data;
-
-    // Return false if not a valid or recognized video URL
-    return false;
 }
 
 /**

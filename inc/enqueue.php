@@ -298,28 +298,5 @@ function mia_resource_hints( $hints, $relation_type ) {
 }
 add_filter( 'wp_resource_hints', 'mia_resource_hints', 10, 2 );
 
-/**
- * Enqueue Pardot tracking script properly
- * Moved from inline script to proper WordPress enqueue system
- */
-function mia_enqueue_pardot_script() {
-    // Only load on frontend, not admin
-    if (!is_admin()) {
-        wp_enqueue_script(
-            'mia-pardot-tracking',
-            get_template_directory_uri() . '/assets/js/pardot-tracking.js',
-            [],
-            '1.0.0',
-            true // Load in footer
-        );
-        
-        // Pass Pardot configuration to script
-        wp_localize_script('mia-pardot-tracking', 'miaPardotConfig', [
-            'piAId' => '303191',
-            'piCId' => '1061'
-        ]);
-    }
-}
-add_action('wp_enqueue_scripts', 'mia_enqueue_pardot_script');
 
 ?>

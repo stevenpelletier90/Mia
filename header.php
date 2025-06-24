@@ -14,10 +14,6 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="google-site-verification" content="Ca5yGxdDZfqb0tX61EdEvhNbfXMMhZ7KsOd_AM60FrM" />
-  <meta name="google-site-verification" content="RQdbIMjo38HYlOmEz3zWRZw9TrM81WZAvxDCxeNbRWY" />
-  <meta name="google-site-verification" content="26HUpdgiYlh0_jaJIpWHyC2Cdi40AojNqU8tMSxGc6Y" />
-  <script src="https://cdn.userway.org/widget.js" data-account="o4cLhj3rDh"></script>
   <?php wp_head(); ?>
   <!-- Bootstrap JS is already enqueued in functions.php -->
 </head>
