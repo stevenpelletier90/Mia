@@ -1,0 +1,695 @@
+/* Styles for the single-location.php template */
+
+/* Location Header (Hero) Styles */
+.location-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #000000 100%);
+  color: #ffffff;
+  padding: 3rem 0;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.location-header h1 {
+  color: var(--color-gold);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.location-header p {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.location-intro {
+  border-left: 3px solid var(--color-gold);
+  padding-left: 1rem;
+}
+
+.location-info {
+  background-color: rgb(155 155 155 / 20%);
+  border-radius: 8px;
+  padding: 1.5rem;
+  backdrop-filter: blur(5px);
+}
+
+.location-detail {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.location-icon {
+  color: var(--color-gold);
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+}
+
+.location-phone {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.location-phone:hover {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+.location-map-link {
+  color: var(--color-gold);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.location-map-link:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.location-map-link .location-icon {
+  margin-right: 0.5rem;
+}
+
+/* Video thumbnail styles */
+.video-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.video-thumbnail:hover img {
+  transform: scale(1.05);
+}
+
+.video-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  border: 3px solid var(--color-gold);
+}
+
+.video-play-button i {
+  color: var(--color-gold);
+  font-size: 24px;
+  margin-left: 5px; /* Slightly adjust to make the play icon appear centered */
+}
+
+.video-thumbnail:hover .video-play-button {
+  background-color: var(--color-gold);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-thumbnail:hover .video-play-button i {
+  color: var(--color-primary);
+}
+
+/* Sidebar section styles */
+.sidebar-section {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* Card styles */
+.card {
+  border-radius: 8px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-body strong {
+  color: var(--color-primary);
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-action {
+  margin-top: 1rem;
+}
+
+/* Add gradient background to the consultation card and form container */
+.single-location .consultation-card,
+.consultation-card,
+.single-location .gform_wrapper.gravity-theme {
+  background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
+  color: #fff;
+}
+
+.consultation-card h3,
+.consultation-card strong,
+.consultation-card p,
+.consultation-card h2 {
+  color: #fff;
+}
+
+.consultation-card .btn-primary {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.consultation-card .btn-primary:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+}
+
+/* Section title styles */
+.section-title {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+.section-title.text-center:after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Surgeon card styles */
+.surgeon-image-container {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.surgeon-headshot-circular {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-gold);
+}
+
+.surgeon-title {
+  font-style: italic;
+  color: var(--color-primary);
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+/* Button styles */
+.mia-button {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.mia-button-white {
+  background-color: #fff;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.mia-button-white:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.mia-button-gold {
+  background-color: var(--color-gold);
+  color: var(--color-primary);
+  border: 2px solid var(--color-gold);
+}
+
+.mia-button-gold:hover {
+  background-color: var(--color-primary);
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+@media (max-width: 767px) {
+  .surgeon-headshot-circular {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Mobile-specific form styles */
+  .single-location .gform_wrapper {
+    padding: 0 !important; /* Remove padding on mobile */
+  }
+
+  .single-location .gform_wrapper input[type="text"],
+  .single-location .gform_wrapper input[type="email"],
+  .single-location .gform_wrapper input[type="tel"],
+  .single-location .gform_wrapper input[type="number"],
+  .single-location .gform_wrapper input[type="url"],
+  .single-location .gform_wrapper select,
+  .single-location .gform_wrapper textarea {
+    font-size: 15px; /* Slightly smaller font for mobile */
+  }
+
+  .single-location .gform_wrapper .gfield_checkbox .gchoice {
+    margin-bottom: 0; /* Consistent with desktop */
+  }
+
+  .single-location .gform_wrapper .gform_footer .gform_button {
+    width: 100%; /* Full-width button on mobile */
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+  }
+
+  /* Maintain grid layout on mobile */
+  .single-location .gform_wrapper .gform_fields {
+    grid-gap: 0.5rem !important; /* Slightly tighter spacing on mobile */
+  }
+}
+
+/* Fix for specific mobile browsers */
+@media (max-width: 480px) {
+  /* Target Android */
+  .single-location .gform_wrapper input,
+  .single-location .gform_wrapper select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Additional spacing for tap targets */
+  .single-location .gform_wrapper .gfield_checkbox .gchoice {
+    padding: 0.25rem 0;
+  }
+
+  .single-location .gform_wrapper .gfield_checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Gravity Forms Overrides: hide labels and normalize field widths */
+
+fieldset#field_1_55 {
+  margin-bottom: 0px !important;
+}
+
+fieldset#field_1_57 {
+  margin-bottom: 0px !important;
+}
+
+fieldset#field_1_58 {
+  margin-bottom: 0px !important;
+}
+
+div#field_1_54 {
+  margin-bottom: 0px !important;
+}
+
+.single-location .gform_wrapper .gfield_label {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gform-footer.gform_footer.top_label {
+  padding-bottom: 0 !important;
+}
+
+/* Consent link styling */
+a.consent-trigger {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.5rem;
+  position: relative;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+a.consent-trigger:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+a.consent-trigger:hover {
+  color: #ffffff;
+}
+
+a.consent-trigger:hover:after {
+  width: 100%;
+}
+
+.single-location .gform_wrapper .ginput_container input[type="text"],
+.single-location .gform_wrapper .ginput_container input[type="email"],
+.single-location .gform_wrapper .ginput_container input[type="tel"],
+.single-location .gform_wrapper .ginput_container input[type="number"],
+.single-location .gform_wrapper .ginput_container input[type="url"],
+.single-location .gform_wrapper .ginput_container textarea,
+.single-location .gform_wrapper .gfield select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hide "* indicates required fields" legend */
+.single-location .gform_wrapper .gform_required_legend {
+  display: none !important;
+}
+
+/* Remove all default margins/padding and apply a consistent gap */
+.single-location .gform_wrapper .gform_fields {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-gap: 0.75rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Reset all fields - zero margins/padding */
+.single-location .gform_wrapper .gfield {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Name field full width but keep inputs side-by-side */
+#field_1_13 {
+  grid-column: span 2 !important;
+}
+
+.single-location .gform_wrapper .ginput_complex.ginput_container_name {
+  display: flex !important;
+  gap: 0.75rem !important;
+  margin: 0 !important;
+}
+
+.single-location .gform_wrapper .ginput_complex.ginput_container_name span {
+  flex: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Email and phone - always side by side */
+#field_1_2,
+#field_1_3 {
+  grid-column: span 1 !important;
+}
+
+/* Country and zip code - always side by side */
+#field_1_36,
+#field_1_42 {
+  grid-column: span 1 !important;
+}
+
+/* Language and procedure - always side by side */
+#field_1_33,
+#field_1_38 {
+  grid-column: span 1 !important;
+}
+
+/* Checkbox fields full width */
+#field_1_55,
+#field_1_57,
+#field_1_58,
+#field_1_54 {
+  grid-column: span 2 !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Checkbox container spacing */
+.single-location .gform_wrapper .gfield_checkbox {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Submit button container */
+.single-location .gform_wrapper .gform_footer {
+  margin-top: 1rem !important;
+  padding: 0 !important;
+}
+
+/* Consistent styling for all form inputs across all devices */
+.single-location .gform_wrapper input[type="text"],
+.single-location .gform_wrapper input[type="email"],
+.single-location .gform_wrapper input[type="tel"],
+.single-location .gform_wrapper input[type="number"],
+.single-location .gform_wrapper input[type="url"],
+.single-location .gform_wrapper select {
+  height: 48px;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.5;
+  font-size: 16px; /* Prevents iOS zoom on focus */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+/* Dropdown styling - dark field with white dropdown menu */
+.single-location .gform_wrapper select {
+  padding: 0.625rem 0.75rem;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  /* Custom arrow styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  padding-right: 2.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.single-location .gform_wrapper .ginput_container_select {
+  position: relative;
+}
+
+.single-location .gform_wrapper .ginput_container_select::after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  pointer-events: none;
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.single-location .gform_wrapper .ginput_container_select.dropdown-open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Style the dropdown options to have white background and black text */
+.single-location .gform_wrapper select option {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 8px 10px;
+}
+
+/* Focus state */
+.single-location .gform_wrapper select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
+  outline: none;
+}
+
+/* Textareas: visual harmony with min-height */
+.single-location .gform_wrapper textarea {
+  min-height: 120px;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.5;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+/* Focus states for inputs and textareas */
+.single-location .gform_wrapper input:focus,
+.single-location .gform_wrapper select:focus,
+.single-location .gform_wrapper textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(200, 178, 115, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Placeholder styling */
+.single-location .gform_wrapper input::placeholder,
+.single-location .gform_wrapper textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+/* Checkbox styling for dark background */
+.single-location .gform_wrapper .gfield_checkbox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.single-location .gform_wrapper .gfield_checkbox .gchoice {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Remove margin as requested */
+}
+
+.single-location .gform_wrapper .gfield_checkbox input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.single-location .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.single-location .gform_wrapper .gfield_checkbox input[type="checkbox"]:checked::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #000000;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.single-location .gform_wrapper .gfield_checkbox label {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Checkbox hover states */
+.single-location .gform_wrapper .gfield_checkbox input[type="checkbox"]:hover {
+  border-color: var(--color-gold);
+}
+
+/* Submit button styling (matches white Mia button on dark background with arrow) */
+.single-location .gform_wrapper .gform_footer .gform_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0.625rem 1.5rem;
+  font-size: 15px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100% !important;
+}
+
+.single-location .gform_wrapper .gform_footer .gform_button::after {
+  content: "\f061"; /* Font Awesome arrow-right */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+  transition: transform 0.3s ease;
+}
+
+.single-location .gform_wrapper .gform_footer .gform_button:hover,
+.single-location .gform_wrapper .gform_footer .gform_button:focus {
+  color: var(--color-primary);
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.single-location .gform_wrapper .gform_footer .gform_button:hover::after,
+.single-location .gform_wrapper .gform_footer .gform_button:focus::after {
+  transform: translateX(5px);
+}
+
+/* Form submit button container */
+.single-location .gform_wrapper .gform_footer {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  text-align: center;
+}
