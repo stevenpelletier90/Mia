@@ -69,60 +69,19 @@ get_header(); ?>
     <div class="surgeon-content-section">
         <div class="container">
             <?php 
-            // Get video fields from the "video_details" group
-            $video_details = get_field('video_details');
-            $video_url = '';
-            $video_thumbnail = '';
-            $thumbnail_url = '';
-            $embed_url = '';
+            // Get video details from ACF
+            $video_info = mia_get_video_field();
+            $video_id = $video_info['video_id'] ?? '';
+            $thumbnail_url = $video_info['thumbnail'] ?? '';
             
-            // Check if there's a video URL in the ACF field
-            if(!empty($video_details) && isset($video_details['video_url'])) {
-                $video_url = $video_details['video_url'];
-                
-                // Function to extract YouTube video ID from various URL formats
-                function get_youtube_video_id($youtube_url) {
-                    $video_id = '';
-                    
-                    // Match standard YouTube URLs (youtu.be and youtube.com)
-                    if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                        $video_id = $matches[1];
-                    } elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                        $video_id = $matches[1];
-                    } elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                        $video_id = $matches[1];
-                    } elseif (preg_match('/youtube\.com\/v\/([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                        $video_id = $matches[1];
-                    } elseif (preg_match('/youtube\.com\/user\/\w+\/\?v=([a-zA-Z0-9_-]+)/', $youtube_url, $matches)) {
-                        $video_id = $matches[1];
-                    }
-                    
-                    return $video_id;
-                }
-                
-                // Get video ID
-                $video_id = get_youtube_video_id($video_url);
-                
-                // Get YouTube embed URL
-                $embed_url = $video_id ? 'https://www.youtube.com/embed/' . $video_id : $video_url;
-                
-                // Get video thumbnail
-                if (isset($video_details['video_thumbnail'])) {
-                    $video_thumbnail = $video_details['video_thumbnail'];
-                    
-                    // Handle the video_thumbnail which returns an array with all image data
-                    if ($video_thumbnail && is_array($video_thumbnail)) {
-                        // The URL is directly accessible in the array
-                        $thumbnail_url = $video_thumbnail['url'];
-                    } elseif ($video_thumbnail && is_numeric($video_thumbnail)) {
-                        // Handle the case where it might be just an ID
-                        $thumbnail_url = wp_get_attachment_image_url($video_thumbnail, 'full');
-                    }
-                }
+            // Build YouTube embed URL from ID
+            $embed_url = '';
+            if ($video_id) {
+                $embed_url = 'https://www.youtube.com/embed/' . $video_id;
             }
             
-            // Only display video section if we have both a URL and thumbnail
-            if($video_url && $thumbnail_url): 
+            // Only display video section if we have video ID and thumbnail
+            if($video_id && $thumbnail_url): 
             ?>
             <!-- Video Section (visible on mobile before content) -->
             <div class="row d-lg-none">

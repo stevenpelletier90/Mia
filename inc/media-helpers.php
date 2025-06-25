@@ -12,89 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Extract video details from URL (YouTube, Vimeo, MP4, fallback)
- *
- * @param string $video_url URL to video
- * @return array|false Video data array or false if invalid/empty
- */
-function get_video_details($video_url) {
-    if (empty($video_url) || !is_string($video_url)) {
-        return false;
-    }
 
-    // Trim and validate URL
-    $video_url = trim($video_url);
-    if (!filter_var($video_url, FILTER_VALIDATE_URL)) {
-        return false;
-    }
-
-    // Object-cache layer - avoid re-processing the same URL
-    $cache_key = 'video_details_' . md5($video_url);
-    $cached    = wp_cache_get($cache_key);
-    if ($cached !== false) {
-        return $cached;
-    }
-
-    $video_data = array(
-        'url' => '',
-        'embed_url' => '',
-        'type' => 'unknown',
-        'duration' => ''
-    );
-
-    // Try oEmbed first (handles YouTube, Shorts, playlists, Vimeo, etc.)
-    $oembed_html = wp_oembed_get($video_url);
-    if ($oembed_html) {
-        $video_data['url'] = esc_url_raw($video_url);
-        $video_data['embed_url'] = esc_url_raw($video_url);
-        $video_data['type'] = 'oembed';
-        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
-        return $video_data;
-    }
-
-    // Fallback: Check if YouTube URL
-    if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $video_url, $matches) ||
-        preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
-        $video_id = sanitize_text_field($matches[1]);
-        $video_data['url'] = esc_url_raw('https://www.youtube.com/watch?v=' . $video_id);
-        $video_data['embed_url'] = esc_url_raw('https://www.youtube.com/embed/' . $video_id);
-        $video_data['type'] = 'youtube';
-        wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
-        return $video_data;
-    }
-
-    // Fallback: Check if Vimeo URL
-    if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/', $video_url, $matches)) {
-        $video_id = absint($matches[1]);
-        if ($video_id > 0) {
-            $video_data['url'] = esc_url_raw('https://vimeo.com/' . $video_id);
-            $video_data['embed_url'] = esc_url_raw('https://player.vimeo.com/video/' . $video_id);
-            $video_data['type'] = 'vimeo';
-            wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
-            return $video_data;
-        }
-    }
-
-    // Fallback: Check if direct file URL (mp4)
-    $parsed_url = parse_url($video_url);
-    if ($parsed_url && isset($parsed_url['path'])) {
-        $extension = pathinfo($parsed_url['path'], PATHINFO_EXTENSION);
-        if (strtolower($extension) === 'mp4') {
-            $video_data['url'] = esc_url_raw($video_url);
-            $video_data['embed_url'] = esc_url_raw($video_url);
-            $video_data['type'] = 'mp4';
-            wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
-            return $video_data;
-        }
-    }
-
-    // Fallback: If it's a valid URL but type is unknown
-    $video_data['url'] = esc_url_raw($video_url);
-    $video_data['embed_url'] = esc_url_raw($video_url);
-    wp_cache_set($cache_key, $video_data, '', DAY_IN_SECONDS);
-    return $video_data;
-}
 
 /**
  * Locate and normalise video data stored in various ACF fields.
@@ -131,17 +49,46 @@ function mia_get_video_field($post_id = null) {
 
         // Case 1: ACF repeater/group with explicit keys
         if (is_array($val)) {
-            if (!empty($val['video_url'])) {
-                $video_url = is_array($val['video_url']) ? $val['video_url']['url'] : $val['video_url'];
-                if (is_string($video_url) && filter_var($video_url, FILTER_VALIDATE_URL)) {
-                    return [
-                        'url'         => esc_url_raw($video_url),
-                        'title'       => sanitize_text_field($val['video_title'] ?? ''),
-                        'description' => sanitize_textarea_field($val['video_description'] ?? ''),
-                        'thumbnail'   => is_string($val['video_thumbnail'] ?? '') ? esc_url_raw($val['video_thumbnail']) : '',
-                    ];
+            // Check for video_id (YouTube ID only) - matches schema structure
+            if (!empty($val['video_id'])) {
+                $video_id = sanitize_text_field($val['video_id']);
+                
+                // Validate YouTube ID format (11 characters, alphanumeric with - and _)
+                if (!preg_match('/^[a-zA-Z0-9_-]{11}$/', $video_id)) {
+                    continue; // Invalid YouTube ID format
                 }
+                
+                $video_url = 'https://www.youtube.com/watch?v=' . $video_id;
+                
+                // Handle video_thumbnail which could be an attachment ID or array
+                $thumbnail = '';
+                if (!empty($val['video_thumbnail'])) {
+                    if (is_numeric($val['video_thumbnail'])) {
+                        // It's an attachment ID
+                        $thumbnail_url = wp_get_attachment_image_url($val['video_thumbnail'], 'full');
+                        if ($thumbnail_url) {
+                            $thumbnail = $thumbnail_url;
+                        }
+                    } elseif (is_array($val['video_thumbnail']) && !empty($val['video_thumbnail']['url'])) {
+                        // It's an ACF image array
+                        $thumbnail = $val['video_thumbnail']['url'];
+                    }
+                }
+                
+                // Always fall back to YouTube thumbnail if no custom thumbnail
+                if (empty($thumbnail)) {
+                    $thumbnail = "https://img.youtube.com/vi/{$video_id}/maxresdefault.jpg";
+                }
+                
+                return [
+                    'url'         => esc_url_raw($video_url),
+                    'title'       => sanitize_text_field($val['video_title'] ?? ''),
+                    'description' => sanitize_textarea_field($val['video_description'] ?? ''),
+                    'thumbnail'   => esc_url_raw($thumbnail),
+                    'video_id'    => $video_id // Include the ID for direct use
+                ];
             }
+            
             // Generic link array
             if (!empty($val['url']) && is_string($val['url']) && filter_var($val['url'], FILTER_VALIDATE_URL)) {
                 return [

@@ -111,30 +111,20 @@ get_header();
 
                 <div class="col-lg-6 ps-lg-5">
                     <?php
-                    // Unified helper fetch
+                    // Get video details from ACF
                     $video_info = mia_get_video_field();
-                    $video_url = $video_info['url']         ?? '';
-                    $video_thumbnail = $video_info['thumbnail'] ?? '';
+                    $video_id = $video_info['video_id'] ?? '';
+                    $thumbnail_url = $video_info['thumbnail'] ?? '';
                     
-                    // Initialize thumbnail URL
-                    $thumbnail_url = '';
-
-                    // Get video details via helper to build embed URL
+                    // Build YouTube embed URL from ID
                     $embed_url = '';
-                    if ($video_url) {
-                        $details  = get_video_details($video_url);
-                        $embed_url = $details ? $details['embed_url'] : $video_url;
-                    }
-
-                    // Handle the video_thumbnail which returns an array with all image data
-                    if ($video_thumbnail && is_array($video_thumbnail)) {
-                        // The URL is directly accessible in the array
-                        $thumbnail_url = $video_thumbnail['url'];
+                    if ($video_id) {
+                        $embed_url = 'https://www.youtube.com/embed/' . $video_id;
                     }
                     ?>
 
-                    <!-- Video container - only show if we have both URL and thumbnail -->
-                    <?php if (!empty($video_url) && !empty($thumbnail_url)): ?>
+                    <!-- Video container - only show if we have video ID and thumbnail -->
+                    <?php if (!empty($video_id) && !empty($thumbnail_url)): ?>
                     <div class="sidebar-section" style="border-radius: 0;">
                         <div class="ratio ratio-16x9">
                             <div class="video-thumbnail" data-embed-url="<?php echo esc_url($embed_url); ?>">
