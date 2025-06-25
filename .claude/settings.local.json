@@ -16,7 +16,9 @@
       "Bash(ls:*)",
       "Bash(diff:*)",
       "WebFetch(domain:developer.wordpress.org)",
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

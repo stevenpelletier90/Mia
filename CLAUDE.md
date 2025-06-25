@@ -4,7 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**MIA Aesthetics v3** is a custom WordPress theme for the aesthetics industry, hosted on WP Engine. This is a professional medical aesthetics website with performance optimization, security focus, and responsive design.
+**MIA Aesthetics v3** is a custom WordPress theme for a multi-location medical aesthetics practice, hosted on WP Engine. This is a professional medical aesthetics website with performance optimization, security focus, and responsive design.
+
+### Practice Structure
+- **Multi-location practice** with locations across the country
+- Each location has one or multiple surgeons
+- All surgeons and locations operate under the Mia Aesthetics brand
+- Hierarchical relationship: Mia Aesthetics > Locations > Surgeons
 
 ### Technology Stack
 - **CMS**: WordPress with custom theme
@@ -55,8 +61,10 @@ The theme uses a sophisticated asset system in `inc/enqueue.php`:
 - Page-specific CSS/JS files matching template names
 
 ### Custom Post Types & Data
+- **Primary CPTs**: `surgeon` (post key), `location`, `procedure`, `case`, `condition`, `special`, `fat-transfer`, `non-surgical`
+- **Relationships**: Surgeons belong to locations, locations belong to Mia Aesthetics organization
 - Before/after gallery data stored in `/assets/data/before-after-gallery.json`
-- ACF Pro manages flexible content architecture
+- ACF Pro manages flexible content architecture with custom fields for schema data
 - Custom queries handle procedure/location/surgeon relationships
 
 ## Development Workflow
