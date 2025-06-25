@@ -36,7 +36,9 @@ The theme follows WordPress best practices with modular organization:
 │   ├── menu-helpers.php   # Menu rendering with caching
 │   ├── cache-helpers.php  # Cache management and clearing
 │   ├── schema.php         # Structured data output
-│   └── queries.php        # Custom query modifications
+│   ├── queries.php        # Custom query modifications
+│   └── /schema/           # Schema.org structured data classes
+│       └── class-clinic-schema.php # Medical clinic/location schema markup
 ├── /assets/
 │   ├── /css/              # Page-specific stylesheets
 │   ├── /js/               # Page-specific JavaScript
@@ -104,3 +106,18 @@ The theme uses a sophisticated asset system in `inc/enqueue.php`:
 - Gravity Forms manages contact/consultation forms
 - Custom post types for medical procedures and locations
 - JSON data files for complex galleries and datasets
+
+## Schema.org & SEO
+### Medical Clinic Schema
+- **Class**: `Mia_Aesthetics\Schema\Clinic_Schema` (inc/schema/class-clinic-schema.php)
+- **Purpose**: Generates Schema.org compliant MedicalBusiness/MedicalClinic markup for location pages
+- **Key Features**:
+  - Medical business information (specialty, price range, payment methods)
+  - Location data (address, geo coordinates, maps integration)
+  - Business hours parsing (handles multiple time formats)
+  - Employee relationships (surgeons linked to locations)
+  - Video schema integration (YouTube VideoObject markup)
+  - Aggregate ratings and reviews
+  - Fallback defaults for missing data
+- **Integration**: Works with Yoast SEO context, ACF Pro fields, and custom post types
+- **Usage**: Automatically applied to `location` post type pages for enhanced search visibility

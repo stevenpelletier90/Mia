@@ -38,6 +38,7 @@ class Schema_Loader {
         require_once $schema_dir . 'class-organization-schema.php';
         require_once $schema_dir . 'class-surgeon-schema.php';
         require_once $schema_dir . 'class-clinic-schema.php';
+        require_once $schema_dir . 'class-faq-schema.php';
     }
     
     /**
@@ -54,6 +55,12 @@ class Schema_Loader {
         
         if ( is_singular( 'location' ) ) {
             $pieces[] = new Clinic_Schema( $context );
+        }
+        
+        // FAQ Schema can be added to any page type
+        $faq_schema = new FAQ_Schema( $context );
+        if ( $faq_schema->is_needed() ) {
+            $pieces[] = $faq_schema;
         }
         
         return $pieces;

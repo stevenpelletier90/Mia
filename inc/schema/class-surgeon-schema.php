@@ -47,6 +47,8 @@ class Surgeon_Schema {
         $surgeon_id = get_the_ID();
         $org_id     = $this->context->site_url . '#organization';
         
+        $schema_data = [];
+        
         // Get associated clinic
         $clinic_obj = get_field( 'surgeon_location', $surgeon_id );
         $clinic_id  = $clinic_obj ? get_permalink( $clinic_obj->ID ) . '#clinic' : null;
@@ -68,13 +70,12 @@ class Surgeon_Schema {
         }
         
         // Description
-        if ( $desc = get_post_meta( $surgeon_id, '_yoast_wpseo_metadesc', true ) ) {
-            $surgeon['description'] = $desc;
-        }
+        $surgeon['description'] = $this->get_description( $surgeon_id );
         
         // Image
-        if ( has_post_thumbnail() ) {
-            $surgeon['image'] = get_the_post_thumbnail_url( $surgeon_id, 'full' );
+        $image_url = $this->get_image( $surgeon_id );
+        if ( $image_url ) {
+            $surgeon['image'] = $image_url;
         }
         
         // Professional credentials
@@ -103,7 +104,112 @@ class Surgeon_Schema {
             ];
         }
         
-        return $surgeon;
+        $schema_data[] = $surgeon;
+        
+        // Add separate VideoObject schema if video exists
+        $video = $this->get_featured_video( $surgeon_id );
+        if ( $video ) {
+            $schema_data[] = $video;
+        }
+        
+        
+        return $schema_data;
+    }
+    
+    /**
+     * Get surgeon description
+     * 
+     * @param int $surgeon_id
+     * @return string
+     */
+    private function get_description( $surgeon_id ) {
+        if ( $desc = get_post_meta( $surgeon_id, '_yoast_wpseo_metadesc', true ) ) {
+            return $desc;
+        }
+        
+        return 'Dr. ' . get_the_title() . ' is a board-certified plastic surgeon at Mia Aesthetics specializing in cosmetic and reconstructive procedures.';
+    }
+    
+    /**
+     * Get surgeon image
+     * 
+     * @param int $surgeon_id
+     * @return string|null
+     */
+    private function get_image( $surgeon_id ) {
+        // Prioritize featured image first for surgeon profiles
+        if ( has_post_thumbnail( $surgeon_id ) ) {
+            $featured_image = get_the_post_thumbnail_url( $surgeon_id, 'full' );
+            if ( $featured_image ) {
+                return $featured_image;
+            }
+        }
+        
+        // Fall back to video thumbnail from video_details group
+        $video_details = get_field( 'video_details', $surgeon_id );
+        if ( $video_details ) {
+            // Use custom thumbnail if available
+            if ( !empty( $video_details['video_thumbnail'] ) ) {
+                $custom_thumbnail = wp_get_attachment_image_url( $video_details['video_thumbnail'], 'full' );
+                if ( $custom_thumbnail ) {
+                    return $custom_thumbnail;
+                }
+            }
+            // Fall back to YouTube thumbnail if video_id exists
+            if ( !empty( $video_details['video_id'] ) ) {
+                return "https://img.youtube.com/vi/{$video_details['video_id']}/maxresdefault.jpg";
+            }
+        }
+        
+        // Default logo as last resort
+        return get_template_directory_uri() . '/assets/images/mia-logo.png';
+    }
+    
+    /**
+     * Get featured video from video_details group field
+     * 
+     * @param int $surgeon_id
+     * @return array|null
+     */
+    private function get_featured_video( $surgeon_id ) {
+        $video_details = get_field( 'video_details', $surgeon_id );
+        
+        if ( empty( $video_details ) || empty( $video_details['video_id'] ) ) {
+            return null;
+        }
+        
+        $video_id = $video_details['video_id'];
+        $video_title = !empty( $video_details['video_title'] ) ? $video_details['video_title'] : 'Dr. ' . get_the_title() . ' - Featured Video';
+        $video_description = !empty( $video_details['video_description'] ) ? $video_details['video_description'] : 'Learn more about Dr. ' . get_the_title() . ' at Mia Aesthetics';
+        
+        // Generate YouTube URLs from video ID
+        $watch_url = "https://www.youtube.com/watch?v={$video_id}";
+        $embed_url = "https://www.youtube.com/embed/{$video_id}";
+        
+        // Use custom thumbnail if available, otherwise use YouTube thumbnail
+        $thumbnail_url = "https://img.youtube.com/vi/{$video_id}/maxresdefault.jpg";
+        if ( !empty( $video_details['video_thumbnail'] ) ) {
+            $custom_thumbnail = wp_get_attachment_image_url( $video_details['video_thumbnail'], 'full' );
+            if ( $custom_thumbnail ) {
+                $thumbnail_url = $custom_thumbnail;
+            }
+        }
+        
+        return [
+            '@type'        => 'VideoObject',
+            '@id'          => get_permalink( $surgeon_id ) . '#video',
+            'name'         => $video_title,
+            'description'  => $video_description,
+            'url'          => $watch_url,
+            'embedUrl'     => $embed_url,
+            'thumbnailUrl' => $thumbnail_url,
+            'uploadDate'   => get_the_date( 'c', $surgeon_id ), // Use surgeon post date as fallback
+            'publisher'    => [
+                '@type' => 'Organization',
+                'name'  => 'Mia Aesthetics',
+                'url'   => home_url()
+            ]
+        ];
     }
     
     /**
@@ -123,4 +229,5 @@ class Surgeon_Schema {
         
         return $specialties;
     }
+    
 }

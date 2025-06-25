@@ -47,6 +47,9 @@ class Clinic_Schema {
         $loc_id = get_the_ID();
         $org_id = $this->context->site_url . '#organization';
         
+        $schema_data = [];
+        
+        // Main clinic schema
         $clinic = [
             '@type'            => [ 'MedicalBusiness', 'MedicalClinic' ],
             '@id'              => get_permalink( $loc_id ) . '#clinic',
@@ -62,7 +65,10 @@ class Clinic_Schema {
         $clinic['description'] = $this->get_description( $loc_id );
         
         // Image
-        $clinic['image'] = $this->get_image( $loc_id );
+        $image_url = $this->get_image( $loc_id );
+        if ( $image_url ) {
+            $clinic['image'] = $image_url;
+        }
         
         // Contact information
         if ( $tel = get_field( 'phone_number', $loc_id ) ) {
@@ -104,13 +110,16 @@ class Clinic_Schema {
             $clinic['employee'] = $employees;
         }
         
-        // Featured video
+        $schema_data[] = $clinic;
+        
+        // Add separate VideoObject schema if video exists
         $video = $this->get_featured_video( $loc_id );
         if ( $video ) {
-            $clinic['video'] = $video;
+            $schema_data[] = $video;
         }
         
-        return $clinic;
+        
+        return $schema_data;
     }
     
     /**
@@ -131,20 +140,34 @@ class Clinic_Schema {
      * Get clinic image
      * 
      * @param int $loc_id
-     * @return string
+     * @return string|null
      */
     private function get_image( $loc_id ) {
-        // Check for YouTube video thumbnail first
-        if ( $video_id = get_field( 'video_id', $loc_id ) ) {
-            return "https://img.youtube.com/vi/{$video_id}/maxresdefault.jpg";
+        // Prioritize featured image first for business listings
+        if ( has_post_thumbnail( $loc_id ) ) {
+            $featured_image = get_the_post_thumbnail_url( $loc_id, 'full' );
+            if ( $featured_image ) {
+                return $featured_image;
+            }
         }
         
-        // Fall back to featured image
-        if ( has_post_thumbnail() ) {
-            return get_the_post_thumbnail_url( $loc_id, 'full' );
+        // Fall back to video thumbnail from video_details group
+        $video_details = get_field( 'video_details', $loc_id );
+        if ( $video_details ) {
+            // Use custom thumbnail if available
+            if ( !empty( $video_details['video_thumbnail'] ) ) {
+                $custom_thumbnail = wp_get_attachment_image_url( $video_details['video_thumbnail'], 'full' );
+                if ( $custom_thumbnail ) {
+                    return $custom_thumbnail;
+                }
+            }
+            // Fall back to YouTube thumbnail if video_id exists
+            if ( !empty( $video_details['video_id'] ) ) {
+                return "https://img.youtube.com/vi/{$video_details['video_id']}/maxresdefault.jpg";
+            }
         }
         
-        // Default logo
+        // Default logo as last resort
         return get_template_directory_uri() . '/assets/images/mia-logo.png';
     }
     
@@ -234,8 +257,8 @@ class Clinic_Schema {
                 $opening_hours[] = [
                     '@type'     => 'OpeningHoursSpecification',
                     'dayOfWeek' => ucfirst( strtolower( $day ) ), // Ensure proper capitalization
-                    'opens'     => $parsed_times['opens'],
-                    'closes'    => $parsed_times['closes']
+                    'opens'     => (string) $parsed_times['opens'],
+                    'closes'    => (string) $parsed_times['closes']
                 ];
             }
         }
@@ -419,27 +442,40 @@ class Clinic_Schema {
     }
     
     /**
-     * Get featured video from video_id field
+     * Get featured video from video_details group field
      * 
      * @param int $loc_id
      * @return array|null
      */
     private function get_featured_video( $loc_id ) {
-        $video_id = get_field( 'video_id', $loc_id );
+        $video_details = get_field( 'video_details', $loc_id );
         
-        if ( empty( $video_id ) ) {
+        if ( empty( $video_details ) || empty( $video_details['video_id'] ) ) {
             return null;
         }
+        
+        $video_id = $video_details['video_id'];
+        $video_title = !empty( $video_details['video_title'] ) ? $video_details['video_title'] : get_the_title() . ' - Featured Video';
+        $video_description = !empty( $video_details['video_description'] ) ? $video_details['video_description'] : 'Learn more about Mia Aesthetics ' . get_the_title() . ' location';
         
         // Generate YouTube URLs from video ID
         $watch_url = "https://www.youtube.com/watch?v={$video_id}";
         $embed_url = "https://www.youtube.com/embed/{$video_id}";
+        
+        // Use custom thumbnail if available, otherwise use YouTube thumbnail
         $thumbnail_url = "https://img.youtube.com/vi/{$video_id}/maxresdefault.jpg";
+        if ( !empty( $video_details['video_thumbnail'] ) ) {
+            $custom_thumbnail = wp_get_attachment_image_url( $video_details['video_thumbnail'], 'full' );
+            if ( $custom_thumbnail ) {
+                $thumbnail_url = $custom_thumbnail;
+            }
+        }
         
         return [
             '@type'        => 'VideoObject',
-            'name'         => get_the_title() . ' - Featured Video',
-            'description'  => 'Learn more about Mia Aesthetics ' . get_the_title() . ' location',
+            '@id'          => get_permalink( $loc_id ) . '#video',
+            'name'         => $video_title,
+            'description'  => $video_description,
             'url'          => $watch_url,
             'embedUrl'     => $embed_url,
             'thumbnailUrl' => $thumbnail_url,
@@ -451,4 +487,5 @@ class Clinic_Schema {
             ]
         ];
     }
+    
 }
