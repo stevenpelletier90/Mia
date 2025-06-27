@@ -1,0 +1,493 @@
+<style type="text/css">
+  .videoContent {
+    width: 100%;
+    color: #fff;
+  }
+
+  .quickIntro {
+    display: flex;
+  }
+
+  .quickIntroColumn {
+    display: flex;
+    width: 50%;
+    min-height: 200px;
+    align-items: center;
+  }
+
+  .colLeft {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .colRight {
+    flex-wrap: wrap;
+  }
+
+  .quickIntroItem {
+    width: 50%;
+    position: relative;
+  }
+
+  .quickIntroItem1 {
+    width: 100%;
+  }
+
+  .quickIntro .quickIntroLink {
+    flex-shrink: 0;
+    flex-grow: 1;
+    margin: 3px 0;
+    width: 100%;
+  }
+
+  .quickIntro .quickIntroImage {
+    position: static;
+    overflow: hidden;
+  }
+
+  .quickIntro .quickIntroImage .img-cover {
+    transition: all 250ms cubic-bezier(0.335, 0.015, 0.46, 0.995);
+  }
+
+  .quickIntro .quickIntroLink:hover .img-cover {
+    transform: scale(1.08);
+  }
+
+  .quickIntro .quickIntroText {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    position: absolute;
+    width: 100%;
+    margin: auto;
+    bottom: 0;
+    text-align: left;
+    padding: 25px;
+  }
+
+  .quickIntro .quickIntroLink .btn-cta {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    display: block;
+    width: fit-content;
+  }
+
+  .quickIntro .quickIntroLink:hover .btn-cta,
+  .quickIntro .quickIntroLink:focus .btn-cta {
+    background-color: #fff;
+    border-color: #fff;
+    color: #222;
+  }
+
+  #myVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('#miscpath#videos/bgVideo.jpg') no-repeat;
+    background-size: cover;
+  }
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    #myVideo {
+      width: auto;
+    }
+  }
+
+  .horizontalInventorySearch p {
+    color: #fff;
+  }
+
+  @media (min-width: 1200px) {
+    .horizontalInventorySearch .hisTitle {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .horizontalInventorySearch .hiaVehiclesAvailable {
+      font-family: 'BarlowCondensed-SemiBold';
+      font-size: 52px;
+      line-height: 65px;
+      margin: 0 0 15px;
+      color: #fff;
+    }
+
+    .horizontalInventorySearch .form-control {
+      appearance: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 0;
+      border-radius: 0;
+      color: #222;
+      font-size: 16px;
+      height: 40px;
+      min-width: 215px;
+      outline: none !important;
+      padding: 0 15px;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .horizontalInventorySearch .form-control option {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
+
+    .horizontalInventorySearch .form-group {
+      position: relative;
+    }
+
+    .horizontalInventorySearch .form-group:before {
+      content: '\f0d7';
+      color: #222;
+      font-family: 'FontAwesome';
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+
+    #h_search_widget_panel_search_by_stock .form-group:last-of-type:before {
+      content: none;
+    }
+
+    .horizontalSearchOptions li:not(:first-child)::before {
+      color: #fff !important;
+    }
+
+    .horizontalInventorySearch .btn-cta {
+      padding: 9px 45px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 1199px) and (min-width: 992px) {
+    h1 .sub-heading {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .horizontalInventorySearch .hisTitle {
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .horizontalInventorySearch .hiaVehiclesAvailable {
+      font-size: 35px;
+      font-family: 'BarlowCondensed-SemiBold';
+      margin: 0 0 15px;
+      color: #fff;
+    }
+
+    .horizontalInventorySearch .form-control {
+      height: 40px;
+      font-size: 16px;
+      border-radius: 0;
+    }
+
+    .horizontalInventorySearch .btn-cta {
+      padding: 8px 35px;
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .videoContent {
+      position: relative;
+      z-index: 2;
+      padding: 0 2em;
+    }
+
+    #videoOverlay {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      z-index: 1;
+    }
+
+    .quickIntro {
+      border: 20px solid #e9e9e9;
+    }
+
+    .horizontalInventorySearch .col-md-12.text-center {
+      text-align: left;
+    }
+
+    .quickIntroItem {
+      border-left: 20px solid #e9e9e9;
+    }
+
+    .quickIntroItem1 {
+      border-bottom: 20px solid #e9e9e9;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .videoContent {
+      padding: 0 5em;
+    }
+  }
+
+  @media (max-width: 991px) {
+    #myVideo {
+      display: none;
+    }
+
+    .quickIntro {
+      flex-wrap: wrap;
+    }
+
+    .quickIntroColumn.colLeft {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+        url('#miscpath#videos/bgVideo.jpg') no-repeat center / cover;
+    }
+
+    .quickIntroColumn {
+      display: flex;
+      width: 100%;
+      min-height: 100px;
+      align-items: center;
+    }
+
+    .videoContent {
+      width: 100%;
+      padding: 30px 15px;
+    }
+
+    .quickIntro {
+      flex-wrap: wrap;
+      border: 15px solid #e9e9e9;
+    }
+
+    .quickIntroItem {
+      border-top: 15px solid #e9e9e9;
+    }
+
+    .quickIntroItem2 {
+      border-right: 7px solid #e9e9e9;
+    }
+
+    .quickIntroItem3 {
+      border-left: 7px solid #e9e9e9;
+    }
+  }
+
+  @media (max-width: 991px) and (min-width: 768px) {
+    .colRight {
+      flex-wrap: wrap;
+    }
+
+    .quickIntroItem {
+      width: 33.33%;
+    }
+
+    .quickIntroItem1 {
+      width: 33.33%;
+    }
+
+    .quickIntroItem1,
+    .quickIntroItem2 {
+      border-right: 7px solid #e9e9e9;
+    }
+
+    .quickIntroItem2,
+    .quickIntroItem3 {
+      border-left: 7px solid #e9e9e9;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .horizontalInventorySearch .horizontalSearchOptions li a {
+      border-bottom: 1px dotted #fff;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 12px;
+      padding-bottom: 5px;
+      text-decoration: none;
+    }
+
+    .horizontalSearchOptions li:not(.active) a {
+      border-bottom: 0;
+      color: #fff !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .videoContent {
+      padding: 15px 15px;
+    }
+
+    .horizontalInventorySearch .horizontalSearchOptions li a {
+      border-bottom: 1px dotted #fff;
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 12px;
+      padding-bottom: 5px;
+      text-decoration: none;
+    }
+
+    .horizontalSearchOptions li:not(.active) a {
+      border-bottom: 0;
+      color: #fff !important;
+    }
+
+    h1 .heading-xl {
+      font-size: 30px;
+    }
+
+    h1 .sub-heading {
+      font-size: 15px;
+    }
+
+    .quickIntro .quickIntroLink .btn-cta {
+      font-size: 12px;
+    }
+  }
+</style>
+
+<div class="quickIntro">
+  <div class="quickIntroColumn colLeft">
+    <div id="videoOverlay" aria-hidden="true"></div>
+    <video
+      id="myVideo"
+      autoplay
+      loop
+      muted
+      playsinline
+      poster="#miscpath#videos/bgVideo.jpg"
+      aria-label="Background video"
+    >
+      <source src="#miscpath#videos/bgVideo.mp4" type="video/mp4" />
+      <source src="#miscpath#videos/bgVideo.webm" type="video/webm" />
+    </video>
+    <div class="videoContent">
+      <div class="inventorySearch">
+        <div id="block1">#Block1#</div>
+      </div>
+    </div>
+  </div>
+  <div class="quickIntroColumn colRight">
+    <div class="quickIntroItem quickIntroItem1">
+      <a
+        class="quickIntroLink"
+        href="/preapproved.aspx"
+        onclick="DealerOnTrack.event('cta','click',window.location.href)"
+        data-dotagging-product-name="Website|Custom Content"
+        data-dotagging-element-type="body"
+        data-dotagging-event-action-result="open"
+        data-dotagging-link-url="/preapproved.aspx"
+        data-dotagging-element-subtype="hyperlink"
+        data-dotagging-event="cta_interaction"
+        aria-label="Apply for Credit - Get Financing"
+      >
+        <div class="quickIntroImage">
+          <div
+            class="img-background img-cover bg-main border-x hidden-xs hidden-sm"
+            role="img"
+            aria-label="Apply for Credit background"
+            style="
+              background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('#miscpath#quickNav1.jpg');
+              padding-top: 35%;
+              background-position: center 20%;
+            "
+          ></div>
+          <div
+            class="img-background img-cover bg-main border-x visible-sm visible-xs"
+            role="img"
+            aria-label="Apply for Credit background"
+            style="
+              background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('#miscpath#quickNav1.jpg');
+              padding-top: 200px;
+            "
+          ></div>
+        </div>
+        <div class="quickIntroText pad-vert-2x text-white">
+          <h3 class="margin-top-x">Apply for Credit</h3>
+          <span class="btn btn-cta btn-lg margin-top_5x">Get Financing</span>
+        </div>
+      </a>
+    </div>
+    <div class="quickIntroItem quickIntroItem2">
+      <a
+        class="quickIntroLink"
+        href="/newspecials.html"
+        onclick="DealerOnTrack.event('cta','click',window.location.href)"
+        data-dotagging-product-name="Website|Custom Content"
+        data-dotagging-element-type="body"
+        data-dotagging-event-action-result="open"
+        data-dotagging-link-url="/newspecials.html"
+        data-dotagging-element-subtype="hyperlink"
+        data-dotagging-event="cta_interaction"
+        aria-label="Special Offers - View Specials"
+      >
+        <div class="quickIntroImage">
+          <div
+            class="img-background img-cover bg-main border-x hidden-sm hidden-xs"
+            role="img"
+            aria-label="Special Offers background"
+            style="
+              background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('#miscpath#quickNav2.jpg');
+              padding-top: 70%;
+            "
+          ></div>
+          <div
+            class="img-background img-cover bg-main border-x visible-sm visible-xs"
+            role="img"
+            aria-label="Special Offers background"
+            style="
+              background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('#miscpath#quickNav2.jpg');
+              padding-top: 200px;
+            "
+          ></div>
+        </div>
+        <div class="quickIntroText pad-vert-2x text-white">
+          <h3 class="margin-top-x">Special <br class="visible-xxs" />Offers</h3>
+          <span class="btn btn-cta btn-lg margin-top_5x">View Specials</span>
+        </div>
+      </a>
+    </div>
+    <div class="quickIntroItem quickIntroItem3">
+      <a
+        class="quickIntroLink"
+        href="/contactus.aspx"
+        onclick="DealerOnTrack.event('cta','click',window.location.href)"
+        data-dotagging-product-name="Website|Custom Content"
+        data-dotagging-element-type="body"
+        data-dotagging-event-action-result="open"
+        data-dotagging-link-url="/contactus.aspx"
+        data-dotagging-element-subtype="hyperlink"
+        data-dotagging-event="cta_interaction"
+        aria-label="Our Group - Contact Us"
+      >
+        <div class="quickIntroImage">
+          <div
+            class="img-background img-cover bg-main border-x hidden-sm hidden-xs"
+            role="img"
+            aria-label="Our Group background"
+            style="
+              background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('#miscpath#quickNav3.jpg');
+              padding-top: 70%;
+            "
+          ></div>
+          <div
+            class="img-background img-cover bg-main border-x visible-sm visible-xs"
+            role="img"
+            aria-label="Our Group background"
+            style="
+              background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('#miscpath#quickNav3.jpg');
+              padding-top: 200px;
+            "
+          ></div>
+        </div>
+        <div class="quickIntroText pad-vert-2x text-white">
+          <h3 class="margin-top-x">Our <br class="visible-xxs" />Group</h3>
+          <span class="btn btn-cta btn-lg margin-top_5x">Contact Us</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

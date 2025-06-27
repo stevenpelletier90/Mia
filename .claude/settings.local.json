@@ -18,7 +18,12 @@
       "WebFetch(domain:developer.wordpress.org)",
       "Bash(claude mcp:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(node:*)",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__filesystem__list_directory",
+      "mcp__filesystem__read_file",
+      "mcp__filesystem__edit_file"
     ],
     "deny": []
   }

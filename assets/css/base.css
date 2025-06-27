@@ -373,6 +373,17 @@ ol {
   line-height: 1.6;
 }
 
+/* FAQ section link styles */
+.faqs-section .accordion-body a {
+  color: #0000FF;
+}
+
+.faqs-section .accordion-body a:hover,
+.faqs-section .accordion-body a:focus {
+  color: #551A8B; /* deeper shade or brand-friendly dark blue */
+  text-decoration-thickness: 2px;
+}
+
 @media (min-width: 1200px) {
   h1,
   .h1 {

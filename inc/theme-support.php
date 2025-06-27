@@ -110,3 +110,11 @@ function mia_admin_bar_view_source( $wp_admin_bar ) {
         ]
     ] );
 }
+
+/**
+ * Enable Google Maps API for ACF Pro
+ */
+add_action( 'acf/init', 'mia_acf_init' );
+function mia_acf_init() {
+    acf_update_setting( 'google_api_key', 'AIzaSyAiXSTjbyqjv_b9yGrxVyXYRmZQZ4GXBJ4' );
+}

@@ -16,7 +16,10 @@ require_once get_template_directory() . '/inc/schema/class-schema-loader.php';
 
 use Mia_Aesthetics\Schema\Schema_Loader;
 
-// Initialize schema on theme setup
+/**
+ * Initialize schema on theme setup
+ * (Re-enabled after fixing Yoast compatibility issue)
+ */
 add_action( 'after_setup_theme', function() {
     Schema_Loader::init();
 } );

@@ -57,23 +57,18 @@ get_header();
 
             <div class="location-details mb-3">
                 <?php
-                $street_address = get_field('street_address');
-                $city           = get_field('city');
-                $state          = get_field('state');
-                $zip_code       = get_field('zip_code');
-                if ($street_address || $city || $state || $zip_code) :
+                $location_map = get_field('location_map');
+                if ($location_map):
+                    $street = $location_map['street_number'] . ' ' . $location_map['street_name'];
+                    $city = $location_map['city'];
+                    $state = $location_map['state_short'];
+                    $zip = $location_map['post_code'];
                 ?>
                     <div class="location-detail mb-2">
                         <span>
-                            <?php if ($street_address) : ?>
-                                <?php echo esc_html($street_address); ?>
-                            <?php endif; ?>
-                            <?php if ($city || $state || $zip_code) : ?>
-                                <br>
-                                <?php
-                                echo esc_html( mia_format_city_state_zip( $city, $state, $zip_code ) );
-                                ?>
-                            <?php endif; ?>
+                            <?php echo esc_html($street); ?>
+                            <br>
+                            <?php echo esc_html($city . ', ' . $state . ' ' . $zip); ?>
                         </span>
                     </div>
                 <?php endif; ?>

@@ -42,6 +42,11 @@ get_header(); ?>
                         <div class="content">
                             <?php the_content(); ?>
                         </div>
+                        
+                        <?php
+                        // Display FAQs if available
+                        echo display_page_faqs();
+                        ?>
                     </div>
                 </div>
             </div>

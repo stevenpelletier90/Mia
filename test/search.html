@@ -1,0 +1,771 @@
+<div class="location-search-container">
+  <h2>Find Our Locations</h2>
+
+  <div class="search-input-wrapper">
+    <input
+      type="text"
+      id="location-search"
+      role="combobox"
+      aria-autocomplete="list"
+      aria-controls="search-dropdown"
+      aria-expanded="false"
+      aria-label="Search for Mia Aesthetics locations by city, state, or zip code"
+      placeholder="Search by city, state, or zip code..."
+      autocomplete="off"
+    />
+    <div class="search-icon"><i class="fas fa-search"></i></div>
+    <div id="loading-spinner" class="loading-spinner" style="display: none">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <div id="search-dropdown" class="search-dropdown" role="listbox" aria-label="Search results">
+    <!-- Results will appear here -->
+  </div>
+</div>
+
+<style>
+  .location-search-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .location-search-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1b1b1b;
+    font-weight: 600;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  #location-search {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1.5rem;
+    font-size: 1.1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  #location-search:focus {
+    border-color: #c8b273;
+    box-shadow: 0 0 0 3px rgba(200, 178, 115, 0.1);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.2rem;
+    pointer-events: none;
+  }
+
+  .loading-spinner {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0e0e0;
+    border-top: 2px solid #c8b273;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Loading skeleton styles */
+  .loading-skeleton {
+    display: none;
+    padding: 0;
+  }
+
+  .skeleton-item {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  .skeleton-item:last-child {
+    border-bottom: none;
+  }
+
+  .skeleton-title {
+    height: 1.2rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    width: 70%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .skeleton-address {
+    height: 0.9rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    border-radius: 4px;
+    margin-bottom: 0.25rem;
+    width: 85%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .skeleton-distance {
+    height: 0.8rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    border-radius: 4px;
+    width: 45%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+  }
+
+  .dropdown-item {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-item:hover,
+  .dropdown-item.highlighted {
+    background-color: #f8f9fa;
+  }
+
+  .dropdown-item h4 {
+    margin: 0 0 0.25rem 0;
+    color: #1b1b1b;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .dropdown-item .location-address {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .dropdown-item .location-distance {
+    background-color: #1b1b1b;
+    color: #c8b273;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.25rem;
+  }
+
+  .dropdown-item .location-phone {
+    background-color: #1b1b1b;
+    color: #c8b273;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.25rem;
+  }
+
+  .no-results {
+    padding: 1.5rem;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* Google Places Autocomplete styling */
+  .pac-container {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid #e0e0e0 !important;
+    margin-top: 5px !important;
+  }
+
+  .pac-item {
+    padding: 1rem 1.5rem !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    cursor: pointer !important;
+  }
+
+  .pac-item:hover {
+    background-color: #f8f9fa !important;
+  }
+
+  .pac-item-selected {
+    background-color: #f8f9fa !important;
+  }
+
+  .pac-matched {
+    font-weight: 600 !important;
+    background-color: #1b1b1b !important;
+    color: #c8b273 !important;
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 3px !important;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .location-search-container {
+      margin: 1rem;
+      padding: 0.5rem;
+    }
+
+    .location-search-container h2 {
+      font-size: 1.5rem;
+    }
+
+    #location-search {
+      font-size: 1rem;
+      padding: 0.875rem 2.5rem 0.875rem 1.25rem;
+    }
+  }
+</style>
+
+<!-- Load Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Load Google Maps API with Places library -->
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiXSTjbyqjv_b9yGrxVyXYRmZQZ4GXBJ4&libraries=places&callback=initGoogleMaps"
+></script>
+
+<script>
+  // Global variables
+  let locations = [];
+  let autocomplete;
+  let userLocation = null;
+  let currentResults = [];
+  let currentHighlightIndex = -1;
+
+  // Search configuration
+  const SEARCH_CONFIG = {
+    MAX_DISTANCE_MILES: 100, // Reasonable driving distance
+    MAX_RESULTS: 3, // Show only 3 closest when no exact match
+    MIN_SEARCH_LENGTH: 2, // Minimum characters to trigger search
+    DEBOUNCE_DELAY: 300, // Reduced for better UX
+  };
+
+  // Cache geocoding results to reduce API calls
+  const geocodeCache = new Map();
+  const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
+
+  // DOM elements
+  const searchInput = document.getElementById('location-search');
+  const searchDropdown = document.getElementById('search-dropdown');
+  const loadingSpinner = document.getElementById('loading-spinner');
+  const searchIcon = document.querySelector('.search-icon');
+
+  // Google Maps callback function
+  window.initGoogleMaps = function () {
+    initializeAutocomplete();
+  };
+
+  // Initialize when page loads
+  document.addEventListener('DOMContentLoaded', function () {
+    loadLocations();
+    // initializeAutocomplete will be called by Google Maps callback
+  });
+
+  // Load locations from WordPress API
+  async function loadLocations() {
+    try {
+      const response = await fetch('/wp-json/wp/v2/location?per_page=100&parent=0&_fields=id,title,link,acf');
+      if (!response.ok) throw new Error('Failed to load locations');
+
+      const data = await response.json();
+      locations = data.map((location) => ({
+        id: location.id,
+        title: location.title.rendered,
+        url: location.link,
+        acf: location.acf || {},
+        coordinates: getCoordinates(location.acf),
+        distance: null,
+      }));
+
+      console.log(`Loaded ${locations.length} parent locations`);
+      console.log(`Locations with coordinates: ${locations.filter((l) => l.coordinates).length}`);
+    } catch (error) {
+      console.error('Error loading locations:', error);
+    }
+  }
+
+  // Extract coordinates from Google Map ACF field
+  function getCoordinates(acf) {
+    if (!acf || !acf.location_map) return null;
+
+    const locationMap = acf.location_map;
+    if (locationMap.lat && locationMap.lng) {
+      return {
+        lat: parseFloat(locationMap.lat),
+        lng: parseFloat(locationMap.lng),
+      };
+    }
+    return null;
+  }
+
+  // Initialize search functionality
+  function initializeAutocomplete() {
+    try {
+      if (typeof google === 'undefined' || !google.maps) {
+        console.error('Google Maps API not loaded');
+        return;
+      }
+
+      // Initialize geocoder for converting addresses to coordinates
+      window.geocoder = new google.maps.Geocoder();
+
+      // Handle text input for both location matches and geocoding
+      searchInput.addEventListener('input', debouncedSearch);
+
+      // Add keyboard navigation
+      searchInput.addEventListener('keydown', handleKeyNavigation);
+
+      console.log('Google Maps Geocoder initialized successfully');
+    } catch (error) {
+      console.error('Error initializing Google Maps:', error);
+    }
+  }
+
+  // Improved debounce function
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  // Simplified search function
+  function handleSearch() {
+    const originalQuery = searchInput.value ? searchInput.value.trim() : '';
+    const query = originalQuery.toLowerCase();
+
+    if (query.length < SEARCH_CONFIG.MIN_SEARCH_LENGTH) {
+      hideDropdown();
+      return;
+    }
+
+    // Check for exact city/location matches first
+    const exactMatches = findExactMatches(query);
+
+    if (exactMatches.length > 0) {
+      // Show exact matches and geocode to add distances
+      geocodeAndShowResults(query, exactMatches, true, originalQuery);
+    } else {
+      // No exact matches - geocode and show closest locations
+      geocodeAndShowResults(query, [], false, originalQuery);
+    }
+  }
+
+  function findExactMatches(query) {
+    return locations.filter((location) => {
+      const locationMap = location.acf.location_map;
+      if (!locationMap) return false;
+
+      // Check various fields for matches
+      const searchFields = [location.title, locationMap.city, locationMap.state, locationMap.state_short]
+        .filter(Boolean)
+        .map((field) => field.toLowerCase());
+
+      return searchFields.some((field) => field.includes(query));
+    });
+  }
+
+  // Create debounced search function
+  const debouncedSearch = debounce(handleSearch, SEARCH_CONFIG.DEBOUNCE_DELAY);
+
+  // Simplified geocoding function with caching
+  function geocodeAndShowResults(query, exactMatches, hasExactMatches, originalQuery) {
+    if (!window.geocoder) return;
+
+    // Check cache first
+    const cacheKey = query.toLowerCase();
+    const cached = geocodeCache.get(cacheKey);
+
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+      userLocation = cached.location;
+      calculateDistances();
+      displaySimplifiedResults(query, exactMatches, hasExactMatches, originalQuery);
+      return;
+    }
+
+    showLoading();
+
+    geocoder.geocode(
+      {
+        address: query + ', USA',
+        componentRestrictions: { country: 'US' },
+      },
+      (results, status) => {
+        if (status === 'OK' && results[0]) {
+          userLocation = {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng(),
+          };
+
+          // Cache the result
+          geocodeCache.set(cacheKey, {
+            location: userLocation,
+            timestamp: Date.now(),
+          });
+
+          // Calculate distances for all locations
+          calculateDistances();
+
+          // Display results using simplified logic
+          displaySimplifiedResults(query, exactMatches, hasExactMatches, originalQuery);
+        } else {
+          hideLoading();
+          searchDropdown.innerHTML = '<div class="no-results">No locations found</div>';
+          showDropdown();
+        }
+      }
+    );
+  }
+
+  // Simplified display function - ALWAYS show results
+  function displaySimplifiedResults(searchQuery, exactMatches, hasExactMatches, originalQuery) {
+    let resultsToShow = [];
+
+    if (hasExactMatches) {
+      // Show exact matches first, then add closest alternatives
+      const exactResults = exactMatches.map((loc) => ({ ...loc, isExactMatch: true }));
+      
+      // Get closest alternatives (excluding exact matches)
+      const alternatives = locations
+        .filter((loc) => loc.coordinates && loc.distance !== null && !exactMatches.some(exact => exact.id === loc.id))
+        .sort((a, b) => (a.distance || Infinity) - (b.distance || Infinity))
+        .slice(0, 2) // Show next 2 closest
+        .map((loc) => ({ ...loc, isExactMatch: false }));
+      
+      resultsToShow = [...exactResults, ...alternatives];
+    } else {
+      // No exact matches - show closest 3 locations regardless of distance
+      resultsToShow = locations
+        .filter((loc) => loc.coordinates && loc.distance !== null)
+        .sort((a, b) => (a.distance || Infinity) - (b.distance || Infinity))
+        .slice(0, SEARCH_CONFIG.MAX_RESULTS)
+        .map((loc) => ({ ...loc, isExactMatch: false }));
+    }
+
+    // This should rarely happen unless there are no locations with coordinates
+    if (resultsToShow.length === 0) {
+      searchDropdown.innerHTML = '<div class="no-results">No locations available</div>';
+    } else {
+      displayResultsWithDistance(resultsToShow, originalQuery || searchQuery, hasExactMatches ? 'exact' : 'nearby');
+    }
+
+    hideLoading();
+    showDropdown();
+  }
+
+  // Calculate distances from user location to all locations
+  function calculateDistances() {
+    if (!userLocation) return;
+
+    locations.forEach((location) => {
+      if (location.coordinates) {
+        location.distance = calculateDistance(
+          userLocation.lat,
+          userLocation.lng,
+          location.coordinates.lat,
+          location.coordinates.lng
+        );
+      }
+    });
+  }
+
+  // Calculate distance between two points using Haversine formula
+  function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 3959; // Earth's radius in miles
+    const dLat = toRadians(lat2 - lat1);
+    const dLng = toRadians(lng2 - lng1);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+  }
+
+  // Update the header to be more informative for far locations
+  function displayResultsWithDistance(results, searchQuery, searchType = 'nearby') {
+    currentResults = results;
+    currentHighlightIndex = -1;
+
+    // Create more helpful headers
+    let headerHtml = '';
+    if (searchType === 'exact') {
+      headerHtml = `
+        <div style="padding: 0.75rem 1.5rem; background: #f0f8ff; border-bottom: 1px solid #e0e0e0; font-size: 0.85rem; color: #666;">
+          <span style="background-color: #1b1b1b; color: #c8b273; padding: 0.25rem 0.5rem; border-radius: 4px;">★</span> <strong>${escapeHtml(
+            capitalizeFirstLetter(searchQuery)
+          )}</strong> + closest alternatives
+        </div>
+      `;
+    } else {
+      // Check if all results are far away
+      const closestDistance = results[0]?.distance || 0;
+      const distanceNote = closestDistance > 100 ? ' (nearest options)' : '';
+
+      headerHtml = `
+        <div style="padding: 0.75rem 1.5rem; background: #f8f9fa; border-bottom: 1px solid #e0e0e0; font-size: 0.85rem; color: #666;">
+          Closest locations to <strong>${escapeHtml(capitalizeFirstLetter(searchQuery))}</strong>${distanceNote}
+        </div>
+      `;
+    }
+
+    const html = results
+      .map((location) => {
+        const address = formatAddress(location.acf);
+        const phone = location.acf.phone_number || '';
+
+        // Show exact match indicator only
+        let matchLabel = '';
+        if (location.isExactMatch) {
+          matchLabel = '<span style="background-color: #1b1b1b; color: #c8b273; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; border-radius: 4px;">★ Exact Match</span>';
+        }
+
+        // Format distance text consistently
+        let distanceHtml = '';
+        if (location.distance !== null) {
+          const distanceText = `${location.distance.toFixed(1)} miles away`;
+          distanceHtml = `<div class="location-distance">${distanceText}</div>`;
+        }
+
+        return `
+          <div class="dropdown-item" role="option" data-location-id="${location.id}" aria-selected="false">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+              <h4>${escapeHtml(location.title)}</h4>
+              ${matchLabel}
+            </div>
+            ${address ? `<div class="location-address">${escapeHtml(address)}</div>` : ''}
+            ${distanceHtml}
+            ${phone ? `<div class="location-phone">${escapeHtml(formatPhone(phone))}</div>` : ''}
+          </div>
+        `;
+      })
+      .join('');
+
+    searchDropdown.innerHTML = headerHtml + html;
+    showDropdown();
+
+    // Add click listeners
+    const items = searchDropdown.querySelectorAll('.dropdown-item');
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => selectLocation(results[index]));
+    });
+  }
+
+  // Navigate to selected location
+  function selectLocation(location) {
+    window.location.href = location.url;
+  }
+
+  // Format address from Google Map field
+  function formatAddress(acf) {
+    const locationMap = acf.location_map;
+    if (!locationMap) return '';
+
+    const parts = [];
+    if (locationMap.street_number && locationMap.street_name) {
+      parts.push(locationMap.street_number + ' ' + locationMap.street_name);
+    }
+    if (locationMap.city) parts.push(locationMap.city);
+    if (locationMap.state_short) parts.push(locationMap.state_short);
+    if (locationMap.post_code) parts.push(locationMap.post_code);
+
+    return parts.join(', ');
+  }
+
+  // Format phone number
+  function formatPhone(phone) {
+    const cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length === 10) {
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+    }
+    return phone;
+  }
+
+  // Escape HTML
+  function escapeHtml(unsafe) {
+    if (typeof unsafe !== 'string') return '';
+    return unsafe
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Return the search query as the user typed it
+  function capitalizeFirstLetter(string) {
+    if (typeof string !== 'string' || string.length === 0) return '';
+    return string;
+  }
+
+  // Create loading skeleton
+  function createLoadingSkeleton() {
+    return `
+      <div class="loading-skeleton">
+        <div class="skeleton-item">
+          <div class="skeleton-title"></div>
+          <div class="skeleton-address"></div>
+          <div class="skeleton-distance"></div>
+        </div>
+        <div class="skeleton-item">
+          <div class="skeleton-title"></div>
+          <div class="skeleton-address"></div>
+          <div class="skeleton-distance"></div>
+        </div>
+        <div class="skeleton-item">
+          <div class="skeleton-title"></div>
+          <div class="skeleton-address"></div>
+          <div class="skeleton-distance"></div>
+        </div>
+      </div>
+    `;
+  }
+
+  // UI functions
+  function showLoading() {
+    loadingSpinner.style.display = 'block';
+    searchIcon.style.display = 'none';
+
+    // Show loading skeleton in dropdown
+    searchDropdown.innerHTML = createLoadingSkeleton();
+    searchDropdown.querySelector('.loading-skeleton').style.display = 'block';
+    showDropdown();
+  }
+
+  function hideLoading() {
+    loadingSpinner.style.display = 'none';
+    searchIcon.style.display = 'block';
+  }
+
+  function showDropdown() {
+    searchDropdown.style.display = 'block';
+    // Update ARIA attributes for screen readers
+    searchInput.setAttribute('aria-expanded', 'true');
+  }
+
+  function hideDropdown() {
+    searchDropdown.style.display = 'none';
+    currentHighlightIndex = -1;
+    // Update ARIA attributes for screen readers
+    searchInput.setAttribute('aria-expanded', 'false');
+  }
+
+  // Keyboard navigation for accessibility
+  function handleKeyNavigation(e) {
+    const items = searchDropdown.querySelectorAll('.dropdown-item');
+
+    if (items.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      currentHighlightIndex = Math.min(currentHighlightIndex + 1, items.length - 1);
+      updateHighlight(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      currentHighlightIndex = Math.max(currentHighlightIndex - 1, -1);
+      updateHighlight(items);
+    } else if (e.key === 'Enter' && currentHighlightIndex >= 0) {
+      e.preventDefault();
+      selectLocation(currentResults[currentHighlightIndex]);
+    } else if (e.key === 'Escape') {
+      hideDropdown();
+      searchInput.blur();
+    }
+  }
+
+  // Update visual highlight for keyboard navigation
+  function updateHighlight(items) {
+    items.forEach((item, index) => {
+      if (index === currentHighlightIndex) {
+        item.classList.add('highlighted');
+        item.setAttribute('aria-selected', 'true');
+        item.scrollIntoView({ block: 'nearest' });
+        // Announce to screen readers
+        searchInput.setAttribute('aria-activedescendant', item.getAttribute('data-location-id'));
+      } else {
+        item.classList.remove('highlighted');
+        item.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+
+  // Hide dropdown when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+      hideDropdown();
+    }
+  });
+</script>

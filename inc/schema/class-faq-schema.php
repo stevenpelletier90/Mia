@@ -50,7 +50,7 @@ class FAQ_Schema {
         $faq_section = get_field( 'faq_section', $post_id );
         
         if ( empty( $faq_section ) || empty( $faq_section['faqs'] ) ) {
-            return null;
+            return [];
         }
         
         $questions = [];
@@ -71,7 +71,7 @@ class FAQ_Schema {
         }
         
         if ( empty( $questions ) ) {
-            return null;
+            return [];
         }
         
         $faq_schema = [

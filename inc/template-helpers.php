@@ -385,6 +385,17 @@ function mia_display_faqs($show_heading = true) {
     }
     
     $faqs = $faq_section['faqs'];
+    
+    // Filter out empty FAQs and check if we have any valid ones
+    $valid_faqs = array_filter($faqs, function($faq) {
+        return !empty($faq['question']) && !empty($faq['answer']);
+    });
+    
+    // If no valid FAQs, return empty
+    if (empty($valid_faqs)) {
+        return '';
+    }
+    
     $accordion_id = 'faq-accordion-' . get_the_ID();
     
     ob_start();
@@ -408,10 +419,8 @@ function mia_display_faqs($show_heading = true) {
         <?php endif; ?>
         
         <div class="accordion" id="<?php echo esc_attr($accordion_id); ?>">
-            <?php foreach ($faqs as $index => $faq): ?>
+            <?php foreach ($valid_faqs as $index => $faq): ?>
                 <?php
-                if (empty($faq['question']) || empty($faq['answer'])) continue;
-                
                 $item_id = 'faq-' . get_the_ID() . '-' . $index;
                 $heading_id = 'heading-' . $item_id;
                 $collapse_id = 'collapse-' . $item_id;
