@@ -172,16 +172,26 @@ class Clinic_Schema {
     }
     
     /**
-     * Get clinic address from structured fields
+     * Get clinic address from Google Maps field
      * 
      * @param int $loc_id
      * @return array|null
      */
     private function get_address( $loc_id ) {
-        $street = get_field( 'street_address', $loc_id );
-        $city   = get_field( 'city', $loc_id );
-        $state  = get_field( 'state', $loc_id );
-        $zip    = get_field( 'zip_code', $loc_id );
+        $location_map = get_field( 'location_map', $loc_id );
+        
+        if ( ! $location_map ) {
+            return null;
+        }
+        
+        // Build street address from components
+        $street_number = $location_map['street_number'] ?? '';
+        $street_name = $location_map['street_name'] ?? '';
+        $street = trim( $street_number . ' ' . $street_name );
+        
+        $city = $location_map['city'] ?? '';
+        $state = $location_map['state'] ?? $location_map['state_short'] ?? ''; // Try full state name first, then abbreviation
+        $zip = $location_map['post_code'] ?? '';
         
         // Only create address if we have the minimum required fields
         if ( $street && $city && $state ) {
@@ -199,24 +209,23 @@ class Clinic_Schema {
     }
     
     /**
-     * Get geo coordinates
+     * Get geo coordinates from Google Maps field
      * 
      * @param int $loc_id
      * @return array|null
      */
     private function get_geo_coordinates( $loc_id ) {
-        $lat = get_field( 'latitude', $loc_id );
-        $lng = get_field( 'longitude', $loc_id );
+        $location_map = get_field( 'location_map', $loc_id );
         
-        if ( $lat && $lng ) {
-            return [
-                '@type'     => 'GeoCoordinates',
-                'latitude'  => $lat,
-                'longitude' => $lng
-            ];
+        if ( ! $location_map || empty( $location_map['lat'] ) || empty( $location_map['lng'] ) ) {
+            return null;
         }
         
-        return null;
+        return [
+            '@type'     => 'GeoCoordinates',
+            'latitude'  => (string) $location_map['lat'],
+            'longitude' => (string) $location_map['lng']
+        ];
     }
     
     /**

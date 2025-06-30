@@ -26,7 +26,51 @@ get_header();
     <section class="location-archive-section py-5">
         <div class="container">
             <?php if (have_posts()) : ?>
-                <div class="row g-5">
+                <!-- Mobile List View -->
+                <div class="location-mobile-list d-md-none">
+                    <?php while (have_posts()) : the_post();
+                        // Get location data
+                        $phone_number = get_field('phone_number');
+                        $location_map = get_field('location_map');
+                    ?>
+                        <div class="location-list-item">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="location-info flex-grow-1">
+                                    <h3 class="h5 mb-2">
+                                        <a href="<?php the_permalink(); ?>" class="text-decoration-none">
+                                            <?php echo get_the_title(); ?>
+                                        </a>
+                                    </h3>
+                                    <?php if ($location_map): 
+                                        $city = isset($location_map['city']) ? $location_map['city'] : '';
+                                        $state = isset($location_map['state_short']) ? $location_map['state_short'] : '';
+                                    ?>
+                                        <?php if ($city && $state): ?>
+                                            <p class="text-muted mb-1"><?php echo esc_html($city . ', ' . $state); ?></p>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if ($phone_number): ?>
+                                        <p class="mb-0">
+                                            <a href="tel:<?php echo esc_attr($phone_number); ?>" class="text-primary text-decoration-none">
+                                                <i class="fas fa-phone me-1"></i><?php echo esc_html($phone_number); ?>
+                                            </a>
+                                        </p>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="location-action">
+                                    <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-outline-primary">
+                                        View <i class="fas fa-chevron-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                </div>
+
+                <!-- Desktop Card View -->
+                <div class="row g-5 d-none d-md-flex">
+                    <?php rewind_posts(); ?>
                     <?php while (have_posts()) : the_post();
                         // Get location data
                         $location_address   = get_field('location_address');
@@ -59,18 +103,37 @@ get_header();
                 <?php
                 $location_map = get_field('location_map');
                 if ($location_map):
-                    $street = $location_map['street_number'] . ' ' . $location_map['street_name'];
-                    $city = $location_map['city'];
-                    $state = $location_map['state_short'];
-                    $zip = $location_map['post_code'];
+                    $street = (isset($location_map['street_number']) ? $location_map['street_number'] : '') . ' ' . (isset($location_map['street_name']) ? $location_map['street_name'] : '');
+                    $city = isset($location_map['city']) ? $location_map['city'] : '';
+                    $state = isset($location_map['state_short']) ? $location_map['state_short'] : '';
+                    $zip = isset($location_map['post_code']) ? $location_map['post_code'] : '';
+                    $street = trim($street); // Clean up any extra spaces
                 ?>
+                    <?php if ($street || $city || $state || $zip): ?>
                     <div class="location-detail mb-2">
                         <span>
-                            <?php echo esc_html($street); ?>
-                            <br>
-                            <?php echo esc_html($city . ', ' . $state . ' ' . $zip); ?>
+                            <?php if ($street): ?>
+                                <?php echo esc_html($street); ?>
+                                <br>
+                            <?php endif; ?>
+                            <?php 
+                            $address_line = '';
+                            if ($city) {
+                                $address_line .= $city;
+                            }
+                            if ($state) {
+                                $address_line .= ($city ? ', ' : '') . $state;
+                            }
+                            if ($zip) {
+                                $address_line .= ($city || $state ? ' ' : '') . $zip;
+                            }
+                            if ($address_line):
+                                echo esc_html($address_line);
+                            endif;
+                            ?>
                         </span>
                     </div>
+                    <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if ($phone_number) : ?>

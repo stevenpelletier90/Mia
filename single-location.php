@@ -21,17 +21,25 @@ get_header();
 <?php
                         $location_map = get_field('location_map');
                         if ($location_map):
-                            $street = $location_map['street_number'] . ' ' . $location_map['street_name'];
-                            $city = $location_map['city'];
-                            $state = $location_map['state_short'];
-                            $zip = $location_map['post_code'];
+                            $street = ($location_map['street_number'] ?? '') . ' ' . ($location_map['street_name'] ?? '');
+                            $city = $location_map['city'] ?? '';
+                            $state = $location_map['state_short'] ?? '';
+                            $zip = $location_map['post_code'] ?? '';
                     ?>
+                            <?php if (!empty(trim($street)) || !empty($city) || !empty($state) || !empty($zip)): ?>
                             <div class="location-detail mb-4">
                                 <div class="d-flex flex-column">
-                                    <span><?php echo esc_html($street); ?></span>
-                                    <span><?php echo esc_html($city . ', ' . $state . ' ' . $zip); ?></span>
+                                    <?php if (!empty(trim($street))): ?>
+                                        <span><?php echo esc_html(trim($street)); ?></span>
+                                    <?php endif; ?>
+                                    <?php 
+                                    $address_line2 = trim($city . ', ' . $state . ' ' . $zip, ', ');
+                                    if (!empty($address_line2)): ?>
+                                        <span><?php echo esc_html($address_line2); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
+                            <?php endif; ?>
                         <?php endif; ?>
 
                         <?php $phone_number = get_field('phone_number'); ?>

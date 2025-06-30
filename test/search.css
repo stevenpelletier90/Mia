@@ -1,0 +1,45 @@
+.locationSec {
+  background: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  padding: 35px 0;
+  z-index: 1;
+}
+
+.quick-nav-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.quick-nav-container .quick-nav-item {
+  width: 25%;
+  padding: 5px 10px;
+}
+
+.quick-nav-container .quick-nav-item a {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+@media (max-width: 1199px) {
+  .locationSec {
+    background: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    padding: 25px 0;
+    z-index: 1;
+    margin-top: 45px;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 540px) {
+  .quick-nav-container .quick-nav-item {
+    width: 25%;
+  }
+}
+
+@media (max-width: 539px) {
+  .quick-nav-container .quick-nav-item {
+    width: 50%;
+  }
+}

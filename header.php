@@ -81,6 +81,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo esc_url(home_url('/financing/')); ?>">Financing</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo esc_url(home_url('/specials/')); ?>">Specials</a>
+                </li>
                 <!-- Patient Portal Dropdown -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="patient-portal-dropdown" aria-describedby="patient-portal-menu">

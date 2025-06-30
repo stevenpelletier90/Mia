@@ -25,6 +25,15 @@
 </div>
 
 <style>
+  :root {
+    --search-primary: var(--color-primary, #1b1b1b);
+    --search-accent: var(--color-gold, #c8b273);
+    --search-text-light: #ffffff;
+    --search-text-muted: rgba(255, 255, 255, 0.8);
+    --search-border: #e0e0e0;
+    --search-shadow: rgba(0, 0, 0, 0.15);
+  }
+
   .location-search-container {
     max-width: 600px;
     margin: 2rem auto;
@@ -35,8 +44,9 @@
   .location-search-container h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: #1b1b1b;
+    color: var(--search-primary);
     font-weight: 600;
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
   }
 
   .search-input-wrapper {
@@ -48,15 +58,16 @@
     width: 100%;
     padding: 1rem 3rem 1rem 1.5rem;
     font-size: 1.1rem;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--search-border);
     border-radius: 50px;
     outline: none;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    font-family: var(--font-body, 'Inter', sans-serif);
   }
 
   #location-search:focus {
-    border-color: #c8b273;
+    border-color: var(--search-accent);
     box-shadow: 0 0 0 3px rgba(200, 178, 115, 0.1);
   }
 
@@ -81,7 +92,7 @@
     width: 20px;
     height: 20px;
     border: 2px solid #e0e0e0;
-    border-top: 2px solid #c8b273;
+    border-top: 2px solid var(--search-accent);
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -161,21 +172,29 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: var(--search-primary);
+    border: 1px solid var(--search-border);
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 1000;
+    box-shadow: 0 4px 20px var(--search-shadow);
+    z-index: var(--z-index-dropdown, 1000);
     display: none;
+  }
+
+  /* Mobile dropdown - positioned statically underneath search */
+  @media (max-width: 768px) {
+    .search-dropdown {
+      position: static;
+      margin-top: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px var(--search-shadow);
+    }
   }
 
   .dropdown-item {
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    color: var(--search-text-light);
   }
 
   .dropdown-item:last-child {
@@ -184,51 +203,55 @@
 
   .dropdown-item:hover,
   .dropdown-item.highlighted {
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
-  .dropdown-item h4 {
+  /* Override global dropdown-item hover styles - remove text decoration */
+  .location-search-container #search-dropdown .dropdown-item:is(:hover, :focus) {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--search-text-light);
+    text-decoration: none !important;
+  }
+
+
+  .location-search-container #search-dropdown .dropdown-item h4 {
     margin: 0 0 0.25rem 0;
-    color: #1b1b1b;
+    color: var(--search-text-light);
     font-size: 1rem;
     font-weight: 600;
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
   }
 
-  .dropdown-item .location-address {
-    color: #666;
+  .location-search-container #search-dropdown .dropdown-item .location-address {
+    color: var(--search-text-muted);
     font-size: 0.9rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-body, 'Inter', sans-serif);
   }
 
-  .dropdown-item .location-distance {
-    background-color: #1b1b1b;
-    color: #c8b273;
+  .location-search-container #search-dropdown .dropdown-item .location-distance {
+    background-color: var(--search-accent);
+    color: var(--search-primary);
     font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
     display: inline-block;
-    margin-top: 0.25rem;
+    margin: 0.25rem 0.5rem 0.25rem 0;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    text-decoration: none !important;
   }
 
-  .dropdown-item .location-phone {
-    background-color: #1b1b1b;
-    color: #c8b273;
-    font-size: 0.85rem;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    display: inline-block;
-    margin-top: 0.25rem;
-  }
+
 
   .no-results {
     padding: 1.5rem;
     text-align: center;
-    color: #666;
+    color: var(--search-text-muted);
     font-style: italic;
+    font-family: var(--font-body, 'Inter', sans-serif);
   }
+
 
   /* Google Places Autocomplete styling */
   .pac-container {
@@ -275,11 +298,49 @@
       font-size: 1rem;
       padding: 0.875rem 2.5rem 0.875rem 1.25rem;
     }
+
+    /* Mobile-specific adjustments */
+    .dropdown-item {
+      padding: 1rem;
+    }
+
+    .dropdown-item h4 {
+      font-size: 1rem;
+    }
+
+    .dropdown-item .location-address {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .dropdown-item .location-distance {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.6rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dropdown-item {
+      padding: 0.875rem;
+    }
+
+    .dropdown-item h4 {
+      font-size: 0.95rem;
+    }
+
+    .dropdown-item .location-address {
+      font-size: 0.85rem;
+    }
+
+    .dropdown-item .location-distance {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+    }
   }
 </style>
 
 <!-- Load Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <!-- Load Google Maps API with Places library -->
 <script
@@ -492,14 +553,14 @@
     if (hasExactMatches) {
       // Show exact matches first, then add closest alternatives
       const exactResults = exactMatches.map((loc) => ({ ...loc, isExactMatch: true }));
-      
+
       // Get closest alternatives (excluding exact matches)
       const alternatives = locations
-        .filter((loc) => loc.coordinates && loc.distance !== null && !exactMatches.some(exact => exact.id === loc.id))
+        .filter((loc) => loc.coordinates && loc.distance !== null && !exactMatches.some((exact) => exact.id === loc.id))
         .sort((a, b) => (a.distance || Infinity) - (b.distance || Infinity))
         .slice(0, 2) // Show next 2 closest
         .map((loc) => ({ ...loc, isExactMatch: false }));
-      
+
       resultsToShow = [...exactResults, ...alternatives];
     } else {
       // No exact matches - show closest 3 locations regardless of distance
@@ -564,10 +625,11 @@
     let headerHtml = '';
     if (searchType === 'exact') {
       headerHtml = `
-        <div style="padding: 0.75rem 1.5rem; background: #f0f8ff; border-bottom: 1px solid #e0e0e0; font-size: 0.85rem; color: #666;">
-          <span style="background-color: #1b1b1b; color: #c8b273; padding: 0.25rem 0.5rem; border-radius: 4px;">★</span> <strong>${escapeHtml(
-            capitalizeFirstLetter(searchQuery)
-          )}</strong> + closest alternatives
+        <div style="padding: 0.75rem 1.5rem; background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: var(--search-text-muted); font-family: var(--font-body, 'Inter', sans-serif);">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="background-color: var(--search-accent); color: var(--search-primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; flex-shrink: 0;"><i class="fas fa-star" style="font-size: 0.7rem;"></i></span>
+            <span><strong style="color: var(--search-text-light);">${escapeHtml(capitalizeFirstLetter(searchQuery))}</strong> + closest alternatives</span>
+          </div>
         </div>
       `;
     } else {
@@ -576,8 +638,11 @@
       const distanceNote = closestDistance > 100 ? ' (nearest options)' : '';
 
       headerHtml = `
-        <div style="padding: 0.75rem 1.5rem; background: #f8f9fa; border-bottom: 1px solid #e0e0e0; font-size: 0.85rem; color: #666;">
-          Closest locations to <strong>${escapeHtml(capitalizeFirstLetter(searchQuery))}</strong>${distanceNote}
+        <div style="padding: 0.75rem 1.5rem; background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: var(--search-text-muted); font-family: var(--font-body, 'Inter', sans-serif);">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-map-marker-alt" style="color: var(--search-accent); flex-shrink: 0;"></i>
+            <span>Closest locations to <strong style="color: var(--search-text-light);">${escapeHtml(capitalizeFirstLetter(searchQuery))}</strong>${distanceNote}</span>
+          </div>
         </div>
       `;
     }
@@ -585,12 +650,12 @@
     const html = results
       .map((location) => {
         const address = formatAddress(location.acf);
-        const phone = location.acf.phone_number || '';
 
-        // Show exact match indicator only
+        // Show exact match indicator - smaller on mobile
         let matchLabel = '';
         if (location.isExactMatch) {
-          matchLabel = '<span style="background-color: #1b1b1b; color: #c8b273; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; border-radius: 4px;">★ Exact Match</span>';
+          matchLabel =
+            '<span style="background-color: var(--search-accent); color: var(--search-primary); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 12px; display: inline-flex; align-items: center; gap: 0.2rem; white-space: nowrap;"><i class="fas fa-star" style="font-size: 0.6rem;"></i>Match</span>';
         }
 
         // Format distance text consistently
@@ -602,21 +667,21 @@
 
         return `
           <div class="dropdown-item" role="option" data-location-id="${location.id}" aria-selected="false">
-            <div style="display: flex; justify-content: space-between; align-items: start;">
-              <h4>${escapeHtml(location.title)}</h4>
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: ${matchLabel ? '0.25rem' : '0'};">
+              <h4 style="margin-bottom: 0;">${escapeHtml(location.title)}</h4>
               ${matchLabel}
             </div>
-            ${address ? `<div class="location-address">${escapeHtml(address)}</div>` : ''}
+            ${address ? `<div class="location-address">${address}</div>` : ''}
             ${distanceHtml}
-            ${phone ? `<div class="location-phone">${escapeHtml(formatPhone(phone))}</div>` : ''}
           </div>
         `;
       })
       .join('');
 
+    // Show results in dropdown for all devices
     searchDropdown.innerHTML = headerHtml + html;
     showDropdown();
-
+    
     // Add click listeners
     const items = searchDropdown.querySelectorAll('.dropdown-item');
     items.forEach((item, index) => {
@@ -629,20 +694,29 @@
     window.location.href = location.url;
   }
 
-  // Format address from Google Map field
+  // Format address from Google Map field - two lines
   function formatAddress(acf) {
     const locationMap = acf.location_map;
     if (!locationMap) return '';
 
-    const parts = [];
+    const addressParts = [];
+    
+    // First line: street address
     if (locationMap.street_number && locationMap.street_name) {
-      parts.push(locationMap.street_number + ' ' + locationMap.street_name);
+      addressParts.push(`<div>${locationMap.street_number} ${locationMap.street_name}</div>`);
     }
-    if (locationMap.city) parts.push(locationMap.city);
-    if (locationMap.state_short) parts.push(locationMap.state_short);
-    if (locationMap.post_code) parts.push(locationMap.post_code);
+    
+    // Second line: city, state, zip
+    const cityStateZip = [];
+    if (locationMap.city) cityStateZip.push(locationMap.city);
+    if (locationMap.state_short) cityStateZip.push(locationMap.state_short);
+    if (locationMap.post_code) cityStateZip.push(locationMap.post_code);
+    
+    if (cityStateZip.length > 0) {
+      addressParts.push(`<div>${cityStateZip.join(', ')}</div>`);
+    }
 
-    return parts.join(', ');
+    return addressParts.join('');
   }
 
   // Format phone number
@@ -699,7 +773,7 @@
     loadingSpinner.style.display = 'block';
     searchIcon.style.display = 'none';
 
-    // Show loading skeleton in dropdown
+    // Show loading skeleton in dropdown for all devices
     searchDropdown.innerHTML = createLoadingSkeleton();
     searchDropdown.querySelector('.loading-skeleton').style.display = 'block';
     showDropdown();
@@ -722,6 +796,7 @@
     // Update ARIA attributes for screen readers
     searchInput.setAttribute('aria-expanded', 'false');
   }
+
 
   // Keyboard navigation for accessibility
   function handleKeyNavigation(e) {
@@ -765,6 +840,13 @@
   // Hide dropdown when clicking outside
   document.addEventListener('click', function (e) {
     if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+      hideDropdown();
+    }
+  });
+
+  // Handle escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
       hideDropdown();
     }
   });
