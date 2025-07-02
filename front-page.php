@@ -215,6 +215,38 @@ include 'hero-section.php';
 <!-- Section Divider -->
 <div class="section-divider my-5"></div>
 
+<!-- Video Background Section -->
+<section class="video-background-section position-relative overflow-hidden">
+  <!-- Video Container with 16:9 aspect ratio -->
+  <div class="video-container ratio ratio-16x9">
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline
+      class="video-bg">
+      <source src="/wp-content/uploads/2025/07/test-bg-1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  
+  <!-- Content Overlay -->
+  <div class="video-content-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="display-3 fw-bold text-white mb-4">Experience Excellence</h2>
+          <p class="lead text-white mb-4">Join thousands of satisfied patients who have transformed their lives at Mia Aesthetics</p>
+          <a href="/consultation/" class="btn btn-lg btn-light px-5 py-3">Book Your Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Divider -->
+<div class="section-divider my-5"></div>
+
 <!-- Procedures Tabbed Section -->
 <section class="procedures-section py-5">
   <div class="container">

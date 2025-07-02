@@ -4,7 +4,13 @@
  * 
  * Clean implementation with proper aspect ratios:
  * - Carousel: 1920x1080 (16:9)
- * - Boxes: 1600x900 (16:9) 
+ * - Boxes: 1600x900 (16:9)
+ * 
+ * Uses ACF custom fields:
+ * - banner_1: First carousel slide image (image array)
+ * - banner_2: Second carousel slide image (image array) 
+ * - ba_image: Before & After box image (image array)
+ * - financing_image: Financing box image (image array)
  */
 ?>
 
@@ -23,36 +29,36 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <?php 
-            $slide1_data = mia_get_responsive_image_data('image-homepage16-9.jpg', '2025/04');
-            if ($slide1_data): ?>
-            <img src="<?php echo esc_url($slide1_data['src']); ?>" 
-                 srcset="<?php echo esc_attr($slide1_data['srcset']); ?>"
+            $banner_1 = get_field('banner_1');
+            if ($banner_1 && !empty($banner_1['url'])): ?>
+            <img src="<?php echo esc_url($banner_1['url']); ?>" 
+                 srcset="<?php echo esc_attr(wp_get_attachment_image_srcset($banner_1['ID'], 'full')); ?>"
                  sizes="(max-width: 480px) 100vw, (max-width: 767px) 100vw, 66vw"
-                 width="1920"
-                 height="1080"
+                 width="<?php echo esc_attr($banner_1['width']); ?>"
+                 height="<?php echo esc_attr($banner_1['height']); ?>"
                  class="d-block w-100" 
-                 alt="Mia Aesthetics homepage banner showcasing plastic surgery procedures" 
+                 alt="<?php echo esc_attr($banner_1['alt']); ?>" 
                  fetchpriority="high">
             <?php else: ?>
-            <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 1080px;">
+            <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center">
               <span class="text-white">Slide 1 Image Not Found</span>
             </div>
             <?php endif; ?>
           </div>
           <div class="carousel-item">
             <?php 
-            $slide2_data = mia_get_responsive_image_data('non-surgical-home-banner.jpg', '2025/04');
-            if ($slide2_data): ?>
-            <img src="<?php echo esc_url($slide2_data['src']); ?>"
-                 srcset="<?php echo esc_attr($slide2_data['srcset']); ?>"
+            $banner_2 = get_field('banner_2');
+            if ($banner_2 && !empty($banner_2['url'])): ?>
+            <img src="<?php echo esc_url($banner_2['url']); ?>"
+                 srcset="<?php echo esc_attr(wp_get_attachment_image_srcset($banner_2['ID'], 'full')); ?>"
                  sizes="(max-width: 480px) 100vw, (max-width: 767px) 100vw, 66vw"
-                 width="1920"
-                 height="1080"
+                 width="<?php echo esc_attr($banner_2['width']); ?>"
+                 height="<?php echo esc_attr($banner_2['height']); ?>"
                  class="d-block w-100" 
-                 alt="Non-surgical treatments and aesthetic procedures at Mia Aesthetics"
+                 alt="<?php echo esc_attr($banner_2['alt']); ?>"
                  loading="lazy">
             <?php else: ?>
-            <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 1080px;">
+            <div class="carousel-placeholder bg-secondary d-flex align-items-center justify-content-center">
               <span class="text-white">Slide 2 Image Not Found</span>
             </div>
             <?php endif; ?>
@@ -66,18 +72,18 @@
       <!-- Before & After Box -->
       <div class="hero-box hero-box-top">
         <?php 
-        $before_after_data = mia_get_responsive_image_data('before-after-banner.jpg', '2025/04');
-        if ($before_after_data): ?>
-        <img src="<?php echo esc_url($before_after_data['src']); ?>"
-             srcset="<?php echo esc_attr($before_after_data['srcset']); ?>"
+        $ba_image = get_field('ba_image');
+        if ($ba_image && !empty($ba_image['url'])): ?>
+        <img src="<?php echo esc_url($ba_image['url']); ?>"
+             srcset="<?php echo esc_attr(wp_get_attachment_image_srcset($ba_image['ID'], 'full')); ?>"
              sizes="(max-width: 480px) 50vw, (max-width: 767px) 50vw, 33vw"
-             width="1600"
-             height="900"
+             width="<?php echo esc_attr($ba_image['width']); ?>"
+             height="<?php echo esc_attr($ba_image['height']); ?>"
              class="hero-box-image" 
-             alt="Before & After"
+             alt="<?php echo esc_attr($ba_image['alt']); ?>"
              loading="lazy">
         <?php else: ?>
-        <div class="hero-box-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 900px;">
+        <div class="hero-box-placeholder bg-secondary d-flex align-items-center justify-content-center">
           <span class="text-white">Before & After Image Not Found</span>
         </div>
         <?php endif; ?>
@@ -92,18 +98,18 @@
       <!-- Financing Box -->
       <div class="hero-box hero-box-bottom">
         <?php 
-        $financing_data = mia_get_responsive_image_data('financing-home-banner.jpg', '2025/04');
-        if ($financing_data): ?>
-        <img src="<?php echo esc_url($financing_data['src']); ?>"
-             srcset="<?php echo esc_attr($financing_data['srcset']); ?>"
+        $financing_image = get_field('financing_image');
+        if ($financing_image && !empty($financing_image['url'])): ?>
+        <img src="<?php echo esc_url($financing_image['url']); ?>"
+             srcset="<?php echo esc_attr(wp_get_attachment_image_srcset($financing_image['ID'], 'full')); ?>"
              sizes="(max-width: 480px) 50vw, (max-width: 767px) 50vw, 33vw"
-             width="1600"
-             height="900"
+             width="<?php echo esc_attr($financing_image['width']); ?>"
+             height="<?php echo esc_attr($financing_image['height']); ?>"
              class="hero-box-image" 
-             alt="Financing"
+             alt="<?php echo esc_attr($financing_image['alt']); ?>"
              loading="lazy">
         <?php else: ?>
-        <div class="hero-box-placeholder bg-secondary d-flex align-items-center justify-content-center" style="height: 900px;">
+        <div class="hero-box-placeholder bg-secondary d-flex align-items-center justify-content-center">
           <span class="text-white">Financing Image Not Found</span>
         </div>
         <?php endif; ?>
