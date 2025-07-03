@@ -1,0 +1,232 @@
+<style>
+  /* J-Plasma Procedure Styles */
+  .procedure-intro-section h2 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .procedure-intro-section .lead {
+    color: var(--color-primary);
+    opacity: 0.7;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .procedure-video-wrapper {
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .procedure-video-wrapper iframe {
+    border: 0;
+  }
+
+  .procedure-how-section h2 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .procedure-highlight-box {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #faf8f3 0%, #f5f0e6 100%);
+    border: 1px solid #e9ecef;
+    border-left: 4px solid var(--color-gold);
+    position: relative;
+  }
+  
+  .procedure-highlight-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(200, 178, 115, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .procedure-highlight-box strong {
+    color: var(--color-primary);
+  }
+
+  .procedure-areas-section {
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+    border: 1px solid #e0e6ed;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .procedure-areas-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(200, 178, 115, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .procedure-areas-section h2 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .procedure-areas-section .lead {
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    opacity: 0.7;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .treatment-areas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .treatment-area-item {
+    background: #fff;
+    border: 1px solid #d6dbdf;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--color-primary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .treatment-area-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(200, 178, 115, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .treatment-area-item:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+  }
+
+  .treatment-area-item:hover::before {
+    left: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .procedure-areas-section {
+      padding: 1.5rem 1rem;
+    }
+    
+    .procedure-highlight-box {
+      padding: 1rem;
+    }
+    
+    .treatment-areas-list {
+      gap: 0.5rem;
+    }
+    
+    .treatment-area-item {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<!-- J-Plasma Procedure Content Layout -->
+<!-- This content can be inserted into the WordPress editor or ACF content field -->
+
+<div class="container py-5">
+  <!-- Introduction Section with Video -->
+  <section class="pb-4">
+    <div class="row align-items-start g-4 g-lg-5">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <h2 class="mb-3">What is J-Plasma?</h2>
+        <p class="lead mb-3">Advanced skin tightening technology for dramatic results</p>
+        <p>
+          Lovingly referred to as the "flamethrower" by some doctors, J-Plasma is a powerful tool that plastic surgeons
+          can use to tighten the skin. Simple yet fascinating, J-plasma procedures start with the placement of a small
+          device just under the skin. A specific radio frequency (RF) is then applied to the device to create a precise
+          beam of heat while helium gas simultaneously cools the area to prevent burns. Together, the gas and RF create
+          a stream of energy known as J-Plasma.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="ratio ratio-16x9 procedure-video-wrapper">
+          <iframe src="https://www.youtube.com/embed/kHHlBCxmdfU" title="J-Plasma Procedure Explained" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-4">
+    <div class="row">
+      <div class="col-lg-10">
+        <h2 class="mb-4">How Does J-Plasma Work?</h2>
+        <p>
+          It's a known fact that heat causes some substances and materials to shrink, which is why many of us dry our
+          favorite blue jeans on low heat rather than high. It turns out that your skin is one of the things that can
+          shrink when exposed to heat. It's normally impossible, however, to apply enough heat to your skin to tighten
+          it without causing burns and damage.
+        </p>
+
+        <div class="procedure-highlight-box mt-4">
+          <p class="mb-0">
+            <strong>J-Plasma solves this problem</strong> by combining the heat of RF with helium gas to create a
+            cooling effect. This allows the RF to make the skin contract while the helium gas allows the heat to quickly
+            dissipate before it reaches the surface of the skin and causes damage. The heat contracts collagen
+            instantly, pulling the skin tighter for instant and, in many cases, dramatic results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatment Areas Section -->
+  <section class="procedure-areas-section my-5">
+    <h2 class="mb-3">What Parts of the Body Can Be Treated?</h2>
+    <p class="lead mb-4">
+      J-Plasma is incredibly versatile and can be performed almost anywhere. You may choose to have your surgeon sculpt
+      your:
+    </p>
+
+    <div class="treatment-areas-list">
+      <div class="treatment-area-item">Abdomen</div>
+      <div class="treatment-area-item">Bra Rolls</div>
+      <div class="treatment-area-item">Arms</div>
+      <div class="treatment-area-item">Inner Thighs</div>
+      <div class="treatment-area-item">Chin</div>
+      <div class="treatment-area-item">Chest (Men)</div>
+    </div>
+  </section>
+</div>

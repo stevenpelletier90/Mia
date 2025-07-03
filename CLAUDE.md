@@ -6,6 +6,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **MIA Aesthetics v3** is a custom WordPress theme for a multi-location medical aesthetics practice, hosted on WP Engine. This is a professional medical aesthetics website with performance optimization, security focus, and responsive design.
 
+**Current Version**: v3.0
+
+### Design Philosophy
+The theme is built on four core principles:
+1. **Lightweight Architecture** - "Every byte matters" - Focus on minimal, efficient code
+2. **Security-First Approach** - "Fort Knox for websites" - Enterprise-grade security considerations
+3. **Mobile-First Design** - "Beautiful on every screen" - Responsive design priority
+4. **Performance Obsessed** - "Speed is a feature" - Optimized for fast load times
+
+### Performance Targets
+- **Load Time**: < 3 seconds
+- **Core Web Vitals**: 90+ score
+- **Mobile Speed**: 95+ score
+- **Security Score**: A+ rating
+
 ### Practice Structure
 - **Multi-location practice** with locations across the country
 - Each location has one or multiple surgeons
@@ -106,6 +121,89 @@ The theme uses a sophisticated asset system in `inc/enqueue.php`:
 - Gravity Forms manages contact/consultation forms
 - Custom post types for medical procedures and locations
 - JSON data files for complex galleries and datasets
+
+## CSS Architecture
+
+### CSS Organization & Loading Strategy
+The theme implements a modular CSS architecture with performance optimization:
+
+#### File Structure
+```
+/assets/css/
+├── base.css              # Core styles, CSS variables, typography, buttons
+├── fonts.css             # @font-face declarations for Inter & Montserrat
+├── header.css            # Site header and navigation styles
+├── footer.css            # Site footer styles
+├── front-page.css        # Homepage-specific styles
+├── hero-section.css      # Modular hero section component
+├── page-*.css            # Template-specific styles
+├── single-*.css          # Single post type styles
+├── archive-*.css         # Archive page styles
+└── [template-name].css   # Auto-loaded based on template
+```
+
+#### CSS Custom Properties (CSS Variables)
+Defined in `base.css`, providing consistent theming:
+- **Colors**: `--color-primary: #1b1b1b`, `--color-gold: #c8b273`
+- **Typography**: `--font-heading: 'Montserrat'`, `--font-body: 'Inter'`
+- **Layout**: `--navbar-height: 65px`
+- **Z-Index System**: Managed hierarchy from `--z-index-dropdown: 1000` to `--z-index-header: 9999`
+- **Component Variables**: Button padding, transitions, footer colors
+
+#### Loading Strategy
+1. **Base Styles**: Always loaded in order: `base.css` → `header.css` → `footer.css`
+2. **Template-Specific**: Conditionally loaded based on active template (inc/enqueue.php)
+3. **Cache Busting**: Uses `filemtime()` for version numbers
+4. **Performance**: No build process - optimized for HTTP/2 parallel loading
+
+### Component Styling Patterns
+
+#### Button System (`.mia-button`)
+Data-attribute driven variants:
+- `data-variant`: gold, gold-outline, hero, white, black
+- `data-size`: sm, lg (default: medium)
+- Consistent hover states with transitions
+- Accessibility-focused with proper contrast ratios
+
+#### Responsive Design
+- Mobile-first approach using Bootstrap 5 grid
+- Custom breakpoints for component adjustments
+- Fluid typography using `clamp()` for scaling
+- Container queries for component-level responsiveness
+
+#### Hero Section Pattern
+- Modular component in `hero-section.css`
+- 16:9 aspect ratio enforcement
+- Carousel + sidebar box layout
+- Responsive stacking on mobile
+
+### CSS Best Practices
+1. **BEM-inspired naming**: `.section-name`, `.section-name__element`
+2. **Utility classes**: Following Bootstrap conventions
+3. **Scoped styles**: Template-specific styles prefixed appropriately
+4. **Performance optimizations**:
+   - CSS custom properties for runtime theming
+   - Minimal specificity chains
+   - GPU-accelerated transforms for animations
+   - Critical CSS considerations documented inline
+
+### Typography System
+- **Headings**: Montserrat, 700 weight, responsive sizing with `calc()`
+- **Body**: Inter, 400 weight, optimized for readability
+- **Font Loading**: Self-hosted in `/assets/fonts/` for performance
+- **Fluid Typography**: Implemented via `clamp()` and viewport units
+
+### Color System
+- Primary brand colors defined as CSS variables
+- RGBA variations for opacity states
+- Accessibility-compliant contrast ratios
+- Consistent hover/focus state transformations
+
+### Form Styling
+- Gravity Forms integration with custom overrides
+- Consistent input/button styling across forms
+- Validation state styles
+- Mobile-optimized touch targets
 
 ## Schema.org & SEO
 ### Medical Clinic Schema

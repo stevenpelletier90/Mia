@@ -1,0 +1,181 @@
+<style>
+  /* hero headline */
+  .display-hero {
+    font-size: clamp(2.6rem, 7vw + 1rem, 4.6rem);
+    line-height: 1.05;
+  }
+  /* big bold section titles */
+  .section-heading {
+    font-size: clamp(2.2rem, 5vw + 0.5rem, 3.2rem);
+    font-weight: 600;
+    color: #fff;
+  }
+  .lead-lg {
+    font-size: clamp(1.25rem, 1.4vw + 1rem, 1.6rem);
+    font-weight: 500;
+  }
+
+  /* ----------  Hero ---------- */
+  .hero {
+    min-height: 65vh; /* shorter hero */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 4px solid var(--brand-accent); /* accent edge */
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    /* higher-contrast split-tone gradient */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.75) 100%);
+    z-index: -1;
+  }
+
+  /* ----------  Utilities ---------- */
+  .object-fit-cover {
+    object-fit: cover;
+  }
+
+  /* accent top border helper */
+  .accent-border-top {
+    border-top: 3px solid var(--brand-accent);
+  }
+</style>
+
+<!-- ========== Hero ========== -->
+<section class="hero text-white">
+  <img
+    src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/02/thigh-lift.jpg"
+    alt="Thigh lift consultation at Mia Aesthetics"
+  />
+  <span class="hero-overlay"></span>
+
+  <div class="container">
+    <h1 class="display-hero fw-bold mb-3">What Is the Skinny Shot?</h1>
+    <p class="lead fs-3 mb-1">Embrace a sleeker silhouette</p>
+    <p class="small fst-italic mb-4">*While Supplies Last</p>
+    <a href="https://shop.miaaesthetics.com/product-category/skinny-shot/" class="btn btn-brand btn-lg" role="button">
+      Purchase Now
+      <i class="fa-solid fa-cart-shopping ms-2"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ========== Centered Intro ========== -->
+<section id="learn-more" class="py-5 accent-border-top">
+  <div class="container">
+    <div class="mx-auto text-center" style="max-width: 60rem">
+      <h2 class="section-heading mb-4">The Skinny Shot at Mia Aesthetics</h2>
+      <p class="lead-lg">
+        At Mia Aesthetics, we believe in transparency when it comes to your treatments. Our Skinny Shots contain a
+        powerful medication paired with pyridoxine—commonly known as <strong>vitamin B6</strong>. B-vitamins act as
+        lipotropes, helping your liver reduce fat production and storage. Additionally, vitamin B can provide an energy
+        boost. Keep in mind that while the Skinny Shot is a helpful tool for weight loss, it works best when combined
+        with a balanced diet and regular exercise routine.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Two-Column Section ========== -->
+<section class="py-5 bg-white text-dark accent-border-top">
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+      <div class="col-lg-6">
+        <img
+          src="https://miaprod.wpenginepowered.com/wp-content/uploads/2025/06/weight-loss-banner.jpg"
+          class="img-fluid rounded-4 shadow-sm object-fit-cover"
+          alt="Illustration of Skinny Shot components"
+        />
+      </div>
+      <div class="col-lg-6">
+        <h3 class="section-heading mb-3">Common Skinny Shot Components</h3>
+        <p class="lead-lg">
+          Different doctors refer to different injections as “skinny shots,” and there is no industry standard. A Skinny
+          Shot could be anything from a vitamin injection to a prescription medication. Some doctors even claim to have
+          their own special cocktail.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Articles Section ========== -->
+<section class="py-5 accent-border-top" style="background: linear-gradient(180deg, #000 0%, #1b1b1b 100%)">
+  <div class="container">
+    <div class="mx-auto" style="max-width: 60rem; color: #ffffff">
+      <h3 class="section-heading mb-3">The Proprietary Mix</h3>
+      <p class="lead-lg mb-5">
+        Weight loss is big business, which makes some practitioners reluctant to divulge their “secret” formulas.
+        <strong>Avoid them.</strong> You deserve to know exactly what’s being injected into your body.
+      </p>
+
+      <h3 class="section-heading mb-3">Vitamin B12</h3>
+      <p class="lead-lg mb-5">
+        Vitamin B12 injections help treat deficiency and reduce fatigue—but only if you’re actually deficient. They are
+        not stand-alone weight-loss solutions.
+      </p>
+
+      <h3 class="section-heading mb-3">Lipotropic Injections (Lipo-C)</h3>
+      <p class="lead-lg mb-0">
+        Lipotropes encourage the liver to metabolize fat. Research is still inconclusive on safety and efficacy, and
+        ingredient mixes vary by clinic.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Split Section • Know WHAT ========== -->
+<section class="py-0 accent-border-top">
+  <div class="row g-0">
+    <div class="col-12 col-md-6">
+      <img
+        src="https://placehold.co/1200x800?text=Know+What+Image"
+        class="w-100 h-100 object-fit-cover"
+        alt="Know what is in a Skinny Shot"
+      />
+    </div>
+    <div class="col-12 col-md-6 d-flex align-items-center p-5" style="background: #1b1b1b">
+      <div>
+        <h3 class="section-heading mb-3">Know What You’re Getting</h3>
+        <p class="lead-lg">
+          Always demand full ingredient transparency before injection. Talk with your doctor to confirm each component
+          is safe for you.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Split Section • Know WHO ========== -->
+<section class="py-0 accent-border-top">
+  <div class="row g-0">
+    <div class="col-12 col-md-6 d-flex align-items-center p-5 order-md-1" style="background: #1b1b1b">
+      <div>
+        <h3 class="section-heading mb-3">Know Who Is Giving It to You</h3>
+        <p class="lead-lg">
+          Ensure your Skinny Shot is administered by a qualified medical professional—doctor, licensed dietician, or
+          registered nurse—whose credentials you can verify.
+        </p>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 order-md-2">
+      <img
+        src="https://placehold.co/1200x800?text=Know+Who+Image"
+        class="w-100 h-100 object-fit-cover"
+        alt="Know who is administering the shot"
+      />
+    </div>
+  </div>
+</section>

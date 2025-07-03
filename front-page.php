@@ -148,27 +148,19 @@ include 'hero-section.php';
 
 <!-- How Payments Work Section -->
 <section class="how-payments-work-section py-5">
-  <div class="container-fluid">
-    <div class="row align-items-stretch">
-      <!-- Left Column: Single Image -->
-      <div class="col-xl-6 d-flex">
-        <div class="payments-image-container flex-fill">
-          <img src="/wp-content/uploads/2025/05/mia-staff-miami.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Mia Staff Miami">
+  <div class="container">
+    <div class="row justify-content-center">
+      <!-- Centered Content -->
+      <div class="col-xl-10 col-lg-11">
+        <div class="text-center mb-4">
+          <h2 class="how-payments-heading mb-2 fs-1 fw-bold">How Payments Work</h2>
+          <h3 class="how-payments-subheading mb-4 fs-4">at Mia Aesthetics</h3>
         </div>
-      </div>
-      
-      <!-- Right Column: Content -->
-      <div class="col-xl-6 d-flex align-items-center">
-        <div class="payments-content w-100 ps-lg-5">
-          <div class="mb-5">
-            <h2 class="section-heading mb-2 fs-1">How Payments Work</h2>
-            <h3 class="section-subheading mb-4 fs-4">at Mia Aesthetics</h3>
-          </div>
-          <div class="row row-cols-1 row-cols-sm-2 g-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
-              <div class="payment-step-card h-100">
-                <h4 class="mb-3">1. Research Surgeons</h4>
-                <ul class="mb-0">
+              <div class="payment-step-card">
+                <h4 class="mb-3 fw-semibold">1. Research Surgeons</h4>
+                <ul class="mb-0 ps-3">
                   <li>Choose from over 25 experienced surgeons</li>
                   <li>Review surgeon bios on our website</li>
                   <li>Browse our before and after photos</li>
@@ -176,9 +168,9 @@ include 'hero-section.php';
               </div>
             </div>
             <div class="col">
-              <div class="payment-step-card h-100">
-                <h4 class="mb-3">2. Check Specials</h4>
-                <ul class="mb-0">
+              <div class="payment-step-card">
+                <h4 class="mb-3 fw-semibold">2. Check Specials</h4>
+                <ul class="mb-0 ps-3">
                   <li>Contact a sales coordinator for specials</li>
                   <li>New surgeons often offer reduced rates</li>
                   <li>Keep an eye on seasonal specials</li>
@@ -186,9 +178,9 @@ include 'hero-section.php';
               </div>
             </div>
             <div class="col">
-              <div class="payment-step-card h-100">
-                <h4 class="mb-3">3. Lock in Your Price</h4>
-                <ul class="mb-0">
+              <div class="payment-step-card">
+                <h4 class="mb-3 fw-semibold">3. Lock in Your Price</h4>
+                <ul class="mb-0 ps-3">
                   <li>Call us to secure a special price</li>
                   <li>Booking fee required to lock in price</li>
                   <li>Price valid for 12 months</li>
@@ -196,9 +188,9 @@ include 'hero-section.php';
               </div>
             </div>
             <div class="col">
-              <div class="payment-step-card h-100">
-                <h4 class="mb-3">4. Complete Payments</h4>
-                <ul class="mb-0">
+              <div class="payment-step-card">
+                <h4 class="mb-3 fw-semibold">4. Complete Payments</h4>
+                <ul class="mb-0 ps-3">
                   <li>Pay at your own pace</li>
                   <li>Contact your patient concierge</li>
                   <li>Ask for contract extensions if needed</li>
@@ -211,9 +203,6 @@ include 'hero-section.php';
     </div>
   </div>
 </section>
-
-<!-- Section Divider -->
-<div class="section-divider my-5"></div>
 
 <!-- Video Background Section -->
 <section class="video-background-section position-relative overflow-hidden">
@@ -231,21 +220,18 @@ include 'hero-section.php';
   </div>
   
   <!-- Content Overlay -->
-  <div class="video-content-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+  <div class="video-content-overlay position-absolute top-0 start-0 w-100 h-100 d-none d-md-flex align-items-center">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
           <h2 class="display-3 fw-bold text-white mb-4">Experience Excellence</h2>
           <p class="lead text-white mb-4">Join thousands of satisfied patients who have transformed their lives at Mia Aesthetics</p>
-          <a href="/consultation/" class="btn btn-lg btn-light px-5 py-3">Book Your Consultation</a>
+          <a href="/consultation/" class="mia-button" data-variant="gold" data-size="lg">Free Virtual Consultation</a>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- Section Divider -->
-<div class="section-divider my-5"></div>
 
 <!-- Procedures Tabbed Section -->
 <section class="procedures-section py-5">

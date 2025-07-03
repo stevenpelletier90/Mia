@@ -103,7 +103,7 @@
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  padding-block: var(--spacing-4xl);
+  /* Removed: padding-block - pages handle their own spacing */
 }
 
 .main-content > .container-fluid,
@@ -113,9 +113,7 @@
   margin-inline: auto;
 }
 
-.main-content > * + * {
-  margin-top: var(--spacing-4xl);
-}
+/* Removed: .main-content > * + * spacing rule - pages handle their own spacing */
 
 .results-resources-section {
   background: linear-gradient(135deg, #000000 0%, var(--color-primary) 100%);
@@ -502,13 +500,9 @@ a.consent-trigger:hover::after {
 }
 
 @media (max-width: 991px) {
-  .main-content {
-    padding-block: var(--spacing-3xl);
-  }
+  /* Removed: .main-content padding-block - pages handle their own spacing */
 
-  .main-content > * + * {
-    margin-top: var(--spacing-3xl);
-  }
+  /* Removed: .main-content > * + * spacing rule - pages handle their own spacing */
 
   .treatment-subsection {
     margin-top: var(--spacing-2xl);
@@ -529,11 +523,11 @@ a.consent-trigger:hover::after {
 
 @media (max-width: 768px) {
   .treatment-header {
-    min-height: 240px;
+    min-height: 180px;
   }
 
   .treatment-header .row.min-vh-50 {
-    min-height: 300px !important;
+    min-height: 220px !important;
   }
 
   .treatment-header .col-12 {
@@ -556,13 +550,9 @@ a.consent-trigger:hover::after {
     font-size: 14px;
   }
 
-  .main-content {
-    padding-block: var(--spacing-2xl);
-  }
+  /* Removed: .main-content padding-block - pages handle their own spacing */
 
-  .main-content > * + * {
-    margin-top: 2.5rem;
-  }
+  /* Removed: .main-content > * + * spacing rule - pages handle their own spacing */
 
   .treatment-subsection {
     margin-top: var(--spacing-xl);

@@ -189,34 +189,20 @@ function mia_enqueue_assets() {
     $template_key = mia_detect_template_key();
     $templates    = mia_get_template_mappings();
 
-    // Debug output for development (only show to admins, not in admin area)
-    if ( WP_DEBUG && current_user_can( 'manage_options' ) && ! is_admin() ) {
-        echo '<div style="position:fixed;top:0;right:0;background:#000;color:#fff;padding:10px;z-index:999999;font-size:12px;max-width:300px;">';
-        echo '<strong>Template Debug:</strong><br>';
-        echo 'Detected Key: ' . ($template_key ?: 'none') . '<br>';
-        echo 'Selected Template: ' . (get_page_template_slug() ?: 'default') . '<br>';
-        echo 'Post Type: ' . (get_post_type() ?: 'none') . '<br>';
-        echo 'Query Type: ';
-        if (is_front_page()) echo 'front-page';
-        elseif (is_home()) echo 'home (posts page)';
-        elseif (is_archive()) echo 'archive';
-        elseif (is_singular()) echo 'singular';
-        elseif (is_404()) echo '404';
-        elseif (is_search()) echo 'search';
-        else echo 'other';
-        echo '<br>';
-        if ($template_key && isset($templates[$template_key])) {
-            echo 'CSS: ' . $templates[$template_key]['css'] . '<br>';
-            echo 'JS: ' . $templates[$template_key]['js'];
-        }
-        echo '</div>';
-    }
 
     if ( $template_key && isset( $templates[ $template_key ] ) ) {
         $template = $templates[ $template_key ];
 
         if ( ! empty( $template['css'] ) ) {
-            mia_register_asset( 'style', 'mia-' . $template_key, '/css/' . $template['css'], [ 'mia-base', 'mia-header', 'mia-footer' ] );
+            $css_deps = [ 'mia-base', 'mia-header', 'mia-footer' ];
+            
+            // Add hero section CSS dependency for front page
+            if ( $template_key === 'front-page' ) {
+                mia_register_asset( 'style', 'mia-hero-section', '/css/hero-section.css', [ 'mia-base', 'mia-bootstrap' ] );
+                $css_deps[] = 'mia-hero-section';
+            }
+            
+            mia_register_asset( 'style', 'mia-' . $template_key, '/css/' . $template['css'], $css_deps );
         }
 
         if ( ! empty( $template['js'] ) ) {

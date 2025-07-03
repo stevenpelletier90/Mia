@@ -14,8 +14,8 @@
 :root {
   --color-primary: #1b1b1b;
   --color-gold: #c8b273;
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
   --navbar-height: 65px;
   --btn-padding: 0.5rem 1rem;
   --btn-padding-sm: 0.375rem 1rem;
@@ -23,7 +23,7 @@
   --btn-font-size: 16px;
   --btn-border-width: 2px;
   --btn-transition: all 0.2s ease;
-  
+
   /* Z-Index Management System (Global) */
   --z-index-dropdown: 1000;
   --z-index-sticky: 1020;
@@ -34,15 +34,15 @@
   --z-index-tooltip: 1070;
   --z-index-header: 9999;
   --z-index-mobile-cta: 9998;
-  
+
   /* Footer Color System - Performance Optimized */
-  --footer-text-light: rgba(255, 255, 255, 0.9);     /* Replaces: rgba(var(--bs-white-rgb), 0.9) */
-  --footer-text-muted: rgba(255, 255, 255, 0.8);     /* Replaces: rgba(var(--bs-white-rgb), 0.8) */
-  --footer-text-subtle: rgba(255, 255, 255, 0.7);    /* Replaces: rgba(var(--bs-white-rgb), 0.7) */
-  --footer-border-color: #c7b07166;                  /* Centralized border system */
-  --footer-border-light: #c7b07133;                  /* Light border variant */
-  --footer-border-subtle: #c7b0711a;                 /* Subtle border variant */
-  --footer-social-bg: rgba(255, 255, 255, 0.1);     /* Replaces: rgba(var(--bs-white-rgb), 0.1) */
+  --footer-text-light: rgba(255, 255, 255, 0.9); /* Replaces: rgba(var(--bs-white-rgb), 0.9) */
+  --footer-text-muted: rgba(255, 255, 255, 0.8); /* Replaces: rgba(var(--bs-white-rgb), 0.8) */
+  --footer-text-subtle: rgba(255, 255, 255, 0.7); /* Replaces: rgba(var(--bs-white-rgb), 0.7) */
+  --footer-border-color: #c7b07166; /* Centralized border system */
+  --footer-border-light: #c7b07133; /* Light border variant */
+  --footer-border-subtle: #c7b0711a; /* Subtle border variant */
+  --footer-social-bg: rgba(255, 255, 255, 0.1); /* Replaces: rgba(var(--bs-white-rgb), 0.1) */
 }
 
 body {
@@ -182,48 +182,48 @@ ol {
   text-decoration: none;
 }
 
-.mia-button[data-variant="gold"] {
+.mia-button[data-variant='gold'] {
   color: #000000;
   background-color: var(--color-gold);
   border-color: var(--color-gold);
 }
 
-.mia-button[data-variant="gold"]:hover,
-.mia-button[data-variant="gold"]:focus {
+.mia-button[data-variant='gold']:hover,
+.mia-button[data-variant='gold']:focus {
   color: var(--color-gold);
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.mia-button[data-variant="gold-outline"] {
+.mia-button[data-variant='gold-outline'] {
   color: var(--color-primary);
   border-color: var(--color-gold);
 }
 
-.mia-button[data-variant="gold-outline"]:hover,
-.mia-button[data-variant="gold-outline"]:focus {
+.mia-button[data-variant='gold-outline']:hover,
+.mia-button[data-variant='gold-outline']:focus {
   color: #fff;
   background-color: var(--color-gold);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.mia-button[data-variant="hero"] {
+.mia-button[data-variant='hero'] {
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color: #ffffff;
   border-color: #ffffff;
   padding: 0.6rem 1.75rem;
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
   width: auto;
   min-width: 140px;
   letter-spacing: 0.5px;
   border-radius: 0.25rem;
 }
 
-.mia-button[data-variant="hero"]:hover,
-.mia-button[data-variant="hero"]:focus {
+.mia-button[data-variant='hero']:hover,
+.mia-button[data-variant='hero']:focus {
   background-color: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -232,40 +232,40 @@ ol {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.mia-button[data-variant="white"] {
+.mia-button[data-variant='white'] {
   color: #000000;
   border-color: #000000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   padding: 0.625rem 1.5rem;
 }
 
-.mia-button[data-variant="white"]:hover,
-.mia-button[data-variant="white"]:focus {
+.mia-button[data-variant='white']:hover,
+.mia-button[data-variant='white']:focus {
   color: #ffffff;
   background-color: #000000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.mia-button[data-variant="black"] {
+.mia-button[data-variant='black'] {
   color: #ffffff;
   border-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   padding: 0.625rem 1.5rem;
 }
 
-.mia-button[data-variant="black"]:hover,
-.mia-button[data-variant="black"]:focus {
+.mia-button[data-variant='black']:hover,
+.mia-button[data-variant='black']:focus {
   color: #000000;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.mia-button[data-size="sm"] {
+.mia-button[data-size='sm'] {
   padding: var(--btn-padding-sm);
   font-size: 0.875rem;
 }
 
-.mia-button[data-size="lg"] {
+.mia-button[data-size='lg'] {
   padding: var(--btn-padding-lg);
   font-size: 1.125rem;
   min-width: 160px;
@@ -298,7 +298,7 @@ ol {
 }
 
 .faqs-section h2:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 0;
@@ -352,9 +352,9 @@ ol {
 }
 
 .accordion-button::after {
-  font-family: "Font Awesome 6 Free";
+  font-family: 'Font Awesome 6 Free';
   font-weight: 900;
-  content: "\f078";
+  content: '\f078';
   background-image: none;
   transition: transform 0.3s ease;
   color: var(--color-gold);
@@ -362,7 +362,7 @@ ol {
 
 .accordion-button:not(.collapsed)::after {
   transform: rotate(180deg);
-  content: "\f078";
+  content: '\f078';
   color: var(--color-gold);
 }
 
@@ -375,12 +375,12 @@ ol {
 
 /* FAQ section link styles */
 .faqs-section .accordion-body a {
-  color: #0000FF;
+  color: #0000ff;
 }
 
 .faqs-section .accordion-body a:hover,
 .faqs-section .accordion-body a:focus {
-  color: #551A8B; /* deeper shade or brand-friendly dark blue */
+  color: #551a8b; /* deeper shade or brand-friendly dark blue */
   text-decoration-thickness: 2px;
 }
 
@@ -407,13 +407,13 @@ ol {
 }
 
 @media (max-width: 767px) {
-  .mia-button[data-variant="hero"] {
+  .mia-button[data-variant='hero'] {
     padding: 0.5rem 1.25rem;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     min-width: 130px;
   }
 
-  .mia-button[data-size="lg"] {
+  .mia-button[data-size='lg'] {
     padding: 0.6rem 1.5rem;
     font-size: 1.05rem;
   }
@@ -428,13 +428,13 @@ ol {
 }
 
 @media (max-width: 480px) {
-  .mia-button[data-variant="hero"] {
+  .mia-button[data-variant='hero'] {
     padding: 0.4rem 1rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     min-width: 110px;
   }
 
-  .mia-button[data-size="lg"] {
+  .mia-button[data-size='lg'] {
     padding: 0.4rem 1.25rem;
     font-size: 0.9rem;
   }

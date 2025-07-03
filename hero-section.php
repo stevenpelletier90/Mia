@@ -88,9 +88,8 @@
         </div>
         <?php endif; ?>
         <div class="hero-box-overlay">
-          <div class="hero-box-title">Before & After</div>
           <a href="<?php echo esc_url(home_url('/before-after/')); ?>" class="mia-button" data-variant="hero">
-            View Gallery <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            View Results <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -114,9 +113,8 @@
         </div>
         <?php endif; ?>
         <div class="hero-box-overlay">
-          <div class="hero-box-title">Financing</div>
           <a href="<?php echo esc_url(home_url('/financing/')); ?>" class="mia-button" data-variant="hero">
-            View Options <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            Financing Options <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
